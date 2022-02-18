@@ -5,11 +5,13 @@
 <configuration>
   <properties resource="com/example/demo/db/db.properties"/>
   <typeAliases>
+  	<typeAlias type="com.example.demo.vo.ProductVO" alias="productVO"/>
+  	<typeAlias type="com.example.demo.vo.MyWishVO" alias="myWishVO"/>
   	<typeAlias type="com.example.demo.vo.MemberVO" alias="memberVO"/>
   	<!-- <typeAlias type="com.example.demo.vo.AddressVO" alias="addressVO"/> -->
   	<!-- <typeAlias type="com.example.demo.vo.DetailMemberVO" alias="detailmemberVO"/> -->
   </typeAliases>
-  <environments default="development">
+  <environments default="development">  
     <environment id="development">
       <transactionManager type="JDBC"/>
       <dataSource type="POOLED">
@@ -21,7 +23,9 @@
     </environment>
   </environments>
   <mappers>
-    <mapper resource="com/example/demo/db/memberMapper.xml"/>
+    <mapper resource="com/example/demo/db/productMapper.xml"/>
+    <mapper resource="com/example/demo/db/myWishMapper.xml"/>
+     <mapper resource="com/example/demo/db/memberMapper.xml"/>
     <!-- <mapper resource="com/example/demo/db/addressMapper.xml"/> -->
     <!-- <mapper resource="com/example/demo/db/detailmemberMapper.xml"/> -->
   </mappers>

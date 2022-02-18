@@ -11,6 +11,6 @@ import com.example.demo.vo.MemberVO;
 public class MemberDAO {
 
 	public List<MemberVO> findAll(){
-		return DBManager.findAll();
+		return DBManager.findAllMember();
 	}
 }
