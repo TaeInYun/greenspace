@@ -3,13 +3,15 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<properties resource="com/example/demo/db/db.properties"/>
-	<typeAliases>
-		<typeAlias type="com.example.demo.vo.MyWishVO" alias="myWishVO"/>
-		<typeAlias type="com.example.demo.vo.OrderListVO" alias="orderListvo"/>
-		<typeAlias type="com.example.demo.vo.AddressVO" alias="addressvo"/>
-	</typeAliases>
-  <environments default="development">
+  <properties resource="com/example/demo/db/db.properties"/>
+  <typeAliases>
+  	<typeAlias type="com.example.demo.vo.ProductVO" alias="productVO"/>
+  	<typeAlias type="com.example.demo.vo.MyWishVO" alias="myWishVO"/>
+  	<typeAlias type="com.example.demo.vo.MemberVO" alias="memberVO"/>
+	<typeAlias type="com.example.demo.vo.OrderListVO" alias="orderListVO"/>
+	<typeAlias type="com.example.demo.vo.AddressVO" alias="addressVO"/>
+  </typeAliases>
+  <environments default="development">  
     <environment id="development">
       <transactionManager type="JDBC"/>
       <dataSource type="POOLED">
@@ -21,8 +23,10 @@
     </environment>
   </environments>
   <mappers>
+    <mapper resource="com/example/demo/db/productMapper.xml"/>
     <mapper resource="com/example/demo/db/myWishMapper.xml"/>
-    <mapper resource="com/example/demo/db/orderListMapper.xml"/>
-    <mapper resource="com/example/demo/db/addressMapper.xml"/>
+     <mapper resource="com/example/demo/db/memberMapper.xml"/>
+	<mapper resource="com/example/demo/db/orderListMapper.xml"/>
+	<mapper resource="com/example/demo/db/addressMapper.xml"/>
   </mappers>
 </configuration>

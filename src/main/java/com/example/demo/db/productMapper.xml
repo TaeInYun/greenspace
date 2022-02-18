@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="product">
+ 
+  <select id="findAll" resultType="productVO">
+    select pro_name, pro_brand, pro_price, pro_saleprice, pro_stock, c.cat_name
+	from product p, category c
+	where c.cat_code = p.cat_code
+  </select>
+  
+  
+  <select id="findByNo" resultType="productVO">
+  	select * from prodcut where no=#{no}
+  </select>
+  
+  <update id="update" parameterType="productVO">
+  	update product set pro_name=#{pro_name},pro_brand=#{pro_brand},pro_price=#{pro_price},pro_saleprice=#{pro_saleprice},pro_stock=#{pro_stock},pro_content=#{pro_content},where no=#{no}
+  </update>
+  
+  <delete id="delete">
+  	delete product where no=#{no}
+  </delete>
+  
+  <update id="updateHit">
+  	update product set hit=hit+1 where no=#{no}
+  </update>
+</mapper>
