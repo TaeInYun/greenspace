@@ -9,7 +9,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import com.example.demo.vo.MemberVO;
 
 import com.example.demo.vo.MyWishVO;
 import com.example.demo.vo.ProductVO;
@@ -31,13 +30,33 @@ public class DBManager {
 	}
 	
 	
-	//-----------------------MemberVO---------------------------
-	public static List<MemberVO> findAllMember(){
+			
+	//-----------------------ReviewVO---------------------------
+	
+	public static List<MyWishVO> findAllMyReview(){
 		SqlSession session = factory.openSession();
-		List<MemberVO> list = session.selectList("member.findAll");
+		List<MyWishVO> list = session.selectList("review.findAll");
 		session.close();
 		return list;
 	}
+	
+	public static List<MyWishVO> findAllMyReviewRate(){
+		SqlSession session = factory.openSession();
+		List<MyWishVO> list = session.selectList("review.findAllRate");
+		session.close();
+		return list;
+	}
+	
+	
+	//-----------------------MyReviewVO---------------------------
+		public static List<MyWishVO> findAllReview(){
+			SqlSession session = factory.openSession();
+			List<MyWishVO> list = session.selectList("myreview.findAll");
+			session.close();
+			return list;
+		}
+	
+	
 	
 	//-----------------------MyWishVO---------------------------
 	public static List<MyWishVO> findByMember(){
