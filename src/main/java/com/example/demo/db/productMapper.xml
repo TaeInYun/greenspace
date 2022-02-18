@@ -4,15 +4,19 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="product">
  
+  <!-- 상품 -->	
   <select id="findAll" resultType="productVO">
-    select pro_name, pro_brand, pro_price, pro_saleprice, pro_stock, c.cat_name
+     select no ,pro_name, pro_brand, pro_price, pro_saleprice, pro_stock, c.cat_name cat_name, PRO_THUMBNAIL
 	from product p, category c
 	where c.cat_code = p.cat_code
   </select>
   
+   <insert id="insert" parameterType="productVO">
+  	insert into product values(seq_product.nextval, #{pro_name}, #{pro_brand}, #{pro_price}, #{pro_saleprice}, #{pro_stock}, #{pro_delivery}, sysdate, 0, #{pro_content}, #{cat_code}, #{PRO_THUMBNAIL})
+  </insert>
   
   <select id="findByNo" resultType="productVO">
-  	select * from prodcut where no=#{no}
+  	select * from product where no=#{no}
   </select>
   
   <update id="update" parameterType="productVO">
@@ -26,4 +30,5 @@
   <update id="updateHit">
   	update product set hit=hit+1 where no=#{no}
   </update>
+  
 </mapper>

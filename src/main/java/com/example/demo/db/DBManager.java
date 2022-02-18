@@ -1,7 +1,6 @@
 package com.example.demo.db;
 
 import java.io.Reader;
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -86,21 +85,30 @@ public class DBManager {
 		int re = session.update("product.update", b);
 		session.close();
 		return re;				
-	}
-
-	public static int delete() {
-		SqlSession session  = factory.openSession();
-		int re=session.delete("product.delete");
-		session.commit();
-		session.close();
-		return re;
-	}
+	}	
 	
 	public static void updateHit(int no) {
 		SqlSession session = factory.openSession();
 		session.update("product.updateHit", no);
 		session.commit();
 		session.close();
+	}
+	
+	public static int delete(int no) {
+		SqlSession session  = factory.openSession();
+		int re=session.delete("product.delete", no);
+		session.commit();
+		session.close();
+		return re;
+	}
+
+	public static int insert(ProductVO p) {
+		
+		SqlSession session  = factory.openSession();
+		int re=session.insert("product.insert",p);
+		session.commit();
+		session.close();
+		return re;
 	}
 	
 }
