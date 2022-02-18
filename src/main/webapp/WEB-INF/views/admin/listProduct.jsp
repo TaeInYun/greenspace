@@ -23,7 +23,7 @@
 			<tr>
 				<td>${p.no }</td>
 				<td>
-					<a href="/admin/detailProduct?no=${p.no}">${p.pro_name} </a>					
+					<a href="/shop/detailProduct?no=${p.no}">${p.pro_name} </a>					
 				</td>				 
 				 
 				<td>${p.pro_brand }</td>

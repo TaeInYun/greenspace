@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -72,7 +73,7 @@ public class ProductController {
 		return mav;
 	}
 	//------------------상품자세히--------------------
-	@RequestMapping("/admin/detailProduct")
+	@RequestMapping("/shop/detailProduct")
 	public void detail(int no, Model model) {		 
 		model.addAttribute("p", dao.findByNo(no));
 	}
@@ -149,5 +150,7 @@ public class ProductController {
 		
 		return mav;
 	}
+	
+	
 	
 }
