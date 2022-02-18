@@ -8,5 +8,7 @@
 </head>
 <body>
 ${msg }
+<a href = "http://localhost:8080/login">로그인으로 이동</a>
+
 </body>
 </html>
