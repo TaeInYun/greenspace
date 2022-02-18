@@ -84,7 +84,8 @@ public class ProductController {
 	}
 	//------------------상품자세히--------------------
 	@RequestMapping("/shop/detailProduct")
-	public void detail(int no, Model model) {		 
+	public void detail(int no, Model model) {	
+		dao.updateHit(no);
 		model.addAttribute("p", dao.findByNo(no));
 	}
 	
