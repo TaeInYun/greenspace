@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.example.demo.vo.AddressVO;
+import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.MyWishVO;
 import com.example.demo.vo.ProductVO;
  
@@ -124,5 +125,30 @@ public class DBManager {
 		session.close();
 		return main;
 	}
+	
+	//------------MemberVO--------------
+	public static int insertMember(MemberVO m) {
+		SqlSession session = factory.openSession();
+		int re = session.insert("member.insert",m);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
+	public static MemberVO findById(String id) {
+		SqlSession session = factory.openSession();
+		MemberVO m = session.selectOne("member.findById", id);
+		session.close();
+		return m;
+	}
+	
+	public static int checkId(String id) {
+		SqlSession session = factory.openSession();
+		int cnt = session.selectOne("member.checkId",id);
+		session.close();
+		return cnt;
+	}
+	
+	
 }
 
