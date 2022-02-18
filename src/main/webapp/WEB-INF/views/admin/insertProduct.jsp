@@ -6,7 +6,24 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script> 
 <script type="text/javascript">
+	$(function(){		 
+		 $(document).ready(function(){
+			 $('.btnAdd').click(function(){				 
+				 $('.addInput').append(
+						 '<input type="type" name="test" value=""><input type="type" name="test" value="">\
+						 	<button type="button" class="btnRemove">삭제</button><br>'
+				);				 
+				 $('.btnRemove').on('click',function(){
+					 $(this).prev().remove();
+					 $(this).prev().remove();					 
+					 $(this).next().remove();
+					 $(this).remove();
+				 })
+			 })
+		 })		 
+	})
 </script>
 </head>
 <body> 	 
@@ -78,6 +95,12 @@
 					}
 				});
 			</script>			
+		</div>
+		
+		<div class="inputArea">
+			<label for="pro_option">옵션설정</label>
+			 <div class="addInput"></div>    
+	        <button type="button" class="btnAdd">추가</button>
 		</div>
 		
 		<hr>

@@ -21,7 +21,7 @@
 				<!-- 본문 -->			
 					<section id="content">			
 					상품이름 : ${p.pro_name }<br>
-					상품가격 :${p.pro_name}<br>
+					상품가격 :${p.pro_price}<br>
 					상품할인가 :${p.pro_saleprice}<br>
 					상품설명 : ${p.pro_content }<br>	
 					조회수 : ${p.pro_hit }<br>	 

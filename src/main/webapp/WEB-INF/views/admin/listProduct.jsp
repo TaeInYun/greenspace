@@ -7,9 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+ 
 </head>
-<body>
-	<H2>상품목록</H2>
+<body>	
 	<table border="1" width="80%">
 		<tr>
 			<td>상품번호</td>
@@ -34,6 +34,6 @@
 				<td>${p.cat_name }</td>
 			</tr>
 		</c:forEach>
-	</table>
+	</table> 			 
 </body>
 </html>

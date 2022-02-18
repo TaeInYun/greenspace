@@ -43,7 +43,7 @@
 </script>
 </head>
 <body>
-	<jsp:include page="../shop/shopHeader.jsp"/>
+	
 	<h2>장바구니</h2>
 	<span>${cnt }</span>
 	<hr>
