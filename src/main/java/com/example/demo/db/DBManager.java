@@ -8,8 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import com.example.demo.vo.MemberVO;
-
+import com.example.demo.vo.AddressVO;
 import com.example.demo.vo.MyWishVO;
 import com.example.demo.vo.ProductVO;
  
@@ -30,21 +29,49 @@ public class DBManager {
 	}
 	
 	
-	//-----------------------MemberVO---------------------------
-	public static List<MemberVO> findAllMember(){
+			
+	//-----------------------ReviewVO---------------------------
+	
+	public static List<MyWishVO> findAllMyReview(){
 		SqlSession session = factory.openSession();
-		List<MemberVO> list = session.selectList("member.findAll");
+		List<MyWishVO> list = session.selectList("review.findAll");
 		session.close();
 		return list;
 	}
 	
-	//-----------------------MyWishVO---------------------------
-	public static List<MyWishVO> findByMember(){
+	public static List<MyWishVO> findAllMyReviewRate(){
 		SqlSession session = factory.openSession();
-		List<MyWishVO> list = session.selectList("myWish.findByMember");
+		List<MyWishVO> list = session.selectList("review.findAllRate");
 		session.close();
 		return list;
 	}
+	
+	
+	//-----------------------MyReviewVO---------------------------
+		public static List<MyWishVO> findAllReview(){
+			SqlSession session = factory.openSession();
+			List<MyWishVO> list = session.selectList("myreview.findAll");
+			session.close();
+			return list;
+		}
+	
+	
+	
+		//************MYWISH ( 장바구니, 위시리스트)
+		
+		public static List<MyWishVO> findByMember(int member_no){
+			SqlSession session = factory.openSession();
+			List<MyWishVO> list = session.selectList("myWish.findByMember", member_no);
+			session.close();
+			return list;
+		}
+		
+		public static int cntOfCart(int member_no){
+			SqlSession session = factory.openSession();
+			int cnt = session.selectOne("myWish.cntOfCart", member_no);
+			session.close();
+			return cnt;
+		}
  
 	//-----------------------ProductVO---------------------------
 	public static List<ProductVO> findAll(){
@@ -68,12 +95,7 @@ public class DBManager {
 		return re;				
 	}	
 	
-	public static void updateHit(int no) {
-		SqlSession session = factory.openSession();
-		session.update("product.updateHit", no);
-		session.commit();
-		session.close();
-	}
+
 	
 	public static int delete(int no) {
 		SqlSession session  = factory.openSession();
@@ -91,6 +113,28 @@ public class DBManager {
 		session.close();
 		return re;
 	}
+
+	public static int delete() {
+		SqlSession session  = factory.openSession();
+		int re=session.delete("product.delete");
+		session.commit();
+		session.close();
+		return re;
+	}
 	
+	public static void updateHit(int no) {
+		SqlSession session = factory.openSession();
+		session.update("product.updateHit", no);
+		session.commit();
+		session.close();
+	}
+	
+	//************ Address ( 주소록 )
+	public static AddressVO getMainAddress(int member_no) {
+		SqlSession session = factory.openSession();
+		AddressVO main =  session.selectOne("address.getMainAddress", member_no);
+		session.close();
+		return main;
+	}
 }
 

@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
@@ -23,7 +24,7 @@
 			<tr>
 				<td>${p.no }</td>
 				<td>
-					<a href="/shop/detailProduct?no=${p.no}">${p.pro_name} </a>					
+					<a href="/admin/detailProduct?no=${p.no}">${p.pro_name} </a>					
 				</td>				 
 				 
 				<td>${p.pro_brand }</td>
