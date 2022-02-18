@@ -1,3 +1,4 @@
+
 package com.example.demo.db;
 
 import java.io.Reader;
@@ -9,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import com.example.demo.vo.MyWishVO;
 import com.example.demo.vo.ProductVO;
  
 
@@ -27,44 +29,27 @@ public class DBManager {
 		}
 	}
 	
+	//-----------------------MyWishVO---------------------------
+	public static List<MyWishVO> findByMember(){
+		SqlSession session = factory.openSession();
+		List<MyWishVO> list = session.selectList("myWish.findByMember");
+		session.close();
+		return list;
+	}
  
+	//-----------------------ProductVO---------------------------
 	public static List<ProductVO> findAll(){
 		SqlSession session = factory.openSession();
 		List<ProductVO> list= session.selectList("product.findAll");
 		session.close();
 		return list;
-	}
-	
-	
-/*	
-	public static int getTotalRecord(HashMap map) {
-		SqlSession session = factory.openSession();
-		int no = session.selectOne("board.totalRecord", map);
-		session.close();
-		return no;
-	}
-	
-	public static int getNextNo() {
-		SqlSession session = factory.openSession();
-		int no = session.selectOne("board.getNextNo");
-		session.close();
-		return no;
-	}
-	
-	public static int insert(BoardVO b) {
-		//b.setNo(getNextNo());
-		SqlSession session  = factory.openSession();
-		int re = session.insert("board.insert", b);
-		session.commit();
-		session.close();
-		return re;
-	}
-*/	
+	}	
+
 	public static ProductVO findByNo(int no) {
 		SqlSession session = factory.openSession();
-		ProductVO b = session.selectOne("board.findByNo", no);
+		ProductVO p = session.selectOne("product.findByNo", no);
 		session.close();
-		return b;		
+		return p;		
 	}
 	
 	public static int update(ProductVO b) {
