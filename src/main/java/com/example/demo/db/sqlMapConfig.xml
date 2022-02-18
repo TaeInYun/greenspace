@@ -6,6 +6,8 @@
 	<properties resource="com/example/demo/db/db.properties"/>
 	<typeAliases>
 		<typeAlias type="com.example.demo.vo.MyWishVO" alias="myWishVO"/>
+		<typeAlias type="com.example.demo.vo.OrderListVO" alias="orderListvo"/>
+		<typeAlias type="com.example.demo.vo.AddressVO" alias="addressvo"/>
 	</typeAliases>
   <environments default="development">
     <environment id="development">
@@ -20,5 +22,7 @@
   </environments>
   <mappers>
     <mapper resource="com/example/demo/db/myWishMapper.xml"/>
+    <mapper resource="com/example/demo/db/orderListMapper.xml"/>
+    <mapper resource="com/example/demo/db/addressMapper.xml"/>
   </mappers>
 </configuration>

@@ -4,7 +4,25 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="myWish">
   <select id="findByMember" resultType="myWishVO">
-    select p.pro_name, p.pro_saleprice, pro_stock, p.pro_thumbnail from wishlist w, product p
-    where w.pro_no = p.no and w,member_no = #{no} 
+	SELECT
+	rownum, c.no no, cart_name pro_name, cart_option pro_option, cart_option_detail option_detail, cart_price price, cart_saleprice saleprice, cart_qty qty, pro_thumbNail img, pro_stock stock
+	FROM
+	cart c, (SELECT no,pro_thumbNail, pro_stock FROM product) p
+	WHERE
+	c.pro_no = p.no
+	AND
+	member_no = #{member_no}
+  </select>
+  <select id="cntOfCart" resultType="Integer">
+	SELECT nvl(count(*), 0) cnt
+	FROM cart
+	WHERE
+	member_no = #{member_no}
+  </select>
+  <select id="getTotalPrice" resultType="Integer">
+	SELECT nvl(count(*), 0) cnt
+	FROM cart
+	WHERE
+	member_no = #{member_no}
   </select>
 </mapper>
