@@ -29,14 +29,49 @@ public class DBManager {
 	}
 	
 	
-	//-----------------------MemberVO---------------------------
-	public static List<MemberVO> findAllMember(){
+			
+	//-----------------------ReviewVO---------------------------
+	
+	public static List<MyWishVO> findAllMyReview(){
 		SqlSession session = factory.openSession();
-		List<MemberVO> list = session.selectList("member.findAll");
+		List<MyWishVO> list = session.selectList("review.findAll");
 		session.close();
 		return list;
 	}
 	
+	public static List<MyWishVO> findAllMyReviewRate(){
+		SqlSession session = factory.openSession();
+		List<MyWishVO> list = session.selectList("review.findAllRate");
+		session.close();
+		return list;
+	}
+	
+	
+	//-----------------------MyReviewVO---------------------------
+		public static List<MyWishVO> findAllReview(){
+			SqlSession session = factory.openSession();
+			List<MyWishVO> list = session.selectList("myreview.findAll");
+			session.close();
+			return list;
+		}
+	
+	
+	
+		//************MYWISH ( 장바구니, 위시리스트)
+		
+		public static List<MyWishVO> findByMember(int member_no){
+			SqlSession session = factory.openSession();
+			List<MyWishVO> list = session.selectList("myWish.findByMember", member_no);
+			session.close();
+			return list;
+		}
+		
+		public static int cntOfCart(int member_no){
+			SqlSession session = factory.openSession();
+			int cnt = session.selectOne("myWish.cntOfCart", member_no);
+			session.close();
+			return cnt;
+		}
  
 	//-----------------------ProductVO---------------------------
 	public static List<ProductVO> findAll(){
@@ -58,6 +93,25 @@ public class DBManager {
 		int re = session.update("product.update", b);
 		session.close();
 		return re;				
+	}	
+	
+
+	
+	public static int delete(int no) {
+		SqlSession session  = factory.openSession();
+		int re=session.delete("product.delete", no);
+		session.commit();
+		session.close();
+		return re;
+	}
+
+	public static int insert(ProductVO p) {
+		
+		SqlSession session  = factory.openSession();
+		int re=session.insert("product.insert",p);
+		session.commit();
+		session.close();
+		return re;
 	}
 
 	public static int delete() {
@@ -75,22 +129,6 @@ public class DBManager {
 		session.close();
 	}
 	
-	//************MYWISH ( 장바구니, 위시리스트)
-	
-	public static List<MyWishVO> findByMember(int member_no){
-		SqlSession session = factory.openSession();
-		List<MyWishVO> list = session.selectList("myWish.findByMember", member_no);
-		session.close();
-		return list;
-	}
-	
-	public static int cntOfCart(int member_no){
-		SqlSession session = factory.openSession();
-		int cnt = session.selectOne("myWish.cntOfCart", member_no);
-		session.close();
-		return cnt;
-	}
-	
 	//************ Address ( 주소록 )
 	public static AddressVO getMainAddress(int member_no) {
 		SqlSession session = factory.openSession();
@@ -99,3 +137,4 @@ public class DBManager {
 		return main;
 	}
 }
+
