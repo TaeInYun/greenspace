@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.Data;
 
 @Data
-public class ProductVO {
+public class ProductVO {	
 	private int no;
 	private String pro_name;
 	private String pro_brand;
@@ -17,8 +17,12 @@ public class ProductVO {
 	private int pro_delivery;
 	private Date pro_date;
 	private int pro_hit;
-	private int pro_content;
-	private int cat_code;
+	private String pro_content;
+	private String cat_code;
+	private String cat_name;
 	private String PRO_THUMBNAIL;
+	private String PRO_image2;
+	private String PRO_image3;
+ 
 	private MultipartFile uploadFile;
 }
