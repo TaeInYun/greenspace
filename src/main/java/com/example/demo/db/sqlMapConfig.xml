@@ -7,6 +7,9 @@
   <typeAliases>
   	<typeAlias type="com.example.demo.vo.MyWishVO" alias="myWishVO"/>
   	<typeAlias type="com.example.demo.vo.AddressVO" alias="addressVO"/>
+	<typeAlias type="com.example.demo.vo.OrderListVO" alias="orderListVO"/>
+  	<typeAlias type="com.example.demo.vo.MyReviewVO" alias="myreviewVO"/>
+  	<typeAlias type="com.example.demo.vo.ReviewVO" alias="reviewVO"/>
   </typeAliases>
   <environments default="development">  
     <environment id="development">
@@ -22,5 +25,9 @@
   <mappers>
     <mapper resource="com/example/demo/db/myWishMapper.xml"/>
     <mapper resource="com/example/demo/db/addressMapper.xml"/>
+	<mapper resource="com/example/demo/db/orderListMapper.xml"/>
+	<mapper resource="com/example/demo/db/addressMapper.xml"/>
+     <mapper resource="com/example/demo/db/myreviewMapper.xml"/> 
+     <mapper resource="com/example/demo/db/reviewMapper.xml"/> 
   </mappers>
 </configuration>
