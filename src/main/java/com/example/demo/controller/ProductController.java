@@ -27,9 +27,19 @@ public class ProductController {
 	@Autowired
 	private ProductDAO dao;
 	
+	@RequestMapping("/shop/shopHome")
+	public void shopHome() {
+		 
+	}	
+	
+	@RequestMapping("/shop/listProduct_home")
+	public void listProduct(Model model) {
+		model.addAttribute("list",dao.findAll_home());	 
+	}
+	
 	//-------------------상품리스트-------------------- 
 	@RequestMapping("/admin/listProduct")
-	public void listProduct(Model model) {
+	public void listProduct_admin(Model model) {
 		model.addAttribute("list",dao.findAll());	 
 	}
 	

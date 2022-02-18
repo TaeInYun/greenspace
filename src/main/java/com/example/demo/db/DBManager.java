@@ -80,7 +80,14 @@ public class DBManager {
 		session.close();
 		return list;
 	}	
-
+ 
+	public static List<ProductVO> findAll_home(){
+		SqlSession session = factory.openSession();
+		List<ProductVO> list= session.selectList("product.findAll_home");
+		session.close();
+		return list;
+	}	
+	
 	public static ProductVO findByNo(int no) {
 		SqlSession session = factory.openSession();
 		ProductVO p = session.selectOne("product.findByNo", no);

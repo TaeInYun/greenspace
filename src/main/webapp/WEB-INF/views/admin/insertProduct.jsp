@@ -7,14 +7,15 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <script type="text/javascript">
-	 
 </script>
 </head>
-<body> 
+<body> 	 
 	<h2>상품 등록</h2>
 	<hr>
-	<form action="/admin/insertProduct" method="post"  enctype="multipart/form-data">		 
-		카테고리 : <select name="cat_code">
+	<form action="/admin/insertProduct" method="post"  enctype="multipart/form-data">		
+		<div class="inputArea">
+			<label for="cat_code">카테고리</label>
+				<select name="cat_code">
 					<option value="BA">욕실</option>
 					<option value="KI">주방</option>
 					<option value="PFO">식품</option>
@@ -23,19 +24,65 @@
 					<option value="POF">사무용품</option>
 					<option value="PDA">일상용품</option>
 				</select><br>
-		상품이름 : <input type="text" name="pro_name"><br>
-		상품브랜드 : <input type="text" name="pro_brand"><br>
-		상품가격 : <input type="text" name="pro_price"><br>
-		상품할인가 : <input type="text" name="pro_saleprice"><br>
-		상품재고 : <input type="text" name="pro_stock"><br>
-		상품평균출고날짜 : <input type="text" name="pro_delivery"><br>
-		상품내용 : <br><textarea rows="10" cols="80" name="pro_content"></textarea><br>		
-		사진 : <input type="file" name="uploadFile"><br>
+		</div>
+		
+		<div class="inputArea">
+			<label for="pro_name">상품명</label>
+			<input type="text" id="pro_name" name="pro_name" />
+		</div>
+			
+		<div class="inputArea">
+			<label for="pro_brand">상품브랜드</label>
+			<input type="text" id="pro_brand" name="pro_brand" />
+		</div>	
+		
+		<div class="inputArea">
+			<label for="pro_price">상품가격</label>
+			<input type="text" id="pro_price" name="pro_price" />
+		</div>	 
 		 
+	 
+	 	<div class="inputArea">
+			<label for="pro_saleprice">상품할인가</label>
+			<input type="text" id="pro_saleprice" name="pro_saleprice" />
+		</div>	 
+		 
+		<div class="inputArea">
+			<label for="pro_stock">상품재고</label>
+			<input type="text" id="pro_stock" name="pro_stock" />
+		</div>	 
+		 
+		<div class="inputArea">
+			<label for="pro_delivery">평균출고날짜</label>
+			<input type="text" id="pro_delivery" name="pro_delivery" />
+		</div>	  
+	 
+		<div class="inputArea">
+			<label for="pro_content">상품내용</label>
+			<textarea rows="10" cols="80" name="pro_content"></textarea>
+		</div>	
+	  		 
+				
+		<div class="inputArea">
+			<label for="PRO_THUMBNAIL">이미지</label>
+			<input type="file" id="PRO_THUMBNAIL" name="uploadFile" />
+			<div class="select_img"><img src="" /></div>
+			<script>
+				$("#PRO_THUMBNAIL").change(function(){
+					if(this.files && this.files[0]) {
+						var reader = new FileReader;
+						reader.onload = function(data) {
+							$(".select_img img").attr("src", data.target.result).width(500);								
+						}
+						reader.readAsDataURL(this.files[0]);
+					}
+				});
+			</script>			
+		</div>
+		
 		<hr>
 		<input type="submit" value="등록">
 		<input type="reset" value="취소">
 	</form>
-</body>
- 
+</body> 
 </html>

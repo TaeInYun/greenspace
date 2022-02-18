@@ -3,6 +3,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="product">
+
+ <!-- 상품 -->	
+  <select id="findAll_home" resultType="productVO">
+     select no ,pro_name, pro_brand, pro_price, pro_saleprice, PRO_THUMBNAIL
+	 from product p
+  </select>
  
   <!-- 상품 -->	
   <select id="findAll" resultType="productVO">
