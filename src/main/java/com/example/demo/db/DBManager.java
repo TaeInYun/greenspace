@@ -9,20 +9,19 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.example.demo.vo.AddressVO;
+import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.MyWishVO;
 import com.example.demo.vo.ProductVO;
  
 
 public class DBManager {
 	private static SqlSessionFactory factory;
+	
 	static {
 		try {
-			Reader reader
-			= Resources.getResourceAsReader("com/example/demo/db/sqlMapConfig.xml");
-			
+			Reader reader = Resources.getResourceAsReader("com/example/demo/db/sqlMapConfig.xml");
 			factory = new SqlSessionFactoryBuilder().build(reader);
 			reader.close();
-			
 		}catch (Exception e) {
 			System.out.println("예외발생:"+e.getMessage());
 		}
@@ -58,10 +57,9 @@ public class DBManager {
 	
 	
 		//************MYWISH ( 장바구니, 위시리스트)
-		
 		public static List<MyWishVO> findByMember(int member_no){
 			SqlSession session = factory.openSession();
-			List<MyWishVO> list = session.selectList("myWish.findByMember", member_no);
+			List<MyWishVO> list = session.selectList("myWish.findByMember", 1);
 			session.close();
 			return list;
 		}
@@ -98,11 +96,10 @@ public class DBManager {
 	public static int update(ProductVO b) {
 		SqlSession session = factory.openSession(true);
 		int re = session.update("product.update", b);
+		session.commit();
 		session.close();
 		return re;				
 	}	
-	
-
 	
 	public static int delete(int no) {
 		SqlSession session  = factory.openSession();
@@ -121,14 +118,6 @@ public class DBManager {
 		return re;
 	}
 
-	public static int delete() {
-		SqlSession session  = factory.openSession();
-		int re=session.delete("product.delete");
-		session.commit();
-		session.close();
-		return re;
-	}
-	
 	public static void updateHit(int no) {
 		SqlSession session = factory.openSession();
 		session.update("product.updateHit", no);
@@ -143,5 +132,30 @@ public class DBManager {
 		session.close();
 		return main;
 	}
+	
+	//------------MemberVO--------------
+	public static int insertMember(MemberVO m) {
+		SqlSession session = factory.openSession();
+		int re = session.insert("member.insert",m);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
+	public static MemberVO findById(String id) {
+		SqlSession session = factory.openSession();
+		MemberVO m = session.selectOne("member.findById", id);
+		session.close();
+		return m;
+	}
+	
+	public static int checkId(String id) {
+		SqlSession session = factory.openSession();
+		int cnt = session.selectOne("member.checkId",id);
+		session.close();
+		return cnt;
+	}
+	
+	
 }
 
