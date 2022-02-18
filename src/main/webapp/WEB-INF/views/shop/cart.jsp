@@ -31,6 +31,13 @@
 			//console.log(total);
 		}
 		
+		
+		
+		
+		
+		
+		
+		
 		sumPrice();
 	})//end function
 </script>
