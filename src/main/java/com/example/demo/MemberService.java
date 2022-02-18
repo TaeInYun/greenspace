@@ -1,5 +1,9 @@
 package com.example.demo;
 
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -38,7 +42,26 @@ public class MemberService implements UserDetailsService{
 				.username(username)
 				.password(m.getPwd())
 				.roles(Integer.toString(m.getMem_type())).build();
+		
 		return details;
 	}
+	
+	public String findIdByEmail(HttpServletResponse response, String email) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		String id = dao.findIdByEmail(email);
+		
+		if (id == null) {
+			out.println("<script>");
+			out.println("alert('가입된 아이디가 없습니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+			return null;
+		} else {
+			return id;
+		}
+	}
+	
 
 }

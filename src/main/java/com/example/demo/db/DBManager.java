@@ -56,7 +56,7 @@ public class DBManager {
 	
 	
 	
-		//************MYWISH ( 장바구니, 위시리스트)
+		//-----------------------MYWISH ( 장바구니, 위시리스트)------------------------
 		public static List<MyWishVO> findByMember(int member_no){
 			SqlSession session = factory.openSession();
 			List<MyWishVO> list = session.selectList("myWish.findByMember", 1);
@@ -125,7 +125,7 @@ public class DBManager {
 		session.close();
 	}
 	
-	//************ Address ( 주소록 )
+	//------------------Address ( 주소록 )------------------------
 	public static AddressVO getMainAddress(int member_no) {
 		SqlSession session = factory.openSession();
 		AddressVO main =  session.selectOne("address.getMainAddress", member_no);
@@ -133,7 +133,7 @@ public class DBManager {
 		return main;
 	}
 	
-	//------------MemberVO--------------
+	//------------------MemberVO--------------
 	public static int insertMember(MemberVO m) {
 		SqlSession session = factory.openSession();
 		int re = session.insert("member.insert",m);
@@ -156,6 +156,12 @@ public class DBManager {
 		return cnt;
 	}
 	
+	public static String findIdByEmail(String email) {
+		SqlSession session = factory.openSession();
+		String id = session.selectOne("member.findIdByEmail", email);
+		session.close();
+		return id;
+	}
 	
 }
 

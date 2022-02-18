@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.MemberService;
 import com.example.demo.dao.MemberDAO;
 import com.example.demo.vo.MemberVO;
 
@@ -26,6 +28,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberDAO dao;
+	
+	@Autowired
+	private MemberService ms;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -86,4 +91,18 @@ public class MemberController {
 		//세션에 상태유지를 하면 브라우저를 닫기 전까지(로그아웃 하기 전까지) 상태유지 할 수 있습니다.
 		session.setAttribute("m", m);	
 	}
+	
+	//이메일로 아이디 찾기 --------------------------------------------------
+	@RequestMapping(value = "/findIdByEmail", method = RequestMethod.GET)
+	public void findIdByEmail_form() {
+	}
+	
+	// 아이디 찾기
+		@RequestMapping(value = "/findId", method = RequestMethod.POST)
+		public String find_id(HttpServletResponse response, @RequestParam("email") String email, Model md) throws Exception{
+			md.addAttribute("id", ms.findIdByEmail(response, email));
+			return "findId";
+		}
+	
+	
 }

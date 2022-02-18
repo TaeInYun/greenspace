@@ -18,4 +18,8 @@ public class MemberDAO {
 	public int checkId(String id) {
 		return DBManager.checkId(id);
 	}
+	
+	public String findIdByEmail(String email) {
+		return DBManager.findIdByEmail(email);
+	}
 }
