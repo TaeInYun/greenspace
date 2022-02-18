@@ -15,14 +15,12 @@ import com.example.demo.vo.ProductVO;
 
 public class DBManager {
 	private static SqlSessionFactory factory;
+	
 	static {
 		try {
-			Reader reader
-			= Resources.getResourceAsReader("com/example/demo/db/sqlMapConfig.xml");
-			
+			Reader reader = Resources.getResourceAsReader("com/example/demo/db/sqlMapConfig.xml");
 			factory = new SqlSessionFactoryBuilder().build(reader);
 			reader.close();
-			
 		}catch (Exception e) {
 			System.out.println("예외발생:"+e.getMessage());
 		}
@@ -58,10 +56,9 @@ public class DBManager {
 	
 	
 		//************MYWISH ( 장바구니, 위시리스트)
-		
 		public static List<MyWishVO> findByMember(int member_no){
 			SqlSession session = factory.openSession();
-			List<MyWishVO> list = session.selectList("myWish.findByMember", member_no);
+			List<MyWishVO> list = session.selectList("myWish.findByMember", 1);
 			session.close();
 			return list;
 		}
@@ -91,11 +88,10 @@ public class DBManager {
 	public static int update(ProductVO b) {
 		SqlSession session = factory.openSession(true);
 		int re = session.update("product.update", b);
+		session.commit();
 		session.close();
 		return re;				
 	}	
-	
-
 	
 	public static int delete(int no) {
 		SqlSession session  = factory.openSession();
@@ -114,14 +110,6 @@ public class DBManager {
 		return re;
 	}
 
-	public static int delete() {
-		SqlSession session  = factory.openSession();
-		int re=session.delete("product.delete");
-		session.commit();
-		session.close();
-		return re;
-	}
-	
 	public static void updateHit(int no) {
 		SqlSession session = factory.openSession();
 		session.update("product.updateHit", no);
