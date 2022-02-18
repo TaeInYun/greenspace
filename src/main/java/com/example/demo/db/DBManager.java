@@ -9,7 +9,6 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.example.demo.vo.AddressVO;
-import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.MyWishVO;
 import com.example.demo.vo.ProductVO;
  
