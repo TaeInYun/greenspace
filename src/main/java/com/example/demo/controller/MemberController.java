@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -98,11 +99,11 @@ public class MemberController {
 	}
 	
 	// 아이디 찾기
-		@RequestMapping(value = "/findId", method = RequestMethod.POST)
-		public String find_id(HttpServletResponse response, @RequestParam("email") String email, Model md) throws Exception{
-			md.addAttribute("id", ms.findIdByEmail(response, email));
-			return "findId";
-		}
+	@RequestMapping(value = "/findId", method = RequestMethod.POST)
+	public String find_id(HttpServletResponse response, @RequestParam("email") String email, Model md) throws Exception{
+		md.addAttribute("id", ms.findIdByEmail(response, email));
+		return "findId";
+	}
 	
 	
 }
