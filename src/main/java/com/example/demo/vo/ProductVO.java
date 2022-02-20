@@ -20,9 +20,10 @@ public class ProductVO {
 	private String pro_content;
 	private String cat_code;
 	private String cat_name;
+	private String img;
 	private String PRO_THUMBNAIL;
-	private String PRO_image2;
-	private String PRO_image3;
- 
+	 
+	
+	
 	private MultipartFile uploadFile;
 }

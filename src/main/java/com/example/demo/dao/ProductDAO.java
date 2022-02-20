@@ -13,7 +13,11 @@ public class ProductDAO {
 	
 	public List<ProductVO> findAll(){
 		return DBManager.findAll();	
-	}	 
+	}	
+	
+	public List<ProductVO> findAll_home(){
+		return DBManager.findAll_home();	
+	}
 	 
 	public ProductVO findByNo(int no) {
 		return DBManager.findByNo(no);

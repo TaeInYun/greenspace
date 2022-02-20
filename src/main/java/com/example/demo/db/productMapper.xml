@@ -3,8 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="product">
+
+ <!-- 상품 home-->	
+  <select id="findAll_home" resultType="productVO">
+     select no ,pro_name, pro_brand, pro_price, pro_saleprice, PRO_THUMBNAIL
+	 from product p
+  </select>
  
-  <!-- 상품 -->	
+  <!-- 상품 admin-->	
   <select id="findAll" resultType="productVO">
      select no ,pro_name, pro_brand, pro_price, pro_saleprice, pro_stock, c.cat_name cat_name, PRO_THUMBNAIL
 	from product p, category c
@@ -28,7 +34,7 @@
   </delete>
   
   <update id="updateHit">
-  	update product set hit=hit+1 where no=#{no}
+  	update product set pro_hit=pro_hit+1 where no=#{no}
   </update>
   
 </mapper>

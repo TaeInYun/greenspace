@@ -10,6 +10,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.example.demo.vo.AddressVO;
 import com.example.demo.vo.CartVO;
+import com.example.demo.vo.MemberVO;
+//github.com/TaeInYun/greenspace.git
 import com.example.demo.vo.MyWishVO;
 import com.example.demo.vo.ProductVO;
  
@@ -56,7 +58,7 @@ public class DBManager {
 	
 	
 	
-		//************MYWISH ( 장바구니, 위시리스트)
+		//-----------------------MYWISH ( 장바구니, 위시리스트)------------------------
 		public static List<MyWishVO> findByMember(int member_no){
 			SqlSession session = factory.openSession();
 			List<MyWishVO> list = session.selectList("myWish.findByMember", 1);
@@ -78,7 +80,14 @@ public class DBManager {
 		session.close();
 		return list;
 	}	
-
+ 
+	public static List<ProductVO> findAll_home(){
+		SqlSession session = factory.openSession();
+		List<ProductVO> list= session.selectList("product.findAll_home");
+		session.close();
+		return list;
+	}	
+	
 	public static ProductVO findByNo(int no) {
 		SqlSession session = factory.openSession();
 		ProductVO p = session.selectOne("product.findByNo", no);
@@ -118,7 +127,7 @@ public class DBManager {
 		session.close();
 	}
 	
-	//************ Address ( 주소록 )
+	//------------------Address ( 주소록 )------------------------
 	public static AddressVO getMainAddress(int member_no) {
 		SqlSession session = factory.openSession();
 		AddressVO main =  session.selectOne("address.getMainAddress", member_no);
@@ -133,6 +142,36 @@ public class DBManager {
 		session.commit();
 		session.close();
 		return re;
+	}
+	
+	//------------------MemberVO--------------
+	public static int insertMember(MemberVO m) {
+		SqlSession session = factory.openSession();
+		int re = session.insert("member.insert",m);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
+	public static MemberVO findById(String id) {
+		SqlSession session = factory.openSession();
+		MemberVO m = session.selectOne("member.findById", id);
+		session.close();
+		return m;
+	}
+	
+	public static int checkId(String id) {
+		SqlSession session = factory.openSession();
+		int cnt = session.selectOne("member.checkId",id);
+		session.close();
+		return cnt;
+	}
+	
+	public static String findIdByEmail(String email) {
+		SqlSession session = factory.openSession();
+		String id = session.selectOne("member.findIdByEmail", email);
+		session.close();
+		return id;
 	}
 	
 }
