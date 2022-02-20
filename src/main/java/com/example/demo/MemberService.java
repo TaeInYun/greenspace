@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import java.io.PrintWriter;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -46,10 +47,14 @@ public class MemberService implements UserDetailsService{
 		return details;
 	}
 	
-	public String findIdByEmail(HttpServletResponse response, String email) throws Exception {
+	public String findIdByEmail(HttpServletResponse response, String email, String name ) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("email", email);
+		map.put("name", name);
+		
 		PrintWriter out = response.getWriter();
-		String id = dao.findIdByEmail(email);
+		String id = dao.findIdByEmail(map);
 		
 		if (id == null) {
 			out.println("<script>");
@@ -60,6 +65,7 @@ public class MemberService implements UserDetailsService{
 			return null;
 		} else {
 			return id;
+			
 		}
 	}
 	

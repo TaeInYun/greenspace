@@ -18,8 +18,8 @@
     select count(*) from member where id=#{id}
   </select> 
   
-  <select id="findIdByEmail"  parameterType="String" resultType="String">
-  	select id from member where email=#{email}
+  <select id="findIdByEmail" parameterType="HashMap" resultType="String">
+  	select id from member where email=#{email} and name=#{name} 
   </select>
   
   

@@ -1,6 +1,8 @@
 package com.example.demo.db;
 
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -167,12 +169,14 @@ public class DBManager {
 		return cnt;
 	}
 	
-	public static String findIdByEmail(String email) {
+	public static String findIdByEmail(HashMap<String,String> m) { 
 		SqlSession session = factory.openSession();
-		String id = session.selectOne("member.findIdByEmail", email);
+		//selectOne
+		String id = session.selectOne("member.findIdByEmail", m);
 		session.close();
 		return id;
 	}
 	
 }
+
 

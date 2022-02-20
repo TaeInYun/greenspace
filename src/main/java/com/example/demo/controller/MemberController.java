@@ -95,14 +95,14 @@ public class MemberController {
 	
 	//이메일로 아이디 찾기 --------------------------------------------------
 	@RequestMapping(value = "/findIdByEmail", method = RequestMethod.GET)
-	public void findIdByEmail_form() {
+	public void findIdByEmailForm() {
 	}
 	
 	// 아이디 찾기
-	@RequestMapping(value = "/findId", method = RequestMethod.POST)
-	public String find_id(HttpServletResponse response, @RequestParam("email") String email, Model md) throws Exception{
-		md.addAttribute("id", ms.findIdByEmail(response, email));
-		return "findId";
+	@RequestMapping(value = "/findIdOK", method = RequestMethod.POST)
+	public String findIdOk(HttpServletResponse response, @RequestParam String email, @RequestParam String name, Model md) throws Exception{
+		md.addAttribute("id", ms.findIdByEmail(response, email, name));
+		return "findIdOK";
 	}
 	
 	
