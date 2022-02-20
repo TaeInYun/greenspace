@@ -24,4 +24,8 @@ public class MemberDAO {
 	public String findIdByEmail(HashMap<String,String> m) {
 		return DBManager.findIdByEmail(m);
 	}
+	
+	public String findIdByPhone(HashMap<String,String> m) {
+		return DBManager.findIdByPhone(m);
+	}
 }

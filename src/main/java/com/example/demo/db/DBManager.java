@@ -60,17 +60,17 @@ public class DBManager {
 	
 	
 	
-		//-----------------------MYWISH ( 장바구니, 위시리스트)------------------------
-		public static List<MyWishVO> findByMember(int member_no){
-			SqlSession session = factory.openSession();
-			List<MyWishVO> list = session.selectList("myWish.findByMember", 1);
-			session.close();
-			return list;
-		}
-		
-		public static int cntOfCart(int member_no){
-			SqlSession session = factory.openSession();
-			int cnt = session.selectOne("myWish.cntOfCart", member_no);
+	//-----------------------MYWISH ( 장바구니, 위시리스트)------------------------
+	public static List<MyWishVO> findByMember(int member_no){
+		SqlSession session = factory.openSession();
+		List<MyWishVO> list = session.selectList("myWish.findByMember", 1);
+		session.close();
+		return list;
+	}
+	
+	public static int cntOfCart(int member_no){
+		SqlSession session = factory.openSession();
+		int cnt = session.selectOne("myWish.cntOfCart", member_no);
 			session.close();
 			return cnt;
 		}
@@ -171,8 +171,14 @@ public class DBManager {
 	
 	public static String findIdByEmail(HashMap<String,String> m) { 
 		SqlSession session = factory.openSession();
-		//selectOne
 		String id = session.selectOne("member.findIdByEmail", m);
+		session.close();
+		return id;
+	}
+	
+	public static String findIdByPhone(HashMap<String,String> m) { 
+		SqlSession session = factory.openSession();
+		String id = session.selectOne("member.findIdByPhone", m);
 		session.close();
 		return id;
 	}

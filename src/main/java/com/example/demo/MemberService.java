@@ -47,27 +47,51 @@ public class MemberService implements UserDetailsService{
 		return details;
 	}
 	
-	public String findIdByEmail(HttpServletResponse response, String email, String name ) throws Exception {
+	public String findId(HttpServletResponse response, String email, String name, String phone ) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("email", email);
-		map.put("name", name);
-		
 		PrintWriter out = response.getWriter();
-		String id = dao.findIdByEmail(map);
 		
-		if (id == null) {
-			out.println("<script>");
-			out.println("alert('가입된 아이디가 없습니다.');");
-			out.println("history.go(-1);");
-			out.println("</script>");
-			out.close();
-			return null;
+		if (email == null) {		
+			map.put("phone", phone);
+			map.put("name", name);
+			
+			String id = dao.findIdByPhone(map);
+			
+			if (id == null) {
+				out.println("<script>");
+				out.println("alert('가입된 아이디가 없습니다.');");
+				out.println("history.go(-1);");
+				out.println("</script>");
+				out.close();
+				return null;
+			} else {
+				return id;
+				
+			}
+				
 		} else {
-			return id;
+			map.put("email", email);
+			map.put("name", name);
+			String id = dao.findIdByEmail(map);
+			if (id == null) {
+				out.println("<script>");
+				out.println("alert('가입된 아이디가 없습니다.');");
+				out.println("history.go(-1);");
+				out.println("</script>");
+				out.close();
+				return null;
+			} else {
+				return id;
+				
+			}
 			
 		}
+			
+		
 	}
+	
+	
 	
 
 }
