@@ -76,7 +76,7 @@
 							</td>
 							<td>
 								<div>
-									<img src="${c.img }">
+									<img src="/upload/${c.img }">
 								</div>
 								<div>
 									<p>${c.pro_name }</p>

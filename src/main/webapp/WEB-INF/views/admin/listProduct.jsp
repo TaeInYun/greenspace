@@ -1,6 +1,5 @@
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
@@ -10,6 +9,7 @@
 </head>
 <body>
 	<H2>상품목록</H2>
+
 	<table border="1" width="80%">
 		<tr>
 			<td>상품번호</td>
@@ -24,9 +24,8 @@
 			<tr>
 				<td>${p.no }</td>
 				<td>
-					<a href="/admin/detailProduct?no=${p.no}">${p.pro_name} </a>					
+					<a href="/shop/detailProduct?no=${p.no}">${p.pro_name} </a>					
 				</td>				 
-				 
 				<td>${p.pro_brand }</td>
 				<td>${p.pro_price }</td>
 				<td>${p.pro_saleprice }</td>

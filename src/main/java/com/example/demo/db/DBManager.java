@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.example.demo.vo.AddressVO;
+import com.example.demo.vo.CartVO;
 import com.example.demo.vo.MyWishVO;
 import com.example.demo.vo.ProductVO;
  
@@ -124,5 +125,15 @@ public class DBManager {
 		session.close();
 		return main;
 	}
+	
+	//************ Cart ( 장바구니 )
+	public static int insertCart(CartVO c) {
+		SqlSession session = factory.openSession();
+		int re = session.insert("cart.insert", c);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
 }
 
