@@ -16,6 +16,7 @@ import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.MyReviewVO;
 //github.com/TaeInYun/greenspace.git
 import com.example.demo.vo.MyWishVO;
+ 
 import com.example.demo.vo.ProductVO;
 import com.example.demo.vo.ReviewVO;
  
@@ -181,7 +182,27 @@ public class DBManager {
 		session.close();
 	}
 	
+ 
+	public static List<ProductVO> findOption(int no){
+		SqlSession session = factory.openSession();
+		List<ProductVO> list= session.selectList("product.findOption",no);
+		session.close();
+		return list;
+	}	
+	
+	public static int findOptionView(int no){
+		SqlSession session = factory.openSession();
+		int re= session.selectOne("product.findOptionView",no);
+		session.close();
+		return re;
+	}	
+	 
+	
+	
+	 
+ 
 	//------------------Address ( 주소록 )------------------------
+ 
 	public static AddressVO getMainAddress(int member_no) {
 		SqlSession session = factory.openSession();
 		AddressVO main =  session.selectOne("address.getMainAddress", member_no);

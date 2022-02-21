@@ -7,12 +7,10 @@
 <meta charset="UTF-8">
 <link href="/css/shop.css" rel="stylesheet"/> 	 
 <title>Insert title here</title>
-<<<<<<< HEAD
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$("#cart").click(function(){
-			
+		$("#cart").click(function(){			
 			let cart_option = "";
 			let cart_option_detail = "";
 			let cart_qty = 1;
@@ -63,15 +61,44 @@
 				<div id="container_box"> 
 				<!-- 본문 -->			
 					<section id="content">			
-					상품이름 : ${p.pro_name }<br>
-					상품가격 :${p.pro_price}<br>
+					상품이름 : ${p.pro_name }<br>				
+					상품가격 :${p.pro_price}<br>	
 					상품할인가 :${p.pro_saleprice}<br>
 					상품설명 : ${p.pro_content }<br>	
-					조회수 : ${p.pro_hit }<br>	 
-					첨부파일명 : ${p.PRO_THUMBNAIL }<br>
+					조회수 : ${p.pro_hit }<br>	 	
+										
+		 		<a href="/shop/insertReview?pro_no=${r.pro_no}"> 리뷰작성하기</a>
+		 		 <c:if test="${cnt>=1}">	
+				 <hr>	 
+				      상품옵션 : 				 
+				        <select id="pro_option_name" name="pro_option_name">
+							<option value="">선택</option>					
+								<c:forEach var="op" items="${op}">							
+								<option value="${op.pro_option_name}">${op.pro_option_name}</option>				
+							</c:forEach>
+						</select>
+						
+						<select id="pro_option_detail_name" name="pro_option_detail_name">
+							<option value="">선택</option>
+							<c:forEach var="op" items="${op}">					
+								<option value="${op.pro_option_detail_name}">${op.pro_option_detail_name}+${op.pro_add_price}</option>										 		
+							</c:forEach>
+						</select>    
+						
+				</c:if>			  
+					
+									 
+					<hr>			 
 					 <img  src="/upload/${p.PRO_THUMBNAIL }" width="200" height="200">
-					 <a href="/shop/insertReview?pro_no=${r.pro_no}"> 리뷰작성하기</a>
-					</section>					
+					 <a href="">찜하기</a>
+					 <a href="">카트</a>
+					 <hr>					 
+					 <a href="">상품평</a>
+					 <a href="">Q&A</a>
+					 <a href="">교환환불</a>
+					 
+					 
+		</section>					
 					 
 					<aside id="aside">
 						<jsp:include page="../shop/shopAside.jsp"/>

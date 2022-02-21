@@ -33,6 +33,6 @@
     <mapper resource="com/example/demo/db/myWishMapper.xml"/>
      <mapper resource="com/example/demo/db/myreviewMapper.xml"/> 
      <mapper resource="com/example/demo/db/memberMapper.xml"/> 
-	<mapper resource="com/example/demo/db/orderListMapper.xml"/>
+	<mapper resource="com/example/demo/db/orderListMapper.xml"/> 
   </mappers>
 </configuration>
