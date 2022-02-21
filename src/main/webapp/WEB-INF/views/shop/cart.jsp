@@ -10,17 +10,54 @@
 <script type="text/javascript">
 	$(function(){
 		
-		$("input[type=checkbox]").prop("checked",true);
+		let checkbox = "input[name=checkList]";
+		let allCheck = "#checkedAll";
 		
-		$(document).on("click", "#listCart input[type=checkbox]", function() {
-			$("input[name=allCheck]").prop("checked", false)
+		// 전체체크에 관한 기능 추가
+		
+		function checkedAll() {
+			if( $("#checkedAll").is(":checked") ){
+				$("input[name=checkList]").prop("checked", true);
+			}else{
+				$("input[name=checkList]").prop("checked", false);
+			}
+		}// 전체체크 함수
+		
+		$(document).on("click","#checkedAll",function() {
+			checkedAll();
 		});
 		
+		$(document).on("click", "#listCart "+ checkbox, function() {
+			$(allCheck).prop("checked", false)
+		}); 
+		
+		// 수량 버튼 기능 추가
+		$(document).on("click", "#minus", function() {
+			let qty = $(this).siblings();
+			let value = Number( $( qty ).val() );
+						
+ 			if(value == 1){
+				$(qty).val(1);
+			}else{
+				$(qty).val(value-1);
+			} 
+		}); // end minus
+		
+		$(document).on("click", "#plus", function() {
+			let qty = $(this).siblings()[1];
+			let value = Number( $( qty ).val() );
+			
+			$(qty).val(value+1);
+		}); // end plus
+		
+		// 가격관련 기능
 		function sumPrice() {
 			
-			let tr = $("input[name=checkList]").parent();
-			
 			let total = 0;
+			let price = 0;
+			let saleprice = 0;
+			
+			let tr = $("input[name=checkList]").parent();
 			
 			$.each($("input[name=checkList]:checked"), function() {
 				let td = $(this).parent();
@@ -29,16 +66,10 @@
 			});			
 			
 			//console.log(total);
-		}
+		}// end sumPrice()
 		
-		
-		
-		
-		
-		
-		
-		
-		sumPrice();
+		//서버동작시 실행
+		checkedAll();
 	})//end function
 </script>
 </head>
@@ -57,7 +88,7 @@
 				<thead>
 					<tr>
 						<td>전체 ${cnt } 개</td>
-						<td><input type="checkbox" name="allCheck"></td>
+						<td><input type="checkbox" id="checkedAll" checked="checked"></td>
 						<td>상품명(옵션)</td>
 						<td>가격</td>
 						<td>수량</td>
@@ -72,8 +103,8 @@
 							</td>
 							<td>
 								<input type="checkbox" name="checkList"">
-								<input type="hidden" name="no" value="${c.no }">
-								<input type="hidden" name="qty" value="${c.qty }">
+								<input type="hidden" name="price" value="${c.price }">
+								<input type="hidden" name="saleprice" value="${c.saleprice }">
 							</td>
 							<td>
 								<div>
@@ -81,17 +112,19 @@
 								</div>
 								<div>
 									<p>${c.pro_name }</p>
-									<p>옵션: ${c.pro_option }/${c.option_detail}</p>
+									<c:if test="${c.pro_option != null}">
+										<p>옵션: ${c.pro_option }/${c.option_detail}</p>
+									</c:if>
 								</div>
 							</td>
 							<td>
 								<span id="price">${c.price }</span>
 								<span id="saleprice">${c.saleprice }</span>
 							</td>
-							<td>
-								<button>-</button>
+							<td id="addSub">
+								<button type="button" id="minus">-</button>
 								<input type="number" value="${c.qty }">
-								<button>+</button>
+								<button type="button" id="plus">+</button>
 							</td>
 							<td>
 								<button>삭제</button>

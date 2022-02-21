@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <link href="/css/shop.css" rel="stylesheet"/> 	 
 <title>Insert title here</title>
-<<<<<<< HEAD
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	$(function(){
