@@ -18,12 +18,28 @@
   </select>
   
    <insert id="insert" parameterType="productVO">
-  	insert into product values(seq_product.nextval, #{pro_name}, #{pro_brand}, #{pro_price}, #{pro_saleprice}, #{pro_stock}, #{pro_delivery}, sysdate, 0, #{pro_content}, #{cat_code}, #{PRO_THUMBNAIL})
-  </insert>
+    </insert>
   
+   <!-- 상품 detail-->
   <select id="findByNo" resultType="productVO">
-  	select * from product where no=#{no}
-  </select>
+  	select pro_name, pro_price, pro_saleprice, pro_content, pro_hit, PRO_THUMBNAIL 
+	from product p 
+	where p.no=#{no} 
+ </select>
+  
+  
+ <select id="findOption" resultType="productVO">   		 
+			select pro_option_name, pro_option_detail_name, pro_add_price, sum(pro_saleprice + pro_add_price)sum
+			from pro_add_option pao,pro_option po, pro_option_detail pod, product p
+			where pao.pro_option_code = po.pro_option_code and
+			pao.pro_option_detail_code = pod.pro_option_detail_code and
+			pro_no=#{no}
+		    GROUP BY pro_option_name, pro_option_detail_name, pro_add_price		 
+ </select> 
+ 	
+ <select id="findOptionView" resultType="java.lang.Integer">   		
+ 	select count (*)cnt from pro_add_option where no=#{no}
+ </select>
   
   <update id="update" parameterType="productVO">
   	update product set pro_name=#{pro_name},pro_brand=#{pro_brand},pro_price=#{pro_price},pro_saleprice=#{pro_saleprice},pro_stock=#{pro_stock},pro_content=#{pro_content},where no=#{no}
