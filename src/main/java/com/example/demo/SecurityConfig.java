@@ -1,33 +1,62 @@
 package com.example.demo;
 
+import javax.annotation.security.PermitAll;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import lombok.AllArgsConstructor;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+	@Autowired
+	private CustomAuthFailureHandler authFailureHandler;
+	
 	//사이트 잠금해제
 	@Override
 	public void configure(WebSecurity web) throws Exception
 	{
 		// static 디렉터리의 하위 파일 목록은 인증 무시 ( = 항상통과 )
-        web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/lib/**","/views/**");}
+        web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/lib/**","/views/**");
+        }
 	
 	//로그인폼 수정
 	@Override
 	protected void configure(HttpSecurity http) throws Exception
 	{
-		http.formLogin().loginPage("/login")//로그인을 위한 서비스명 설정
-		.defaultSuccessUrl("/loginOK");//로그인을 성공하였을때 이동할 서비스명을 설정
+		http.formLogin()
+		.loginPage("/login")//로그인을 위한 서비스명 설정
+		//.loginProcessingUrl("/loginAction")//로그인과정
+		.defaultSuccessUrl("/loginOK")//로그인을 성공하였을때 이동할 서비스명을 설정
+		.failureUrl("/login?error=true")
+		.failureHandler(authFailureHandler); //->변수로
+		//.failureHandler(failureHandler()); ->@Bean설정했을시 
 		
+		http.logout()
+		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))//로그아웃을 위한 서비스명을 설정
+		.invalidateHttpSession(true)//로그아웃을 완료하였을 때 세션을 파기하도록 설정
+		.logoutSuccessUrl("/login");//로그아웃을 완료한 후에 이동할 서비스명 설정
 	
+		http.httpBasic();
 	}	
 	
+	/*
+	@Bean
+	public AuthenticationFailureHandler failureHandler() {
+		return new CustomAuthFailureHandler();
+	}*/
+
 	/*
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -55,5 +84,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.httpBasic();
 	
 	}*/
+	
+
 	
 }

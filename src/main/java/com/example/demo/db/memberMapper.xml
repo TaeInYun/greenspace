@@ -14,8 +14,19 @@
     select * from member where id=#{id}
   </select>
   
+  <!-- 아이디 중복 체크  -->
    <select id="checkId" resultType="int">
     select count(*) from member where id=#{id}
   </select> 
+  
+  <!-- 닉네임 중복 체크  -->
+   <select id="checkNickname" resultType="int">
+    select count(*) from member where nickname=#{nickname}
+  </select>   
+  
+  <!-- 이메일 중복 체크  -->
+   <select id="checkEmail" resultType="int">
+    select count(*) from member where email=#{email}
+  </select>     
   
 </mapper>

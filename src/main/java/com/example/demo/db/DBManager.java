@@ -149,6 +149,20 @@ public class DBManager {
 		return cnt;
 	}
 	
+	public static int checkNickname(String nickname) {
+		SqlSession session = factory.openSession();
+		int cnt = session.selectOne("member.checkNickname",nickname);
+		session.close();
+		return cnt;
+	}	
+	
+	public static int checkEmail(String email) {
+		SqlSession session = factory.openSession();
+		int cnt = session.selectOne("member.checkEmail",email);
+		session.close();
+		return cnt;
+	}		
+	
 	
 }
 
