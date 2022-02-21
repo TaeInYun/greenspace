@@ -10,8 +10,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$("#cart").click(function(){
-			
+		$("#cart").click(function(){			
 			let cart_option = "";
 			let cart_option_detail = "";
 			let cart_qty = 1;
@@ -70,8 +69,7 @@
 		 		
 		 		 <c:if test="${cnt>=1}">	
 				 <hr>	 
-				      상품옵션 : 
-				 
+				      상품옵션 : 				 
 				        <select id="pro_option_name" name="pro_option_name">
 							<option value="">선택</option>					
 								<c:forEach var="op" items="${op}">							
