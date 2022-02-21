@@ -70,6 +70,7 @@
 					조회수 : ${p.pro_hit }<br>	 
 					첨부파일명 : ${p.PRO_THUMBNAIL }<br>
 					 <img  src="/upload/${p.PRO_THUMBNAIL }" width="200" height="200">
+					 <a href="/shop/insertReview?pro_no=${r.pro_no}"> 리뷰작성하기</a>
 					</section>					
 					 
 					<aside id="aside">

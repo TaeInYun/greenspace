@@ -2,8 +2,20 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="myreview">
+<mapper namespace="myreview">  <!--  -->
   <select id="findAll" resultType="myreviewVO">
-    
+    select r.member_no, pro_name, pro_option_detail_name, 
+	pro_option_name, re_date,re_title ,re_content,re_like,
+	(select nvl(count(re_no),0) from comments where re_no=r.no)co_cnt
+	from review r, product pro , pro_add_option ad ,pro_option_detail od ,pro_option po,img i
+	where ad.pro_no=pro.no
+	and ad.pro_option_detail_code=od.pro_option_detail_code
+	and po.pro_option_code=ad.pro_option_code
+	and i.re_no=r.no and member_no=#{member_no}    
   </select>
+  
+  <select id="">
+  	
+  </select>
+  
 </mapper>

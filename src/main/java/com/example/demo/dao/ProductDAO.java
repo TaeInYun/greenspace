@@ -32,8 +32,9 @@ public class ProductDAO {
 		return DBManager.delete(no);
 	}
 	
+	
 	public void updateHit(int no) {
-		DBManager.updateHit(no);
+		DBManager.updateReviewHit(no);
 	}
 	
 	public int insert(ProductVO p) {
