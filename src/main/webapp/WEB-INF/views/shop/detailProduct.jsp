@@ -41,7 +41,6 @@
 					$("#btns").append(span);
 				}
 			});//end ajax
-			
 		});
 	});
 </script>
@@ -88,8 +87,6 @@
 						</select>    
 						
 				</c:if>			  
-					
-									 
 					<hr>			 
 					 <img  src="/upload/${p.PRO_THUMBNAIL }" width="200" height="200">
 					 <a href="">찜하기</a>
@@ -98,8 +95,6 @@
 					 <a href="">상품평</a>
 					 <a href="">Q&A</a>
 					 <a href="">교환환불</a>
-					 
-					 
 		</section>					
 					 
 					<aside id="aside">
