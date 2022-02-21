@@ -53,6 +53,14 @@
 	<div class="error_login" style="display: block" style="font:red">${loginFailMsg}</div>
     </c:if>
 	<input id="loginBtn" type="button" value="로그인">
-	</form>
+	    	<div>
+	    	<a href="/findIdByEmail">아이디 찾기</a> 
+	     	<a href="/findPwdByEmail">비밀번호 찾기</a> 
+	     	
+	     	<p>계정이 없으신가요?</p>
+	     	
+	       <a href="/join">회원가입</a>
+       </div>
+</form>
 </body>
 </html>

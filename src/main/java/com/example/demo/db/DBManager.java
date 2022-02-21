@@ -1,6 +1,8 @@
 package com.example.demo.db;
 
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -9,9 +11,14 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.example.demo.vo.AddressVO;
+import com.example.demo.vo.CartVO;
 import com.example.demo.vo.MemberVO;
+import com.example.demo.vo.MyReviewVO;
+//github.com/TaeInYun/greenspace.git
 import com.example.demo.vo.MyWishVO;
+ 
 import com.example.demo.vo.ProductVO;
+import com.example.demo.vo.ReviewVO;
  
 
 public class DBManager {
@@ -31,42 +38,92 @@ public class DBManager {
 			
 	//-----------------------ReviewVO---------------------------
 	
-	public static List<MyWishVO> findAllMyReview(){
+	public static List<ReviewVO> findAllReview(){
 		SqlSession session = factory.openSession();
-		List<MyWishVO> list = session.selectList("review.findAll");
+		List<ReviewVO> list = session.selectList("review.findAll");
 		session.close();
 		return list;
 	}
 	
-	public static List<MyWishVO> findAllMyReviewRate(){
+	public static ReviewVO findAllReviewRate(int pro_no){
 		SqlSession session = factory.openSession();
-		List<MyWishVO> list = session.selectList("review.findAllRate");
+		ReviewVO r = session.selectOne("ReviewVO.findAllRate", pro_no);
 		session.close();
-		return list;
+		return r;
 	}
+	
+	public static ReviewVO findAllReviewDetail(int no) {
+		SqlSession session = factory.openSession();
+		ReviewVO r = session.selectOne("ReviewVO.findAllDetail", no);
+		session.close();
+		return r;
+	}
+	
+	public static int insertReview(ReviewVO r) {
+		
+		SqlSession session  = factory.openSession();
+		int re=session.insert("review.insert",r);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
+	
+	public static int updateReview(ReviewVO r) {
+		SqlSession session = factory.openSession(true);
+		int re = session.update("review.update", r);
+		session.commit();
+		session.close();
+		return re;				
+	}	
+	
+	public static int deleteReview(int no) {
+		SqlSession session  = factory.openSession();
+		int re=session.delete("review.delete", no);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
+	public static void updateReviewHit(int no) {
+		SqlSession session = factory.openSession();
+		session.update("review.updateHit", no);
+		session.commit();
+		session.close();
+	}
+	
 	
 	
 	//-----------------------MyReviewVO---------------------------
-		public static List<MyWishVO> findAllReview(){
+		public static List<MyReviewVO> findAllMyReview(){
 			SqlSession session = factory.openSession();
-			List<MyWishVO> list = session.selectList("myreview.findAll");
-			session.close();
-			return list;
-		}
-	
-	
-	
-		//************MYWISH ( 장바구니, 위시리스트)
-		public static List<MyWishVO> findByMember(int member_no){
-			SqlSession session = factory.openSession();
-			List<MyWishVO> list = session.selectList("myWish.findByMember", 1);
+			List<MyReviewVO> list = session.selectList("myreview.findAll");
 			session.close();
 			return list;
 		}
 		
-		public static int cntOfCart(int member_no){
+		public static List<MyReviewVO> findAllMyReviewRate(){
 			SqlSession session = factory.openSession();
-			int cnt = session.selectOne("myWish.cntOfCart", member_no);
+			List<MyReviewVO> list = session.selectList("myreview.findAllRate");
+			session.close();
+			return list;
+		}
+		
+		
+	
+	
+	
+	//-----------------------MYWISH ( 장바구니, 위시리스트)------------------------
+	public static List<MyWishVO> findByMember(int member_no){
+		SqlSession session = factory.openSession();
+		List<MyWishVO> list = session.selectList("myWish.findByMember", 1);
+		session.close();
+		return list;
+	}
+	
+	public static int cntOfCart(int member_no){
+		SqlSession session = factory.openSession();
+		int cnt = session.selectOne("myWish.cntOfCart", member_no);
 			session.close();
 			return cnt;
 		}
@@ -78,7 +135,14 @@ public class DBManager {
 		session.close();
 		return list;
 	}	
-
+ 
+	public static List<ProductVO> findAll_home(){
+		SqlSession session = factory.openSession();
+		List<ProductVO> list= session.selectList("product.findAll_home");
+		session.close();
+		return list;
+	}	
+	
 	public static ProductVO findByNo(int no) {
 		SqlSession session = factory.openSession();
 		ProductVO p = session.selectOne("product.findByNo", no);
@@ -118,7 +182,27 @@ public class DBManager {
 		session.close();
 	}
 	
-	//************ Address ( 주소록 )
+ 
+	public static List<ProductVO> findOption(int no){
+		SqlSession session = factory.openSession();
+		List<ProductVO> list= session.selectList("product.findOption",no);
+		session.close();
+		return list;
+	}	
+	
+	public static int findOptionView(int no){
+		SqlSession session = factory.openSession();
+		int re= session.selectOne("product.findOptionView",no);
+		session.close();
+		return re;
+	}	
+	 
+	
+	
+	 
+ 
+	//------------------Address ( 주소록 )------------------------
+ 
 	public static AddressVO getMainAddress(int member_no) {
 		SqlSession session = factory.openSession();
 		AddressVO main =  session.selectOne("address.getMainAddress", member_no);
@@ -126,7 +210,16 @@ public class DBManager {
 		return main;
 	}
 	
-	//------------MemberVO--------------
+	//************ Cart ( 장바구니 )
+	public static int insertCart(CartVO c) {
+		SqlSession session = factory.openSession();
+		int re = session.insert("cart.insert", c);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
+	//------------------MemberVO---------------------------------
 	public static int insertMember(MemberVO m) {
 		SqlSession session = factory.openSession();
 		int re = session.insert("member.insert",m);
@@ -149,6 +242,7 @@ public class DBManager {
 		return cnt;
 	}
 	
+
 	public static int checkNickname(String nickname) {
 		SqlSession session = factory.openSession();
 		int cnt = session.selectOne("member.checkNickname",nickname);
@@ -163,6 +257,22 @@ public class DBManager {
 		return cnt;
 	}		
 	
+
+	public static String findIdByEmail(HashMap<String,String> m) { 
+		SqlSession session = factory.openSession();
+		String id = session.selectOne("member.findIdByEmail", m);
+		session.close();
+		return id;
+	}
 	
+	public static String findIdByPhone(HashMap<String,String> m) { 
+		SqlSession session = factory.openSession();
+		String id = session.selectOne("member.findIdByPhone", m);
+		session.close();
+		return id;
+	}
+
+
 }
+
 

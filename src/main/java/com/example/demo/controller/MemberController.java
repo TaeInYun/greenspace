@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.Random;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,6 +137,23 @@ public class MemberController {
 		//세션에 상태유지를 하면 브라우저를 닫기 전까지(로그아웃 하기 전까지) 상태유지 할 수 있습니다.
 		session.setAttribute("m", m);	
 	}
+	
+	//이메일로 아이디 찾기 --------------------------------------------------
+	@RequestMapping(value = "/findIdByEmail", method = RequestMethod.GET)
+	public void findIdByEmailForm() {
+	}
+	
+	// 아이디 찾기
+	@RequestMapping(value = "/findIdOK", method = RequestMethod.POST)
+	public String findIdOk(HttpServletResponse response, @RequestParam String email, @RequestParam String name,@RequestParam String phone, Model md) throws Exception{
+		md.addAttribute("id", ms.findId(response, email, name, phone));
+		return "findIdOK";
+	}
+	
+	//핸드폰 번호로 아이디 찾기 --------------------------------------------------
+	@RequestMapping(value = "/findIdByPhone", method = RequestMethod.GET)
+	public void findIdByPhoneForm() {
+	}	
 	
 	
 }
