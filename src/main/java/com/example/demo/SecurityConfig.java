@@ -22,8 +22,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception
 	{
-		http.formLogin().loginPage("/login")//로그인을 위한 서비스명 설정
-		.defaultSuccessUrl("/loginOK");//로그인을 성공하였을때 이동할 서비스명을 설정
+		http
+		.formLogin().loginPage("/login")//로그인을 위한 서비스명 설정
+		.defaultSuccessUrl("/loginOK");	//로그인을 성공하였을때 이동할 서비스명을 설정
+
 		
 	
 	}	

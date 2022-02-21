@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +10,14 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.MemberService;
 import com.example.demo.dao.MemberDAO;
 import com.example.demo.vo.MemberVO;
 
@@ -26,6 +29,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberDAO dao;
+	
+	@Autowired
+	private MemberService ms;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -86,4 +92,24 @@ public class MemberController {
 		//세션에 상태유지를 하면 브라우저를 닫기 전까지(로그아웃 하기 전까지) 상태유지 할 수 있습니다.
 		session.setAttribute("m", m);	
 	}
+	
+	//이메일로 아이디 찾기 --------------------------------------------------
+	@RequestMapping(value = "/findIdByEmail", method = RequestMethod.GET)
+	public void findIdByEmailForm() {
+	}
+	
+	// 아이디 찾기
+	@RequestMapping(value = "/findIdOK", method = RequestMethod.POST)
+	public String findIdOk(HttpServletResponse response, @RequestParam String email, @RequestParam String name,@RequestParam String phone, Model md) throws Exception{
+		md.addAttribute("id", ms.findId(response, email, name, phone));
+		return "findIdOK";
+	}
+	
+	//핸드폰 번호로 아이디 찾기 --------------------------------------------------
+	@RequestMapping(value = "/findIdByPhone", method = RequestMethod.GET)
+	public void findIdByPhoneForm() {
+	}
+	
+	
+	
 }

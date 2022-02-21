@@ -1,6 +1,8 @@
 package com.example.demo.db;
 
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -9,7 +11,9 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.example.demo.vo.AddressVO;
+import com.example.demo.vo.CartVO;
 import com.example.demo.vo.MemberVO;
+//github.com/TaeInYun/greenspace.git
 import com.example.demo.vo.MyWishVO;
  
 import com.example.demo.vo.ProductVO;
@@ -57,17 +61,17 @@ public class DBManager {
 	
 	
 	
-		//************MYWISH ( 장바구니, 위시리스트)
-		public static List<MyWishVO> findByMember(int member_no){
-			SqlSession session = factory.openSession();
-			List<MyWishVO> list = session.selectList("myWish.findByMember", 1);
-			session.close();
-			return list;
-		}
-		
-		public static int cntOfCart(int member_no){
-			SqlSession session = factory.openSession();
-			int cnt = session.selectOne("myWish.cntOfCart", member_no);
+	//-----------------------MYWISH ( 장바구니, 위시리스트)------------------------
+	public static List<MyWishVO> findByMember(int member_no){
+		SqlSession session = factory.openSession();
+		List<MyWishVO> list = session.selectList("myWish.findByMember", 1);
+		session.close();
+		return list;
+	}
+	
+	public static int cntOfCart(int member_no){
+		SqlSession session = factory.openSession();
+		int cnt = session.selectOne("myWish.cntOfCart", member_no);
 			session.close();
 			return cnt;
 		}
@@ -126,7 +130,7 @@ public class DBManager {
 		session.close();
 	}
 	
-	 
+ 
 	public static List<ProductVO> findOption(int no){
 		SqlSession session = factory.openSession();
 		List<ProductVO> list= session.selectList("product.findOption",no);
@@ -144,8 +148,9 @@ public class DBManager {
 	
 	
 	 
-	
-	//************ Address ( 주소록 )
+ 
+	//------------------Address ( 주소록 )------------------------
+ 
 	public static AddressVO getMainAddress(int member_no) {
 		SqlSession session = factory.openSession();
 		AddressVO main =  session.selectOne("address.getMainAddress", member_no);
@@ -153,7 +158,16 @@ public class DBManager {
 		return main;
 	}
 	
-	//------------MemberVO--------------
+	//************ Cart ( 장바구니 )
+	public static int insertCart(CartVO c) {
+		SqlSession session = factory.openSession();
+		int re = session.insert("cart.insert", c);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
+	//------------------MemberVO--------------
 	public static int insertMember(MemberVO m) {
 		SqlSession session = factory.openSession();
 		int re = session.insert("member.insert",m);
@@ -176,6 +190,20 @@ public class DBManager {
 		return cnt;
 	}
 	
+	public static String findIdByEmail(HashMap<String,String> m) { 
+		SqlSession session = factory.openSession();
+		String id = session.selectOne("member.findIdByEmail", m);
+		session.close();
+		return id;
+	}
+	
+	public static String findIdByPhone(HashMap<String,String> m) { 
+		SqlSession session = factory.openSession();
+		String id = session.selectOne("member.findIdByPhone", m);
+		session.close();
+		return id;
+	}
 	
 }
+
 

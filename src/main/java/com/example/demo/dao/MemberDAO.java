@@ -1,5 +1,7 @@
 package com.example.demo.dao;
 
+import java.util.HashMap;
+
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.db.DBManager;
@@ -17,5 +19,13 @@ public class MemberDAO {
 	
 	public int checkId(String id) {
 		return DBManager.checkId(id);
+	}
+	
+	public String findIdByEmail(HashMap<String,String> m) {
+		return DBManager.findIdByEmail(m);
+	}
+	
+	public String findIdByPhone(HashMap<String,String> m) {
+		return DBManager.findIdByPhone(m);
 	}
 }

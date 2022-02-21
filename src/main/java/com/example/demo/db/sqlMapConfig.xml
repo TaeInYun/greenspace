@@ -5,12 +5,13 @@
 <configuration>
   <properties resource="com/example/demo/db/db.properties"/>
   <typeAliases>
-  	<typeAlias type="com.example.demo.vo.MyWishVO" alias="myWishVO"/>
   	<typeAlias type="com.example.demo.vo.AddressVO" alias="addressVO"/>
-	<typeAlias type="com.example.demo.vo.OrderListVO" alias="orderListVO"/>
-  	<typeAlias type="com.example.demo.vo.MyReviewVO" alias="myreviewVO"/>
+  	<typeAlias type="com.example.demo.vo.CartVO" alias="cartVO"/>
   	<typeAlias type="com.example.demo.vo.ReviewVO" alias="reviewVO"/>
   	<typeAlias type="com.example.demo.vo.MemberVO" alias="memberVO"/>
+  	<typeAlias type="com.example.demo.vo.MyWishVO" alias="myWishVO"/>
+  	<typeAlias type="com.example.demo.vo.MyReviewVO" alias="myreviewVO"/>
+	<typeAlias type="com.example.demo.vo.OrderListVO" alias="orderListVO"/>
   	<typeAlias type="com.example.demo.vo.ProductVO" alias="productVO"/>
 
   </typeAliases>
@@ -26,14 +27,13 @@
     </environment>
   </environments>
   <mappers>
+    <mapper resource="com/example/demo/db/addressMapper.xml"/>
+     <mapper resource="com/example/demo/db/cartMapper.xml"/> 
+     <mapper resource="com/example/demo/db/reviewMapper.xml"/> 
     <mapper resource="com/example/demo/db/productMapper.xml"/>
     <mapper resource="com/example/demo/db/myWishMapper.xml"/>
-    <mapper resource="com/example/demo/db/addressMapper.xml"/>
-	<mapper resource="com/example/demo/db/orderListMapper.xml"/>
-	<mapper resource="com/example/demo/db/addressMapper.xml"/>
      <mapper resource="com/example/demo/db/myreviewMapper.xml"/> 
-     <mapper resource="com/example/demo/db/reviewMapper.xml"/> 
      <mapper resource="com/example/demo/db/memberMapper.xml"/> 
- 
+	<mapper resource="com/example/demo/db/orderListMapper.xml"/> 
   </mappers>
 </configuration>
