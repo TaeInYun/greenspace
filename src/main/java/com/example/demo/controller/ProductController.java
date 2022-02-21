@@ -86,7 +86,12 @@ public class ProductController {
 	@RequestMapping("/shop/detailProduct")
 	public void detail(int no, Model model) {	
 		dao.updateHit(no);
+		
+	 	dao.findOption(no);
 		model.addAttribute("p", dao.findByNo(no));
+	 	model.addAttribute("op", dao.findOption(no));
+	 	model.addAttribute("cnt", dao.findOptionView(no));
+	 	 
 	}
 	
 	

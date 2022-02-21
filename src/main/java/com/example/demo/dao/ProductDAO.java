@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.db.DBManager;
+ 
 import com.example.demo.vo.ProductVO;
 
 @Repository
@@ -39,4 +40,13 @@ public class ProductDAO {
 	public int insert(ProductVO p) {
 		return DBManager.insert(p);
 	}
+ 	
+	public List<ProductVO> findOption(int no){
+		return DBManager.findOption(no);	
+	}
+	
+	public int findOptionView(int no) {
+		return DBManager.findOptionView(no);
+	}
+ 
 }

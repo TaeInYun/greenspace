@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.example.demo.vo.AddressVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.MyWishVO;
+ 
 import com.example.demo.vo.ProductVO;
  
 
@@ -124,6 +125,25 @@ public class DBManager {
 		session.commit();
 		session.close();
 	}
+	
+	 
+	public static List<ProductVO> findOption(int no){
+		SqlSession session = factory.openSession();
+		List<ProductVO> list= session.selectList("product.findOption",no);
+		session.close();
+		return list;
+	}	
+	
+	public static int findOptionView(int no){
+		SqlSession session = factory.openSession();
+		int re= session.selectOne("product.findOptionView",no);
+		session.close();
+		return re;
+	}	
+	 
+	
+	
+	 
 	
 	//************ Address ( 주소록 )
 	public static AddressVO getMainAddress(int member_no) {
