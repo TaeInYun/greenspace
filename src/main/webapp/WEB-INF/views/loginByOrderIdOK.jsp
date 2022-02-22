@@ -9,8 +9,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>로그인성공</h2>
-${m.nickname }님
+<h2>로그인 성공</h2>
+${order.name }님
 <a href="logout">로그아웃</a>
 </body>
 </html>
