@@ -6,6 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.error_id, .error_pwd{
+	font-size: 0.7em;
+	color: red;
+}
+.error_login{
+	font-size: 0.7em;
+	color: red;
+}
+</style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	$(function(){
@@ -38,7 +48,11 @@
 </head>
 <body>
 	<h2>로그인</h2>
+			<a href="/login">기존 회원</a> 
+	     	<a href="/loginByOrderId" style="color:#b3b3b3">비회원 주문조회</a> 
+	     	
 	<form id="login_form" action="login" method="post">
+
 		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 		
 			<div class="id_wrap">
@@ -64,6 +78,7 @@
 			     		<p>계정이 없으신가요?</p>
 			      	<a href="/join">회원가입</a>
 		      </div>
+
 </form>
 </body>
 </html>

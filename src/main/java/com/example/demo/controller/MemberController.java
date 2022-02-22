@@ -38,7 +38,7 @@ public class MemberController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	
+
 	//회원가입----------------------------
 	@RequestMapping(value = "/join",method = RequestMethod.GET)
 	public void join_form() {	
@@ -119,7 +119,6 @@ public class MemberController {
 	public void loginAction() {
 		
 	}
-	
 
 	
 	//로그인확인----------------------------
@@ -139,7 +138,7 @@ public class MemberController {
 		
 		//db로 부터 읽어온 회원객체를 세션에 상태유지합니다.
 		//세션에 상태유지를 하면 브라우저를 닫기 전까지(로그아웃 하기 전까지) 상태유지 할 수 있습니다.
-		session.setAttribute("m", m);	
+		session.setAttribute("m", m);
 	}
 	
 	//이메일 아이디 찾기 
@@ -159,6 +158,7 @@ public class MemberController {
 		return "findIdOK";
 	}
 	
+
 
 	//이메일 비밀번호 찾기
 	@RequestMapping(value="/findPwdByEmail", method = RequestMethod.GET )
@@ -181,8 +181,6 @@ public class MemberController {
 		md.addAttribute("checkPwd", ms.resetPwd(response, id, email, phone));
 		return "resetPwd" ;
 	}
-	
 
-	
 	
 }
