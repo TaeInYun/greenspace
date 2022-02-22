@@ -115,11 +115,16 @@
 						<select id="pro_option_detail_name" name="pro_option_detail_name">
 							<option value="">선택</option>
 							<c:forEach var="op" items="${op}">					
-								<option value="${op.pro_option_detail_name}">${op.pro_option_detail_name}+${op.pro_add_price}</option>										 		
+								<option value="${op.pro_add_price}" name="${op.pro_option_detail_name}">${op.pro_option_detail_name}+${op.pro_add_price}</option>										 		
 							</c:forEach>
 						</select>    
 						
-				</c:if>			  
+				</c:if>	
+				<div id="addSub">
+				<button type="button" id="minus" >-</button>
+				<input type="number" value="1" id="qty">
+					<button type="button" id="plus">+</button>
+				</div>				  
 				<hr>			 
 				 <img  src="/upload/${p.PRO_THUMBNAIL }" width="200" height="200">
 				 <a href="">찜하기</a>
