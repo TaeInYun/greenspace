@@ -6,6 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.error_id, .error_pwd{
+	font-size: 0.7em;
+	color: red;
+}
+.error_login{
+	font-size: 0.7em;
+	color: red;
+}
+</style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	$(function(){
@@ -38,8 +48,11 @@
 </head>
 <body>
 	<h2>로그인</h2>
+			<a href="/login">기존 회원</a> 
+	     	<a href="/loginByOrderId" style="color:#b3b3b3">비회원 주문조회</a> 
+	     	
 	<form id="login_form" action="login" method="post">
-	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+	<!-- <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"> -->
 	<div class="id_wrap">
 	<input type="text" name="username" id="id" placeholder="아이디를 입력해주세요"><br>
 	</div>
@@ -48,10 +61,10 @@
 	</div> 
 	<div class="error_id" style="display: none" >아이디를 입력해 주세요. </div>
 	<div class="error_pwd" style="display: none">비밀번호를 입력해 주세요. </div>
-	 <!--로그인에러-->
-    <c:if test="${param.error }">
-	<div class="error_login" style="display: block" style="font:red">${loginFailMsg}</div>
-    </c:if>
+		 <!--로그인에러-->
+	    <c:if test="${param.error }">
+		<div class="error_login" style="display: block" style="font:red">${loginFailMsg}</div>
+	    </c:if>
 	<input id="loginBtn" type="button" value="로그인">
 	    	<div>
 	    	<a href="/findIdByEmail">아이디 찾기</a> 

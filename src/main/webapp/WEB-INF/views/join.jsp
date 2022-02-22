@@ -304,7 +304,7 @@ $(function(){
 	        
 	        /* 닉네임 중복체크 */
 				$.ajax({
-					url:"checkNickname",
+					url:"loginByOrder",
 					data:{nickname:nickname},
 					success:function(data){
 						//0이면 사용가능 , 1이면 중복

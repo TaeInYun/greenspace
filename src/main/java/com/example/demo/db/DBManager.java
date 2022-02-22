@@ -16,7 +16,7 @@ import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.MyReviewVO;
 //github.com/TaeInYun/greenspace.git
 import com.example.demo.vo.MyWishVO;
- 
+import com.example.demo.vo.OrderListVO;
 import com.example.demo.vo.ProductVO;
 import com.example.demo.vo.ReviewVO;
  
@@ -272,7 +272,19 @@ public class DBManager {
 		return id;
 	}
 
-
+	//--------------------OrderListVO관련--------------
+	/*  주문 조회 로그인 */
+	public static OrderListVO LoginByOrderId(String name,String id) {
+		
+		HashMap map = new HashMap();
+		map.put("receiver_name", name);
+		map.put("ord_id", id);
+		SqlSession session = factory.openSession();
+		OrderListVO o = session.selectOne("orderList.LoginByOrderId", map);
+		session.close();
+		return o;
+	}
+	
 }
 
 

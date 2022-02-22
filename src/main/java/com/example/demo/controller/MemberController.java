@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.MemberService;
 import com.example.demo.dao.MemberDAO;
 import com.example.demo.vo.MemberVO;
 
@@ -33,6 +34,9 @@ public class MemberController {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private MemberService ms;
 	
 	
 	//회원가입----------------------------
@@ -115,7 +119,6 @@ public class MemberController {
 	public void loginAction() {
 		
 	}
-	
 
 	
 	//로그인확인----------------------------
@@ -135,7 +138,7 @@ public class MemberController {
 		
 		//db로 부터 읽어온 회원객체를 세션에 상태유지합니다.
 		//세션에 상태유지를 하면 브라우저를 닫기 전까지(로그아웃 하기 전까지) 상태유지 할 수 있습니다.
-		session.setAttribute("m", m);	
+		session.setAttribute("m", m);
 	}
 	
 	//이메일로 아이디 찾기 --------------------------------------------------
@@ -153,7 +156,6 @@ public class MemberController {
 	//핸드폰 번호로 아이디 찾기 --------------------------------------------------
 	@RequestMapping(value = "/findIdByPhone", method = RequestMethod.GET)
 	public void findIdByPhoneForm() {
-	}	
-	
+	}
 	
 }
