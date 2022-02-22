@@ -49,4 +49,12 @@ public class ProductDAO {
 		return DBManager.findOptionView(no);
 	}
  
+	public List<ProductVO> findOptionName(int no){
+		return DBManager.findOptionName(no);	
+	}
+ 
+ 	public List<ProductVO> findOptionDetailName(String pro_option_name ){
+		return DBManager.findOptionDetailName(pro_option_name);	
+	}
+ 
 }

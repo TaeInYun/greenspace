@@ -9,40 +9,24 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-	$(function(){
-		$("#cart").click(function(){			
-			let cart_option = "";
-			let cart_option_detail = "";
-			let cart_qty = 1;
-			let member_no = 1;
-			let pro_add_option_no = "";
-			
-			
-			let data = {
-					cart_name: '${p.pro_name}',
-					cart_price:${p.pro_price},
-					cart_saleprice:${p.pro_saleprice},
-					pro_no:${p.no},
-					cart_option:cart_option,
-					cart_option_detail:cart_option_detail,
-					cart_qty:cart_qty,
-					member_no:member_no,
-					pro_add_option_no:pro_add_option_no
-			};
-			
-			$.ajax({
-				url: "insertCart",
-				data: data,
-				success: function(data){
-					let span = $("<span></span>").attr("class","animate");
-					span.html("장바구니에 추가되었습니다.");
-					span.append( $("<a></a>").attr("href","./cart").html("장바구니로 가기") )
-					$("#btns").append(span);
-				}
-			});//end ajax
-			
-		});
-	});
+$(function(){
+
+  
+	$("select[name=pro_option_name]").change(function(){
+		let pro_option_name =  $(this).val() 
+		alert(pro_option_name)
+	}); 
+	
+	$.ajax({
+		url:"detailProduct",
+		type:'GET',
+		data:{pro_option_name:pro_option_name},
+		success:function(data){},
+		error:function(){alert("error")}
+	})
+	 
+});
+		 
 </script>
 </head>
 <body>
@@ -61,31 +45,48 @@
 				<div id="container_box"> 
 				<!-- 본문 -->			
 					<section id="content">			
+					상품번호 : ${p.no }<br>				
 					상품이름 : ${p.pro_name }<br>				
 					상품가격 :${p.pro_price}<br>	
 					상품할인가 :${p.pro_saleprice}<br>
 					상품설명 : ${p.pro_content }<br>	
-					조회수 : ${p.pro_hit }<br>	 	
-										
-		 		
-		 		 <c:if test="${cnt>=1}">	
-				 <hr>	 
-				      상품옵션 : 				 
-				        <select id="pro_option_name" name="pro_option_name">
-							<option value="">선택</option>					
-								<c:forEach var="op" items="${op}">							
-								<option value="${op.pro_option_name}">${op.pro_option_name}</option>				
-							</c:forEach>
+					조회수 : ${p.pro_hit }<br>	 
+				 					
+		 		 	 
+			
+		<c:if test="${cnt>=1}">	
+		 <hr>		 
+ 		 <form action="option" method="post">
+ 		 
+ 		  상품옵션 : 					      
+				     <div id="option">		 
+				        <select id="pro_option_name" name="pro_option_name"  >	
+				       			<option value="">선택</option>							      		        	 				 				
+								<c:forEach var="name" items="${name}">		
+								 	<option value="${name.pro_option_name }">${name.pro_option_name }</option>							 						 
+								</c:forEach>
 						</select>
-						
-						<select id="pro_option_detail_name" name="pro_option_detail_name">
+					</div>	
+						 
+						 
+						 
+			 	     <select id="pro_option_detail_name" name="pro_option_detail_name">
 							<option value="">선택</option>
-							<c:forEach var="op" items="${op}">					
-								<option value="${op.pro_option_detail_name}">${op.pro_option_detail_name}+${op.pro_add_price}</option>										 		
+							<c:forEach var="ond" items="${ond}">					
+								<option value="${ond.pro_option_detail_name}">${ond.pro_option_detail_name}</option>										 		
 							</c:forEach>
 						</select>    
-						
-				</c:if>			  
+	 
+				
+ 		 </form>
+		</c:if>		 
+				     			  
+					
+					<form>
+						<input class="id" type="hidden">
+						<input class="pwd" type="hidden">
+					</form>
+					
 					
 									 
 					<hr>			 
@@ -96,7 +97,7 @@
 					 <a href="">상품평</a>
 					 <a href="">Q&A</a>
 					 <a href="">교환환불</a>
-					 
+					<hr> 
 					 
 		</section>					
 					 

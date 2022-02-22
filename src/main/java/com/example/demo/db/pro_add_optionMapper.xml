@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pro_add_option">
+  
+  
+  <insert id="insert" parameterType="pro_add_optionVO">
+  	insert into  pro_add_option values(seq_pro_add_option.nextval,#{pro_add_price},#{pro_no},#{pro_option_code},#{pro_option_detail_code})
+  </insert>
+  
+ 
+  
+  
+</mapper>

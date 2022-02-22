@@ -2,18 +2,27 @@ package com.example.demo.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.net.http.HttpRequest;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.dao.Pro_add_optionDAO;
 import com.example.demo.dao.ProductDAO;
+ 
+import com.example.demo.vo.Pro_add_optionVO;
 import com.example.demo.vo.ProductVO;
 
 import lombok.Setter;
@@ -24,6 +33,7 @@ public class ProductController {
 	
 	@Autowired
 	private ProductDAO dao;
+	private Pro_add_optionDAO dao2;
 	
 	@RequestMapping("/shop/shopHome")
 	public void shopHome() {
@@ -47,7 +57,7 @@ public class ProductController {
 	}		
 	
 	@RequestMapping(value = "/admin/insertProduct", method = RequestMethod.POST)
-	public ModelAndView insertSubmit(ProductVO p, HttpServletRequest request, String cat_code ) {
+	public ModelAndView insertSubmit(ProductVO p, HttpServletRequest request, String cat_code,Pro_add_optionVO po ) {
 		ModelAndView mav = new ModelAndView("redirect:/admin/listProduct");
 		
 		String path = request.getRealPath("upload");
@@ -63,7 +73,9 @@ public class ProductController {
 		}	
 		
 		int re = dao.insert(p);
-		if(re != 1) {
+		//int re2 = dao2.insert(po);
+		 
+		if(re != 1 ) {
 			mav.setViewName("error");
 			mav.addObject("msg", "상품등록에 실패하였습니다.");
 		}else {
@@ -80,17 +92,33 @@ public class ProductController {
 		}		
 		return mav;
 	}
+	
+	
+	
 	//------------------상품자세히--------------------
 	@RequestMapping("/shop/detailProduct")
-	public void detail(int no, Model model) {	
-		dao.updateHit(no);
-		
+	public void detail(int no, Model model, HttpSession session) {	
+		dao.updateHit(no);		
 	 	dao.findOption(no);
-		model.addAttribute("p", dao.findByNo(no));
-	 	model.addAttribute("op", dao.findOption(no));
+	 	
+		model.addAttribute("p", dao.findByNo(no));	  	
 	 	model.addAttribute("cnt", dao.findOptionView(no));
-	 	 
+		model.addAttribute("op", dao.findOption(no));	
+		model.addAttribute("name", dao.findOptionName(no));	
+		
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/detailProduct",  method=RequestMethod.GET)	
+	public void test(@RequestParam("pro_option_name")String pro_option_name ) {
+		if(pro_option_name != null) {
+			System.out.println(pro_option_name); 
+		}else {
+			System.out.println("error"); 
+		}
+		        
+	}
+	 
 	
 	
 	//------------------상품수정하기--------------------

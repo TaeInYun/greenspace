@@ -15,7 +15,7 @@ import com.example.demo.vo.CartVO;
 import com.example.demo.vo.MemberVO;
 //github.com/TaeInYun/greenspace.git
 import com.example.demo.vo.MyWishVO;
- 
+import com.example.demo.vo.Pro_add_optionVO;
 import com.example.demo.vo.ProductVO;
  
 
@@ -123,6 +123,14 @@ public class DBManager {
 		return re;
 	}
 
+public static int insertPro_add_option(Pro_add_optionVO po) {		
+		SqlSession session  = factory.openSession();
+		int re=session.insert("pro_add_option.insert",po);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
 	public static void updateHit(int no) {
 		SqlSession session = factory.openSession();
 		session.update("product.updateHit", no);
@@ -145,9 +153,22 @@ public class DBManager {
 		return re;
 	}	
 	 
-	
-	
-	 
+	public static List<ProductVO> findOptionName(int no){
+		SqlSession session = factory.openSession();
+		List<ProductVO> list= session.selectList("product.findOptionName",no);
+		session.close();
+		return list;
+	}	
+ 	
+ 
+	 	public static List<ProductVO> findOptionDetailName(String pro_option_name){
+		SqlSession session = factory.openSession();
+		List<ProductVO> list= session.selectList("product.findOptionDetailName",pro_option_name);
+		session.close();
+		return list;
+	}
+ 		
+   
  
 	//------------------Address ( 주소록 )------------------------
  
