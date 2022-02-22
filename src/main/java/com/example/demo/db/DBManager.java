@@ -167,6 +167,21 @@ public class DBManager {
 		return re;
 	}
 	
+	public static int deleteCart(int no) {
+		SqlSession session = factory.openSession();
+		int re = session.delete("cart.delete",no);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
+	public static int isCart(HashMap map) {
+		SqlSession session = factory.openSession();
+		int re= session.selectOne("cart.isCart", map);
+		session.close();
+		return re;
+	}
+	
 	//------------------MemberVO--------------
 	public static int insertMember(MemberVO m) {
 		SqlSession session = factory.openSession();
@@ -203,7 +218,10 @@ public class DBManager {
 		session.close();
 		return id;
 	}
-	
+
+
+
+
 }
 
 

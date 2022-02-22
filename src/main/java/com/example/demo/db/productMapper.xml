@@ -21,7 +21,7 @@
   
    <!-- 상품 detail product-->
   <select id="findByNo" resultType="productVO">
-  	select pro_name, pro_price, pro_saleprice, pro_content, pro_hit, PRO_THUMBNAIL 
+  	select no, pro_name, pro_price, pro_saleprice, pro_content, pro_hit, PRO_THUMBNAIL 
 	from product p 
 	where p.no=#{no} 
  </select>
