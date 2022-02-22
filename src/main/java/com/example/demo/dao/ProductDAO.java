@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.db.DBManager;
+ 
 import com.example.demo.vo.ProductVO;
 
 @Repository
@@ -32,11 +33,21 @@ public class ProductDAO {
 		return DBManager.delete(no);
 	}
 	
+	
 	public void updateHit(int no) {
-		DBManager.updateHit(no);
+		DBManager.updateReviewHit(no);
 	}
 	
 	public int insert(ProductVO p) {
 		return DBManager.insert(p);
 	}
+ 	
+	public List<ProductVO> findOption(int no){
+		return DBManager.findOption(no);	
+	}
+	
+	public int findOptionView(int no) {
+		return DBManager.findOptionView(no);
+	}
+ 
 }
