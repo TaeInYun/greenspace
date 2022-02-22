@@ -93,23 +93,41 @@ public class MemberController {
 		session.setAttribute("m", m);	
 	}
 	
-	//이메일로 아이디 찾기 --------------------------------------------------
+	//이메일 아이디 찾기 --------------------------------------------------
 	@RequestMapping(value = "/findIdByEmail", method = RequestMethod.GET)
 	public void findIdByEmailForm() {
 	}
 	
-	// 아이디 찾기
+	//핸드폰 아이디 찾기 --------------------------------------------------
+	@RequestMapping(value = "/findIdByPhone", method = RequestMethod.GET)
+	public void findIdByPhoneForm() {
+	}
+	
+	//아이디 찾기
 	@RequestMapping(value = "/findIdOK", method = RequestMethod.POST)
 	public String findIdOk(HttpServletResponse response, @RequestParam String email, @RequestParam String name,@RequestParam String phone, Model md) throws Exception{
 		md.addAttribute("id", ms.findId(response, email, name, phone));
 		return "findIdOK";
 	}
 	
-	//핸드폰 번호로 아이디 찾기 --------------------------------------------------
-	@RequestMapping(value = "/findIdByPhone", method = RequestMethod.GET)
-	public void findIdByPhoneForm() {
+	//이메일 비밀번호 찾기
+	@RequestMapping(value="/findPwdByEmail", method = RequestMethod.GET )
+	public void findPwdByEmail() {
 	}
 	
+	//핸드폰 비밀번호 찾기
+	@RequestMapping(value="/findPwdByPhone", method = RequestMethod.GET )
+	public void findPwdByPhone() {
+	}
+
+	
+	@RequestMapping(value="/resetPwd", method = RequestMethod.POST)
+	public String resetPwd(HttpServletResponse response, @RequestParam String id, @RequestParam String email, @RequestParam String phone, Model md) throws Exception{
+		md.addAttribute("checkPwd", ms.resetPwd(response, id, email, phone));
+		return "resetPwd";
+	}
+	
+
 	
 	
 }
