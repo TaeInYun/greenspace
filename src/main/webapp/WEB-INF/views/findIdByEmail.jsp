@@ -8,7 +8,7 @@
 <body>
 	<h3>아이디 찾기</h3>
 	<a href="/findIdByEmail">이메일주소</a>
-	<a href="http://localhost:8080/findIdByPhone">핸드폰번호</a>  
+	<a href="/findIdByPhone">핸드폰번호</a>  
 
 	<p>회원가입시 등록하신 이름과 이메일주소를 입력하세요</p>
 	

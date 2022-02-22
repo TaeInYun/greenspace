@@ -42,4 +42,15 @@ public class MemberDAO {
 	public String findIdByPhone(HashMap<String,String> m) {
 		return DBManager.findIdByPhone(m);
 	}
+	
+	public int findPwdByEmail(HashMap<String,String> m) {
+		return DBManager.findPwdByEmail(m);
+	}
+	
+	public int findPwdByPhone(HashMap<String,String> m) {
+		return DBManager.findPwdByPhone(m);
+	}
+	
+	
+	
 }

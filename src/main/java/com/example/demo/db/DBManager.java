@@ -272,6 +272,21 @@ public class DBManager {
 		return id;
 	}
 
+	public static int findPwdByEmail(HashMap<String,String> m) {
+		SqlSession session = factory.openSession();
+		int re = session.selectOne("member.findPwdByEmail", m);
+		session.close();
+		return re;
+	}
+	
+	public static int findPwdByPhone(HashMap<String,String> m) {
+		SqlSession session = factory.openSession();
+		int re = session.selectOne("member.findPwdByPhone", m);
+		session.close();
+		return re;
+	}
+	
+
 	//--------------------OrderListVO관련--------------
 	/*  주문 조회 로그인 */
 	public static OrderListVO LoginByOrderId(String name,String id) {

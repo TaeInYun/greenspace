@@ -64,7 +64,7 @@ public class ReviewController {
 		
 		@RequestMapping(value = "/admin/insertReview" , method = RequestMethod.POST)	
 		public ModelAndView insertReview(ReviewVO r, HttpServletRequest request) {
-			ModelAndView mav = new ModelAndView("redirect:/listReview");
+			ModelAndView mav = new ModelAndView("redirect:/admin/listReview");
 			String path = request.getRealPath("upload/review");
 			String oldFname = r.getRe_thumbnail();
 			MultipartFile uploadFile = r.getUploadFile();
@@ -105,7 +105,7 @@ public class ReviewController {
 		
 		@RequestMapping(value ="/updateReview", method =RequestMethod.POST)	
 		public ModelAndView updateSubmit(ReviewVO r, HttpServletRequest request) {
-			ModelAndView mav = new ModelAndView("redirect:/listReview");
+			ModelAndView mav = new ModelAndView("redirect:/admin/listReview");
 			String path = request.getRealPath("upload/review");
 			String oldFname = r.getRe_thumbnail();
 			MultipartFile uploadFile = r.getUploadFile();
