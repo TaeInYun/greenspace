@@ -17,4 +17,5 @@ public class MyWishDAO {
 	public int cntOfCart(int member_no){
 		return DBManager.cntOfCart(member_no);
 	}
+
 }

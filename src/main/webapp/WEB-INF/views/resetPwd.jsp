@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,27 +9,26 @@
 </head>
 <body>
 
-
 	<h3>비밀번호 초기화</h3> 
-	<hr>
 	새로운 비밀번호를 입력하세요
 	
-	
-	<form action="" method="POST">
+	<form  action="resetPwd" method="POST">
 		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
-			<p>
-				<label>새비밀번호</label>
-				<input type="text" id="pwd" name="pwd" required>
-			</p>
-			<p>	
-				<label>새 비밀번호 확인</label>
-				<input type="text" id="pwdChek" name="pwdChek" required>
-			</p>
-				<input type="submit" value="비밀번호 변경">
-				<button type="button" onclick="history.go(-1);" >Cancel</button>
+		${checkPwd}
+		
+		<c:set target="${checkPwd}" property="c">
+			${checkPwd.c}
+		
+		</c:set>
+		
+	
+			
 	</form>
 	
+   
 	
+	
+
 	
 </body>
 </html>

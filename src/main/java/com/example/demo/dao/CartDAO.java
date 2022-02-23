@@ -1,5 +1,7 @@
 package com.example.demo.dao;
 
+import java.util.HashMap;
+
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.db.DBManager;
@@ -11,4 +13,13 @@ public class CartDAO {
 	public int insert(CartVO c) {
 		return DBManager.insertCart(c);
 	}
+
+	public int delete(int no) {
+		return DBManager.deleteCart(no);
+	}
+
+	public int isCart(HashMap map) {
+		return DBManager.isCart(map);
+	}
+
 }

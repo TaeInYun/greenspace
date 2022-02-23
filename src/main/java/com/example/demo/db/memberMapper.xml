@@ -39,11 +39,11 @@
   </select>
   
 
-    <select id="findPwdByEmail" parameterType="HashMap" resultType="String">
+    <select id="findPwdByEmail" parameterType="HashMap" resultType="int">
   	select count(*) from member where email=#{email} and id=#{id} 
   </select>
   
-   <select id="findPwdByPhone" parameterType="HashMap" resultType="String">
+   <select id="findPwdByPhone" parameterType="HashMap" resultType="int">
   	select count(*) from member where phone=#{phone} and id=#{id} 
   </select>
   

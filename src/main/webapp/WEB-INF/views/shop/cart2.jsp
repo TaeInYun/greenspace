@@ -7,14 +7,23 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="/js/qty.js"></script>
-<script type="text/javascript" src="/js/cart.js"></script>
 <script type="text/javascript">
 	$(function(){
 		
 		///** 장바구니리스트
+		
 		let checkbox = "input[name=checkList]";
 		let allCheck = "#checkedAll";
+		
+		// 전체체크에 관한 기능 추가
+		
+		function checkedAll() {
+			if( $("#checkedAll").is(":checked") ){
+				$("input[name=checkList]").prop("checked", true);
+			}else{
+				$("input[name=checkList]").prop("checked", false);
+			}
+		}// 전체체크 함수
 		
 		$(document).on("click","#checkedAll",function() {
 			checkedAll();
@@ -24,34 +33,63 @@
 			$(allCheck).prop("checked", false)
 		}); 
 		
-		// 수량 버튼 기능
+		// 수량 버튼 기능 추가
 		$(document).on("click", "#minus", function() {
-			minus(this);
+			let qty = $(this).siblings();
+			let value = Number( $( qty ).val() );
+						
+ 			if(value == 1){
+				$(qty).val(1);
+			}else{
+				$(qty).val(value-1);
+			} 
 		}); // end minus
 		
 		$(document).on("click", "#plus", function() {
-			plus(this);
+			let qty = $(this).siblings()[1];
+			let value = Number( $( qty ).val() );
+			
+			$(qty).val(value+1);
 		}); // end plus
 		
-		//장바구니 상품 삭제		
-		$(document).on("click", "#delete", function() {
-			let noArr = new Array();
-			noArr.push( $(this).val() );
-			deleteCart(noArr);
-		});
+		function deleteCart(){
+			
+		}
 		
-		//선택 상품 삭제
-		$("#delSelected").click(function(){
-			let select = $("input[name=checkList]:checked");
-			let noArr = new Array();
-			
-			$.each(select, function() {
-				let no = $($(this).siblings()[2]).val();
-				noArr.push(no);
-			});
-			
-			deleteCart(noArr);
+		
+		$(document).on("click", "#delete", function() {
+			re = confirm("해당상품을 삭제하시겠습니까?");
+			if(re == true){
+				let no = $(this).val();
+				
+				$.ajax({
+					url: "deleteCart",
+					data: {no:no},
+					success: function() {
+						alert("해당 상품을 장바구니에서 삭제하였습니다.");
+						location.href="cart";
+					}
+				});
+				
+			}//end if
 		});
+
+/* 		function deleteCart() {
+			re = confirm("해당상품을 삭제하시겠습니까?");
+			if(re == true){
+				let no = $(this).val();
+				
+				$.ajax({
+					url: "deleteCart",
+					data: {no:no},
+					success: function() {
+						alert("해당 상품을 장바구니에서 삭제하였습니다.");
+						location.href="cart";
+					}
+				});
+				
+			}
+		} */
 		
 		// ** 주문서
 		function sumPrice() {
@@ -67,6 +105,8 @@
 				let no = $(td).find("input[name=no]").val();
 				let qty = $(td).find("input[name=qty]").val();
 			});			
+			
+			//console.log(total);
 		}// end sumPrice()
 		
 		//서버동작시 실행
@@ -79,8 +119,8 @@
 	<span>${cnt }</span>
 	<hr>
 	<div>
-		<button id="soldOut">품절모두삭제</button>
-		<button id="delSelected">선택삭제</button>
+		<button>품절모두삭제</button>
+		<button>선택삭제</button>
 	</div>
 	<div>
 		<form action="insertOrder" >
@@ -105,7 +145,6 @@
 								<input type="checkbox" name="checkList"">
 								<input type="hidden" name="price" value="${c.price }">
 								<input type="hidden" name="saleprice" value="${c.saleprice }">
-								<input type="hidden" name="pro_no" value="${c.no }">
 							</td>
 							<td>
 								<div>
