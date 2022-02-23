@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.example.demo.vo.AddressVO;
 import com.example.demo.vo.CartVO;
+import com.example.demo.vo.ChallengeVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.MyReviewVO;
 //github.com/TaeInYun/greenspace.git
@@ -299,6 +300,52 @@ public class DBManager {
 		session.close();
 		return o;
 	}
+	
+	//---------------Challenge (챌린지 관련) ----------
+	/*관리자 - 챌린지 목록*/
+	public static List<ChallengeVO> findAllChg(){
+		SqlSession session = factory.openSession();
+		List<ChallengeVO> list= session.selectList("challenge.findAll");
+		session.close();
+		return list;
+	}		
+	
+	/* 관리자 챌린지 항목 추가 */
+	public static int insertChg(ChallengeVO c) {
+		SqlSession session  = factory.openSession();
+		int re=session.insert("challenge.insert",c);
+		session.commit();
+		session.close();
+		return re;
+	}	
+	
+	/* 관리자 챌린지 항목 상세 */
+	public static ChallengeVO findChgByNo(int no) {
+		SqlSession session = factory.openSession();
+		ChallengeVO c = session.selectOne("challenge.findByNo", no);
+		session.close();
+		return c;		
+	}	
+	
+
+	/*관리자 - 챌린지 항목 수정*/
+	public static int updateChg(ChallengeVO c) {
+		SqlSession session = factory.openSession(true);
+		int re = session.update("challenge.update", c);
+		session.commit();
+		session.close();
+		return re;				
+	}	
+	
+	/*관리자 - 챌린지 항목 삭제*/
+	public static int deleteChg(int no) {
+		SqlSession session  = factory.openSession();
+		int re=session.delete("challenge.delete", no);
+		session.commit();
+		session.close();
+		return re;
+	}	
+	
 	
 }
 
