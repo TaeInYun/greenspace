@@ -50,7 +50,7 @@ public class ProductDAO {
 	public int findOptionView(int no) {
 		return DBManager.findOptionView(no);
 	}
- 
+ /*
 	public List<ProductVO> findOptionName(int no){
 		return DBManager.findOptionName(no);	
 	}
@@ -58,7 +58,7 @@ public class ProductDAO {
  	public List<ProductVO> findOptionDetailName(HashMap map){
 		return DBManager.findOptionDetailName(map);	
 	}
- 
+ */
 
 	 
 }

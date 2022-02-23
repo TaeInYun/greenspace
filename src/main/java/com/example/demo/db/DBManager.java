@@ -213,7 +213,7 @@ public class DBManager {
 		session.close();
 		return re;
 	}	
-	 
+	/* 
 	public static List<ProductVO> findOptionName(int no){
 		SqlSession session = factory.openSession();
 		List<ProductVO> list= session.selectList("product.findOptionName",no);
@@ -228,7 +228,7 @@ public class DBManager {
 		session.close();
 		return list;
 	}
- 		
+ 	*/	
   
  
 	//------------------Address ( 주소록 )------------------------

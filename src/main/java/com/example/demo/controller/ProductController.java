@@ -35,32 +35,25 @@ public class ProductController {
 	
 	@Autowired
 	private ProductDAO dao;
-	 
-	@RequestMapping("/test")
-	public void shopHeader() {
-		
-	}	
+	   
 	
 	@RequestMapping("/shop/listProduct_home")
-	public void listProduct(HttpSession session, Model model, String cat_code, String keyword) {
-	 
-		
-		
-		if( keyword == null ) {
-			if(session.getAttribute("keyword") != null ) {				 
-				keyword = (String)session.getAttribute("keyword");
-			}
-		}
-		
-		
+	public void listProduct(HttpSession session, Model model, String cat_code, String keyword,String filter,String filterASC) {
+	  	
 		System.out.println("검색어:"+keyword+"");
 		System.out.println("cat_code:"+cat_code);
+		System.out.println("filter:"+filter);
+		System.out.println("filterASC:"+filterASC);
 		
 		HashMap map= new HashMap();
- 
 		map.put("keyword", keyword);
 		map.put("cat_code", cat_code);
+		map.put("filter", filter);
+		map.put("filterASC", filterASC);
+		
 		model.addAttribute("list", dao.findAll_home(map));
+		
+		
 	}
 	
 	//-------------------상품리스트-------------------- 
@@ -115,27 +108,19 @@ public class ProductController {
 	
 	//------------------상품자세히--------------------
 	@RequestMapping("/shop/detailProduct")
-	public void detail(int no, Model model, HttpSession session) {	
+	public void detail(int no, Model model) {	
 		dao.updateHit(no);		
 	 	dao.findOption(no);
 	 	
 		model.addAttribute("p", dao.findByNo(no));	  	
 	 	model.addAttribute("cnt", dao.findOptionView(no));
 		model.addAttribute("op", dao.findOption(no));	
-		//model.addAttribute("name", dao.findOptionName(no));	
+	 
 		
 	}
-	 
-	@ResponseBody
-	@RequestMapping(value ="test.action")
-	public void test(String userName,HttpServletRequest request){
-		 System.out.print(request.getParameter("userName"));
-		 System.out.print(userName);
-	}
-	
-	
+	  
  
-
+/*
 	@ResponseBody
 	@RequestMapping("/findOptionName")
 	public List<ProductVO> list(int no) {	
@@ -153,7 +138,7 @@ public class ProductController {
 	}
 	
 	
-	
+	*/
 	
 	
 	

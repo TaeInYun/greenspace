@@ -10,6 +10,7 @@
 <body>
 	<h3>카테고리</h3>
 	<ul >
+			 
 			<li><a href="/shop/listProduct_home?cat_code=BA">욕실</a></li>
 			<li><a href="/shop/listProduct_home?cat_code=KI">주방</a></li>
 			<li><a href="/shop/listProduct_home?cat_code=PFO">식품</a></li>

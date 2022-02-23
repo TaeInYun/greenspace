@@ -9,12 +9,21 @@
      select no ,pro_name, pro_brand, pro_price, pro_saleprice, PRO_THUMBNAIL
 	 from product 
 	 <if test="cat_code !=null">
-	 	where cat_code=#{cat_code}
+	 		where cat_code=#{cat_code}
 	 </if>
 	 
 	 <if test="keyword != null">
 			where pro_name like '%'||#{keyword}||'%' 
 	 </if>
+	 
+	 <if test="filter != null">
+			order by ${filter} desc
+	 </if>
+	 
+	 <if test="filterASC != null">
+			order by ${filterASC}  
+	 </if>
+	 
  </select>
  
  
@@ -42,34 +51,10 @@
 			pao.pro_option_detail_code = pod.pro_option_detail_code and
 			pro_no=#{no}
 		    GROUP BY pro_option_name, pro_option_detail_name, pro_add_price		 
+		    order by pro_option_name
  </select> 
  
- 
- 
- 
- 
- 
- <select id="findOptionName" resultType="productVO">
- 	select distinct pro_option_name
-	from pro_option po, pro_add_option pao, product p
-	where pao.pro_no= p.no and
-	po.pro_option_code = pao.pro_option_code and
-	p.no=#{no} 
- </select>
- 
   
- <select id="findOptionDetailName" resultType="productVO">
-	select distinct pro_option_detail_name
-	from pro_option po, pro_add_option pao, product p, pro_option_detail pod
-	where pao.pro_no= p.no and
-	po.pro_option_code = pao.pro_option_code and
-    pod.pro_option_detail_code= pao.pro_option_detail_code and
-    pro_option_name=#{pro_option_name} and
-	p.no=#{no} 
-</select>
-
-
-
 
  <select id="findOptionView" resultType="java.lang.Integer">   		
  	select count( distinct pro_option_code)cnt from pro_add_option where pro_no=#{no}

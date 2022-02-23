@@ -46,21 +46,15 @@
 	  		 
 				
 		<div class="inputArea">
-			<label for="PRO_THUMBNAIL">이미지</label>
-			<input type="hidden" name="fname" value="${p.PRO_THUMBNAIL}">
-		 		 <input type="file" name="uploadFile"><br>
-		 		<script>
-				$("#PRO_THUMBNAIL").change(function(){
-					if(this.files && this.files[0]) {
-						var reader = new FileReader;
-						reader.onload = function(data) {
-							$(".select_img img").attr("src", data.target.result).width(500);								
-						}
-						reader.readAsDataURL(this.files[0]);
-					}
-				});
-			</script>	
+			 <label for="PRO_THUMBNAIL">이미지</label>
+				<input type="hidden" name="PRO_THUMBNAIL" value="${p.PRO_THUMBNAIL }">
+		   <input type="file" name="uploadFile">(${p.PRO_THUMBNAIL })<br>
 		</div>
+ 
+			
+ 
+ 
+
 		<input type="submit" value="수정">
 		<input type="reset" value="취소">
 		 
