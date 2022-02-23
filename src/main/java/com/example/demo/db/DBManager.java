@@ -234,6 +234,15 @@ public class DBManager {
 		return re;
 	}
 	
+	public static int updateQty(HashMap map) {
+		SqlSession session = factory.openSession();
+		int re = session.update("cart.updateQty", map);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
+	
 	public static int insertMember(MemberVO m) {
 		SqlSession session = factory.openSession();
 		int re = session.insert("member.insert",m);
@@ -314,6 +323,15 @@ public class DBManager {
 		session.close();
 		return o;
 	}
+	
+	public static OrderListVO initOrderInfo(int member_no) {
+		
+		SqlSession session = factory.openSession();
+		OrderListVO o = session.selectOne("orderList.initOrderInfo", member_no);
+		session.close();
+		return o;
+	}
+
 	
 }
 

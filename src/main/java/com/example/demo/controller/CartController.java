@@ -57,4 +57,25 @@ public class CartController {
 		for(String no : arr) { int re = dao.delete(Integer.parseInt(no)); }
 		return msg;
 	}
+	
+	@RequestMapping("/shop/updateQty")
+	@ResponseBody
+	public String updateQty(CartVO c) {
+		String msg = "변경 실패";
+		System.out.println(c.getCart_qty());
+		System.out.println(c.getNo());
+		
+		HashMap map = new HashMap<>();
+		map.put("cart_qty", c.getCart_qty());
+		map.put("no", c.getNo());
+		map.put("member_no", 1);
+		
+		int re = dao.updateQty(map);
+		
+		if(re == 1) {
+			msg = "변경";
+		}
+		
+		return msg;
+	}
 }

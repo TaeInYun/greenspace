@@ -51,7 +51,6 @@
 				url: "isCart",
 				data: data,
 				success: function(cnt){
-					console.log(cnt);
 					if(cnt == 0){ //장바구니에 없는 상품
 						$.ajax({
 							url: "insertCart",
