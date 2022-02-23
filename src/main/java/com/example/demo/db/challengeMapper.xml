@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="challenge">
+
+  <!-- 관리자 챌린지 목록 -->
+  <select id="findAll" resultType="challengeVO">
+		select * from challenge order by no
+  </select>
+  
+  <!-- 관리자 챌린지 상세 -->
+  <select id="findByNo" resultType="challengeVO">
+		select * from challenge where no = #{no}
+  </select>  
+
+  <!-- 관리자 챌린지항목 추가하기 -->
+  <insert id="insert" parameterType="challengeVO">
+	insert into challenge values(seq_chg.nextval, 
+	#{chg_title}, #{chg_content},#{chg_tree})
+  </insert>
+  
+   <!-- 관리자 챌린지항목 수정 -->
+  <update id="update" parameterType="challengeVO">
+	update challenge set chg_title=#{chg_title},
+	chg_content=#{chg_content}, chg_tree=#{chg_tree}
+	where no=#{no}
+	</update>	
+
+   <!-- 관리자 챌린지항목 삭제 -->
+  <delete id="delete">
+	delete challenge where no=#{no}
+  </delete> 
+  
+</mapper>

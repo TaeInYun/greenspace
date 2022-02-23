@@ -47,17 +47,18 @@ public class MemberService implements UserDetailsService{
 		return details;
 	}
 	
+	
 	public String findId(HttpServletResponse response, String email, String name, String phone ) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		HashMap<String, String> map = new HashMap<String, String>();
 		PrintWriter out = response.getWriter();
+		map.put("name", name);
+		map.put("phone", phone);
+		map.put("email", email);
 		
-		if (email == null) {		
-			map.put("phone", phone);
-			map.put("name", name);
-			
+		if ( !phone.equals( "null")) {		
 			String id = dao.findIdByPhone(map);
-			
+			System.out.println("findIdByPhone이 실행중입니다.");
 			if (id == null) {
 				out.println("<script>");
 				out.println("alert('가입된 아이디가 없습니다.');");
@@ -70,9 +71,7 @@ public class MemberService implements UserDetailsService{
 				
 			}
 				
-		} else {
-			map.put("email", email);
-			map.put("name", name);
+		} else{
 			String id = dao.findIdByEmail(map);
 			if (id == null) {
 				out.println("<script>");
@@ -87,51 +86,27 @@ public class MemberService implements UserDetailsService{
 			}
 			
 		}
-			
-		
-	}
-	
-	
-	
-	public String resetPwd(HttpServletResponse response, String email, String id, String phone  ) throws Exception {
-		response.setContentType("text/html;charset=utf-8");
-		HashMap<String, String> map = new HashMap<String, String>();
-		PrintWriter out = response.getWriter();
-		map.put("id", id);
-		
-		
-		if (email == null) {		
-			map.put("phone", phone);
-			int re = dao.findPwdByPhone(map);
-			
-			if (re == 1) {
-				return "resetId";
-			} else {
-				out.println("<script>");
-				out.println("alert('가입된 아이디가 없습니다.');");
-				out.println("history.go(-1);");
-				out.println("</script>");
-				out.close();
-				return null;
-			}
-				
-		} else {
-			map.put("email", email);
-			int re = dao.findPwdByPhone(map);
-			if (id == null) {
-				return "resetId";
-			} else {
-				out.println("<script>");
-				out.println("alert('가입된 아이디가 없습니다.');");
-				out.println("history.go(-1);");
-				out.println("</script>");
-				out.close();
-				return null;
 
-			}
+	}
 			
+	
+	
+	
+	public int resetPwd(HttpServletResponse response, String id, String email,  String phone){
+		int re;	
+		HashMap<String, String> map = new HashMap<String, String>();
+		
+		map.put("id", id);
+		map.put("phone", phone);
+		map.put("email", email);
+			
+		if (!phone.equals( "null")) {		
+			re = dao.findPwdByPhone(map);
+		} else {
+			re = dao.findPwdByEmail(map);			
 		}
-			
+		System.out.println(re);
+		return re;
 		
 	}
 	

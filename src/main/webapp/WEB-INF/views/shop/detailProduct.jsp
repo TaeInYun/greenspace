@@ -136,7 +136,6 @@
 				url: "isCart",
 				data: data,
 				success: function(cnt){
-					console.log(cnt);
 					if(cnt == 0){ //장바구니에 없는 상품
 						$.ajax({
 							url: "insertCart",
@@ -232,14 +231,19 @@
 		 <section id="container">		
 				<div id="container_box"> 
 				<!-- 본문 -->			
-					<section id="content">			
-					상품번호 : ${p.no }<br>				
-					상품이름 : ${p.pro_name }<br>				
+ 
+					<section id="content">	
+					<a href="/shop/insertReview?pro_no=${r.pro_no}"> 리뷰작성하기</a>
+			 		<a href="/admin/updateProduct?no=${p.no}"> 상품수정</a>
+			 		<a href="/admin/deleteProduct?no=${p.no}"> 상품삭제</a>	
+			 		<hr>	
+					상품번호 : ${p.no }<br>	
+ 					상품이름 : ${p.pro_name }<br>				
 					상품가격 :${p.pro_price}<br>	
 					상품할인가 :${p.pro_saleprice}<br>
 					상품설명 : ${p.pro_content }<br>	
-					조회수 : ${p.pro_hit }<br>	 	
-										
+					 	
+ 
 						
 		 	<!-- --------------------옵션------------------- -->	 
 		 		 <c:if test="${cnt>=1}">		 
@@ -297,12 +301,10 @@
 										
 				<div id="littelCart_clone"></div>					
 										
-		 		<a href="/shop/insertReview?pro_no=${r.pro_no}"> 리뷰작성하기</a>
-		 		<a href="/admin/updateProduct?no=${p.no}"> 상품수정</a>
-		 		<a href="/admin/deleteProduct?no=${p.no}"> 상품삭제</a>
+		 		
 		 	
 		 	   	
-				<hr>		 
+
 				 <img  src="/upload/${p.PRO_THUMBNAIL }" width="200" height="200">
 				 <a href="">찜하기</a>
 				 <a href="">카트</a>

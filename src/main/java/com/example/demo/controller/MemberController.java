@@ -141,12 +141,12 @@ public class MemberController {
 		session.setAttribute("m", m);
 	}
 	
-	//이메일 아이디 찾기 --------------------------------------------------
+	//이메일 아이디 찾기 
 	@RequestMapping(value = "/findIdByEmail", method = RequestMethod.GET)
 	public void findIdByEmailForm() {
 	}
 	
-	//핸드폰 아이디 찾기 --------------------------------------------------
+	//핸드폰 아이디 찾기
 	@RequestMapping(value = "/findIdByPhone", method = RequestMethod.GET)
 	public void findIdByPhoneForm() {
 	}
@@ -154,9 +154,12 @@ public class MemberController {
 	//아이디 찾기
 	@RequestMapping(value = "/findIdOK", method = RequestMethod.POST)
 	public String findIdOk(HttpServletResponse response, @RequestParam String email, @RequestParam String name,@RequestParam String phone, Model md) throws Exception{
-		md.addAttribute("id", ms.findId(response, email, name, phone));
+		System.out.println(email);
+		System.out.println(name);
+		System.out.println(phone);
+		md.addAttribute("id",ms.findId(response, email, name, phone));
 		return "findIdOK";
-	}
+	} 
 	
 
 
@@ -169,7 +172,12 @@ public class MemberController {
 	@RequestMapping(value="/findPwdByPhone", method = RequestMethod.GET )
 	public void findPwdByPhone() {
 	}
-
+	
+	
+	@RequestMapping(value="/resetPwd", method = RequestMethod.GET)
+	public void resetPwdForm() throws Exception{
+		
+	}
 	
 	@RequestMapping(value="/resetPwd", method = RequestMethod.POST)
 	public String resetPwd(HttpServletResponse response, @RequestParam String id, @RequestParam String email, @RequestParam String phone, Model md) throws Exception{

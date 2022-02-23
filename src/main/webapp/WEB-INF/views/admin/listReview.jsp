@@ -17,7 +17,7 @@
 			<td>리뷰내용</td>
 			<td>회원번호</td>			
 		</tr>
-		<c:forEach var="r" items="${list }">
+		<c:forEach var="r" items="${r2 }">
 			<tr>
 				<td>${r.no }</td>
 				<td>

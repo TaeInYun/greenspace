@@ -13,4 +13,8 @@ public class OrderListDAO {
 	public OrderListVO LoginByOrderId(String name,String ord_id) {
 		return DBManager.LoginByOrderId(name,ord_id);
 	}
+	
+	public OrderListVO initOrderInfo(int member_no) {
+		return DBManager.initOrderInfo(member_no);
+	}
 }

@@ -36,4 +36,7 @@
 			and cart_option_detail = #{cart_option_detail}
 		</if>
 	</select>
+	<update id="updateQty" parameterType="Integer">
+		update cart set cart_qty=#{cart_qty} where no= #{no} and member_no=#{member_no}
+	</update>
 </mapper>
