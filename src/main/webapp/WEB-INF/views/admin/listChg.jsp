@@ -9,6 +9,7 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 </head>
 <body>
+<div>
 	<H2>챌린지 목록</H2>
 
 	<table border="1" width="80%">
@@ -19,7 +20,7 @@
 			<td>나무 수</td>		
 			<td>관리</td>			
 		</tr>
-		<c:forEach var="c" items="${list }">
+		<c:forEach var="c" items="${chglist}">
 			<tr>
 				<td>${c.no }</td>
 				<td>${c.chg_title}</td>				 
@@ -34,6 +35,51 @@
 	<div>
 	<a href="/admin/insertChg">추가</a>
 	</div>
-	
+</div>
+
+<div>
+	<H2>어제 챌린지 목록</H2>
+	<table border="1" width="80%">
+		<tr>
+			<td>어제의 챌린지</td>	
+		</tr>
+		<c:forEach var="yesterdayChgList" items="${yesterdayChgList }">
+			<tr>
+				<td>${yesterdayChgList.chg_title}</td>	
+			</tr>
+		</c:forEach>
+	</table> 	
+</div>	
+
+
+<div>
+	<H2>오늘의 챌린지 목록</H2>
+	<table border="1" width="80%">
+		<tr>
+			<td>오늘의 챌린지</td>	
+		</tr>
+		<c:forEach var="todaylist" items="${todaylist }">
+			<tr>
+				<td>${todaylist.chg_title}</td>	
+			</tr>
+		</c:forEach>
+	</table> 	
+</div>	
+
+<div>
+	<H2>내일의 챌린지 목록</H2>
+	<table border="1" width="80%">
+		<tr>
+			<td>내일의 챌린지</td>	
+		</tr>
+		<c:forEach var="tomorrowList" items="${tomorrowList }">
+			<tr>
+				<td>${tomorrowList.chg_title}</td>	
+			</tr>
+		</c:forEach>
+	</table> 	
+</div>	
+
+
 </body>
 </html>
