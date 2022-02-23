@@ -13,7 +13,6 @@ function minus(b) {
 function plus(b){
 	let qty = $(b).siblings()[1];
 	let value = Number( $( qty ).val() );
-	
 	$(qty).val(value+1);
 	
 }

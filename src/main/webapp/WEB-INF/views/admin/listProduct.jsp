@@ -32,7 +32,9 @@
 				<td>${p.pro_saleprice }</td>
 				<td>${p.pro_stock }</td>
 				<td>${p.cat_name }</td>
+				
 			</tr>
+			
 		</c:forEach>
 	</table> 			 
 </body>

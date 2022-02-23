@@ -30,3 +30,29 @@ function insertCartMSG(msg){
 	span.append( $("<a></a>").attr("href","./cart").html("장바구니로 가기") )
 	$("#btns").append(span);
 }
+
+// 체크에 따라 주문정보의 가격표시
+function showOrderPriceInfo(){
+	let select = $("input[name=checkList]:checked");
+	let tot_price = 0;
+	let tot_saleprice = 0;
+	let tot_discount = 0;
+	let delivery_price = 0;
+	
+	$.each(select, function() {
+		tot_price += Number( $($(this).siblings()[0]).val() );
+		tot_discount += Number( $($(this).siblings()[3]).val() );
+		tot_saleprice += Number( $($(this).siblings()[1]).val() );
+	});
+	
+	
+	if( tot_saleprice < 50000){
+		delivery_price = 2500;
+	}
+	
+	$("#tot_price").html(tot_price);
+	$("#tot_discount").html(tot_discount);
+	$("#tot_saleprice").html(tot_saleprice);
+	$("#delivery_price").html(delivery_price);
+}
+

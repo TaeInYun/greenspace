@@ -77,7 +77,11 @@
 	<div class="error_orderNum" style="display: none">주문번호를 입력해주세요. </div>
 	<span class="error_msg" style="display:none"></span>
 	<input id="loginOrderBtn" type="button" value="비회원 주문조회">
+		<hr>
+		<p>주문번호는 상품 주문 시 입력하신 문자로 발송되었습니다.<br>
+			확인이 어려울 시 고객센터로 문의하세요</p>
 		<div>
+		<hr>
 	     	<p>계정이 없으신가요?</p> 	
 	       <a href="/join">회원가입</a>
        </div>

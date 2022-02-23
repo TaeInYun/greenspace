@@ -30,7 +30,8 @@ public class OrderListVO {
 	private String option_name;
 	private String option_detail;
 	private String pro_qty;
-	private String pro_price;
-	private String pro_saleprice;
+	private int pro_price;
+	private int pro_saleprice; 
+	private int pro_discount; 
 	private String pro_thumbnail;
 }
