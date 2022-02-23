@@ -48,8 +48,8 @@
 </head>
 <body>
 	<h2>로그인</h2>
-			<a href="/login">기존 회원</a> 
-	     	<a href="/loginByOrderId" style="color:#b3b3b3">비회원 주문조회</a> 
+		<a href="/login">기존 회원</a> 
+	     <a href="/loginByOrderId" style="color:#b3b3b3">비회원 주문조회</a> 
 	     	
 	<form id="login_form" action="login" method="post">
 

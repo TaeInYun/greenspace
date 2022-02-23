@@ -38,7 +38,6 @@
   	select id from member where phone=#{phone} and name=#{name} 
   </select>
   
-
     <select id="findPwdByEmail" parameterType="HashMap" resultType="int">
   	select count(*) from member where email=#{email} and id=#{id} 
   </select>
