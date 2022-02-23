@@ -93,5 +93,48 @@ public class MemberService implements UserDetailsService{
 	
 	
 	
+	public String resetPwd(HttpServletResponse response, String email, String id, String phone  ) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		HashMap<String, String> map = new HashMap<String, String>();
+		PrintWriter out = response.getWriter();
+		map.put("id", id);
+		
+		
+		if (email == null) {		
+			map.put("phone", phone);
+			int re = dao.findPwdByPhone(map);
+			
+			if (re == 1) {
+				return "resetId";
+			} else {
+				out.println("<script>");
+				out.println("alert('가입된 아이디가 없습니다.');");
+				out.println("history.go(-1);");
+				out.println("</script>");
+				out.close();
+				return null;
+			}
+				
+		} else {
+			map.put("email", email);
+			int re = dao.findPwdByPhone(map);
+			if (id == null) {
+				return "resetId";
+			} else {
+				out.println("<script>");
+				out.println("alert('가입된 아이디가 없습니다.');");
+				out.println("history.go(-1);");
+				out.println("</script>");
+				out.close();
+				return null;
+
+			}
+			
+		}
+			
+		
+	}
+	
+	
 
 }

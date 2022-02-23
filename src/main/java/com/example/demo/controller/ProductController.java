@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.net.http.HttpRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,16 +35,32 @@ public class ProductController {
 	
 	@Autowired
 	private ProductDAO dao;
-	private Pro_add_optionDAO dao2;
-	
-	@RequestMapping("/shop/shopHome")
-	public void shopHome() {
-		 
+	 
+	@RequestMapping("/test")
+	public void shopHeader() {
+		
 	}	
 	
 	@RequestMapping("/shop/listProduct_home")
-	public void listProduct(Model model) {
-		model.addAttribute("list",dao.findAll_home());	 
+	public void listProduct(HttpSession session, Model model, String cat_code, String keyword) {
+	 
+		
+		
+		if( keyword == null ) {
+			if(session.getAttribute("keyword") != null ) {				 
+				keyword = (String)session.getAttribute("keyword");
+			}
+		}
+		
+		
+		System.out.println("검색어:"+keyword+"");
+		System.out.println("cat_code:"+cat_code);
+		
+		HashMap map= new HashMap();
+ 
+		map.put("keyword", keyword);
+		map.put("cat_code", cat_code);
+		model.addAttribute("list", dao.findAll_home(map));
 	}
 	
 	//-------------------상품리스트-------------------- 
@@ -104,21 +122,39 @@ public class ProductController {
 		model.addAttribute("p", dao.findByNo(no));	  	
 	 	model.addAttribute("cnt", dao.findOptionView(no));
 		model.addAttribute("op", dao.findOption(no));	
-		model.addAttribute("name", dao.findOptionName(no));	
+		//model.addAttribute("name", dao.findOptionName(no));	
 		
 	}
-	
+	 
 	@ResponseBody
-	@RequestMapping(value = "/detailProduct",  method=RequestMethod.GET)	
-	public void test(@RequestParam("pro_option_name")String pro_option_name ) {
-		if(pro_option_name != null) {
-			System.out.println(pro_option_name); 
-		}else {
-			System.out.println("error"); 
-		}
-		        
+	@RequestMapping(value ="test.action")
+	public void test(String userName,HttpServletRequest request){
+		 System.out.print(request.getParameter("userName"));
+		 System.out.print(userName);
+	}
+	
+	
+ 
+
+	@ResponseBody
+	@RequestMapping("/findOptionName")
+	public List<ProductVO> list(int no) {	
+		return dao.findOptionName(no);
 	}
 	 
+	@ResponseBody
+	@RequestMapping("/findOptionDetailName")
+	public List<ProductVO> list(ProductVO p){
+		HashMap map = new HashMap();
+		map.put("pro_option_name", p.getPro_option_name());		 
+		map.put("no", p.getNo());
+		
+		return dao.findOptionDetailName(map);
+	}
+	
+	
+	
+	
 	
 	
 	//------------------상품수정하기--------------------
@@ -132,7 +168,7 @@ public class ProductController {
 	public ModelAndView updateSubmit(ProductVO p, HttpServletRequest request) {
 		
 		String path = request.getRealPath("upload");
-		ModelAndView mav = new ModelAndView("redirect:/listBoard");
+		ModelAndView mav = new ModelAndView("redirect:/admin/listProduct");
 		String oldFname = p.getPRO_THUMBNAIL();
 		MultipartFile uploadFile = p.getUploadFile();
 		String PRO_THUMBNAIL = uploadFile.getOriginalFilename();
@@ -175,7 +211,7 @@ public class ProductController {
 	
 	@RequestMapping(value = "/admin/deleteProduct", method = RequestMethod.POST)
 	public ModelAndView deleteSubmit(int no, HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView("redirect:/listBoard");
+		ModelAndView mav = new ModelAndView("redirect:/admin/listProduct");
 		String oldFname = dao.findByNo(no).getPRO_THUMBNAIL();		
 		 
 		int re = dao.delete(no);

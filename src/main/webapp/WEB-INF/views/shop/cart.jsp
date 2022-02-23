@@ -7,49 +7,80 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="/js/qty.js"></script>
+<script type="text/javascript" src="/js/cart.js"></script>
 <script type="text/javascript">
 	$(function(){
 		
-		$("input[type=checkbox]").prop("checked",true);
+		///** 장바구니리스트
+		let checkbox = "input[name=checkList]";
+		let allCheck = "#checkedAll";
 		
-		$(document).on("click", "#listCart input[type=checkbox]", function() {
-			$("input[name=allCheck]").prop("checked", false)
+		$(document).on("click","#checkedAll",function() {
+			checkedAll();
 		});
 		
+		$(document).on("click", "#listCart "+ checkbox, function() {
+			$(allCheck).prop("checked", false)
+		}); 
+		
+		// 수량 버튼 기능
+		$(document).on("click", "#minus", function() {
+			minus(this);
+		}); // end minus
+		
+		$(document).on("click", "#plus", function() {
+			plus(this);
+		}); // end plus
+		
+		//장바구니 상품 삭제		
+		$(document).on("click", "#delete", function() {
+			let noArr = new Array();
+			noArr.push( $(this).val() );
+			deleteCart(noArr);
+		});
+		
+		//선택 상품 삭제
+		$("#delSelected").click(function(){
+			let select = $("input[name=checkList]:checked");
+			let noArr = new Array();
+			
+			$.each(select, function() {
+				let no = $($(this).siblings()[2]).val();
+				noArr.push(no);
+			});
+			
+			deleteCart(noArr);
+		});
+		
+		// ** 주문서
 		function sumPrice() {
 			
-			let tr = $("input[name=checkList]").parent();
-			
 			let total = 0;
+			let price = 0;
+			let saleprice = 0;
+			
+			let tr = $("input[name=checkList]").parent();
 			
 			$.each($("input[name=checkList]:checked"), function() {
 				let td = $(this).parent();
 				let no = $(td).find("input[name=no]").val();
 				let qty = $(td).find("input[name=qty]").val();
 			});			
-			
-			//console.log(total);
-		}
+		}// end sumPrice()
 		
-		
-		
-		
-		
-		
-		
-		
-		sumPrice();
+		//서버동작시 실행
+		checkedAll();
 	})//end function
 </script>
 </head>
 <body>
-	
 	<h2>장바구니</h2>
 	<span>${cnt }</span>
 	<hr>
 	<div>
-		<button>품절모두삭제</button>
-		<button>선택삭제</button>
+		<button id="soldOut">품절모두삭제</button>
+		<button id="delSelected">선택삭제</button>
 	</div>
 	<div>
 		<form action="insertOrder" >
@@ -57,7 +88,7 @@
 				<thead>
 					<tr>
 						<td>전체 ${cnt } 개</td>
-						<td><input type="checkbox" name="allCheck"></td>
+						<td><input type="checkbox" id="checkedAll" checked="checked"></td>
 						<td>상품명(옵션)</td>
 						<td>가격</td>
 						<td>수량</td>
@@ -72,8 +103,9 @@
 							</td>
 							<td>
 								<input type="checkbox" name="checkList"">
-								<input type="hidden" name="no" value="${c.no }">
-								<input type="hidden" name="qty" value="${c.qty }">
+								<input type="hidden" name="price" value="${c.price }">
+								<input type="hidden" name="saleprice" value="${c.saleprice }">
+								<input type="hidden" name="pro_no" value="${c.no }">
 							</td>
 							<td>
 								<div>
@@ -81,20 +113,22 @@
 								</div>
 								<div>
 									<p>${c.pro_name }</p>
-									<p>옵션: ${c.pro_option }/${c.option_detail}</p>
+									<c:if test="${c.pro_option != null}">
+										<p>옵션: ${c.pro_option }/${c.option_detail}</p>
+									</c:if>
 								</div>
 							</td>
 							<td>
 								<span id="price">${c.price }</span>
 								<span id="saleprice">${c.saleprice }</span>
 							</td>
-							<td>
-								<button>-</button>
+							<td id="addSub">
+								<button type="button" id="minus">-</button>
 								<input type="number" value="${c.qty }">
-								<button>+</button>
+								<button type="button" id="plus">+</button>
 							</td>
 							<td>
-								<button>삭제</button>
+								 <button type="button"  id="delete" value="${c.no }">삭제하기</button>
 							</td>
 						</tr>
 					</c:forEach>

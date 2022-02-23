@@ -8,13 +8,30 @@
   </select>
   
   <select id="findAllRate" resultType="reviewVO">
-  	select * from review order by re_rate desc
+  	select * from review where pro_no=#{pro_no} order by re_rate desc  
+  </select>
+  
+  <select id="findAllDetail" resultType="reviewVO">
+  	select * from review where no=#{no}
   </select>
   
   <insert id="insert" parameterType="reviewVO">
-  	
+  	insert into review(no,re_title,re_rate,re_content,re_date,pro_no,re_hit,re_like,member_no,ord_no,point_type_code,re_thumbnail) 
+  	values(seq_comment.nextval,#{re_title},#{re_rate},#{re_content},sysdate,#{pro_no},#{re_hit},#{re_like},#{member_no},#{ord_no},#{point_type_code},#{re_thumbnail})  	
   </insert>
   
+  <update id="update" parameterType="reviewVO">
+  	update review set re_title=#{re_title},re_rate=#{re_rate},re_content=#{re_content},re_thumbnail=#{re_thumbnail} where no=#{no}
+  </update>
   
+  
+  <delete id="delete">
+  	delete review where no=#{no}
+  </delete>
+  
+  
+  <update id="updateHit">
+  	update review set re_hit=re_hit+1 where no=#{no}
+  </update>
   
 </mapper>
