@@ -2,8 +2,10 @@ package com.example.demo.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,16 +28,16 @@ public class ReviewController {
 	@Autowired
 	private ReviewDAO dao;
 	
-	/*
+	
 	public void setDao(ReviewDAO dao) {
 		this.dao = dao;
 	}
-	*/
+	
 	
 	//-------------------리뷰전체리스트-------------------- 
 		@RequestMapping("/admin/listReview")
-		public void listProduct_admin(Model model) {
-			model.addAttribute("list",dao.findAll());	 
+		public void listProduct_admin(HttpSession session) {
+			session.setAttribute("r2",dao.findAll());	 
 		}
 		
 		
@@ -63,7 +65,9 @@ public class ReviewController {
 		}
 		
 		@RequestMapping(value = "/admin/insertReview" , method = RequestMethod.POST)	
-		public ModelAndView insertReview(ReviewVO r, HttpServletRequest request) {
+		public ModelAndView insertReview(ReviewVO r, HttpServletRequest request,HttpSession session) {
+			//List<ReviewVO> list= (List<ReviewVO>)session.getAttribute("list");
+			
 			ModelAndView mav = new ModelAndView("redirect:/admin/listReview");
 			String path = request.getRealPath("upload/review");
 			String oldFname = r.getRe_thumbnail();
@@ -100,7 +104,7 @@ public class ReviewController {
 		
 		@RequestMapping(value ="/updateReview", method =RequestMethod.GET)
 		public void updateForm(int no, Model model){
-			model.addAttribute("g", dao.findAllDetail(no));
+			model.addAttribute("r", dao.findAllDetail(no));
 		}
 		
 		@RequestMapping(value ="/updateReview", method =RequestMethod.POST)	
