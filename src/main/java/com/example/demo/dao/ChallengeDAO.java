@@ -31,5 +31,9 @@ public class ChallengeDAO {
 		return DBManager.deleteChg(no);
 	}
 	
+	public List<ChallengeVO> selectChgRandom(){
+		return DBManager.selectChgRandom();	
+	}
+	
 	
 }

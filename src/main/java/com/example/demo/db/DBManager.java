@@ -10,8 +10,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import com.example.demo.dao.ChallengeListDAO;
 import com.example.demo.vo.AddressVO;
 import com.example.demo.vo.CartVO;
+import com.example.demo.vo.ChallengeListVO;
 import com.example.demo.vo.ChallengeVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.MyReviewVO;
@@ -236,6 +238,9 @@ public class DBManager {
 		return re;
 	}
 	
+	//-----------------Member ( 회원관련 )------------------------
+	 
+	
 	public static int insertMember(MemberVO m) {
 		SqlSession session = factory.openSession();
 		int re = session.insert("member.insert",m);
@@ -303,6 +308,14 @@ public class DBManager {
 		return re;
 	}
 	
+	/*-------- 회원 목록 -------*/
+	public static List<MemberVO> findAllMember(){
+		SqlSession session = factory.openSession();
+		List<MemberVO> list= session.selectList("member.findAll");
+		session.close();
+		return list;
+	}	
+	
 
 	//--------------------OrderListVO관련--------------
 	/*  주문 조회 로그인 */
@@ -360,8 +373,48 @@ public class DBManager {
 		session.commit();
 		session.close();
 		return re;
+	}
+	
+	/*관리자 -챌린지 3개 랜덤가져오기*/
+	public static List<ChallengeVO> selectChgRandom(){
+		SqlSession session = factory.openSession();
+		List<ChallengeVO> list= session.selectList("challenge.selectChgRandom");
+		session.close();
+		return list;
+	}
+	
+	/*관리자 - 챌린지리스트 추가 하기 */
+	public static int insertChglist(HashMap map) {
+		SqlSession session  = factory.openSession();
+		int re=session.insert("challengelist.insert", map);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
+	/*관리자 - 오늘챌린지리스트 불러오기 */
+	public static List<ChallengeListVO> todayChgList(){
+		SqlSession session = factory.openSession();
+		List<ChallengeListVO> list= session.selectList("challengelist.todayChgList");
+		session.close();
+		return list;
 	}	
 	
+	/*관리자 - 내일챌린지리스트 불러오기 */
+	public static List<ChallengeListVO> tomorrowChgList(){
+		SqlSession session = factory.openSession();
+		List<ChallengeListVO> list= session.selectList("challengelist.tomorrowChgList");
+		session.close();
+		return list;
+	}	
+	
+	/*관리자 - 어제챌린지리스트 불러오기 */
+	public static List<ChallengeListVO> yesterdayChgList(){
+		SqlSession session = factory.openSession();
+		List<ChallengeListVO> list= session.selectList("challengelist.yesterdayChgList");
+		session.close();
+		return list;
+	}		
 	
 }
 
