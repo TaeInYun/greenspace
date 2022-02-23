@@ -21,5 +21,8 @@ public class CartDAO {
 	public int isCart(HashMap map) {
 		return DBManager.isCart(map);
 	}
-
+	
+	public int updateQty(HashMap map) {
+		return DBManager.updateQty(map);
+	}
 }

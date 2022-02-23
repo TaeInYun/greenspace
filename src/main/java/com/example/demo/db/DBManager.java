@@ -17,9 +17,13 @@ import com.example.demo.vo.ChallengeListVO;
 import com.example.demo.vo.ChallengeVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.MyReviewVO;
-//github.com/TaeInYun/greenspace.git
+
 import com.example.demo.vo.MyWishVO;
+
+import com.example.demo.vo.Pro_add_optionVO;
+
 import com.example.demo.vo.OrderListVO;
+
 import com.example.demo.vo.ProductVO;
 import com.example.demo.vo.ReviewVO;
  
@@ -131,6 +135,9 @@ public class DBManager {
 			session.close();
 			return cnt;
 		}
+	
+	
+	
  
 	//-----------------------ProductVO---------------------------
 	public static List<ProductVO> findAll(){
@@ -140,9 +147,9 @@ public class DBManager {
 		return list;
 	}	
  
-	public static List<ProductVO> findAll_home(){
+	public static List<ProductVO> findAll_home(HashMap map){
 		SqlSession session = factory.openSession();
-		List<ProductVO> list= session.selectList("product.findAll_home");
+		List<ProductVO> list= session.selectList("product.findAll_home", map);
 		session.close();
 		return list;
 	}	
@@ -179,6 +186,14 @@ public class DBManager {
 		return re;
 	}
 
+	public static int insertPro_add_option(Pro_add_optionVO po) {		
+		SqlSession session  = factory.openSession();
+		int re=session.insert("pro_add_option.insert",po);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
 	public static void updateHit(int no) {
 		SqlSession session = factory.openSession();
 		session.update("product.updateHit", no);
@@ -201,9 +216,22 @@ public class DBManager {
 		return re;
 	}	
 	 
-	
-	
-	 
+	public static List<ProductVO> findOptionName(int no){
+		SqlSession session = factory.openSession();
+		List<ProductVO> list= session.selectList("product.findOptionName",no);
+		session.close();
+		return list;
+	}	
+ 	
+ 
+	 	public static List<ProductVO> findOptionDetailName(HashMap map){
+		SqlSession session = factory.openSession();
+		List<ProductVO> list= session.selectList("product.findOptionDetailName",map);
+		session.close();
+		return list;
+	}
+ 		
+  
  
 	//------------------Address ( 주소록 )------------------------
  
@@ -238,8 +266,17 @@ public class DBManager {
 		return re;
 	}
 	
+	public static int updateQty(HashMap map) {
+		SqlSession session = factory.openSession();
+		int re = session.update("cart.updateQty", map);
+		session.commit();
+		session.close();
+		return re;
+	}
+
 	//-----------------Member ( 회원관련 )------------------------
-	 
+
+
 	
 	public static int insertMember(MemberVO m) {
 		SqlSession session = factory.openSession();
@@ -330,6 +367,15 @@ public class DBManager {
 		return o;
 	}
 	
+
+	public static OrderListVO initOrderInfo(int member_no) {
+		
+		SqlSession session = factory.openSession();
+		OrderListVO o = session.selectOne("orderList.initOrderInfo", member_no);
+		session.close();
+		return o;
+	}
+
 	//---------------Challenge (챌린지 관련) ----------
 	/*관리자 - 챌린지 목록*/
 	public static List<ChallengeVO> findAllChg(){
@@ -374,6 +420,7 @@ public class DBManager {
 		session.close();
 		return re;
 	}
+
 	
 	/*관리자 -챌린지 3개 랜덤가져오기*/
 	public static List<ChallengeVO> selectChgRandom(){
@@ -399,6 +446,7 @@ public class DBManager {
 		session.close();
 		return list;
 	}	
+
 	
 	/*관리자 - 내일챌린지리스트 불러오기 */
 	public static List<ChallengeListVO> tomorrowChgList(){
@@ -417,5 +465,4 @@ public class DBManager {
 	}		
 	
 }
-
 

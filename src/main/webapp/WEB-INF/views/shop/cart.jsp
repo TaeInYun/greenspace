@@ -11,28 +11,53 @@
 <script type="text/javascript" src="/js/cart.js"></script>
 <script type="text/javascript">
 	$(function(){
-		
-		///** 장바구니리스트
+		//***** 체크박스에 대한 변수 선언
 		let checkbox = "input[name=checkList]";
 		let allCheck = "#checkedAll";
 		
+		//***** 체크박스 클릭시 실행되는 이벤트함수
 		$(document).on("click","#checkedAll",function() {
 			checkedAll();
+			
+			showOrderPriceInfo();
 		});
 		
 		$(document).on("click", "#listCart "+ checkbox, function() {
 			$(allCheck).prop("checked", false)
+			showOrderPriceInfo();
 		}); 
 		
-		// 수량 버튼 기능
+		
+		//*****  수량 버튼 기능
 		$(document).on("click", "#minus", function() {
-			minus(this);
+			
+			let qty = $(this).siblings();
+			let cart_qty = Number( $( qty ).val() ) - 1;
+			console.log(cart_qty);
+			
+			let no = $( $(document).find("input[name=pro_no]")).val();
+			
+			let data = {
+				cart_qty:cart_qty,
+				no:no
+			}
+			
+ 			$.ajax({
+				url: "updateQty",
+				data:  data,
+				success: function(msg){
+					alert("해당 상품의 수량이 "+msg + "되었습니다.");
+					location.href="cart";
+				}
+			});//end ajax
+			
 		}); // end minus
 		
 		$(document).on("click", "#plus", function() {
 			plus(this);
 		}); // end plus
 		
+
 		//장바구니 상품 삭제		
 		$(document).on("click", "#delete", function() {
 			let noArr = new Array();
@@ -40,36 +65,22 @@
 			deleteCart(noArr);
 		});
 		
-		//선택 상품 삭제
+		
+		//***** 선택 상품 삭제
 		$("#delSelected").click(function(){
 			let select = $("input[name=checkList]:checked");
 			let noArr = new Array();
 			
 			$.each(select, function() {
 				let no = $($(this).siblings()[2]).val();
+				console.log(no);
 				noArr.push(no);
 			});
 			
 			deleteCart(noArr);
 		});
 		
-		// ** 주문서
-		function sumPrice() {
-			
-			let total = 0;
-			let price = 0;
-			let saleprice = 0;
-			
-			let tr = $("input[name=checkList]").parent();
-			
-			$.each($("input[name=checkList]:checked"), function() {
-				let td = $(this).parent();
-				let no = $(td).find("input[name=no]").val();
-				let qty = $(td).find("input[name=qty]").val();
-			});			
-		}// end sumPrice()
-		
-		//서버동작시 실행
+		//***** 서버동작시 실행
 		checkedAll();
 	})//end function
 </script>
@@ -101,11 +112,12 @@
 							<td>
 								${c.rownum }
 							</td>
-							<td>
+							<td id="values">
 								<input type="checkbox" name="checkList"">
 								<input type="hidden" name="price" value="${c.price }">
 								<input type="hidden" name="saleprice" value="${c.saleprice }">
 								<input type="hidden" name="pro_no" value="${c.no }">
+								<input type="hidden" name="discount" value="${c.price - c.saleprice}">
 							</td>
 							<td>
 								<div>
@@ -139,15 +151,18 @@
 	<div id="order">
 		<div id="address">
 			<h5>배송지</h5>
-			받는 사람 : ${addr.addr_receiver }
-			주소 : ${addr.addr_road } ${addr.addr_detail }
-			전화번호 : ${addr.addr_phone }
+			받는 사람 : ${info.name }
+			주소 : ${info.addr_road } ${info.addr_detail }
+			전화번호 : ${info.phone }
 			<button>배송지변경</button>
 		</div>
 		<hr>
-		<div id="orderPrice">
+		<div id="orderInfo">
+			<p>상품금액 : <span id="tot_price">${info.pro_price }</span> 원</p>
+			<p>상품할인금액 : <span id="tot_discount">${info.pro_discount }</span> 원</p>
+			<p>배송비 : <span id="delivery_price">${info.delivery_price}</span> 원 </p>
+			<p>결제예정금액 : <span id="tot_saleprice">${info.pro_saleprice}</span> 원 </p>
 		</div>
-		<hr>
 	</div>
 </body>
 </html>

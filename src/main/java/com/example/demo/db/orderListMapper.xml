@@ -20,15 +20,16 @@
 	addr_road, 
 	addr_detail, 
 	addr_phone phone, 
-	a.p pro_price, 
-	a.s pro_saleprice
+	a.price pro_price, 
+	a.saleprice pro_saleprice,
+	a.discount pro_discount
 	FROM
 	address a,
 	(SELECT no, name FROM member WHERE no = #{member_no}) m,
 	(
 	sELECT
-	SUM(pro_price * CART_QTY), SUM(pro_saleprice*CART_QTY) p,
-	SUM(pro_price * CART_QTY) - SUM(pro_saleprice*CART_QTY) s
+	SUM(pro_price * CART_QTY) price, SUM(pro_saleprice*CART_QTY) saleprice,
+	SUM(pro_price * CART_QTY) - SUM(pro_saleprice*CART_QTY) discount
 	FROM
 	product p,
 	(SELECT pro_no, CART_QTY
@@ -43,7 +44,7 @@
 	WHERE
 	a.member_no = m.no
 	AND
-	addr_main = 1;
+	addr_main = 1
   </select>
   
 </mapper>
