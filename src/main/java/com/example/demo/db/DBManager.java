@@ -47,14 +47,14 @@ public class DBManager {
 	
 	public static ReviewVO findAllReviewRate(int pro_no){
 		SqlSession session = factory.openSession();
-		ReviewVO r = session.selectOne("ReviewVO.findAllRate", pro_no);
+		ReviewVO r = session.selectOne("review.findAllRate", pro_no);
 		session.close();
 		return r;
 	}
 	
 	public static ReviewVO findAllReviewDetail(int no) {
 		SqlSession session = factory.openSession();
-		ReviewVO r = session.selectOne("ReviewVO.findAllDetail", no);
+		ReviewVO r = session.selectOne("review.findAllDetail", no);
 		session.close();
 		return r;
 	}
@@ -86,6 +86,7 @@ public class DBManager {
 	}
 	
 	public static void updateReviewHit(int no) {
+		System.out.println(no);
 		SqlSession session = factory.openSession();
 		session.update("review.updateHit", no);
 		session.commit();

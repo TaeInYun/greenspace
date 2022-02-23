@@ -19,9 +19,9 @@
   
   
   
-   <!-- 상품 detail product-->
+   <!-- 상품 detail product (리뷰때문에 no출력함)-->
   <select id="findByNo" resultType="productVO">
-  	select pro_name, pro_price, pro_saleprice, pro_content, pro_hit, PRO_THUMBNAIL 
+  	select * 
 	from product p 
 	where p.no=#{no} 
  </select>
