@@ -20,12 +20,14 @@
 				<label>id</label>
 				<input type="text" id="id" name="id" required>
 			</p>
+			
 			<p>	
 				<label>Email</label>
 				<input type="text" id="email" name="email" required>
 			</p>
-				<input type="submit" value="비밀번호 찾기">
-				<button type="button" onclick="history.go(-1);" >Cancel</button>
+			
+			<input type="submit" value="비밀번호 찾기">
+			<button type="button" onclick="history.go(-1);" >Cancel</button>
 	</form>
 </body>
 </html>

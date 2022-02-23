@@ -38,7 +38,7 @@ public class MemberController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	
+
 	//회원가입----------------------------
 	@RequestMapping(value = "/join",method = RequestMethod.GET)
 	public void join_form() {	
@@ -119,7 +119,6 @@ public class MemberController {
 	public void loginAction() {
 		
 	}
-	
 
 	
 	//로그인확인----------------------------
@@ -139,15 +138,15 @@ public class MemberController {
 		
 		//db로 부터 읽어온 회원객체를 세션에 상태유지합니다.
 		//세션에 상태유지를 하면 브라우저를 닫기 전까지(로그아웃 하기 전까지) 상태유지 할 수 있습니다.
-		session.setAttribute("m", m);	
+		session.setAttribute("m", m);
 	}
 	
-	//이메일 아이디 찾기 --------------------------------------------------
+	//이메일 아이디 찾기 
 	@RequestMapping(value = "/findIdByEmail", method = RequestMethod.GET)
 	public void findIdByEmailForm() {
 	}
 	
-	//핸드폰 아이디 찾기 --------------------------------------------------
+	//핸드폰 아이디 찾기
 	@RequestMapping(value = "/findIdByPhone", method = RequestMethod.GET)
 	public void findIdByPhoneForm() {
 	}
@@ -160,6 +159,7 @@ public class MemberController {
 	}
 	
 
+
 	//이메일 비밀번호 찾기
 	@RequestMapping(value="/findPwdByEmail", method = RequestMethod.GET )
 	public void findPwdByEmail() {
@@ -169,15 +169,18 @@ public class MemberController {
 	@RequestMapping(value="/findPwdByPhone", method = RequestMethod.GET )
 	public void findPwdByPhone() {
 	}
-
+	
+	
+	@RequestMapping(value="/resetPwd", method = RequestMethod.GET)
+	public void resetPwdForm() throws Exception{
+		
+	}
 	
 	@RequestMapping(value="/resetPwd", method = RequestMethod.POST)
 	public String resetPwd(HttpServletResponse response, @RequestParam String id, @RequestParam String email, @RequestParam String phone, Model md) throws Exception{
 		md.addAttribute("checkPwd", ms.resetPwd(response, id, email, phone));
-		return "resetPwd";
+		return "resetPwd" ;
 	}
-	
 
-	
 	
 }

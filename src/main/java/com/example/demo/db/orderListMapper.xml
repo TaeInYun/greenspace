@@ -5,4 +5,45 @@
 <mapper namespace="orderList">
   <select id="insertOrderList" resultType="myWishVO">
   </select>
+    
+  <!-- 주문조회로그인 -->
+  <select id="LoginByOrderId" resultType="orderListVO">
+  select o.ord_id as id,receiver_name as name,receiver_phone as phone from orders o,receiver r 
+	where o.receiver_no = r.no
+	and receiver_name=#{receiver_name}
+ 	and ord_id=#{ord_id}
+  </select>
+  <!-- 장바구니 - 처음 주문정보 -->
+  <select id="initOrderInfo" resultType="orderListVO">
+  	SELECT
+	m.name name, 
+	addr_road, 
+	addr_detail, 
+	addr_phone phone, 
+	a.p pro_price, 
+	a.s pro_saleprice
+	FROM
+	address a,
+	(SELECT no, name FROM member WHERE no = #{member_no}) m,
+	(
+	sELECT
+	SUM(pro_price * CART_QTY), SUM(pro_saleprice*CART_QTY) p,
+	SUM(pro_price * CART_QTY) - SUM(pro_saleprice*CART_QTY) s
+	FROM
+	product p,
+	(SELECT pro_no, CART_QTY
+	FROM
+	cart
+	WHERE
+	member_no = #{member_no}
+	) c
+	WHERE
+	p.no = c.pro_no
+	) a
+	WHERE
+	a.member_no = m.no
+	AND
+	addr_main = 1;
+  </select>
+  
 </mapper>
