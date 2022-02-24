@@ -14,6 +14,9 @@
 	<typeAlias type="com.example.demo.vo.OrderListVO" alias="orderListVO"/>
   	<typeAlias type="com.example.demo.vo.ProductVO" alias="productVO"/>
   	<typeAlias type="com.example.demo.vo.ChallengeVO" alias="challengeVO"/>
+  	<typeAlias type="com.example.demo.vo.ChallengeListVO" alias="challengelistVO"/>
+	<typeAlias type="com.example.demo.vo.Pro_add_optionVO" alias="pro_add_optionVO"/>
+
   </typeAliases>
   <environments default="development">  
     <environment id="development">
@@ -35,6 +38,8 @@
      <mapper resource="com/example/demo/db/myreviewMapper.xml"/> 
      <mapper resource="com/example/demo/db/memberMapper.xml"/> 
 	<mapper resource="com/example/demo/db/orderListMapper.xml"/> 
+  	<mapper resource="com/example/demo/db/pro_add_optionMapper.xml"/> 
 	<mapper resource="com/example/demo/db/challengeMapper.xml"/> 
+	<mapper resource="com/example/demo/db/challengelistMapper.xml"/>  
   </mappers>
 </configuration>

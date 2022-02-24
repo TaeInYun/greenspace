@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
  
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -16,8 +17,8 @@ public class ProductDAO {
 		return DBManager.findAll();	
 	}	
 	
-	public List<ProductVO> findAll_home(){
-		return DBManager.findAll_home();	
+	public List<ProductVO> findAll_home(HashMap map){
+		return DBManager.findAll_home(map);	
 	}
 	 
 	public ProductVO findByNo(int no) {
@@ -49,5 +50,15 @@ public class ProductDAO {
 	public int findOptionView(int no) {
 		return DBManager.findOptionView(no);
 	}
+ /*
+	public List<ProductVO> findOptionName(int no){
+		return DBManager.findOptionName(no);	
+	}
  
+ 	public List<ProductVO> findOptionDetailName(HashMap map){
+		return DBManager.findOptionDetailName(map);	
+	}
+ */
+
+	 
 }

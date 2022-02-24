@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
@@ -54,9 +55,15 @@ public class MemberDAO {
 		return DBManager.findPwdByPhone(m);
 	}
 	
+
 	//새비밀번호 설정
 	public String updatePwd(HashMap<String, String> m) {
 		return DBManager.updatePwd(m);
+	}
+
+
+	public List<MemberVO> findAllMember(){
+		return DBManager.findAllMember();
 	}
 	
 }

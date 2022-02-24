@@ -7,26 +7,43 @@
  <!-- 상품 home-->	
   <select id="findAll_home" resultType="productVO">
      select no ,pro_name, pro_brand, pro_price, pro_saleprice, PRO_THUMBNAIL
-	 from product p
-  </select>
+	 from product 
+	 <if test="cat_code !=null">
+	 		where cat_code=#{cat_code}
+	 </if>
+	 
+	 <if test="keyword != null">
+			where pro_name like '%'||#{keyword}||'%' 
+	 </if>
+	 
+	 <if test="filter != null">
+			order by ${filter} desc
+	 </if>
+	 
+	 <if test="filterASC != null">
+			order by ${filterASC}  
+	 </if>
+	 
+ </select>
+ 
+ 
+ 
+ 
  
   <!-- 상품 admin-->	
   <select id="findAll" resultType="productVO">
      select no ,pro_name, pro_brand, pro_price, pro_saleprice, pro_stock, c.cat_name cat_name, PRO_THUMBNAIL
 	from product p, category c
 	where c.cat_code = p.cat_code
-  </select>
-  
-  
+  </select>  
   
    <!-- 상품 detail product-->
-  <select id="findByNo" resultType="productVO">
-  	select no, pro_name, pro_price, pro_saleprice, pro_content, pro_hit, PRO_THUMBNAIL 
-	from product p 
-	where p.no=#{no} 
+  <select id="findByNo" resultType="productVO"> 
+  	select * from product  
+	where no=#{no} 
  </select>
   
-   <!-- 상품 detail 옵션-->
+   <!-- 상품 detail 한 개 옵션-->
  <select id="findOption" resultType="productVO">   		 
 			select pro_option_name, pro_option_detail_name, pro_add_price, sum(pro_saleprice + pro_add_price)sum
 			from pro_add_option pao,pro_option po, pro_option_detail pod, product p
@@ -34,17 +51,37 @@
 			pao.pro_option_detail_code = pod.pro_option_detail_code and
 			pro_no=#{no}
 		    GROUP BY pro_option_name, pro_option_detail_name, pro_add_price		 
+		    order by pro_option_name
  </select> 
- 	
- 	
+ 
+  
+
  <select id="findOptionView" resultType="java.lang.Integer">   		
- 	select count (*)cnt from pro_add_option where pro_no=#{no}
+ 	select count( distinct pro_option_code)cnt from pro_add_option where pro_no=#{no}
  </select>
+  
+  <insert id="insert" parameterType="productVO">
+   	insert into product values(
+    seq_product.nextval,
+   #{pro_name},
+    #{pro_brand},
+    #{pro_price},
+    #{pro_saleprice},
+    #{pro_stock},
+    #{pro_delivery},
+             sysdate,
+             0,             
+    #{pro_content},
+    #{cat_code},
+    #{PRO_THUMBNAIL}
+    )
+  </insert>
+  
   
    
    <!-- 상품 수정-->
   <update id="update" parameterType="productVO">
-  	update product set pro_name=#{pro_name},pro_brand=#{pro_brand},pro_price=#{pro_price},pro_saleprice=#{pro_saleprice},pro_stock=#{pro_stock},pro_content=#{pro_content},where no=#{no}
+  	update product set pro_name=#{pro_name},pro_brand=#{pro_brand},pro_price=#{pro_price},pro_saleprice=#{pro_saleprice},pro_stock=#{pro_stock},pro_content=#{pro_content},PRO_THUMBNAIL=#{PRO_THUMBNAIL} where no=#{no}
   </update>
   
    <!-- 상품 삭제-->

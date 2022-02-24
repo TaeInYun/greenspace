@@ -8,7 +8,7 @@
   </select>
   
   <select id="findAllRate" resultType="reviewVO">
-  	select * from review where pro_no=#{pro_no} order by re_rate desc  
+  	select * from review r where r.pro_no=#{pro_no} order by re_rate desc  
   </select>
   
   <select id="findAllDetail" resultType="reviewVO">
@@ -16,12 +16,42 @@
   </select>
   
   <insert id="insert" parameterType="reviewVO">
-  	insert into review(no,re_title,re_rate,re_content,re_date,pro_no,re_hit,re_like,member_no,ord_no,point_type_code,re_thumbnail) 
-  	values(seq_comment.nextval,#{re_title},#{re_rate},#{re_content},sysdate,#{pro_no},0,0,#{member_no},null,REV,#{re_thumbnail})  	
+  	insert into review(
+  	no,
+  	re_title,
+  	re_rate,
+  	re_content,
+  	re_date,
+  	pro_no,
+  	re_hit,
+  	re_like,
+  	member_no,
+  	point_type_code,
+  	re_thumbnail) 
+  	
+  	values(seq_comment.nextval,
+  	#{re_title},
+  	#{re_rate},
+  	#{re_content},
+  	sysdate,
+  	#{pro_no},
+  	0,
+  	0,
+  	#{member_no},
+  	'REV',
+  	#{re_thumbnail})  	
   </insert>
   
   <update id="update" parameterType="reviewVO">
-  	update review set re_title=#{re_title},re_rate=#{re_rate},re_content=#{re_content},re_thumbnail=#{re_thumbnail} where no=#{no}
+  	update review set 
+  	no=#{no},
+  	re_title=#{re_title},
+  	re_rate=#{re_rate},
+  	re_content=#{re_content},
+  	re_thumbnail=#{re_thumbnail},
+  	pro_no=#{pro_no},
+  	member_no=#{member_no}
+  	where no=#{no}
   </update>
   
   
