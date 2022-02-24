@@ -54,18 +54,16 @@
 		select * from member
 		</select>
 	
-
 	  <insert id="insert" parameterType="memberVO">
 	  	insert into member values(seq_cer.nextval,
 		#{id},#{pwd} ,#{name},#{nickname},#{email},#{phone},
 		null,null,0,0,1,0)
 	  </insert>	
   
-  
 	  <!-- 메인 유저정보 -->
 	  <select id="mainMemberInfo" resultType="memberVO">
 	  SELECT nickname, levels, point_use FROM member where no = #{member_no}
 	  </select>
+		
 
- 
 </mapper>
