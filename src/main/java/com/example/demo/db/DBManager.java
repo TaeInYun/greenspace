@@ -9,6 +9,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.ui.Model;
 
 import com.example.demo.vo.AddressVO;
 import com.example.demo.vo.CartVO;
@@ -312,11 +313,17 @@ public class DBManager {
 		return re;
 	}
 	
+	public static String updatePwd(HashMap<String,String> m) {
+		SqlSession session = factory.openSession();
+		String re = session.selectOne("member.updatePwd", m);
+		session.close();
+		return re;
+	}
+	
 
 	//--------------------OrderListVO관련--------------
 	/*  주문 조회 로그인 */
 	public static OrderListVO LoginByOrderId(String name,String id) {
-		
 		HashMap map = new HashMap();
 		map.put("receiver_name", name);
 		map.put("ord_id", id);
