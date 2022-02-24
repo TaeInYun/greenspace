@@ -100,8 +100,9 @@
 					상품할인가 :${p.pro_saleprice}<br>
 					상품설명 : ${p.pro_content }<br>	
 					조회수 : ${p.pro_hit }<br>	 	
-										
-		 		<a href="/admin/insertReview?pro_no=${p.no}"> 리뷰작성하기</a>
+				
+				<a href="/shop/listReview_rate?pro_no=${p.no}">리뷰 목록 보기</a>						
+		 		<a href="/shop/insertReview?pro_no=${p.no}"> 리뷰작성하기</a>
 		 	
 		 		 <c:if test="${cnt>=1}">	
 				 <hr>	 

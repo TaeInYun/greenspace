@@ -13,4 +13,25 @@
 		member_no = #{member_no}
 		AND addr_main = 1
   </select>
+  
+  <select id="allMainAddress" resultType="addressVO">
+  		SELECT
+		*
+		FROM
+		address
+		WHERE
+		member_no = #{member_no}
+		AND addr_main = 1
+  </select>
+   
+  <select id="allSubAddress" resultType="addressVO">
+  		SELECT
+		*
+		FROM
+		address
+		WHERE
+		member_no = #{member_no}
+		AND addr_main = 0
+  </select>
+  
 </mapper>

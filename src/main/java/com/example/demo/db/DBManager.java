@@ -45,11 +45,12 @@ public class DBManager {
 		return list;
 	}
 	
-	public static ReviewVO findAllReviewRate(int pro_no){
+	//상품번호 리뷰목록을 갖고 오는 sql
+	public static List<ReviewVO> findAllReviewRate(int pro_no){
 		SqlSession session = factory.openSession();
-		ReviewVO r = session.selectOne("review.findAllRate", pro_no);
+		List<ReviewVO> list = session.selectList("review.findAllRate", pro_no);
 		session.close();
-		return r;
+		return list;
 	}
 	
 	public static ReviewVO findAllReviewDetail(int no) {
@@ -61,6 +62,7 @@ public class DBManager {
 	
 	public static int insertReview(ReviewVO r) {
 		
+		System.out.println(r);
 		SqlSession session  = factory.openSession();
 		int re=session.insert("review.insert",r);
 		session.commit();
@@ -211,6 +213,20 @@ public class DBManager {
 		return main;
 	}
 	
+	public static AddressVO allMainAddress(int member_no) {
+		SqlSession session = factory.openSession();
+		AddressVO sub =  session.selectOne("address.allMainAddress", member_no);
+		session.close();
+		return sub;
+	}
+	
+	public static AddressVO allSubAddress(int member_no) {
+		SqlSession session = factory.openSession();
+		AddressVO sub =  session.selectOne("address.allSubAddress", member_no);
+		session.close();
+		return sub;
+	}
+	
 	//************ Cart ( 장바구니 )
 	public static int insertCart(CartVO c) {
 		SqlSession session = factory.openSession();
@@ -315,6 +331,7 @@ public class DBManager {
 		session.close();
 		return o;
 	}
+	
 	
 }
 

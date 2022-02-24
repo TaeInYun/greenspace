@@ -16,8 +16,7 @@
 		제목: <input type="text" name="re_title"> <br>
 		평점: <input type="text" name="re_rate"> <br>
 		내용: <input type="text" name="re_content"> <br>			
-		상품번호: <br> 
-		<input type="text" name="no" value="<%=request.getQueryString().substring(7)%>"> <br> 
+		상품번호: <input type="text" name="pro_no" value="${pro_no} "> <br> 
 		작성자:	<input type="text" name="member_no" value="${m.no}"> <br>
 		상품사진: <input type="file" name="uploadFile"> <br>
 		<input type="submit" value="등록">

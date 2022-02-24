@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.ReviewDAO;
+import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.ProductVO;
 import com.example.demo.vo.ReviewVO;
 
@@ -53,30 +54,39 @@ public class ReviewController {
 		
 		@RequestMapping("/shop/listReview_rate")
 		public void rate(int pro_no, Model model) {	
-			model.addAttribute("r", dao.findAllRate(pro_no));
+			List<ReviewVO> list = (List<ReviewVO>)dao.findAllRate(pro_no);
+			System.out.println(list);
+			model.addAttribute("list", list);
 		}	
 		
-	
+		
+		
+		
 	//-------------------리뷰작성하기-------------------- 
 		
-		@RequestMapping(value = "/admin/insertReview" , method = RequestMethod.GET)
-		public void insertForm() {
-			
+		@RequestMapping(value = "/shop/insertReview" , method = RequestMethod.GET)
+		public void insertForm(int pro_no, Model model) {
+			model.addAttribute("pro_no", pro_no);
 		}
 		
-		@RequestMapping(value = "/admin/insertReview" , method = RequestMethod.POST)	
+		@RequestMapping(value = "/shop/insertReview" , method = RequestMethod.POST)	
 		public ModelAndView insertReview(ReviewVO r, HttpServletRequest request,HttpSession session) {
 			//List<ReviewVO> list= (List<ReviewVO>)session.getAttribute("list");
 			
+			System.out.println("insertReview 동작함.");
+			System.out.println(r);
 			ModelAndView mav = new ModelAndView("redirect:/admin/listReview");
 			String path = request.getRealPath("upload/review");
-			String oldFname = r.getRe_thumbnail();
+			System.out.println("path:"+path);
+			//String oldFname = r.getRe_thumbnail();
 			MultipartFile uploadFile = r.getUploadFile();
 			String thumbnail = uploadFile.getOriginalFilename();
+			System.out.println("thumbnail:"+thumbnail);
 			byte []data;
 			try {
 				data = uploadFile.getBytes();
 				if(thumbnail != null && !thumbnail.equals("")) {
+					System.out.println("업로드 파일있어요!");
 					r.setRe_thumbnail(thumbnail);
 					FileOutputStream fos = new FileOutputStream(path +"/"+thumbnail);
 					fos.write(data);
@@ -84,30 +94,24 @@ public class ReviewController {
 				}
 			}catch (Exception e) {
 				// TODO: handle exception
+				System.out.println("예외발생:"+e.getMessage());
 			}
 			
-			int re=dao.update(r);
-			if(re ==1) {
-				if(thumbnail !=null && !thumbnail.equals("")) {
-					File file = new File(path + "/" + oldFname);
-					file.delete();
-				}
-			}else {
-				mav.setViewName("error");
-				mav.addObject("msg", "상품수정에 실패하였습니다.");
-			}
+			r.setRe_thumbnail(thumbnail);
+			dao.insert(r);
+			
 			return mav;
 
 		}
 		
 		//-------------------리뷰수정하기--------------------
 		
-		@RequestMapping(value ="/updateReview", method =RequestMethod.GET)
+		@RequestMapping(value ="/shop/updateReview", method =RequestMethod.GET)
 		public void updateForm(int no, Model model){
 			model.addAttribute("r", dao.findAllDetail(no));
 		}
 		
-		@RequestMapping(value ="/updateReview", method =RequestMethod.POST)	
+		@RequestMapping(value ="/shop/updateReview", method =RequestMethod.POST)	
 		public ModelAndView updateSubmit(ReviewVO r, HttpServletRequest request) {
 			ModelAndView mav = new ModelAndView("redirect:/admin/listReview");
 			String path = request.getRealPath("upload/review");
@@ -144,9 +148,10 @@ public class ReviewController {
 		
 		//-------------------리뷰삭제하기--------------------
 		
+		//findAllRate()
 		
 		public ModelAndView delete(HttpServletRequest request, int no) {
-			String oldFname = dao.findAllRate(no).getRe_thumbnail();
+			String oldFname = dao.findAllDetail(no).getRe_thumbnail();
 			
 			ModelAndView mav = new ModelAndView("redirect:/listReview");
 			int re = dao.delete(no);
