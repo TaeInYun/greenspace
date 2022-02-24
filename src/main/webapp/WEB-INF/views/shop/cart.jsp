@@ -8,7 +8,8 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/js/qty.js"></script>
-<script type="text/javascript" src="/js/cart.js"></script>
+<script type="text/javascript" src="/js/product.js"></script>
+<script type="text/javascript" src="/js/checkbox.js"></script>
 <script type="text/javascript">
 	$(function(){
 		//***** 체크박스에 대한 변수 선언
@@ -33,28 +34,22 @@
 			
 			let qty = $(this).siblings();
 			let cart_qty = Number( $( qty ).val() ) - 1;
-			console.log(cart_qty);
 			
-			let no = $( $(document).find("input[name=pro_no]")).val();
+			let td = $( $(this).parent() ).siblings()[1];
+			let no =$( $(td).find( "input[name=pro_no]" ) ).val();
 			
-			let data = {
-				cart_qty:cart_qty,
-				no:no
-			}
-			
- 			$.ajax({
-				url: "updateQty",
-				data:  data,
-				success: function(msg){
-					alert("해당 상품의 수량이 "+msg + "되었습니다.");
-					location.href="cart";
-				}
-			});//end ajax
+			updateQty(cart_qty,no);
 			
 		}); // end minus
 		
 		$(document).on("click", "#plus", function() {
-			plus(this);
+			let qty = $(this).siblings()[1];
+			let cart_qty = Number( $( qty ).val() )+1;
+			
+			let td = $( $(this).parent() ).siblings()[1];
+			let no =$( $(td).find( "input[name=pro_no]" ) ).val();
+			
+			updateQty(cart_qty,no);
 		}); // end plus
 		
 
@@ -73,7 +68,6 @@
 			
 			$.each(select, function() {
 				let no = $($(this).siblings()[2]).val();
-				console.log(no);
 				noArr.push(no);
 			});
 			
@@ -135,8 +129,13 @@
 								<span id="saleprice">${c.saleprice }</span>
 							</td>
 							<td id="addSub">
-								<button type="button" id="minus">-</button>
-								<input type="number" value="${c.qty }">
+								<c:if test="${c.qty == 1 }">
+									<button type="button" disabled="disabled" id="minus">-</button>
+								</c:if>
+								<c:if test="${c.qty != 1 }">
+									<button type="button" id="minus">-</button>
+								</c:if>
+									<input type="number" readonly="readonly" value="${c.qty }">
 								<button type="button" id="plus">+</button>
 							</td>
 							<td>

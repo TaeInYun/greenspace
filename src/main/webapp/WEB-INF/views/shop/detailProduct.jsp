@@ -9,44 +9,18 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/js/qty.js"></script>
-<script type="text/javascript" src="/js/cart.js"></script>
+<script type="text/javascript" src="/js/product.js"></script>
 <script type="text/javascript">
 	$(function(){
+		let pro_price = ${p.pro_price};
+		let pro_saleprice = ${p.pro_saleprice};
+		let pro_name = "${p.pro_name}"
+		let pro_no = ${p.no}	
+		let member_no = 1;
 		
 		$("#cart").click(function(){		
-			
-			let cart_option = $("#pro_option_name > option:selected").val();
-			let cart_option_detail = $("#pro_option_detail_name > option:selected").attr("name");
-			let cart_qty = $("#qty").val();
-			let member_no = 1;
-			
-			let option_price = $("#pro_option_detail_name > option:selected").val();
-			let pro_price = ${p.pro_price};
-			let pro_saleprice = ${p.pro_saleprice};
-			
-			//상품옵션이 아예없을경우
-			if(cart_option == null){
-				cart_option = "";
-				cart_option_detail="";
-			}
-			
-			// 상품가격 + 옵션가격
-			if(option_price != null && option_price!=""){
-				pro_price += Number(option_price)
-				pro_saleprice += Number(option_price)
-			}
-			
-			let data = {
-					cart_name: '${p.pro_name}',
-					cart_price:pro_price,
-					cart_saleprice:pro_saleprice,
-					pro_no:${p.no},
-					cart_option:cart_option,
-					cart_option_detail:cart_option_detail,
-					cart_qty:cart_qty,
-					member_no:member_no,
-			};
-			
+			let data = getProductInfo(member_no, pro_price,pro_saleprice, pro_name, pro_no );
+ 			
 			$.ajax({
 				url: "isCart",
 				data: data,
@@ -75,6 +49,22 @@
 		$(document).on("click", "#plus", function() {
 			plus(this);
 		}); // end plus
+		
+		$("#btns a").click(function(event){
+			event.preventDefault();
+		});
+		
+		$("#wishList").click(function(){
+			let data = getProductInfo(member_no, pro_price,pro_saleprice, pro_name, pro_no );
+		
+			$.ajax({
+					url: "insertWishList",
+					data: data,
+					success: function(msg){
+						
+					}
+				});//end ajax
+		})
 	});
 </script>
 </head>
@@ -82,6 +72,8 @@
 	<h2>상품 상세</h2>
 	<div id="btns">
 		<button id="cart">장바구니 추가</button>
+		<a href="" id="wishList">찜하기</a>
+		<a href="">카트</a>
 	</div>
 	<hr>
 	 <div id="root">
@@ -108,14 +100,14 @@
 				        <select id="pro_option_name" name="pro_option_name">
 							<option value="">선택</option>					
 								<c:forEach var="op" items="${op}">							
-								<option value="${op.pro_option_name}">${op.pro_option_name}</option>				
+								<option value="${op.pro_option_code}">${op.pro_option_name}</option>				
 							</c:forEach>
 						</select>
 						
 						<select id="pro_option_detail_name" name="pro_option_detail_name">
 							<option value="">선택</option>
 							<c:forEach var="op" items="${op}">					
-								<option value="${op.pro_add_price}" name="${op.pro_option_detail_name}">${op.pro_option_detail_name}+${op.pro_add_price}</option>										 		
+								<option value="${op.pro_add_price}" name="${op.pro_option_detail_code}">${op.pro_option_detail_name}(+${op.pro_add_price})</option>										 		
 							</c:forEach>
 						</select>    
 						
@@ -127,8 +119,7 @@
 				</div>				  
 				<hr>			 
 				 <img  src="/upload/${p.PRO_THUMBNAIL }" width="200" height="200">
-				 <a href="">찜하기</a>
-				 <a href="">카트</a>
+
 				 <hr>					 
 				 <a href="">상품평</a>
 				 <a href="">Q&A</a>

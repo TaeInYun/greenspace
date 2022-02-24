@@ -20,6 +20,7 @@ import com.example.demo.vo.MyWishVO;
 import com.example.demo.vo.OrderListVO;
 import com.example.demo.vo.ProductVO;
 import com.example.demo.vo.ReviewVO;
+import com.example.demo.vo.WishListVO;
  
 
 public class DBManager {
@@ -379,7 +380,36 @@ public class DBManager {
 		return re;
 	}	
 	
-	
+	//---------------WishList (위시리스트 관련) ----------
+	public static List<WishListVO> findByMemberWish(int member_no){
+		SqlSession session = factory.openSession();
+		List<WishListVO> list = session.selectList("wishList.findByMember", member_no);
+		session.close();
+		return list;
+	}
+
+	public static int cntOfWishList(int member_no){
+		SqlSession session = factory.openSession();
+		int cnt = session.selectOne("wishList.cntOfWishList", member_no);
+		session.close();
+		return cnt;
+	}
+
+	public static int deleteWishList(int no){
+		SqlSession session = factory.openSession();
+		int re = session.delete("wishList.deleteWishList", no);
+		session.commit();
+		session.close();
+		return re;
+	}
+
+	public static int insertWishList(WishListVO w) {
+		SqlSession session = factory.openSession();
+		int re = session.delete("wishList.insert", w);
+		session.commit();
+		session.close();
+		return re;
+	}
 }
 
 
