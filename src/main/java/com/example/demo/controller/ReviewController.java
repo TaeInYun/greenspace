@@ -108,11 +108,17 @@ public class ReviewController {
 		
 		@RequestMapping(value ="/shop/updateReview", method =RequestMethod.GET)
 		public void updateForm(int no, Model model){
-			model.addAttribute("r", dao.findAllDetail(no));
+			//model.addAttribute("pro_no", pro_no);
+			//model.addAttribute("no", no);
+			model.addAttribute("r", dao.findAllDetail(no));		
 		}
 		
 		@RequestMapping(value ="/shop/updateReview", method =RequestMethod.POST)	
 		public ModelAndView updateSubmit(ReviewVO r, HttpServletRequest request) {
+			
+			System.out.println("updateReview 동작함.");
+			System.out.println(r);
+			
 			ModelAndView mav = new ModelAndView("redirect:/admin/listReview");
 			String path = request.getRealPath("upload/review");
 			String oldFname = r.getRe_thumbnail();

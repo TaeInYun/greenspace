@@ -137,7 +137,7 @@
 				<!-- 본문 -->			
  
 					<section id="content">	
-							<a href="/shop/insertReview?pro_no=${r.pro_no}"> 리뷰작성하기</a>
+							
 					 		<a href="/admin/updateProduct?no=${p.no}"> 상품수정</a>
 					 		<a href="/admin/deleteProduct?no=${p.no}"> 상품삭제</a>	
 					 		<hr>	
@@ -147,6 +147,8 @@
 							상품할인가 :${p.pro_saleprice}<br>
 							상품설명 : ${p.pro_content }<br>	
 							<img  src="/upload/${p.PRO_THUMBNAIL }" width="200" height="200"><br>
+							<a href="/shop/listReview_rate?pro_no=${p.no}">리뷰 목록 보기</a>						
+		 		            <a href="/shop/insertReview?pro_no=${p.no}"> 리뷰작성하기</a>
 						 
 						 	<c:if test="${cnt>=1 }">
 						  			  <select id="option" name="option">

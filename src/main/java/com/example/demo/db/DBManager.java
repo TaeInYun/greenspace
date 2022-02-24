@@ -52,12 +52,13 @@ public class DBManager {
 		return list;
 	}
 	
-	public static ReviewVO findAllReviewRate(int pro_no){
-		SqlSession session = factory.openSession();
-		ReviewVO r = session.selectOne("review.findAllRate", pro_no);
-		session.close();
-		return r;
-	}
+	//상품번호 리뷰목록을 갖고 오는 sql
+		public static List<ReviewVO> findAllReviewRate(int pro_no){
+			SqlSession session = factory.openSession();
+			List<ReviewVO> list = session.selectList("review.findAllRate", pro_no);
+			session.close();
+			return list;
+		}
 	
 	public static ReviewVO findAllReviewDetail(int no) {
 		SqlSession session = factory.openSession();
@@ -241,6 +242,61 @@ public class DBManager {
 		session.close();
 		return main;
 	}
+	
+	public static List<AddressVO> findAllAddress() {
+		SqlSession session = factory.openSession();
+		List<AddressVO> list =  session.selectList("address.findAll");
+		session.close();
+		return list;
+	}
+	
+	public static AddressVO findAllAddressDetail(int no) {
+		SqlSession session = factory.openSession();
+		AddressVO a = session.selectOne("address.findAllDetail", no);
+		session.close();
+		return a;
+	}
+	
+	public static AddressVO allMainAddress(int member_no) {
+		SqlSession session = factory.openSession();
+		AddressVO main =  session.selectOne("address.allMainAddress", member_no);
+		session.close();
+		return main;
+	}
+	
+	public static List<AddressVO> allSubAddress(int member_no) {
+		SqlSession session = factory.openSession();
+		List<AddressVO> sub =  session.selectList("address.allSubAddress", member_no);
+		session.close();
+		return sub;
+	}
+	
+    public static int insertAddress(AddressVO a) {
+		
+		SqlSession session  = factory.openSession();
+		int re=session.insert("address.insert",a);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
+	
+	public static int updateAddress(AddressVO a) {
+		SqlSession session = factory.openSession(true);
+		int re = session.update("address.update", a);
+		session.commit();
+		session.close();
+		return re;				
+	}	
+	
+	public static int deleteAddress(int no) {
+		SqlSession session  = factory.openSession();
+		int re=session.delete("address.delete", no);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
 	
 	//************ Cart ( 장바구니 )
 	public static int insertCart(CartVO c) {

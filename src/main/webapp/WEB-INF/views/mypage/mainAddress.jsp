@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,33 +8,21 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>메인배송지</h2>
-	<table border="1" width="80%">
-		<tr>
-			<td>배송지이름</td>
-			<td>우편번호</td>
-			<td>받는사람이름</td>
-			<td>배송지</td>
-			<td>배송지상세</td>
-			<td>배송지휴대폰번호</td>
+	<h1>메인배송지</h1>
+	<hr>
+		
+			배송지이름:${a.addr_title }<br>
+			우편번호:${a.addr_postal}<br>
+			받는사람이름:${a.addr_recevier }<br>
+			배송지:${a.addr_road }<br>
+			배송지상세:${a.addr_detail }<br>
+			배송지휴대폰번호:${a.addr_phone }<br>		
+		
+		<a href="/mypage/updateAddress?no=${a.no}"> 수정하기 </a>
 			
-		</tr>
-		<c:forEach var="a" items="${a }">
-			<tr>
-				<td>${a.addr_title }</td>
-				<td>
-					<a href="/admin/updateAddress?no=${a.no}">${a.addr_postal} </a>					
-				</td>				 
-				<td>${a.addr_recevier }</td>
-				<td>${a.addr_road }</td>
-				<td>${a.addr_detail }</td>
-				<td>${a.addr_phone }</td>
-								
-			</tr>
-			
-		</c:forEach>
-	</table> 
-		<hr>
+
+	<hr>
+	
 	<h2>서브배송지</h2>
 	<table border="1" width="80%">
 		<tr>
@@ -45,8 +34,7 @@
 			<td>배송지휴대폰번호</td>
 			
 		</tr>
-		<c:forEach var="a2" items="${a2 }">
-		
+		<c:forEach var="a2" items="${list }">	<!-- taglib -->	
 		
 			<tr>
 				<td>${a2.addr_title }</td>
@@ -58,8 +46,7 @@
 				<td>${a2.addr_detail }</td>
 				<td>${a2.addr_phone }</td>
 								
-			</tr>
-			
+			</tr>			
 		</c:forEach>
 	</table> 
 </body>
