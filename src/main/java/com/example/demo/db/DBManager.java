@@ -9,6 +9,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.springframework.ui.Model;
 
 import com.example.demo.dao.ChallengeListDAO;
 import com.example.demo.vo.AddressVO;
@@ -416,6 +417,14 @@ public class DBManager {
 		return m;
 	}
 	
+	
+	public static String updatePwd(HashMap<String,String> m) {
+		SqlSession session = factory.openSession();
+		String re = session.selectOne("member.updatePwd", m);
+		session.close();
+		return re;
+	}
+
 	/*-------- 회원 목록 -------*/
 	public static List<MemberVO> findAllMember(){
 		SqlSession session = factory.openSession();
@@ -423,12 +432,12 @@ public class DBManager {
 		session.close();
 		return list;
 	}	
+
 	
 
 	//--------------------OrderListVO관련--------------
 	/*  주문 조회 로그인 */
 	public static OrderListVO LoginByOrderId(String name,String id) {
-		
 		HashMap map = new HashMap();
 		map.put("receiver_name", name);
 		map.put("ord_id", id);

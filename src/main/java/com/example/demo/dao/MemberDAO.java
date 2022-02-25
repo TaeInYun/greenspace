@@ -35,24 +35,33 @@ public class MemberDAO {
 		return DBManager.findById(id);
 	}
 	
-	
+	//이메일 아이디 찾기
 	public String findIdByEmail(HashMap<String,String> m) {
 		return DBManager.findIdByEmail(m);
 	}
 	
+	//핸드폰 아이디 찾기
 	public String findIdByPhone(HashMap<String,String> m) {
 		return DBManager.findIdByPhone(m);
 	}
 	
+	//이메일로 비밀번호 찾기
 	public int findPwdByEmail(HashMap<String,String> m) {
 		return DBManager.findPwdByEmail(m);
 	}
 	
+	//핸드폰으로 비밀번호 찾기
 	public int findPwdByPhone(HashMap<String,String> m) {
 		return DBManager.findPwdByPhone(m);
 	}
 	
-	//회원목록
+
+	//새비밀번호 설정
+	public String updatePwd(HashMap<String, String> m) {
+		return DBManager.updatePwd(m);
+	}
+
+
 	public List<MemberVO> findAllMember(){
 		return DBManager.findAllMember();
 	}
