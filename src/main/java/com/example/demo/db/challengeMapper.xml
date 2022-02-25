@@ -32,4 +32,10 @@
 	delete challenge where no=#{no}
   </delete> 
   
+    <!-- 챌린지 랜덤3개 가져오기 -->
+	<select id="selectChgRandom" resultType="challengeVO">
+	select no from(select no from challenge
+    order by DBMS_RANDOM.RANDOM) <![CDATA[where rownum <= 3]]>
+	</select>
+
 </mapper>

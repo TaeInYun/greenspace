@@ -21,6 +21,7 @@
 	평점: ${r.re_rate }<br>	
 	<img src="/upload/review/${r.re_thumbnail }" width="100" height="100">
 	<hr>
-	
+	<a href="/shop/updateReview?no=${r.no}"><button >수정하기</button></a>
+	<!--  <a href="deleteReview?no=${r.no }">삭제</a>-->
 </body>
 </html>

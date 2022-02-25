@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="challengelist">
+
+  <!-- 관리자 오늘의챌린지 목록 -->
+  <select id="todayChgList" resultType="challengelistVO">
+	select distinct chg_title from challenge_list l,challenge c  
+	where l.chg_no = c.no and 
+	to_char(l.chg_list_date,'yy/mm/dd') = TO_CHAR(SYSDATE, 'yy/mm/dd') 
+  </select>
+  
+    <!-- 관리자 내일 챌린지 목록 -->
+  <select id="tomorrowChgList" resultType="challengelistVO">
+	select distinct chg_title from challenge_list l,challenge c  
+	where l.chg_no = c.no and 
+	to_char(l.chg_list_date,'yy/mm/dd') = TO_CHAR(SYSDATE+1, 'yy/mm/dd') 
+  </select>
+  
+    <!-- 관리자 어제 챌린지 목록 -->
+  <select id="yesterdayChgList" resultType="challengelistVO">
+	select distinct chg_title from challenge_list l,challenge c  
+	where l.chg_no = c.no and 
+	to_char(l.chg_list_date,'yy/mm/dd') = TO_CHAR(SYSDATE-1, 'yy/mm/dd') 
+  </select>  
+  
+  
+  <!-- 관리자 오늘의 챌린지리스트 추가하기 -->
+  <insert id="insert" parameterType="challengelistVO">
+		insert into challenge_list(no,CHG_LIST_DATE,chg_no,member_no,chg_status_code) values(
+        seq_chg_list.nextval,
+        sysdate+1 ,
+        #{chg_no} , 
+        #{member_no},
+        'STA')
+  </insert>
+  
+
+	
+</mapper>

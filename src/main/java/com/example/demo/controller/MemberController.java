@@ -154,9 +154,12 @@ public class MemberController {
 	//아이디 찾기
 	@RequestMapping(value = "/findIdOK", method = RequestMethod.POST)
 	public String findIdOk(HttpServletResponse response, @RequestParam String email, @RequestParam String name,@RequestParam String phone, Model md) throws Exception{
-		md.addAttribute("id", ms.findId(response, email, name, phone));
+		System.out.println(email);
+		System.out.println(name);
+		System.out.println(phone);
+		md.addAttribute("id",ms.findId(response, email, name, phone));
 		return "findIdOK";
-	}
+	} 
 	
 
 
@@ -179,7 +182,7 @@ public class MemberController {
 	@RequestMapping(value="/resetPwd", method = RequestMethod.POST)
 	public String resetPwd(HttpServletResponse response, @RequestParam String id, @RequestParam String email, @RequestParam String phone, Model md) throws Exception{
 		md.addAttribute("checkPwd", ms.resetPwd(response, id, email, phone));
-		return "resetPwd" ;
+		return "resetPwd";
 	}
 
 	
