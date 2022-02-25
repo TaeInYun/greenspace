@@ -130,13 +130,20 @@ public class DBManager {
 		session.close();
 		return list;
 	}
+
+	public static MyWishVO getProInfoForOrder(HashMap map){
+		SqlSession session = factory.openSession();
+		MyWishVO list = session.selectOne("myWish.getProInfoForOrder", map);
+		session.close();
+		return list;
+	}
 	
 	public static int cntOfCart(int member_no){
 		SqlSession session = factory.openSession();
 		int cnt = session.selectOne("myWish.cntOfCart", member_no);
 			session.close();
 			return cnt;
-		}
+	}
 	
 	
 	
@@ -401,6 +408,13 @@ public class DBManager {
 		session.close();
 		return re;
 	}
+
+	public static MemberVO getMemberInfo(int member_no) {
+		SqlSession session = factory.openSession();
+		MemberVO m = session.selectOne("member.mainMemberInfo", member_no);
+		session.close();
+		return m;
+	}
 	
 	/*-------- 회원 목록 -------*/
 	public static List<MemberVO> findAllMember(){
@@ -513,7 +527,6 @@ public class DBManager {
 		return list;
 	}	
 	
-<<<<<<< HEAD
 	//---------------WishList (위시리스트 관련) ----------
 	public static List<WishListVO> findByMemberWish(int member_no){
 		SqlSession session = factory.openSession();
@@ -544,10 +557,7 @@ public class DBManager {
 		session.close();
 		return re;
 	}
-}
 
-
-=======
 	/*관리자 - 어제챌린지리스트 불러오기 */
 	public static List<ChallengeListVO> yesterdayChgList(){
 		SqlSession session = factory.openSession();
@@ -557,4 +567,3 @@ public class DBManager {
 	}		
 	
 }
->>>>>>> branch 'master' of https://github.com/TaeInYun/greenspace.git

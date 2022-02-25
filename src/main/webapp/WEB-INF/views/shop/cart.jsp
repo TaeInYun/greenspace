@@ -74,6 +74,44 @@
 			deleteCart(noArr);
 		});
 		
+		//***** 선택 상품 주문하기
+		$("#order").click(function(){
+			
+			let select = $("input[name=checkList]:checked");
+			let noArr = new Array();
+			
+			$.each(select, function() {
+				let no = $($(this).siblings()[2]).val();
+				noArr.push(no);
+			});
+			
+			let receiverInfo = new Array();
+			receiverInfo.push( $("#name").text() );
+			receiverInfo.push( $("#address").text() );
+			receiverInfo.push( $("#phone").text() );
+			
+			let orderInfo = new Array();
+			let arr = document.getElementsByClassName("orderInfo");
+			
+			for( let i = 0; i < arr.length; i++){
+				orderInfo.push( $(arr[i]).text() );
+			}
+			
+ 			$.ajax({
+				url: "order_form",
+				type: "post",
+				data: {
+					proInfo:noArr,
+					receiverInfo:receiverInfo,
+					orderInfo:orderInfo
+				},
+				success: function(){
+					location.href="/shop/order_form"
+				}
+			});
+		});
+		
+		
 		//***** 서버동작시 실행
 		checkedAll();
 	})//end function
@@ -148,19 +186,22 @@
 		</form>
 	</div>
 	<div id="order">
-		<div id="address">
+		<div id="receiver">
 			<h5>배송지</h5>
-			받는 사람 : ${info.name }
-			주소 : ${info.addr_road } ${info.addr_detail }
-			전화번호 : ${info.phone }
+			받는 사람 : <span id="name">${info.name }</span>
+			주소 : <span id="address">${info.addr_road } ${info.addr_detail }</span>
+			전화번호 : <span id="phone">${info.phone }</span>
 			<button>배송지변경</button>
 		</div>
 		<hr>
 		<div id="orderInfo">
-			<p>상품금액 : <span id="tot_price">${info.pro_price }</span> 원</p>
-			<p>상품할인금액 : <span id="tot_discount">${info.pro_discount }</span> 원</p>
-			<p>배송비 : <span id="delivery_price">${info.delivery_price}</span> 원 </p>
-			<p>결제예정금액 : <span id="tot_saleprice">${info.pro_saleprice}</span> 원 </p>
+			<p>상품금액 : <span id="tot_price" class="orderInfo">${info.pro_price }</span> 원</p>
+			<p>상품할인금액 : <span id="tot_discount" class="orderInfo">${info.pro_discount }</span> 원</p>
+			<p>배송비 : <span id="delivery_price" class="orderInfo">${info.delivery_price}</span> 원 </p>
+			<p>결제예정금액 : <span id="tot_saleprice" class="orderInfo">${info.pro_saleprice}</span> 원 </p>
+		</div>
+		<div>
+			<button>주문하기</button>
 		</div>
 	</div>
 </body>

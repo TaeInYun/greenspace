@@ -56,5 +56,10 @@ public class MemberDAO {
 	public List<MemberVO> findAllMember(){
 		return DBManager.findAllMember();
 	}
+
+	//회원정보
+	public MemberVO getMemberInfo(int member_no){
+		return DBManager.getMemberInfo(member_no);
+	}
 	
 }

@@ -53,8 +53,7 @@
   
   <!-- 메인 유저정보 -->
   <select id="mainMemberInfo" resultType="memberVO">
-  SELECT nickname, levels, point_use FROM member where no = #{member_no}
+  SELECT nickname, levels, nvl(point_use,0) as point_use FROM member where no = #{member_no}
   </select>
-
  
 </mapper>
