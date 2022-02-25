@@ -147,9 +147,7 @@
 	<h2>상품 상세</h2>
 	<div id="btns">
 		<button id="cart">장바구니 추가</button>
-		<a href="" id="wishList">찜하기</a>
-		<a href="">카트</a>
-		<button id="cart">장바구니 추가</button>		 
+		<a href="" id="wishList">찜하기</a> 
 	</div>
 	<hr>
 	 <div id="root">
@@ -163,8 +161,7 @@
 				<!-- 본문 -->			
 					<section id="content">	
 							
-					 		<a href="/admin/updateProduct?no=${p.no}"> 상품수정</a>
-					 		<a href="/admin/deleteProduct?no=${p.no}"> 상품삭제</a>	
+					 	 	
 					 		<hr>	
 							상품번호 : ${p.no }<br>	
 		 					상품이름 : ${p.pro_name }<br>				
@@ -197,45 +194,28 @@
 											    </select>
 									</div>
 						  
-							 <div id="littleCart" style="border-style: solid;">
- 
-							 		<table border="1">
-										<thead>
-											<tr>
-												<td>선택옵션1</td>
-												<td>선택옵션2</td>
-												<td>구매수량</td>
-											</tr>
-										</thead>
-										<tbody id="optionList"></tbody>
-									</table>
-							</div>
-							
+									 <div id="littleCart" style="border-style: solid;">
+		 									<table border="1">
+												<thead>
+													<tr>
+														<td>선택옵션1</td>
+														<td>선택옵션2</td>
+														<td>구매수량</td>
+													</tr>
+												</thead>
+												<tbody id="optionList"></tbody>
+											</table>
+									</div>							
 						  </c:if>
- 
-								<table>
-									<thead>
-										<tr>
-											<td>선택옵션</td>
-											<td>구매수량</td>
-											 
-										</tr>
-									</thead>
-									<tbody id="optionList"></tbody>
-								</table>
-								
-								
-							 </div>
- 
-						 <hr>					 
+  						 <hr>					 
 						 <a href="">상품평</a>
 						 <a href="">Q&A</a>
 						 <a href="">교환환불</a>
 												 
 					</section><!-- 본문 -->					
-					<aside id="aside">
-						<jsp:include page="../shop/shopAside.jsp"/>
-					</aside>				
+									<aside id="aside">
+										<jsp:include page="../shop/shopAside.jsp"/>
+									</aside>				
 				</div>
 			</section>
 	</div><!-- 전체  section box-->
