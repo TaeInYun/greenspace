@@ -47,13 +47,20 @@
   
    <!-- 상품 detail 옵션값 전체 찾기-->
  <select id="findOption" resultType="productVO">   		 
-			select pao.no, pro_option_name, pro_option_detail_name, pao.pro_option_detail_code, pro_add_price, sum(pro_saleprice + pro_add_price)sum
-			from pro_add_option pao,pro_option po, pro_option_detail pod, product p
-			where pao.pro_option_code = po.pro_option_code and
-			pao.pro_option_detail_code = pod.pro_option_detail_code and
-			pro_no=#{no}
-		    GROUP BY  pao.no, pro_option_name, pro_option_detail_name,pao.pro_option_detail_code, pro_add_price		 
-		    order by pro_option_name
+ 
+	select 
+	pro_option_name, pro_option_detail_name, pro_add_price, sum(pro_saleprice + pro_add_price)sum, pao.pro_option_detail_code pro_option_detail_code, po.pro_option_code pro_option_code 
+	from 
+	pro_add_option pao,pro_option po, pro_option_detail pod, product p
+	where 
+	pao.pro_option_code = po.pro_option_code 
+	and
+	pao.pro_option_detail_code = pod.pro_option_detail_code 
+	and
+	pro_no=#{pro_no}
+	GROUP BY pro_option_name, pro_option_detail_name, pro_add_price, pao.pro_option_detail_code,po.pro_option_code     
+	order by pro_option_name
+ 
  </select> 
  
   

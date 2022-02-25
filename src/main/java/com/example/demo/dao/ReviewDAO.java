@@ -14,7 +14,7 @@ public class ReviewDAO {
 		return DBManager.findAllReview();
 	}
 	
-	public ReviewVO findAllRate(int pro_no){
+	public List<ReviewVO> findAllRate(int pro_no){
 		return DBManager.findAllReviewRate(pro_no);
 	}
 	

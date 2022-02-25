@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -89,27 +90,45 @@ public class MemberService implements UserDetailsService{
 
 	}
 			
-	
-	
-	
-	public int resetPwd(HttpServletResponse response, String id, String email,  String phone){
+	public int resetPwd(HttpServletResponse response, String id, String email,  String phone, HttpSession session){
+		//회원인지 아닌지 판별할 변수 re
+		//re가 1이면 회원 0이면 비회원
 		int re;	
 		HashMap<String, String> map = new HashMap<String, String>();
 		
+		//hashMap에 변수들 저장
 		map.put("id", id);
 		map.put("phone", phone);
 		map.put("email", email);
-			
+		
+		//사용자가 입력한 핸드폰 값이 null이 아니면 findPwdPhon메서드를 실행하여 회원인지 판별
 		if (!phone.equals( "null")) {		
 			re = dao.findPwdByPhone(map);
 		} else {
 			re = dao.findPwdByEmail(map);			
 		}
-		System.out.println(re);
-		return re;
 		
+		//만약 회원일 경우 세션에 해당 정보를 입력함.
+		if(re == 1) {
+			session.setAttribute("id", id);
+		}
+		
+		return re;
+
 	}
 	
+
+	public String updatePwd(String id, String pwd) {
+		HashMap<String, String> map = new HashMap<String, String>();
+
+		map.put("id", id);
+		map.put("pwd", pwd);
+		
+		String re = dao.updatePwd(map);
+		System.out.println(re);
+		
+		return re;
+	}
 	
 
 }

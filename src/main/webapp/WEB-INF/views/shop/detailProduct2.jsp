@@ -5,12 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="/css/shop.css" rel="stylesheet"/> 	
-<style type="text/css">
-	 button{
-		disabled:disabled;
-       }
-</style> 
+<link href="/css/shop.css" rel="stylesheet"/> 	 
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -74,72 +69,42 @@
 				});//end ajax
 		})
 		
-		 
-
-		<!-- --------------------옵션-------------------- -->	 	 
 		
-		let a= $("p").hasClass('OCL');
-		let d= $("p").hasClass('OSZ');
- 
-		let no = ${p.no};
-		 b = $(".OCL").html();
-		 c =$(".OSZ").html();
-		
-		
-	  
-		let data= {
-				no:no,
-				pro_option_name:b
-		}; 
-		$.ajax({url:"/findOptionDetailName", data:data, success:function(data) {		 	 
-			  $.each(data, function (index, value) {			
-				  if(a=true){				  
-					  $('#pro_option_detail_name').append('<option value="' + value.pro_option_detail_name + '">' + value.pro_option_detail_name + '</option>');
-				  } 
-			  })
-		}});
-		
-		
-		let data2= {
-				no:no,
-				pro_option_name:c
-		}; 
-		$.ajax({url:"/findOptionDetailName", data:data2, success:function(data) {		 	 
-			  $.each(data, function (index, value) {						
-				  if(d=true){
-					  $('#pro_option_detail_name2').append('<option value="' + value.pro_option_detail_name + '">' + value.pro_option_detail_name + '</option>');
-					  $("#pro_option_detail_name2").prop('disabled',true); //첫번째 옵션 선택 전까지 막아둠
-					 } 
-			  })
-		}});
-		
-		
-		
-		
-
-	 	$("#pro_option_detail_name").change(function(){					
-		 	$("#pro_option_detail_name2").removeAttr('disabled');	 
-	 	})
-		
-		
-		$("#pro_option_detail_name2").change(function(){			
-			  option1 = $("#pro_option_detail_name > option:selected").val();
-			  option2 = $("#pro_option_detail_name2 > option:selected").val();	
-	  
+		//-------------------옵션------------------
+		$("#option").change(function(){		
+			 let option = $("#option > option:selected").val();
 			 let tr = $("<tr></tr>");	
-			 $(tr).append( $("<td></td>").html( option1 ).attr( 'class', option1 )  );
-			 $(tr).append( $("<td></td>").html( option2 ).attr( 'class', option2)  )  ;
+			 $(tr).append( $("<td></td>").html( option)  );
+			 $("#option > option:selected").prop('disabled',true);
 			 $("#optionList").append(tr);
-			 $(tr).append( $("<input></input>").val( "구매개수를 입력하시오").attr( 'id', "qty" )	);
-			  
-			 
-			 $("#pro_option_detail_name ").val(null);	
-			 $("#pro_option_detail_name2 ").val(null);
-			 
-		 });
-	 	
+			 $(tr).append( $("<input></input>").val( "구매개수를 입력하시오")  );
+		});
 		
 		
+		
+	/* 
+		  $(".plus").click(function(){
+			   var num = $(".numBox").val();
+			   var plusNum = Number(num) + 1;
+		   
+			   if(plusNum >= ${p.pro_stock}) {
+			    	$(".numBox").val(num);
+			   } else {
+			    	$(".numBox").val(plusNum);          
+			   }
+		  });
+		  
+		  $(".minus").click(function(){
+			   var num = $(".numBox").val();
+			   var minusNum = Number(num) - 1;
+		   
+			   if(minusNum <= 0) {
+			   		$(".numBox").val(num);
+			   } else {
+			    	$(".numBox").val(minusNum);          
+			   }
+		  });
+		*/  
 	});
 </script>
 </head>
@@ -161,6 +126,7 @@
 		 <section id="container">		
 				<div id="container_box"> 
 				<!-- 본문 -->			
+<<<<<<< HEAD
 					<section id="content">	
 							
 					 		<a href="/admin/updateProduct?no=${p.no}"> 상품수정</a>
@@ -172,47 +138,55 @@
 							상품할인가 :${p.pro_saleprice}<br>
 							상품설명 : ${p.pro_content }<br>	
 							<img  src="/upload/${p.PRO_THUMBNAIL }" width="200" height="200"><br>
- 
-						 
-						 	<c:if test="${cnt<1 }">						 	
-						 		<input type="text" value="수량을 입력하시오" id="qty">
-						 	</c:if>
-						 	
- 
 							<a href="/shop/listReview_rate?pro_no=${p.no}">리뷰 목록 보기</a>						
 		 		            <a href="/shop/insertReview?pro_no=${p.no}"> 리뷰작성하기</a>
+		 	
+		 		 <c:if test="${cnt>=1}">	
+				 <hr>	 
+				      상품옵션 : 				 
+				        <select id="pro_option_name" name="pro_option_name">
+							<option value="">선택</option>					
+								<c:forEach var="op" items="${op}">							
+								<option value="${op.pro_option_code}">${op.pro_option_name}</option>				
+							</c:forEach>
+						</select>
+						
+						<select id="pro_option_detail_name" name="pro_option_detail_name">
+							<option value="">선택</option>
+							<c:forEach var="op" items="${op}">					
+								<option value="${op.pro_add_price}" name="${op.pro_option_detail_code}">${op.pro_option_detail_name}(+${op.pro_add_price})</option>										 		
+							</c:forEach>
+						</select>    
+						
+				</c:if>	
+				<div id="addSub">
+				<button type="button" id="minus" >-</button>
+				<input type="number" value="1" id="qty">
+					<button type="button" id="plus">+</button>
+				</div>				  
+				<hr>			 
+				 <img  src="/upload/${p.PRO_THUMBNAIL }" width="200" height="200">
+
+				 <hr>					 
+				 <a href="">상품평</a>
+				 <a href="">Q&A</a>
+				 <a href="">교환환불</a>
+					 
+					 
+		</section>					
+=======
  
+
+						 
 						 	<c:if test="${cnt>=1 }">
-						  			 <div id="combo">	
-						  				 		<p class="OCL">색상</p>
-						  						<select id="pro_option_detail_name" class="select" >
-											     	 <option value="null">------select------</option>
-											    </select>
-						  				 
-											    
-											    
-											    <p class="OSZ">사이즈</p>
-						  						<select id="pro_option_detail_name2" class="select">
-											     	  	<option value="null">------select------</option>
-											    </select>
-									</div>
-						  
+						  			  <select id="option" name="option">
+										<option value="">선택</option>					
+											<c:forEach var="op" items="${op}">							
+											<option value="${op.pro_option_name}:${op.pro_option_detail_name }+${op.pro_add_price }">${op.pro_option_name}:${op.pro_option_detail_name }+${op.pro_add_price }</option>				
+										</c:forEach>
+									</select>
+						   </c:if>
 							 <div id="littleCart" style="border-style: solid;">
- 
-							 		<table border="1">
-										<thead>
-											<tr>
-												<td>선택옵션1</td>
-												<td>선택옵션2</td>
-												<td>구매수량</td>
-											</tr>
-										</thead>
-										<tbody id="optionList"></tbody>
-									</table>
-							</div>
-							
-						  </c:if>
- 
 								<table>
 									<thead>
 										<tr>
@@ -226,7 +200,7 @@
 								
 								
 							 </div>
- 
+						 
 						 <hr>					 
 						 <a href="">상품평</a>
 						 <a href="">Q&A</a>
@@ -239,6 +213,5 @@
 				</div>
 			</section>
 	</div><!-- 전체  section box-->
-	
 </body>
 </html>
