@@ -7,10 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>상품 삭제</h2>
+	<h2>옵션 삭제</h2>
 	<hr>
 	<form action="/admin/deleteProductOption" method="post">
-		<input type="hidden" name="no" value="${no }">		 
+		<input type="hidden" name="no" value="${no}">		 				
 		<input type="submit" value="삭제">
 	</form>
 </body>

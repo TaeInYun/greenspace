@@ -4,7 +4,38 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="product">
 
- <!-- 상품 home-->	
+
+  <!--관리자 상품 리스트-->	
+  <select id="findAll" resultType="productVO">
+    	select no ,pro_name, pro_brand, pro_price, pro_saleprice, pro_stock, PRO_THUMBNAIL from (
+		select rownum num, no ,pro_name, pro_brand, pro_price, pro_saleprice, pro_stock, PRO_THUMBNAIL from
+		(select no, pro_name, pro_brand, pro_price, pro_saleprice, pro_stock, PRO_THUMBNAIL from PRODUCT 
+			<if test="keyword != null">
+				where pro_name like '%'||#{keyword}||'%' 
+			</if>		
+			<if test="searchColumn != null">
+				order by ${searchColumn}
+			</if>		 
+		))
+	where num between #{start} and #{end}     
+	order by no
+  </select>  
+	
+ 
+ 
+  <select id="totalRecord" resultType="java.lang.Integer">
+  	select count(*) from product 
+  	<if test="keyword != null">
+			where pro_name like '%'||#{keyword}||'%' 
+	</if>
+	
+	<if test="searchColumn != null">
+			cat_code=${searchColumn}
+	</if> 
+  </select>
+  
+  
+  <!-- 상품 일반 유저(home)-->	
   <select id="findAll_home" resultType="productVO">
      select no ,pro_name, pro_brand, pro_price, pro_saleprice, PRO_THUMBNAIL
 	 from product 
@@ -22,32 +53,21 @@
 	 
 	 <if test="filterASC != null">
 			order by ${filterASC}  
-	 </if>
-	 
+	 </if>	 
  </select>
- 
-  <select id="totalRecord" resultType="java.lang.Integer">
-  	select count(*) from product 
-  </select>
- 
- 
- 
-  <!-- 상품 admin-->	
-  <select id="findAll" resultType="productVO">
-     select no ,pro_name, pro_brand, pro_price, pro_saleprice, pro_stock, c.cat_name cat_name, PRO_THUMBNAIL
-	from product p, category c
-	where c.cat_code = p.cat_code
-  </select>  
   
-   <!-- 상품 detail product-->
+  
+  
+  <!-- 상품 상세 -->
   <select id="findByNo" resultType="productVO"> 
-  	select * from product  
-	where no=#{no} 
+  	select no, pro_name, pro_brand, pro_price, pro_saleprice,pro_stock, pro_delivery, pro_hit, pro_content, pro_thumbnail, c.cat_name 
+	from product p, category c
+	where no=#{no} and
+    p.cat_code=c.cat_code
  </select>
   
-   <!-- 상품 detail 옵션값 전체 찾기-->
- <select id="findOption" resultType="productVO">   		 
- 
+  <!-- 상품에 있는 옵션값 전체 찾기-->
+ <select id="findOption" resultType="productVO">   	 
 	select 
 	pro_option_name, pro_option_detail_name, pro_add_price, sum(pro_saleprice + pro_add_price)sum, pao.pro_option_detail_code pro_option_detail_code, po.pro_option_code pro_option_code 
 	from 
@@ -69,31 +89,15 @@
  	select count( distinct pro_option_code)cnt from pro_add_option where pro_no=#{no}
  </select>
  
- 
- <!-- 상품 옵션값 전체 찾기-->
- <select id="findDBOption" resultType="productVO" >
-  select pro_option_name, pro_option_code
-			from  pro_option 
- </select>
- 
- <!-- 상품 detail 옵션값 전체 찾기-->
- <select id="findDBDetailOption" resultType="productVO" >
-  select distinct pao.pro_option_detail_code, pro_option_detail_name
-	from pro_option_detail pod, pro_option po, pro_add_option pao
-	where pao.pro_option_code=#{pro_option_code} and
-	po.pro_option_code=pao.pro_option_code and
-	pao.pro_option_detail_code=pod.pro_option_detail_code
-
- </select>		 
- 
- <select id="findOptionName" resultType="productVO" >
+ <!-- 상품에 있는 옵션이름 찾기(leve1) -->
+  <select id="findOptionName" resultType="productVO" >
  	select distinct po.pro_option_code, pro_option_name
 	from pro_option po, pro_add_option pao
 	where po.pro_option_code= pao.pro_option_code and
 	pao.pro_no=#{no}
  </select>		
  
- 
+ <!-- 상품에 있는 자세한 옵션 이름 찾기(leve2) -->
   <select id="findOptionDetailName" resultType="productVO" >
  	select distinct pao.pro_option_detail_code ,pro_option_detail_name
 	from pro_option_detail pod, pro_add_option pao,pro_option po
@@ -101,7 +105,33 @@
     po.pro_option_code =pao.pro_option_code and
 	pao.pro_no=#{no} and 
 	po.pro_option_name=#{pro_option_name}
- </select>	
+ </select>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+ <!-- 옵션값 전체 찾기 (leve1)-->
+ <select id="findDBOption" resultType="productVO" >
+  select pro_option_name, pro_option_code
+			from  pro_option 
+ </select>
+ 
+ <!--   leve1에 따른 자세한 옵션 찾기-->
+ <select id="findDBDetailOption" resultType="productVO" >
+  	select distinct pao.pro_option_detail_code, pro_option_detail_name
+	from pro_option_detail pod, pro_option po, pro_add_option pao
+	where pao.pro_option_code=#{pro_option_code} and
+	po.pro_option_code=pao.pro_option_code and
+	pao.pro_option_detail_code=pod.pro_option_detail_code
+ </select>		 
+ 
+
+ 
+	
  
   
   <insert id="insert" parameterType="productVO">
@@ -124,7 +154,7 @@
    
    <!-- 상품 수정-->
   <update id="update" parameterType="productVO">
-  	update product set pro_name=#{pro_name},pro_brand=#{pro_brand},pro_price=#{pro_price},pro_saleprice=#{pro_saleprice},pro_stock=#{pro_stock},pro_content=#{pro_content},PRO_THUMBNAIL=#{PRO_THUMBNAIL} where no=#{no}
+  	update product set  cat_code=#{cat_code}, pro_name=#{pro_name},pro_brand=#{pro_brand},pro_price=#{pro_price},pro_saleprice=#{pro_saleprice},pro_stock=#{pro_stock},pro_content=#{pro_content},PRO_THUMBNAIL=#{PRO_THUMBNAIL} where no=#{no}
   </update>
   
    <!-- 상품 삭제-->

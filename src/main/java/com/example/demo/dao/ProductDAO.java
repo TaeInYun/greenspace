@@ -13,13 +13,12 @@ import com.example.demo.vo.ProductVO;
 @Repository
 public class ProductDAO {	 
 	
-	public static int pageSIZE = 10;  
+	public static int pageSIZE = 5;  
 	public static int totalRecord;	 
 	public static int totalPage;	 
 	
-	
-	public List<ProductVO> findAll(HashMap map){
-		
+	//관리자 상품 리스트
+	public List<ProductVO> findAll(HashMap map){		
 		totalRecord = DBManager.getTotalRecord(map);
 		totalPage = (int)Math.ceil(totalRecord/(double)pageSIZE);
 		return DBManager.findAll(map);	
@@ -40,8 +39,7 @@ public class ProductDAO {
 	public int delete(int no) {
 		// TODO Auto-generated method stub
 		return DBManager.delete(no);
-	}
-	
+	}	
 	
 	public void updateHit(int no) {
 		DBManager.updateReviewHit(no);

@@ -142,6 +142,7 @@ public class DBManager {
 	
  
 	//-----------------------ProductVO---------------------------
+	//관리자 상품 리스트
 	public static List<ProductVO> findAll(HashMap map){
 		SqlSession session = factory.openSession();
 		List<ProductVO> list= session.selectList("product.findAll",map);
@@ -165,6 +166,7 @@ public class DBManager {
 		return list;
 	}	
 	
+	//상품 상세 
 	public static ProductVO findByNo(int no) {
 		SqlSession session = factory.openSession();
 		ProductVO p = session.selectOne("product.findByNo", no);
@@ -172,54 +174,7 @@ public class DBManager {
 		return p;		
 	}
 	
-	public static int update(ProductVO b) {
-		SqlSession session = factory.openSession(true);
-		int re = session.update("product.update", b);
-		session.commit();
-		session.close();
-		return re;				
-	}	
 	
-	public static int delete(int no) {
-		SqlSession session  = factory.openSession();
-		int re=session.delete("product.delete", no);
-		session.commit();
-		session.close();
-		return re;
-	}
-	
-	public static int deletePro_add_option(int no) {
-		SqlSession session = factory.openSession();
-		int re=session.delete("pro_add_option.delete", no);
-		session.commit();
-		session.close();
-		return re;
-	}
-	
-	public static int insert(ProductVO p) {
-		
-		SqlSession session  = factory.openSession();
-		int re=session.insert("product.insert",p);
-		session.commit();
-		session.close();
-		return re;
-	}
-	public static int insertPro_add_option(Pro_add_optionVO po) {		
-		SqlSession session  = factory.openSession();
-		int re=session.insert("pro_add_option.insert",po);
-		session.commit();
-		session.close();
-		return re;
-	}
-	
-	public static void updateHit(int no) {
-		SqlSession session = factory.openSession();
-		session.update("product.updateHit", no);
-		session.commit();
-		session.close();
-	}
-	
- 
 	public static List<ProductVO> findOption(int no){
 		SqlSession session = factory.openSession();
 		List<ProductVO> list= session.selectList("product.findOption",no);
@@ -265,9 +220,63 @@ public class DBManager {
 	}
 	
 	
-	public static List<Pro_add_optionVO> findOptionByNo(int no) {	 
+	
+	public static int update(ProductVO b) {
+		SqlSession session = factory.openSession(true);
+		int re = session.update("product.update", b);
+		session.commit();
+		session.close();
+		return re;				
+	}	
+	
+	public static int delete(int no) {
+		SqlSession session  = factory.openSession();
+		int re=session.delete("product.delete", no);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
+	public static void updateHit(int no) {
 		SqlSession session = factory.openSession();
-		List<Pro_add_optionVO> list= session.selectList("product.findOptionByNo", no);
+		session.update("product.updateHit", no);
+		session.commit();
+		session.close();
+	}
+	
+	public static int insert(ProductVO p) {		
+		SqlSession session  = factory.openSession();
+		int re=session.insert("product.insert",p);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
+	
+	
+	
+	
+	//------------------------상품 자체 옵션(Pro_add_optionVO)--------------
+	public static int deletePro_add_option(int no) {
+		SqlSession session = factory.openSession();
+		int re=session.delete("pro_add_option.delete", no);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
+	
+	public static int insertPro_add_option(Pro_add_optionVO po) {		
+		SqlSession session  = factory.openSession();
+		int re=session.insert("pro_add_option.insert",po);
+		session.commit();
+		session.close();
+		return re;
+	}
+
+	public static List<Pro_add_optionVO> findOptionByProNo(int no) {	 
+		SqlSession session = factory.openSession();
+		List<Pro_add_optionVO> list= session.selectList("pro_add_option.findOptionByProNo", no);
 		session.close();
 		return list;
 	}

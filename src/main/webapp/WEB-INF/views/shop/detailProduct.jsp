@@ -114,14 +114,12 @@
 		}});
 		
 		
-		
-		
-
+		//첫 번째 콤보박스가 움직일시
 	 	$("#pro_option_detail_name").change(function(){					
 		 	$("#pro_option_detail_name2").removeAttr('disabled');	 
 	 	})
 		
-		
+		//두 번째 콤보박스가 움직일시
 		$("#pro_option_detail_name2").change(function(){			
 			  option1 = $("#pro_option_detail_name > option:selected").val();
 			  option2 = $("#pro_option_detail_name2 > option:selected").val();	
@@ -165,7 +163,7 @@
 					 		<hr>	
 							상품번호 : ${p.no }<br>	
 		 					상품이름 : ${p.pro_name }<br>				
-							상품가격 :${p.pro_price}<br>	
+							상품가격 : ${p.pro_price}<br>	
 							상품할인가 :${p.pro_saleprice}<br>
 							상품설명 : ${p.pro_content }<br>	
 							<img  src="/upload/${p.PRO_THUMBNAIL }" width="200" height="200"><br>

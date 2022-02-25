@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자설정_상품목록</title>
 <link href="/css/shop.css" rel="stylesheet"/>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/js/qty.js"></script>
@@ -13,45 +13,8 @@
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
-	$(function(){
-		//***** 체크박스에 대한 변수 선언
-		let checkbox = "input[name=checkList]";
-		let allCheck = "#checkedAll";
-		
-		//***** 체크박스 클릭시 실행되는 이벤트함수
-		$(document).on("click","#checkedAll",function() {
-			checkedAll();
-			
-			showOrderPriceInfo();
-		});
-		
-		$(document).on("click", "#listCart "+ checkbox, function() {
-			$(allCheck).prop("checked", false)
-			showOrderPriceInfo();
-		}); 
- 
-		
-		//***** 선택 상품 삭제
-		$("#delSelected").click(function(){
-			let select = $("input[name=checkList]:checked");
-			let noArr = new Array();
-			
-			$.each(select, function() {
-				let no = $($(this).siblings()[2]).val();
-				console.log(no);
-				noArr.push(no);
-			});
-			
-			deleteCart(noArr);
-		});
-		
-		$("#option").click(function(){
-			alert("상품등록");
-		})
-		
-		
-	})//end function
-	</script>
+	 
+</script>
 </head>
 <body>
 
@@ -67,6 +30,22 @@
 				<!-- 본문 -->			
 					<section id="content">
 					 	<H2>상품목록</H2>
+					 	
+					 	<form action="/admin/listProduct" method="post">
+						 	<select name="searchColumn">
+						 		<option value="">전체</option>
+						 		<option value="PBA">욕실</option>
+						 		<option value="PKI">주방</option>
+						 		<option value="PFO">식품</option>
+						 		<option value="PCO">화장품</option>
+						 		<option value="PPE">애완용품</option>
+						 		<option value="POF">사무용품</option>
+						 		<option value="PDA">일상용품</option>
+						 	</select>
+						  
+						 	<input type="text" name="keyword">
+							<input type="submit" value="검색">
+						</form>
 						<table border="1" width="80%">
 							<tr>
 								<td><input type="checkbox" id="checkedAll" checked="checked"></td>
@@ -76,15 +55,12 @@
 								<td>상품브랜드</td>
 								<td>상품가격</td>
 								<td>상품할인가</td>
-								<td>재고수</td>
-								<td>카테고리</td>
+								<td>재고수</td>								 
 								<td colspan=3>상품관리</td>
-								 
-								 
 							</tr>
+							
 							<c:forEach var="p" items="${list }">
 								<tr>
-								
 									<td><input type="checkbox" name="checkList"></td>				
 									<td>${p.no }</td>
 									<td><img  src="/upload/${p.PRO_THUMBNAIL }" width="100" height="100"></td>
@@ -95,21 +71,21 @@
 									<td>${p.pro_price }</td>
 									<td>${p.pro_saleprice }</td>
 									<td>${p.pro_stock }</td>
-									<td>${p.cat_name }</td>
+								 
 									<td><button><a  href="/admin/updateProduct?no=${p.no }">수정</a></button></td>
 									<td><button><a  href="/admin/deleteProduct?no=${p.no }">삭제</a></button></td>
 									<td><button><a  href="/admin/insertProductOption?no=${p.no }">옵션</a></button></td>
 								</tr>	
 							</c:forEach>
 						</table>
-						<c:forEach var="i" begin="1" end="${totalPage }">
-							<a href="/admin/listProduct?pageNUM=${i }">${i }</a>&nbsp;&nbsp;
-						</c:forEach>	
+							<c:forEach var="i" begin="1" end="${totalPage }">
+								<a href="/admin/listProduct?pageNUM=${i }">${i }</a>&nbsp;&nbsp;
+							</c:forEach>	
 					  			 
 					</section>					
 					 
 					<aside id="aside">
-						<jsp:include page="../admin/adminAside.jsp"/>
+						<jsp:include page="../admin/adminAside.jsp"/>				 		 
 					</aside>				
 			</div><!-- 전체  section box-->
 		</section>

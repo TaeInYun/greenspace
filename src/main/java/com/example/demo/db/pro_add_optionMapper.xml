@@ -15,14 +15,18 @@
 	  	 #{pro_option_detail_code})
   	</insert>
   
-  	<select id="findOptionByNo" resultType="pro_add_optionVO">
-	  	select pro_option_code, pro_option_detail_code
-		from pro_add_option
-		where pro_no=#{no}
+  	<select id="findOptionByProNo" resultType="pro_add_optionVO">
+	  	select pao.no, pao.pro_option_code, pro_option_name, pao.pro_option_detail_code,pro_option_detail_name 
+		from pro_add_option pao, pro_option po, pro_option_detail pod
+		where pao.pro_option_code = po.pro_option_code and
+		pao.pro_option_detail_code =  pod.pro_option_detail_code and
+		pro_no=#{no}
+		 
   	</select>
   
+  	
 	<delete id="delete">
-  		delete pro_add_option where no=#{no}
+  		delete pro_add_option where no=#{no} 
 	</delete>
  
   

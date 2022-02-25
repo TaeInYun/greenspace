@@ -6,17 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <link href="/css/shop.css" rel="stylesheet"/> 	 
-<title>Insert title here</title>
+<title>관리자설정_${p.pro_name }_상세페이지</title>
  
  
 </head>
 <body>
-	<h2>상품 상세</h2>
-	
-	 <div id="root">
+	<div id="root">
 		<header id="header">
 			<div id="header_box">
-				<jsp:include page="../shop/shopHeader.jsp"/>
+				<jsp:include page="../header.jsp"/>
 			</div>
 		</header>	
 		 <section id="container">		
@@ -24,23 +22,71 @@
 				<!-- 본문 -->			
  
 					<section id="content">	
-							 	
-					 		<hr>	
-							상품번호 : ${p.no }<br>	
-							카테고리 : ${p.cat_code }<br>	
-		 					상품이름 : ${p.pro_name }<br>				
-							상품가격 :${p.pro_price}<br>	
-							상품할인가 :${p.pro_saleprice}<br>
-							상품재고 :${p.pro_stock}<br>
-							상품설명 : ${p.pro_content }<br>	
-							평균출고일자 : ${p.pro_delivery }<br>	
-							입고일자 : ${p.pro_date }<br>	
-							조회수 : ${p.pro_hit }<br>	
-							<img  src="/upload/${p.PRO_THUMBNAIL }" width="200" height="200"><br>
-						  
-						  	<hr>
+					 		 		
+						<div class="label" >
+							<label for="no">상품번호</label>
+							 <span>${p.no }</span>
+						</div>
+					 	
+					 	<div class="label" >
+							<label for="cat_name">카테고리</label>
+							<span>${p.cat_name }</span>
+						</div>
+						
+						
+						<div class="label" >
+							<label for="pro_name">상품이름</label> 
+							<span> ${p.pro_name }</span>
+						</div>
+						
+						
+						<div class="label" >
+							<label for="pro_price">상품가격</label>
+							 <span>${p.pro_price }원</span>
+						</div>
+						
+						
+						<div class="label" >
+							<label for="pro_saleprice">상품할인가</label>
+							 <span>${p.pro_saleprice }원</span>
+						</div>	 
+					 		 
+						<div class="label" >
+							<label for="pro_saleprice">상품재고</label>
+							 <span>${p.pro_stock }개</span>
+						</div>	 
+						
+						<div class="label" >
+							<label for="pro_saleprice">상품설명</label>
+							 <span>${p.pro_content }</span>
+						</div>	 	 
+						
+						<div class="label" >
+							<label for="pro_delivery">평균출고일자</label>
+							 <span>${p.pro_delivery }일</span>
+						</div>	 	
+						
+						<div class="label" >
+							<label for="pro_hit">조회수</label>
+							<span> ${p.pro_hit }</span>
+						</div>	
+						 
+						<div class="label" >
+							<label for="PRO_THUMBNAIL">사진</label><br>
+							 <img  src="/upload/${p.PRO_THUMBNAIL }" width="200" height="200"><br>
+						</div> 
+						
+						
+						
+						<hr>
+						 <p>옵션설정</p>	
+						 <c:if test="${cnt<1 }">	
+					 		<P>옵션이 없습니다:(</P>
+					 		<button><a href="/admin/insertProductOption?no=${p.no}">옵션추가</a></button>
+						 </c:if>
 						  	
-						 <c:if test="${cnt>=1 }">				 	
+						 <c:if test="${cnt>=1 }">
+						 	 	
 						 	  <table border="1" width="80%">
 								<tr>
 									<td> 옵션명 </td>
@@ -48,11 +94,11 @@
 									<td> 설정</td>
 								</tr>
 								
-								<c:forEach var="op" items="${op}">		
+								<c:forEach var="findOptionByProNo" items="${findOptionByProNo}">		
 									<tr>
-										<td class="${op.pro_option_name}">${op.pro_option_name }</td>				 
-										<td class="${op.pro_option_detail_code}">${op.pro_option_detail_name }</td>
-										<td><a href="../admin/deleteProductOption?no=${op.no}"><button>삭제</button></a></td>
+										<td><a href="../admin/insertProductOption?no=${p.no }">${findOptionByProNo.pro_option_name }</a></td>				 
+										<td><a href="../admin/insertProductOption?no=${p.no }">${findOptionByProNo.pro_option_detail_name }</a></td>
+								 		<td><a href="../admin/deleteProductOption?no=${findOptionByProNo.no}"><button>삭제</button></a></td>   
 									</tr>
 								</c:forEach>
 						</table>			 
@@ -62,7 +108,7 @@
 					</section><!-- 본문 -->					
 					 
 					<aside id="aside">
-						<jsp:include page="../shop/shopAside.jsp"/>
+						<jsp:include page="../admin/adminAside.jsp"/>
 					</aside>				
 				</div>
 			</section>

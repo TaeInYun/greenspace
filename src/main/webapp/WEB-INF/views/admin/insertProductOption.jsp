@@ -11,12 +11,11 @@
 $(function(){  	
 	
 	
-		$(document).on("change","#pro_option_code ",function(){				
-			 	
-			let pro_option_code =$("#pro_option_code > option:selected").val().trim(); 
+		$(document).on("change","#pro_option_code",function(){	
+			let pro_option_code =$("#pro_option_code > option:selected").val();
 			let data={pro_option_code:pro_option_code};
 			 
-			$.ajax({url:"/findOptionDetailName",data:data,success:function(data){
+			$.ajax({url:"/findDBDetailOption",data:data,success:function(data){
 				$("#pro_option_detail_code").empty();
 				 $('#pro_option_detail_code').append(	'<option value="' +null + '">' + null + '</option>'	);
 				  $.each(data, function(index,value){	
@@ -27,19 +26,15 @@ $(function(){
 		
 		
 		$(document).on("change","#pro_option_detail_code ",function(){				
-			let c=  $("#pro_option_detail_code > option:selected").val();
-			alert(c);
+			let select_combo=  $("#pro_option_detail_code > option:selected").val();
+			let discriminant= $("td").hasClass(select_combo)
 			
-			if($("td").hasClass(c)=true){ 
-			 alert("이미 선택된 옵션입니다.");
-			$("#pro_option_code").val("선택");	
-			$("#pro_option_detail_code").val("선택");	
-			$("#pro_option_detail_code > option:selected").prop('disabled',true);
-		}	
-			
-		})
-		
-
+		 	if(discriminant==true){ 
+			 	alert("이미 선택된 옵션입니다.");
+				$("#pro_option_detail_code > option:selected").prop('disabled',true);
+			}	
+		  
+		}) 
  
 			   
 })//FUNCTION
@@ -82,24 +77,27 @@ $(function(){
 	</form>	
 	
 	 
-	 
-	 
-	<h3>${p.pro_name}의 옵션 현황</h3>	  
-	<table border="1" width="80%">
-			<tr>
-				<td> 옵션명 </td>
-				<td> 옵션상세명</td>
-				<td> 설정</td>
-			</tr>
-			
-			<c:forEach var="op" items="${op}">		
+		 <p>옵션설정</p>	
+		 <c:if test="${cnt<1 }">	
+	 		<P>옵션이 없습니다:(</P>
+		 </c:if>
+		  	
+		 <c:if test="${cnt>=1 }">						 	 	
+		 	  <table border="1" width="80%">
 				<tr>
-					<td class="${op.pro_option_name}">${op.pro_option_name }</td>				 
-					<td class="${op.pro_option_detail_code}">${op.pro_option_detail_name }</td>
-					<td><a href="../admin/deleteProductOption?no=${op.no}"><button>삭제</button></a></td>
+					<td> 옵션명 </td>
+					<td> 옵션상세명</td>
+					<td> 설정</td>
 				</tr>
-			</c:forEach>
-	</table>	
- 
+				 
+				<c:forEach var="findOptionByProNo" items="${findOptionByProNo}">		
+					<tr>
+						<td class="${findOptionByProNo.pro_option_code}">${findOptionByProNo.pro_option_name }</td>				 
+						<td class="${findOptionByProNo.pro_option_detail_code }">${findOptionByProNo.pro_option_detail_name }</td>
+				 		<td><a href="../admin/deleteProductOption?no=${findOptionByProNo.no}"><button>삭제</button></a></td>   
+					</tr>
+				</c:forEach>
+			</table>			 
+		 </c:if>	
 </body>
 </html>
