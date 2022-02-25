@@ -5,11 +5,25 @@
 <mapper namespace="pro_add_option">
   
   
-  <insert id="insert" parameterType="pro_add_optionVO">
-  	insert into  pro_add_option values(seq_pro_add_option.nextval,#{pro_add_price},#{pro_no},#{pro_option_code},#{pro_option_detail_code})
-  </insert>
+  	<insert id="insert" parameterType="pro_add_optionVO">
+	  	 insert into 
+	  	 pro_add_option values(
+	  	 seq_pro_add_option.nextval,
+	  	 #{pro_add_price},
+	  	 #{pro_no},  	 
+	  	 #{pro_option_code},
+	  	 #{pro_option_detail_code})
+  	</insert>
   
+  	<select id="findOptionByNo" resultType="pro_add_optionVO">
+	  	select pro_option_code, pro_option_detail_code
+		from pro_add_option
+		where pro_no=#{no}
+  	</select>
+  
+	<delete id="delete">
+  		delete pro_add_option where no=#{no}
+	</delete>
  
-  
   
 </mapper>

@@ -140,12 +140,21 @@ public class DBManager {
 	
  
 	//-----------------------ProductVO---------------------------
-	public static List<ProductVO> findAll(){
+	public static List<ProductVO> findAll(HashMap map){
 		SqlSession session = factory.openSession();
-		List<ProductVO> list= session.selectList("product.findAll");
+		List<ProductVO> list= session.selectList("product.findAll",map);
 		session.close();
 		return list;
 	}	
+	
+	
+	public static int getTotalRecord(HashMap map) {
+		SqlSession session = factory.openSession();
+		int no = session.selectOne("product.totalRecord", map);
+		session.close();
+		return no;
+	}
+	
  
 	public static List<ProductVO> findAll_home(HashMap map){
 		SqlSession session = factory.openSession();
@@ -176,6 +185,15 @@ public class DBManager {
 		session.close();
 		return re;
 	}
+	
+	public static int deletePro_add_option(int no) {
+		SqlSession session = factory.openSession();
+		int re=session.delete("pro_add_option.delete", no);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
 
 	public static int insert(ProductVO p) {
 		
@@ -215,7 +233,7 @@ public class DBManager {
 		session.close();
 		return re;
 	}	
-	/* 
+ 
 	public static List<ProductVO> findOptionName(int no){
 		SqlSession session = factory.openSession();
 		List<ProductVO> list= session.selectList("product.findOptionName",no);
@@ -230,8 +248,30 @@ public class DBManager {
 		session.close();
 		return list;
 	}
- 	*/	
+ 	 
   
+	public static List<ProductVO> findDBOption(){
+		SqlSession session = factory.openSession();
+		List<ProductVO> list= session.selectList("product.findDBOption");
+		session.close();
+		return list;
+	}	
+	
+	public static List<ProductVO> findDBDetailOption(String pro_option_code){
+		SqlSession session = factory.openSession();
+		List<ProductVO> list= session.selectList("product.findDBDetailOption", pro_option_code);
+		session.close();
+		return list;
+	}
+	
+	
+	public static List<Pro_add_optionVO> findOptionByNo(int no) {	 
+		SqlSession session = factory.openSession();
+		List<Pro_add_optionVO> list= session.selectList("product.findOptionByNo", no);
+		session.close();
+		return list;
+	}
+	
  
 	//------------------Address ( 주소록 )------------------------
  
@@ -462,7 +502,11 @@ public class DBManager {
 		List<ChallengeListVO> list= session.selectList("challengelist.yesterdayChgList");
 		session.close();
 		return list;
-	}		
+	}
+
+	
+
+			
 	
 }
 

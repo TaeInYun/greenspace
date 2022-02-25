@@ -23,7 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.Pro_add_optionDAO;
 import com.example.demo.dao.ProductDAO;
- 
+
 import com.example.demo.vo.Pro_add_optionVO;
 import com.example.demo.vo.ProductVO;
 
@@ -35,8 +35,15 @@ public class ProductController {
 	
 	@Autowired
 	private ProductDAO dao;
-	   
 	
+	@Autowired
+	private Pro_add_optionDAO prodao;
+  
+	
+	 
+	
+	 
+	//-------------------shop main----------------
 	@RequestMapping("/shop/listProduct_home")
 	public void listProduct(HttpSession session, Model model, String cat_code, String keyword,String filter,String filterASC) {
 	  	
@@ -58,8 +65,23 @@ public class ProductController {
 	
 	//-------------------상품리스트-------------------- 
 	@RequestMapping("/admin/listProduct")
-	public void listProduct_admin(Model model) {
-		model.addAttribute("list",dao.findAll());	 
+	public void listProduct_admin(Model model,HttpSession session,String searchColumn,String keyword,
+			@RequestParam(value = "pageNUM", defaultValue = "1")  int pageNUM) {
+		
+		
+		int start = (pageNUM-1)* dao.pageSIZE + 1;
+		int end = start + dao.pageSIZE - 1;
+		
+		HashMap map= new HashMap();
+	 
+		map.put("searchColumn", searchColumn);
+		map.put("keyword", keyword);
+		map.put("start", start);
+		map.put("end", end);
+		
+		model.addAttribute("totalPage", dao.totalPage);
+		model.addAttribute("list",dao.findAll(map));
+		
 	}
 	
 	//------------------상품추가하기-------------------- 
@@ -69,7 +91,9 @@ public class ProductController {
 	
 	@RequestMapping(value = "/admin/insertProduct", method = RequestMethod.POST)
 	public ModelAndView insertSubmit(ProductVO p, HttpServletRequest request, String cat_code,Pro_add_optionVO po ) {
+		//ModelAndView mav = new ModelAndView("redirect:/admin/listProduct");
 		ModelAndView mav = new ModelAndView("redirect:/admin/listProduct");
+		
 		
 		String path = request.getRealPath("upload");
 		System.out.println("path:"+path);
@@ -87,8 +111,8 @@ public class ProductController {
 		//int re2 = dao2.insert(po);
 		 
 		if(re != 1 ) {
-			mav.setViewName("error");
-			mav.addObject("msg", "상품등록에 실패하였습니다.");
+			//mav.setViewName("error");
+			//mav.addObject("msg", "상품등록에 실패하였습니다.");
 		}else {
 			try {
 				byte []data = uploadFile.getBytes();
@@ -96,6 +120,8 @@ public class ProductController {
 					FileOutputStream fos = new FileOutputStream(path + "/"+PRO_THUMBNAIL);
 					fos.write(data);
 					fos.close();
+					
+					  
 				}
 			}catch (Exception e) {
 				// TODO: handle exception
@@ -103,6 +129,87 @@ public class ProductController {
 		}		
 		return mav;
 	}
+	
+	
+	
+	//-----------------옵션-------------------
+	@RequestMapping(value = "/admin/insertProductOption", method = RequestMethod.GET)
+	public void insertOptionForm(int no, Model model) {		
+		model.addAttribute("p", dao.findByNo(no));
+		model.addAttribute("op", dao.findOption(no));	
+		model.addAttribute("findDBOption", dao.findDBOption());
+	}		
+	
+	@RequestMapping(value = "/admin/insertProductOption", method = RequestMethod.POST)
+	public ModelAndView insertOptionSubmit(  Model model, Pro_add_optionVO po) {
+		ModelAndView mav = new ModelAndView("redirect:/admin/detailProduct");
+		//model.addAttribute("p", prodao.findOptionByNo(no));
+		int re= prodao.insert(po);
+		if(re!=1) {
+			mav.setViewName("error");
+		}
+		
+		return mav;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/findDBDetailOption")
+	public List<ProductVO> findOptionDetailName(String pro_option_code) {		 
+		return dao.findDBDetailOption(pro_option_code);	  	
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("/findOptionName")
+	public List<ProductVO> findOptionName(int no) {		 
+		return dao.findOptionName(no);	  	
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("/findOptionDetailName")
+	public List<ProductVO> findOptionDetailName(int no,String pro_option_name ) {		 
+		
+		HashMap map= new HashMap();
+		map.put("pro_option_name", pro_option_name);
+		map.put("no", no);
+		return dao.findOptionDetailName(map);	  	
+	}
+	
+	
+	 
+	
+	
+	
+	@RequestMapping(value = "/admin/listProductOption", method = RequestMethod.GET)
+	public void listProductOption(int no, Model model) {
+		model.addAttribute("no", no);
+		model.addAttribute("cnt", dao.findOptionView(no));
+		System.out.print(no);
+	}
+	
+	
+	@RequestMapping(value = "/admin/deleteProductOption", method = RequestMethod.GET)
+	public void deleteProductOptionget(int no, Model model) {
+		model.addAttribute("no", no);
+	}
+	
+
+	@RequestMapping(value = "/admin/deleteProductOption", method = RequestMethod.POST)
+	public ModelAndView deleteProductOption(int no, Model model,Pro_add_optionVO po) {
+		ModelAndView mav = new ModelAndView("redirect:/admin/detailProduct");
+		model.addAttribute("no", no);
+		model.addAttribute("op", dao.findOption(no));	
+		int re= prodao.delete(no);
+		if(re!=1) {
+			mav.setViewName("error");
+		} 
+		return mav;
+		 
+	}
+	
+	
+	
 	
 	
 	
@@ -115,9 +222,24 @@ public class ProductController {
 		model.addAttribute("p", dao.findByNo(no));	  	
 	 	model.addAttribute("cnt", dao.findOptionView(no));
 		model.addAttribute("op", dao.findOption(no));	
-	 
+		model.addAttribute("op", dao.findOption(no));	
+		model.addAttribute("findOptionName", dao.findOptionName(no));	  	
 		
 	}
+	
+	
+	//------------------상품자세히_관리자--------------------
+		@RequestMapping("/admin/detailProduct")
+		public void detailProduct_admin(int no, Model model) {	
+			dao.updateHit(no);		
+		 	dao.findOption(no);
+		 	
+			model.addAttribute("p", dao.findByNo(no));	  	
+		 	model.addAttribute("cnt", dao.findOptionView(no));
+			model.addAttribute("op", dao.findOption(no));	
+		 
+			
+		}
 	  
  
 /*
@@ -215,5 +337,6 @@ public class ProductController {
 	}
 	
 	
+
 	
 }

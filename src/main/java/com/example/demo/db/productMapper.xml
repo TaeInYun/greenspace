@@ -26,7 +26,9 @@
 	 
  </select>
  
- 
+  <select id="totalRecord" resultType="java.lang.Integer">
+  	select count(*) from product 
+  </select>
  
  
  
@@ -43,22 +45,57 @@
 	where no=#{no} 
  </select>
   
-   <!-- 상품 detail 한 개 옵션-->
+   <!-- 상품 detail 옵션값 전체 찾기-->
  <select id="findOption" resultType="productVO">   		 
-			select pro_option_name, pro_option_detail_name, pro_add_price, sum(pro_saleprice + pro_add_price)sum
+			select pao.no, pro_option_name, pro_option_detail_name, pao.pro_option_detail_code, pro_add_price, sum(pro_saleprice + pro_add_price)sum
 			from pro_add_option pao,pro_option po, pro_option_detail pod, product p
 			where pao.pro_option_code = po.pro_option_code and
 			pao.pro_option_detail_code = pod.pro_option_detail_code and
 			pro_no=#{no}
-		    GROUP BY pro_option_name, pro_option_detail_name, pro_add_price		 
+		    GROUP BY  pao.no, pro_option_name, pro_option_detail_name,pao.pro_option_detail_code, pro_add_price		 
 		    order by pro_option_name
  </select> 
  
   
-
+  
  <select id="findOptionView" resultType="java.lang.Integer">   		
  	select count( distinct pro_option_code)cnt from pro_add_option where pro_no=#{no}
  </select>
+ 
+ 
+ <!-- 상품 옵션값 전체 찾기-->
+ <select id="findDBOption" resultType="productVO" >
+  select pro_option_name, pro_option_code
+			from  pro_option 
+ </select>
+ 
+ <!-- 상품 detail 옵션값 전체 찾기-->
+ <select id="findDBDetailOption" resultType="productVO" >
+  select distinct pao.pro_option_detail_code, pro_option_detail_name
+	from pro_option_detail pod, pro_option po, pro_add_option pao
+	where pao.pro_option_code=#{pro_option_code} and
+	po.pro_option_code=pao.pro_option_code and
+	pao.pro_option_detail_code=pod.pro_option_detail_code
+
+ </select>		 
+ 
+ <select id="findOptionName" resultType="productVO" >
+ 	select distinct po.pro_option_code, pro_option_name
+	from pro_option po, pro_add_option pao
+	where po.pro_option_code= pao.pro_option_code and
+	pao.pro_no=#{no}
+ </select>		
+ 
+ 
+  <select id="findOptionDetailName" resultType="productVO" >
+ 	select distinct pao.pro_option_detail_code ,pro_option_detail_name
+	from pro_option_detail pod, pro_add_option pao,pro_option po
+	where pod.pro_option_detail_code= pao.pro_option_detail_code and
+    po.pro_option_code =pao.pro_option_code and
+	pao.pro_no=#{no} and 
+	po.pro_option_name=#{pro_option_name}
+ </select>	
+ 
   
   <insert id="insert" parameterType="productVO">
    	insert into product values(
@@ -76,8 +113,7 @@
     #{PRO_THUMBNAIL}
     )
   </insert>
-  
-  
+ 
    
    <!-- 상품 수정-->
   <update id="update" parameterType="productVO">

@@ -13,8 +13,16 @@ import com.example.demo.vo.ProductVO;
 @Repository
 public class ProductDAO {	 
 	
-	public List<ProductVO> findAll(){
-		return DBManager.findAll();	
+	public static int pageSIZE = 10;  
+	public static int totalRecord;	 
+	public static int totalPage;	 
+	
+	
+	public List<ProductVO> findAll(HashMap map){
+		
+		totalRecord = DBManager.getTotalRecord(map);
+		totalPage = (int)Math.ceil(totalRecord/(double)pageSIZE);
+		return DBManager.findAll(map);	
 	}	
 	
 	public List<ProductVO> findAll_home(HashMap map){
@@ -50,7 +58,7 @@ public class ProductDAO {
 	public int findOptionView(int no) {
 		return DBManager.findOptionView(no);
 	}
- /*
+  
 	public List<ProductVO> findOptionName(int no){
 		return DBManager.findOptionName(no);	
 	}
@@ -58,7 +66,13 @@ public class ProductDAO {
  	public List<ProductVO> findOptionDetailName(HashMap map){
 		return DBManager.findOptionDetailName(map);	
 	}
- */
-
+  
+	public List<ProductVO> findDBOption(){
+		return DBManager.findDBOption();	
+	}
+	
+	public List<ProductVO> findDBDetailOption(String pro_option_code){
+		return DBManager.findDBDetailOption(pro_option_code);	
+	}
 	 
 }
