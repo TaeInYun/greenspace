@@ -24,6 +24,7 @@ public class AddressController {
 	@Autowired
 	private AddressDAO dao;
 	
+	//-----------------주소 전체리스트-------------------------
 	@RequestMapping("/admin/listAddress")
 	public void listAddress_admin(HttpSession session) {
 		session.setAttribute("aa", dao.FindAll());
