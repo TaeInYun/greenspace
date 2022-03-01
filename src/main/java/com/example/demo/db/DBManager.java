@@ -20,6 +20,7 @@ import com.example.demo.vo.MyWishVO;
 import com.example.demo.vo.Pro_add_optionVO;
 import com.example.demo.vo.OrderListVO;
 import com.example.demo.vo.ProductVO;
+import com.example.demo.vo.QnaVO;
 import com.example.demo.vo.ReviewVO;
 import com.example.demo.vo.WishListVO;
  
@@ -94,6 +95,15 @@ public class DBManager {
 		session.update("review.updateHit", no);
 		session.commit();
 		session.close();
+	}
+	
+	//-----------------------QnaVO---------------------------
+	
+	public static List<QnaVO> findAllQna(int qnaColumn){
+		SqlSession session = factory.openSession();
+		List<QnaVO> list = session.selectList("qna.findAll", qnaColumn);
+		session.close();
+		return list;
 	}
 	
 	

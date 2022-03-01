@@ -17,6 +17,7 @@
   	<typeAlias type="com.example.demo.vo.WishListVO" alias="wishListVO"/>
   	<typeAlias type="com.example.demo.vo.ChallengeListVO" alias="challengelistVO"/>
 	<typeAlias type="com.example.demo.vo.Pro_add_optionVO" alias="pro_add_optionVO"/>
+	<typeAlias type="com.example.demo.vo.QnaVO" alias="qnaVO"/>
   </typeAliases>
   <environments default="development">  
     <environment id="development">
@@ -42,5 +43,6 @@
 	<mapper resource="com/example/demo/db/challengeMapper.xml"/> 
 	<mapper resource="com/example/demo/db/wishListMapper.xml"/> 
 	<mapper resource="com/example/demo/db/challengelistMapper.xml"/>  
+	<mapper resource="com/example/demo/db/qnaMapper.xml"/>  
   </mappers>
 </configuration>

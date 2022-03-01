@@ -50,6 +50,7 @@
 								
 			</tr>		
 				
+				<a href="/mypage/insertAddressSub"><button >배송지추가</button></a>
 		</c:forEach>
 	</table> 
 </body>

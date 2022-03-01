@@ -62,6 +62,22 @@ public class AddressController {
 		return mav;
 	}
 	
+	@RequestMapping(value = "/mypage/insertAddressSub" , method = RequestMethod.GET)
+	public void insertSubForm() {
+		// jsp 에서 m.no로 전달하면 되기 때문에 필요없음? addr_main 고민 
+	}
+	
+	@RequestMapping(value = "/mypage/insertAddressSub" , method = RequestMethod.POST)
+	public ModelAndView insertAddressSub(AddressVO a) {
+		ModelAndView mav = new ModelAndView("redirect:/admin/listAddress");
+		System.out.println("insert작동함");
+		System.out.println(a);
+		
+		dao.insert(a);
+		
+		return mav;
+	}
+	
 	
 	@RequestMapping(value = "/mypage/updateAddress" , method = RequestMethod.GET)
 	public void updateForm(int no, Model model) {

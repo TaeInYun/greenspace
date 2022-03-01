@@ -27,10 +27,11 @@ function kakaopost(){
 	<form action="/mypage/updateAddress" method="post" enctype="multipart/form-data">
 	
 		
-		리뷰번호:<br>
-		<input type="text" name="no" value="${a.no }">  <!-- hidden -->
+		<!-- 리뷰번호:<br>-->
+		<input type="hidden" name="no" value="${a.no }"> <br> <!-- hidden -->
 		 <input type="button" value="우편번호찾기" onclick="kakaopost()">
-		메인/서브: <input type="text" name="addr_main" value="${a.addr_main} "> <br> 
+		<!--메인/서브: -->
+		<input type="hidden" name="addr_main" value="${a.addr_main} "> <br> 
 		우편번호: <input type="text" name="addr_postal" id="addr_postal" value="${a.addr_postal}"> <br>
 		주소: <input type="text" name="addr_road" id="addr_road" value="${a.addr_road}"> <br>			
 		주소상세: <input type="text" name="addr_detail" id="addr_detail" value="${a.addr_detail}"> <br> 
@@ -38,7 +39,8 @@ function kakaopost(){
 		받는사람:	<input type="text" name="addr_receiver" value="${a.addr_receiver}"> <br>
 		휴대전화번호:	<input type="text" name="addr_phone" value="${a.addr_phone}"> <br>
 		주소이름:	<input type="text" name="addr_title" value="${a.addr_title}"> <br>
-		회원번호:	<input type="text" name="member_no" value="${m.no }" > <br> <!-- hidden -->
+		<!--회원번호:	-->
+		<input type="hidden" name="member_no" value="${m.no }" > <br> <!-- hidden -->
 		
 		<input type="submit" value="수정">
 		<input type="reset" value="취소">
@@ -46,6 +48,6 @@ function kakaopost(){
 
 
 
-</form>>
+</form>
 </body>
 </html>
