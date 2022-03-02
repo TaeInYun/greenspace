@@ -25,6 +25,14 @@ public class nonMemberController {
 	@Autowired
 	private OrderListDAO dao;
 	
+	
+	//메인 
+	@RequestMapping("/mainpage/nonmember")
+	public void nomember() {
+		
+	}
+	
+	
 	//주문조회 로그인
 	@RequestMapping(value="/loginByOrderId",method=RequestMethod.GET)
 	public void loginByOrderId_form() {

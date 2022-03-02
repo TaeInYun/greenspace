@@ -84,6 +84,7 @@ $(function(){
 						<div class="inputArea">
 							<label for="PRO_THUMBNAIL">이미지</label>
 							<input type="file" id="PRO_THUMBNAIL" name="uploadFile" />
+							
 							<div class="select_img"><img src="" /></div>		
 						</div>					 
 						 

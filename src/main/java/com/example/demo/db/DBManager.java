@@ -12,7 +12,9 @@ import org.springframework.ui.Model;
 import com.example.demo.dao.ChallengeListDAO;
 import com.example.demo.vo.AddressVO;
 import com.example.demo.vo.CartVO;
+import com.example.demo.vo.CerBoardVO;
 import com.example.demo.vo.ChallengeListVO;
+import com.example.demo.vo.ChallengeUserVO;
 import com.example.demo.vo.ChallengeVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.MyReviewVO;
@@ -526,6 +528,8 @@ public class DBManager {
 
 
 
+	
+
 	//--------------------OrderListVO관련--------------
 	/*  주문 조회 로그인 */
 	public static OrderListVO LoginByOrderId(String name,String id) {
@@ -546,7 +550,9 @@ public class DBManager {
 		session.close();
 		return o;
 	}
+
 	//---------------Challenge (챌린지 관련) ----------
+
 	/*관리자 - 챌린지 목록*/
 	public static List<ChallengeVO> findAllChg(){
 		SqlSession session = factory.openSession();
@@ -623,6 +629,84 @@ public class DBManager {
 		return list;
 	}	
 	
+	
+	/*관리자 - 어제챌린지리스트 불러오기 */
+	public static List<ChallengeListVO> yesterdayChgList(){
+		SqlSession session = factory.openSession();
+		List<ChallengeListVO> list= session.selectList("challengelist.yesterdayChgList");
+		session.close();
+		return list;
+
+	}	
+	
+	//---------------회원 Challenge --------------------
+	/* 회원 챌린지리스트 불러오기 */
+	public static List<ChallengeListVO> findChglist(int member_no){
+		SqlSession session = factory.openSession();
+		List<ChallengeListVO> list= session.selectList("challengelist.findByNo",member_no);
+		session.close();
+		return list;
+	}	
+	
+	/* 회원 챌린지 도전상태 변경 */
+	public static int updateChgStatus(ChallengeListVO c) {
+		SqlSession session = factory.openSession();
+		int re = session.update("challengelist.updateChgStatus", c);
+		session.commit();
+		session.close();
+		return re;				
+	}	
+
+	/* 회원 챌린지완료 클릭시 ING-> STA로 도전상태 변경 */
+	public static int updateChgStatusSTA(int member_no) {
+		SqlSession session = factory.openSession();
+		int re = session.update("challengelist.updateChgStatusSTA", member_no);
+		session.commit();
+		session.close();
+		return re;				
+	}	
+	
+	
+	//--------------ChallengeUser (완료한 챌린지만 담는 테이블) ----------------
+	/* 완료한 챌린지만 insert */
+	public static int insertEndChg(int member_no) {
+		SqlSession session  = factory.openSession();
+		int re=session.insert("challengeuser.insert",member_no);
+		session.commit();
+		session.close();
+		return re;
+	}	
+	
+	
+	//------------------회원 완료된 챌린지 목록 ----------------------
+	public static List<ChallengeUserVO> listChgUserByMemberNO(int member_no){
+		SqlSession session = factory.openSession();
+		List<ChallengeUserVO> list= session.selectList("challengeuser.listChgUserByMemberNO",member_no);
+		session.close();
+		return list;
+	}		
+	
+	
+	
+	//------------------챌린지 인증게시판 목록 ----------------------
+	public static List<CerBoardVO> findCerBoard(){
+		SqlSession session = factory.openSession();
+		List<CerBoardVO> list= session.selectList("cerboard.findAll");
+		session.close();
+		return list;
+	}		
+
+	
+	//------------------챌린지 인증게시판 등록 ----------------------
+	public static int insertCerBoard(CerBoardVO c) {
+		SqlSession session  = factory.openSession();
+		int re=session.insert("cerboard.insert",c);
+		session.commit();
+		session.close();
+		return re;
+	}	
+
+	
 	//---------------WishList (위시리스트 관련) ----------
 	public static List<WishListVO> findByMemberWish(int member_no){
 		SqlSession session = factory.openSession();
@@ -650,13 +734,8 @@ public class DBManager {
 		session.close();
 		return re;
 	}
-	/*관리자 - 어제챌린지리스트 불러오기 */
-	public static List<ChallengeListVO> yesterdayChgList(){
-		SqlSession session = factory.openSession();
-		List<ChallengeListVO> list= session.selectList("challengelist.yesterdayChgList");
-		session.close();
-		return list;
-	}
+	
+	
 
 	 
 }

@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import lombok.AllArgsConstructor;
@@ -22,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private CustomAuthFailureHandler authFailureHandler;
-	
+
 	//사이트 잠금해제
 	@Override
 	public void configure(WebSecurity web) throws Exception
@@ -35,16 +36,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception
 	{
-
-		http
-		.csrf().disable()
-		.formLogin()
-		.loginPage("/login")//로그인을 위한 서비스명 설정
-		//.loginProcessingUrl("/loginAction")//로그인과정
-		.defaultSuccessUrl("/loginOK")//로그인을 성공하였을때 이동할 서비스명을 설정
-		.failureUrl("/login?error=true")
-		.failureHandler(authFailureHandler); //->변수로
-
+	       http
+	       .authorizeRequests()
+	       .and()
+			.csrf().disable()
+			.formLogin()
+			.loginPage("/login")//로그인을 위한 서비스명 설정
+			//.loginProcessingUrl("/loginAction")//로그인과정
+			.defaultSuccessUrl("/loginOK")//로그인을 성공하였을때 이동할 서비스명을 설정
+			.failureUrl("/login?error=true")
+			.failureHandler(authFailureHandler) //->변수로
+			//.successHandler(successHandler()) //로그인 성공시 이전 페이지로
+			.permitAll(); 
+	     
+	       
 		
 		http.logout()
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))//로그아웃을 위한 서비스명을 설정
@@ -54,7 +59,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.httpBasic();
 	}	
-	
+
+	@Bean 
+	public AuthenticationSuccessHandler successHandler() { 
+		return new CustomLoginSuccessHandler("/defaultUrl"); 
+		}
+
+
+
 	
 
 	/*

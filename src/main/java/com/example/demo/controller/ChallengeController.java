@@ -2,16 +2,22 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.ChallengeDAO;
 import com.example.demo.dao.ChallengeListDAO;
+import com.example.demo.dao.ChallengeUserDAO;
 import com.example.demo.vo.ChallengeListVO;
+import com.example.demo.vo.ChallengeUserVO;
 import com.example.demo.vo.ChallengeVO;
 import com.example.demo.vo.MemberVO;
 
@@ -26,21 +32,25 @@ public class ChallengeController {
 	@Autowired
 	private ChallengeListDAO listdao;
 	
-	//-------------------챌린지 항목 리스트-------------------- 
+	@Autowired
+	private ChallengeUserDAO userdao;
+	
+
+	//-------------------관리자 챌린지 항목 리스트-------------------- 
 	@RequestMapping("/admin/listChg")
 	public void listChg(Model model) {
 		model.addAttribute("chglist",dao.findAll());	
-		model.addAttribute("todaylist",listdao.todayChgList());	
+		model.addAttribute("todaylist",listdao.todayChgList());
 		model.addAttribute("tomorrowList",listdao.tomorrowChgList());	
 		model.addAttribute("yesterdayList",listdao.yesterdayChgList());	
 	}
 	
-	//------------------상품추가하기-------------------- 
+	//------------------관리자 챌린지 추가-------------------- 
 	@RequestMapping(value = "/admin/insertChg", method = RequestMethod.GET)
 	public void insertForm() {		 
 	}	
 
-	//-------------------챌린지 추가------------------ 
+	//-------------------관리자 챌린지 추가------------------ 
 	@RequestMapping(value="/admin/insertChg",method = RequestMethod.POST )
 	public ModelAndView insert_submit(ChallengeVO c) {
 		ModelAndView mav= new ModelAndView("redirect:/admin/listChg");
@@ -52,7 +62,7 @@ public class ChallengeController {
 		return mav;
 	}
 
-	//-------------------챌린지 수정------------------ 
+	//-------------------관리자 챌린지 수정------------------ 
 	
 	@RequestMapping(value = "/admin/updateChg", method = RequestMethod.GET)
 	public void updateForm(int no, Model model) {
@@ -60,7 +70,7 @@ public class ChallengeController {
 	}
 	
 	
-	
+	//----------------관리자 챌린지 수정 ----------------
 	@RequestMapping("/admin/updateChg")
 	public ModelAndView update(int no,ChallengeVO c) {
 		ModelAndView mav= new ModelAndView("redirect:/admin/listChg");
@@ -72,7 +82,7 @@ public class ChallengeController {
 		return mav;
 	}	
 	
-	//-------------------챌린지 삭제------------------ 
+	//-------------------관리자 챌린지 삭제------------------ 
 	@RequestMapping("/admin/deleteChg")
 	public ModelAndView delete_submit(int no) {
 		ModelAndView mav= new ModelAndView("redirect:/admin/listChg");
@@ -86,10 +96,64 @@ public class ChallengeController {
 	}	
 	
 
-	
-	
 
+	//-------------------메인 회원 챌린지 목록-------------------- 
+	@RequestMapping("/mainpage/member")
+	public void memberChgList(Model model,HttpSession session) {
+		
+		MemberVO m = (MemberVO)session.getAttribute("m");
+		
+		int member_no = m.getNo();
+		System.out.println(member_no);
+		//도전챌린지목록
+		model.addAttribute("chglist",listdao.memberChgList(member_no));
+		//완료 챌린지목록
+		model.addAttribute("endlist", userdao.listChgUserByMemberNO(member_no));		
 	
+	}
+	
+	// 회원 버튼클릭 도전상태 변경 
+	@RequestMapping("/mainpage/updateChgStatus")
+	@ResponseBody
+	public int changeChgStatus(ChallengeListVO c) {
+		
+		int chg_no = c.getChg_no();
+		String chg_status_code = c.getChg_status_code();
+		int member_no = c.getMember_no();
+		
+		int re = listdao.updateChgStatus(c);
+		if(re==1) {
+			System.out.println("수정성공");
+		}else {
+			System.out.println("수정실패");
+		}
+		
+		return re;
+	}	
+	
+	
+	
+	//오늘 챌린지 완료 버튼 클릭시 도전상태가 'END'인것만 insert되게
+	@RequestMapping("/mainpage/insertEndChg")
+	@ResponseBody
+	public int insertEndChg(int member_no) {
+	
+		System.out.println(member_no);	
+		
+		int re = userdao.insertEndChg(member_no);
+
+		
+		if(re==1) {
+			System.out.println("추가성공");
+			listdao.updateChgStatusSTA(member_no);
+		}else {
+			System.out.println("추가실패");
+		}
+		System.out.println(member_no);
+		
+		return re;
+	}
+
 }
 	
 

@@ -71,4 +71,5 @@ public class MemberDAO {
 		return DBManager.getMemberInfo(member_no);
 	}
 	
+	
 }

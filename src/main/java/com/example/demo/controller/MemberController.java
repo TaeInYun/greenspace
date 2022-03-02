@@ -1,12 +1,10 @@
 package com.example.demo.controller;
 
-import java.util.Enumeration;
 import java.util.Random;
 
-import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -113,8 +111,10 @@ public class MemberController {
 	
 	//로그인----------------------------
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public void login() {
-
+	public String login(HttpServletRequest request) {
+		String referrer = request.getHeader("Referer");
+		request.getSession().setAttribute("prevPage", referrer);
+	    return "/login";
 	}
 	
 	//로그인----------------------------
@@ -126,12 +126,12 @@ public class MemberController {
 	
 	//로그인확인----------------------------
 	@RequestMapping("/loginOK")  //시큐리티 환경설정파일에서 로그인을 성공하여 여기로 오도록 설정하였습니다.
-	public void loginOK(HttpSession session) {
-		//로그인한 회원의 정보를 브라우저를 닫기 전까지(로그아웃 하기 전까지)유지하기 위하여 session을 매개변수로 설정합니다.
+	public ModelAndView loginOK(HttpSession session) {
+		
 		
 		//로그인한 회원의 정보를 파악하기 위해서는 다음과 같이 시큐리티에게 요청합니다.
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		User user= (User)authentication.getPrincipal();//시큐리티가 인증한(로그인한) 사용자의 정보를 읽어 옵니다.
+		User user=(User)authentication.getPrincipal();//시큐리티가 인증한(로그인한) 사용자의 정보를 읽어 옵니다.
 		
 		//인증된 User객체의 id를 뽑아옵니다.		
 		String id = user.getUsername();
@@ -142,6 +142,9 @@ public class MemberController {
 		//db로 부터 읽어온 회원객체를 세션에 상태유지합니다.
 		//세션에 상태유지를 하면 브라우저를 닫기 전까지(로그아웃 하기 전까지) 상태유지 할 수 있습니다.
 		session.setAttribute("m", m);
+		
+		ModelAndView mav = new ModelAndView("redirect:/mainpage/member");
+		return mav;
 	}
 	
 	//이메일 아이디 찾기 

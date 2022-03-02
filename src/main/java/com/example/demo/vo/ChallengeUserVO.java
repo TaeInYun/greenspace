@@ -10,5 +10,8 @@ public class ChallengeUserVO {
 	private Date chg_user_date;
 	private int chg_no;
 	private String chg_status_code;
+	private String chg_title;
+	private String chg_content;
 	private int member_no;
+	
 }

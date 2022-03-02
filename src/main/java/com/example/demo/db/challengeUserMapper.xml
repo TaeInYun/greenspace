@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="challengeuser">
+
+	<!-- 도전완료한 리스트 insert  -->
+	<insert id="insert" parameterType="challengeuserVO">
+	insert into challenge_user(no,chg_user_date,chg_no,member_no,chg_status_code)
+	select * from challenge_list where chg_status_code='END' and 
+	to_char(chg_list_date,'yy/mm/dd') = TO_CHAR(SYSDATE, 'yy/mm/dd')
+	and member_no=#{member_no}
+	</insert>
+	
+	
+	<!-- 회원의 도전완료한 리스트 목록 -->
+	<select id="listChgUserByMemberNO" resultType="challengeuserVO">
+    select chg_no,chg_user_date,chg_title,chg_content from challenge_user cu,challenge c
+	where cu.chg_no=c.no
+    and to_char(chg_user_date,'yy/mm/dd') = TO_CHAR(SYSDATE, 'yy/mm/dd') 
+	and member_no=#{member_no}
+	</select>
+
+
+</mapper>

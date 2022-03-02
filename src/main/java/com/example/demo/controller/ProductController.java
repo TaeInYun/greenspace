@@ -83,6 +83,8 @@ public class ProductController {
 			dao.updateHit(no);				 	
 			model.addAttribute("p", dao.findByNo(no));	  	
 		 	model.addAttribute("cnt", dao.findOptionView(no));
+		 	model.addAttribute("cnt", dao.findOptionView(no));
+		 	model.addAttribute("op", dao.findOption(no));
 		}
 		
 		
