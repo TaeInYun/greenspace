@@ -43,9 +43,9 @@
 		<tr>
 			<td>어제의 챌린지</td>	
 		</tr>
-		<c:forEach var="yesterdayChgList" items="${yesterdayChgList }">
+		<c:forEach var="ylist" items="${yesterdayChgList }">
 			<tr>
-				<td>${yesterdayChgList.chg_title}</td>	
+				<td>${ylist.chg_title}</td>	
 			</tr>
 		</c:forEach>
 	</table> 	

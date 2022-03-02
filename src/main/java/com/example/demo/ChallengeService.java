@@ -52,6 +52,6 @@ public class ChallengeService {
 				
 			}
 		}
-		System.out.println("등록완료");
+		System.out.println("챌린지 리스트 등록완료");
 	}
 }

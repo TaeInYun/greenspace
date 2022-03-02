@@ -57,4 +57,5 @@ public class MemberDAO {
 		return DBManager.findAllMember();
 	}
 	
+	
 }

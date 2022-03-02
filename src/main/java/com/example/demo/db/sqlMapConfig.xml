@@ -16,6 +16,8 @@
   	<typeAlias type="com.example.demo.vo.ChallengeVO" alias="challengeVO"/>
   	<typeAlias type="com.example.demo.vo.ChallengeListVO" alias="challengelistVO"/>
 	<typeAlias type="com.example.demo.vo.Pro_add_optionVO" alias="pro_add_optionVO"/>
+	<typeAlias type="com.example.demo.vo.ChallengeUserVO" alias="challengeuserVO"/>
+	<typeAlias type="com.example.demo.vo.CerBoardVO" alias="cerboardVO"/>
 
   </typeAliases>
   <environments default="development">  
@@ -41,5 +43,7 @@
   	<mapper resource="com/example/demo/db/pro_add_optionMapper.xml"/> 
 	<mapper resource="com/example/demo/db/challengeMapper.xml"/> 
 	<mapper resource="com/example/demo/db/challengelistMapper.xml"/>  
+	<mapper resource="com/example/demo/db/challengeUserMapper.xml"/>  
+	<mapper resource="com/example/demo/db/cerboardMapper.xml"/>  
   </mappers>
 </configuration>
