@@ -13,7 +13,7 @@
 		
 			배송지이름:${a.addr_title }<br>
 			우편번호:${a.addr_postal}<br>
-			받는사람이름:${a.addr_recevier }<br>
+			받는사람이름:${a.addr_receiver }<br>
 			배송지:${a.addr_road }<br>
 			배송지상세:${a.addr_detail }<br>
 			배송지휴대폰번호:${a.addr_phone }<br>		
@@ -37,16 +37,20 @@
 		<c:forEach var="a2" items="${list }">	<!-- taglib -->	
 		
 			<tr>
-				<td>${a2.addr_title }</td>
 				<td>
-					<a href="/admin/updateAddress?no=${a2.no}">${a2.addr_postal} </a>					
+				<a href="/mypage/updateAddress?no=${a2.no}">${a2.addr_title }</a>
+				</td>
+				<td>
+					${a2.addr_postal} 					
 				</td>				 
-				<td>${a2.addr_recevier }</td>
+				<td>${a2.addr_receiver }</td>
 				<td>${a2.addr_road }</td>
 				<td>${a2.addr_detail }</td>
 				<td>${a2.addr_phone }</td>
 								
-			</tr>			
+			</tr>		
+				
+				<a href="/mypage/insertAddressSub"><button >배송지추가</button></a>
 		</c:forEach>
 	</table> 
 </body>

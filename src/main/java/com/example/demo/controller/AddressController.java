@@ -24,6 +24,7 @@ public class AddressController {
 	@Autowired
 	private AddressDAO dao;
 	
+	//-----------------주소 전체리스트-------------------------
 	@RequestMapping("/admin/listAddress")
 	public void listAddress_admin(HttpSession session) {
 		session.setAttribute("aa", dao.FindAll());
@@ -52,6 +53,22 @@ public class AddressController {
 	
 	@RequestMapping(value = "/mypage/insertAddress" , method = RequestMethod.POST)
 	public ModelAndView insertAddress(AddressVO a) {
+		ModelAndView mav = new ModelAndView("redirect:/admin/listAddress");
+		System.out.println("insert작동함");
+		System.out.println(a);
+		
+		dao.insert(a);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/mypage/insertAddressSub" , method = RequestMethod.GET)
+	public void insertSubForm() {
+		// jsp 에서 m.no로 전달하면 되기 때문에 필요없음? addr_main 고민 
+	}
+	
+	@RequestMapping(value = "/mypage/insertAddressSub" , method = RequestMethod.POST)
+	public ModelAndView insertAddressSub(AddressVO a) {
 		ModelAndView mav = new ModelAndView("redirect:/admin/listAddress");
 		System.out.println("insert작동함");
 		System.out.println(a);

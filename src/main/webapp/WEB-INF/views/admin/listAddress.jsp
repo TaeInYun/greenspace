@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,9 +22,11 @@
 		</tr>
 		<c:forEach var="a" items="${aa }">
 			<tr>
-				<td>${a.no }</td>
 				<td>
-					<a href="/mypage/detailAddress?no=${a.no}">${a.addr_title} </a>					
+			  <a href="/mypage/detailAddress?no=${a.no}">${a.no }</a>
+				</td>
+				<td>
+					${a.addr_title} 					
 				</td>				 
 				<td>${a.addr_postal }</td>
 				<td>${a.addr_road }</td>

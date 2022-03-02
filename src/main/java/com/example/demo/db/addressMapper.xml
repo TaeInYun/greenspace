@@ -65,18 +65,19 @@
   	
   	values(
   	seq_comment.nextval,
-  	#{addr_main},   <!-- 1이면메인0이면서브 -->
+  	#{addr_main},   
   	#{addr_postal},
   	#{addr_road},
   	#{addr_detail},
-  	#{addr_msg},	<!-- null -->
+  	#{addr_msg},	
   	#{addr_receiver},
   	#{addr_phone},
-  	#{addr_title},  <!-- null -->
+  	#{addr_title},  
   	#{member_no}
   	)
   	
-  </insert>
+  </insert> 
+     
   
   <update id="update" parameterType="addressVO">
    update address set 

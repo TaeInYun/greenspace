@@ -25,15 +25,15 @@
 <body>
 
 
-	<h2>메인주소입력</h2>
-	<form action="insertAddress" method="post"
+	<h2>서브주소입력</h2>
+	<form action="insertAddressSub" method="post"
 			enctype="multipart/form-data">		
 		<!--  리뷰번호:
 		<input type="hidden" name="no"> <br> -->
 		 <input type="button" value="우편번호찾기" onclick="kakaopost()">
 		
-		<!-- 메인/서브: -->
-		<input type="hidden" name="addr_main" value=1> <br> 
+		<!--메인/서브:-->
+		 <input type="hidden" name="addr_main" value=0> <br> 
 		<!-- 1메인0서브 이건 value사용할듯? 아니면 maininsert insert -->
 		우편번호: <input type="text" name="addr_postal" id="addr_postal"> <br>
 		주소: <input type="text" name="addr_road" id="addr_road"> <br>			
@@ -42,7 +42,7 @@
 		받는사람:	<input type="text" name="addr_receiver" > <br>
 		휴대전화번호:	<input type="text" name="addr_phone" > <br>
 		주소이름:	<input type="text" name="addr_title" > <br>
-		<!-- 회원번호:-->	
+		<!--회원번호:	-->
 		<input type="hidden" name="member_no" value="${m.no }" > <br> <!-- hidden -->
 		
 		<input type="submit" value="등록">

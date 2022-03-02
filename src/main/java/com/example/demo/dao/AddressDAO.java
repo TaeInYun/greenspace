@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.db.DBManager;
 import com.example.demo.vo.AddressVO;
-import com.example.demo.vo.ReviewVO;
+
 
 @Repository
 public class AddressDAO {
@@ -20,8 +20,8 @@ public class AddressDAO {
 		return DBManager.findAllAddress();
 	}
 	
-	public ReviewVO findAllDetail(int no) {
-		return DBManager.findAllReviewDetail(no);
+	public AddressVO findAllDetail(int no) {
+		return DBManager.findAllAddressDetail(no);
 	}
 	
 	//메인주소출력 one

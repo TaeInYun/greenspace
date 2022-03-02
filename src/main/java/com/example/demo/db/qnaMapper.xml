@@ -2,18 +2,27 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="Qna">
-  <select id="findAll" >
+<mapper namespace="qna">
+  <select id="findAll" >  <!-- 내 qna 리스트 -->
   	SELECT
-	img_name, pro_name, pro_qna_title, pro_qna_type_name, pro_qna_date, qna_type_name
+	img_name, 
+	pro_name, 
+	pro_qna_title title, 
+	pro_qna_type_name qna_type, 
+	pro_qna_date day, 
+	qna_type_name status
 	FROM
-	img i, product pro, pro_qna pq, pro_qna_type tc, qna_status qs
+	img i, 
+	product pro, 
+	pro_qna pq, 
+	pro_qna_type tc, 
+	qna_status qs
 	WHERE
 	pro.no = i.pro_no 
 	and pro.no = pq.pro_no
 	and pq.pro_qna_type_code = tc.pro_qna_type_code
 	and qs.qna_status_code = pq.qna_Status_code
-	and pq.no=1;  	
+	and pq.no=${qnaColumn}  	
   </select>
   
   
