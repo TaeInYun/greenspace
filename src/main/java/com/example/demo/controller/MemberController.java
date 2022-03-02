@@ -137,7 +137,7 @@ public class MemberController {
 		String id = user.getUsername();
 		
 		//만약 로그인한 회원의 다른 정보도 필요하다면 db을 통해 갖고 옵니다.
-		MemberVO m =dao.findById(id);
+		MemberVO m = dao.findById(id);
 		
 		//db로 부터 읽어온 회원객체를 세션에 상태유지합니다.
 		//세션에 상태유지를 하면 브라우저를 닫기 전까지(로그아웃 하기 전까지) 상태유지 할 수 있습니다.
@@ -160,15 +160,10 @@ public class MemberController {
 	//아이디 찾기
 	@RequestMapping(value = "/findIdOK", method = RequestMethod.POST)
 	public String findIdOk(HttpServletResponse response, @RequestParam String email, @RequestParam String name,@RequestParam String phone, Model md) throws Exception{
-		System.out.println(email);
-		System.out.println(name);
-		System.out.println(phone);
 		md.addAttribute("id",ms.findId(response, email, name, phone));
 		return "findIdOK";
 	} 
 	
-
-
 	//이메일 비밀번호 찾기
 	@RequestMapping(value="/findPwdByEmail", method = RequestMethod.GET )
 	public void findPwdByEmail() {
@@ -186,10 +181,20 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/resetPwd", method = RequestMethod.POST)
-	public String resetPwd(HttpServletResponse response, @RequestParam String id, @RequestParam String email, @RequestParam String phone, Model md) throws Exception{
-		md.addAttribute("checkPwd", ms.resetPwd(response, id, email, phone));
+	public String resetPwd(HttpServletResponse response, HttpSession session,   @RequestParam String id, @RequestParam String email, @RequestParam String phone, Model md) throws Exception{
+		md.addAttribute("checkPwd", ms.resetPwd(response, id, email, phone, session));
 		return "resetPwd";
 	}
+	
+	@RequestMapping(value="/updatePwdOK", method = RequestMethod.POST)
+	public String updatePwdOK(HttpServletResponse response, HttpSession session, @RequestParam String pwd, Model model) {
+		String id = (String)session.getAttribute("id");
+		
+		model.addAttribute("updatePwdOK", ms.updatePwd(id, pwd));
+		model.addAttribute("id", id);
 
+		//세션에서 유지한 id 값을 반환해주고 세션을 끝내보자 
+		return "updatePwdOK";
+	}
 	
 }

@@ -4,13 +4,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자설정_${p.pro_name }_상품수정</title>
 </head>
 <body>
 <h2>상품 수정</h2>
 	<hr>
 	<form action="/admin/updateProduct" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="no" value="${p.no }">
+		 
+		<div class="inputArea">
+			<label for="cat_code">카테고리</label>
+				<select name="cat_code"  >
+					<option value="BA">욕실</option>
+					<option value="KI">주방</option>
+					<option value="PFO">식품</option>
+					<option value="PCO">화장품</option>
+					<option value="PPE">애완용품</option>
+					<option value="POF">사무용품</option>
+					<option value="PDA">일상용품</option>
+				</select><br>
+		</div>
+				
 		
 		<div class="inputArea">
 			<label for="pro_name">상품명</label>
@@ -46,21 +60,11 @@
 	  		 
 				
 		<div class="inputArea">
-			<label for="PRO_THUMBNAIL">이미지</label>
-			<input type="hidden" name="fname" value="${p.PRO_THUMBNAIL}">
-		 		 <input type="file" name="uploadFile"><br>
-		 		<script>
-				$("#PRO_THUMBNAIL").change(function(){
-					if(this.files && this.files[0]) {
-						var reader = new FileReader;
-						reader.onload = function(data) {
-							$(".select_img img").attr("src", data.target.result).width(500);								
-						}
-						reader.readAsDataURL(this.files[0]);
-					}
-				});
-			</script>	
+			 <label for="PRO_THUMBNAIL">이미지</label>
+				<input type="hidden" name="PRO_THUMBNAIL" value="${p.PRO_THUMBNAIL }">
+		   <input type="file" name="uploadFile">(${p.PRO_THUMBNAIL })<br>
 		</div>
+		
 		<input type="submit" value="수정">
 		<input type="reset" value="취소">
 		 

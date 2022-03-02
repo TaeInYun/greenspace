@@ -9,6 +9,7 @@ public class Pro_add_optionVO {
 	private int pro_no;
 	private String pro_option_code;
 	private String pro_option_detail_code;
-	 
+	private String pro_option_name;
+	private String pro_option_detail_name;
 	
 }

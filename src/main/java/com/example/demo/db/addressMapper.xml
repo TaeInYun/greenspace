@@ -13,4 +13,91 @@
 		member_no = #{member_no}
 		AND addr_main = 1
   </select>
+  
+  <select id="findAll" resultType="addressVO">
+  		SELECT
+		*
+		FROM
+		address
+  </select>
+  
+  <select id="findAllDetail" resultType="addressVO">
+  		SELECT
+		*
+		FROM
+		address a
+		where a.no=#{no}
+  </select>
+  
+  
+  <select id="allMainAddress" resultType="addressVO">
+  		SELECT
+		*
+		FROM
+		address
+		WHERE
+		member_no = #{member_no}
+		AND addr_main = 1
+  </select>
+   
+  <select id="allSubAddress" resultType="addressVO">
+  		SELECT
+		*
+		FROM
+		address
+		WHERE
+		member_no = #{member_no}
+		AND addr_main = 0
+  </select>
+  
+  <insert id="insert" parameterType="addressVO">
+  	insert into address(
+  	no,
+  	addr_main,
+  	addr_postal,
+  	addr_road,
+  	addr_detail,
+  	addr_msg,
+  	addr_receiver,
+  	addr_phone,
+  	addr_title,
+  	member_no)
+  	
+  	values(
+  	seq_comment.nextval,
+  	#{addr_main},   
+  	#{addr_postal},
+  	#{addr_road},
+  	#{addr_detail},
+  	#{addr_msg},	
+  	#{addr_receiver},
+  	#{addr_phone},
+  	#{addr_title},  
+  	#{member_no}
+  	)
+  	
+  </insert> 
+     
+  
+  <update id="update" parameterType="addressVO">
+   update address set 
+   no=#{no},
+   addr_main=#{addr_main},
+   addr_postal=#{addr_postal},
+   addr_road=#{addr_road},
+   addr_detail=#{addr_detail},
+   addr_msg=#{addr_msg},
+   addr_receiver=#{addr_receiver},
+   addr_phone=#{addr_phone},
+   addr_title=#{addr_title},
+   member_no=#{member_no}
+   where no=#{no}
+  </update>
+  
+  
+  <delete id="delete">
+  	delete address where no=#{no}
+  </delete>
+  
+  
 </mapper>

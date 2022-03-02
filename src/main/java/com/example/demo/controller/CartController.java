@@ -62,8 +62,6 @@ public class CartController {
 	@ResponseBody
 	public String updateQty(CartVO c) {
 		String msg = "변경 실패";
-		System.out.println(c.getCart_qty());
-		System.out.println(c.getNo());
 		
 		HashMap map = new HashMap<>();
 		map.put("cart_qty", c.getCart_qty());

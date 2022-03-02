@@ -12,12 +12,10 @@
 	<h3>비밀번호 초기화</h3> 
 	새로운 비밀번호를 입력하세요
 	
-	<form  action="resetPwd" method="POST">
+	<form  action="updatePwdOK" method="POST">
 		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
-		${checkPwd}
-		
 		<c:choose>
-			<c:when test= "${ '${checkPwd}' == '1'}">
+			<c:when test="${ checkPwd eq '1'}">
 			 <p>
            		<label>새비밀번호</label>
             	<input type="text" id="pwd" name="pwd" required>
