@@ -21,4 +21,5 @@ public class MyWishVO {
 	private String addr_road;
 	private String addr_detail;
 	private String phone;
+	private int option_combination_no;
 }

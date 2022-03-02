@@ -89,7 +89,7 @@
 			receiverInfo.push( $("#name").text() );
 			receiverInfo.push( $("#address").text() );
 			receiverInfo.push( $("#phone").text() );
-			
+			receiverInfo.push( $("#msg").val() );
 			let orderInfo = new Array();
 			let arr = document.getElementsByClassName("orderInfo");
 			
@@ -188,9 +188,10 @@
 	<div id="order">
 		<div id="receiver">
 			<h5>배송지</h5>
-			받는 사람 : <span id="name">${info.name }</span>
-			주소 : <span id="address">${info.addr_road } ${info.addr_detail }</span>
-			전화번호 : <span id="phone">${info.phone }</span>
+			<p> 받는 사람 : <span id="name">${info.name }</span> </p>
+			<p>주소 : <span id="address">(${info.addr_postal})${info.addr_road } ${info.addr_detail }</span></p>
+			<p>전화번호 : <span id="phone">${info.phone }</span></p>
+			<input type="hidden" id="msg" value="${info.addr_msg }">
 			<button>배송지변경</button>
 		</div>
 		<hr>

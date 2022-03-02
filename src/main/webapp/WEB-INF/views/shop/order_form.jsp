@@ -8,7 +8,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 <script type="text/javascript">
+	IMP.init("imp27131305");
+
 	$(function(){
 		
 		if( $("#useMaxPoint").is(":checked") ){
@@ -152,7 +155,7 @@
 					배송지 주소
 				</li>
 				<li>
-					(지번주소 필요)${receiverInfo[1]}
+					${receiverInfo[1]}
 				</li>
 			</ul>
 			<ul>
@@ -160,7 +163,7 @@
 					배송 요청사항
 				</li>
 				<li>
-					"구현 해야한다."
+					${receiverInfo[3]}
 				</li>
 			</ul>
 		</div>

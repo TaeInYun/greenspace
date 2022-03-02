@@ -5,8 +5,8 @@
 <mapper namespace="address">
   <select id="getMainAddress" resultType="addressVO">
 		SELECT
-		addr_receiver, 
-		addr_road, addr_detail, addr_phone
+		addr_receiver, addr_postal,
+		addr_road, addr_detail, addr_phone, addr_msg
 		FROM
 		address
 		WHERE

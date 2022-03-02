@@ -16,10 +16,12 @@
   <!-- 장바구니 - 처음 주문정보 -->
   <select id="initOrderInfo" resultType="orderListVO">
   	SELECT
-	m.name name, 
+	m.name name,
+	addr_postal, 
 	addr_road, 
 	addr_detail, 
 	addr_phone phone, 
+	addr_msg,
 	a.price pro_price, 
 	a.saleprice pro_saleprice,
 	a.discount pro_discount

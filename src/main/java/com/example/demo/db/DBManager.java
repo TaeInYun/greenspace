@@ -138,9 +138,6 @@ public class DBManager {
 			return cnt;
 	}
 	
-	
-	
- 
 	//-----------------------ProductVO---------------------------
 	//관리자 상품 리스트
 	public static List<ProductVO> findAll(HashMap map){
@@ -376,6 +373,7 @@ public class DBManager {
 		session.close();
 		return re;
 	}
+	
 	//-----------------Member ( 회원관련 )------------------------
 	
 	public static int insertMember(MemberVO m) {

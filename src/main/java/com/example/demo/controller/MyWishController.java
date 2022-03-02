@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.AddressDAO;
+import com.example.demo.dao.CartDAO;
 import com.example.demo.dao.MemberDAO;
 import com.example.demo.dao.MyWishDAO;
 import com.example.demo.dao.OrderListDAO;
@@ -39,10 +40,12 @@ public class MyWishController {
 	@Autowired
 	private MemberDAO dao_member;
 	
+	@Autowired
+	private CartDAO dao_cart;
+	
 	@RequestMapping("/shop/cart")
 	public void myWishList(Model model) {
 		int member_no = 1;
-		
 		List<MyWishVO> list = dao_mywish.findByMember(member_no);
 		OrderListVO info = dao_orderList.initOrderInfo(member_no);
 
