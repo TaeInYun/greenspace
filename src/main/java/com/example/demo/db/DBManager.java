@@ -99,14 +99,40 @@ public class DBManager {
 	
 	//-----------------------QnaVO---------------------------
 	
-	public static List<QnaVO> findAllQna(int qnaColumn){
+	public static List<QnaVO> findAllQna(){
 		SqlSession session = factory.openSession();
-		List<QnaVO> list = session.selectList("qna.findAll", qnaColumn);
+		List<QnaVO> list = session.selectList("qna.findAll");
 		session.close();
 		return list;
 	}
 	
+	public static List<QnaVO> findAllQnaList(){
+		SqlSession session = factory.openSession();
+		List<QnaVO> list = session.selectList("qna.findAllList");
+		session.close();
+		return list;
+	}
+	   
+	public static QnaVO findAllQnaDetail(int no) {
+		SqlSession session = factory.openSession();
+		QnaVO r = session.selectOne("qna.findAllDetail", no);
+		session.close();
+		return r;
+	}
 	
+	public static List<QnaVO> findAllQnaSearch(HashMap map){
+		SqlSession session = factory.openSession();
+		List<QnaVO> list = session.selectList("qna.findAllSearch",map);
+		session.close();
+		return list;
+	}
+	
+	public static int getTotalRecordQna(HashMap map) {
+		SqlSession session = factory.openSession();
+		int no = session.selectOne("qna.totalRecord", map);
+		session.close();
+		return no;
+	}
 	
 	//-----------------------MyReviewVO---------------------------
 		public static List<MyReviewVO> findAllMyReview(){
@@ -345,6 +371,31 @@ public class DBManager {
 		session.close();
 		return re;				
 	}	
+	
+	
+	public static int updateMainBtnAddress(AddressVO a) {
+		SqlSession session = factory.openSession(true);
+		int re = session.update("address.updatemainbtn", a);
+		session.commit();
+		session.close();
+		return re;				
+	}
+	public static int updateSubBtnAddress(AddressVO a) {
+		SqlSession session = factory.openSession(true);
+		int re = session.update("address.updatesubbtn", a);
+		session.commit();
+		session.close();
+		return re;				
+	}
+	
+	//---------------------메인베송지로 변경하면 나머지 서브로 
+	public static void updateBtnAddress(int member_no) {
+		SqlSession session = factory.openSession();
+		session.update("address.updatebtn", member_no);
+		session.commit();
+		session.close();
+						
+	}
 	
 	public static int deleteAddress(int no) {
 		SqlSession session  = factory.openSession();
