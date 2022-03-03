@@ -5,8 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
+<script  type="text/javascript" src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
  function kakaopost(){
     new daum.Postcode({
         oncomplete: function(data) {
@@ -19,6 +20,11 @@
         }
     }).open();
  }
+ 
+ var selectBoxChange = function(value){
+	 console.log("값변경테스트:"+value);
+	 $("#changeTest").val(value);
+ }
 </script>
 
 </head>
@@ -30,10 +36,16 @@
 			enctype="multipart/form-data">		
 		<!--  리뷰번호:
 		<input type="hidden" name="no"> <br> -->
-		 <input type="button" value="우편번호찾기" onclick="kakaopost()">
+		 <input type="button" value="우편번호찾기" onclick="kakaopost()"> <br>
+		
 		
 		<!-- 메인/서브: -->
-		<input type="hidden" name="addr_main" value=1> <br> 
+		<input type="hidden" id="changeInput"/>
+		<select id="changeTest" onchange="selectBoxChage(this.value);">
+		  <option value=1>메인</option>
+		  <option value=0>서브</option>
+		</select> <br> 
+		<!-- <input type="hidden" name="addr_main" value=1> <br>  -->
 		<!-- 1메인0서브 이건 value사용할듯? 아니면 maininsert insert -->
 		우편번호: <input type="text" name="addr_postal" id="addr_postal"> <br>
 		주소: <input type="text" name="addr_road" id="addr_road"> <br>			

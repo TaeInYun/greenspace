@@ -26,5 +26,8 @@ public class Pro_add_optionDAO {
 	public int findProAddPriceNo(int no) {
 		return DBManager.findProAddPriceNo(no);
 	}
+	public int findProAddOptionNoForWishList(HashMap map) {
+		return DBManager.findProAddOptionNoForWishList(map);
+	}
 	
 }

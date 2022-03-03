@@ -85,6 +85,8 @@ public class ProductController {
 			dao.updateHit(no);				 	
 			model.addAttribute("p", dao.findByNo(no));	  	
 		 	model.addAttribute("cnt", dao.findOptionView(no));
+		 	model.addAttribute("option", dao.findOptionName(no));
+		 	model.addAttribute("op", dao.findOption(no));
 		}
 		
 		
@@ -93,6 +95,7 @@ public class ProductController {
 		public void detailProduct_admin(int no, Model model) {	
 			model.addAttribute("p", dao.findByNo(no));	  	
 		 	model.addAttribute("cnt", dao.findOptionView(no));
+		 	model.addAttribute("option", dao.findOptionName(no));
 			model.addAttribute("findOptionByProNo", prodao.findOptionByProNo(no));
 			
 		}
@@ -248,7 +251,7 @@ public class ProductController {
 	//--구매시의 옵션 추가 ajax	
 		@ResponseBody
 		@RequestMapping("/findOptionName")
-		public List<ProductVO> findOptionName(int no) {		 
+		public ProductVO findOptionName(int no) {		 
 			return dao.findOptionName(no);	  	
 		}
 		

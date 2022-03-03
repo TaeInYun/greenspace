@@ -91,7 +91,7 @@
  
  <!-- 상품에 있는 옵션이름 찾기(leve1) -->
   <select id="findOptionName" resultType="productVO" >
- 	select distinct po.pro_option_code, pro_option_name
+ 	select distinct po.pro_option_code as pro_option_code, pro_option_name
 	from pro_option po, pro_add_option pao
 	where po.pro_option_code= pao.pro_option_code and
 	pao.pro_no=#{no}

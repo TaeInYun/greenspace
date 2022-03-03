@@ -9,6 +9,7 @@
 </head>
 <body>
 	<h1>메인배송지</h1>
+	<a href="/mypage/insertAddress"><button >배송지추가하기</button></a>
 	<hr>
 		
 			배송지이름:${a.addr_title }<br>
@@ -41,16 +42,16 @@
 				<a href="/mypage/updateAddress?no=${a2.no}">${a2.addr_title }</a>
 				</td>
 				<td>
-					${a2.addr_postal} 					
+					${a2.addr_postal} 				
 				</td>				 
 				<td>${a2.addr_receiver }</td>
 				<td>${a2.addr_road }</td>
 				<td>${a2.addr_detail }</td>
 				<td>${a2.addr_phone }</td>
-								
+				<td><a href="/mypage/updateMainBtnAddress?no=${a2.no}">	<button>메인주소로변경</button></a></td>	
 			</tr>		
 				
-				<a href="/mypage/insertAddressSub"><button >배송지추가</button></a>
+				
 		</c:forEach>
 	</table> 
 </body>

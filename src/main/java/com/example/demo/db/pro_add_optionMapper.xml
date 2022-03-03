@@ -33,6 +33,16 @@
 	 pro_no = #{pro_no}  	
   	</select>
   	
+  	<select id="findProAddOptionNoForWishList" resultType="Integer">
+  	 select no from pro_add_option
+  	 WHERE
+  	 pro_option_code = (SELECT pro_option_code FROM pro_option WHERE pro_option_name = #{pro_option_name})
+  	 AND 
+  	 pro_option_detail_code = (SELECT pro_option_detail_code FROM pro_option_detail WHERE pro_option_detail_name = #{pro_option_detail_name})
+	 AND
+	 pro_no = #{pro_no}  	
+  	</select>
+  	
 	<delete id="delete">
   		delete pro_add_option where no=#{no} 
 	</delete>

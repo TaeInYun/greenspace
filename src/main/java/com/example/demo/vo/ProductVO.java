@@ -21,7 +21,7 @@ public class ProductVO {
 	private String cat_code;
 	private String cat_name;
 	private String img;
-	
+
 	private String PRO_THUMBNAIL;
 	private String pro_option_code;
 	private String pro_option_name;

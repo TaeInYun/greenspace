@@ -28,6 +28,8 @@ public class CartController {
 	@RequestMapping("/shop/insertCart")
 	@ResponseBody
 	public String insertCart(CartVO c) {
+		c.setMember_no(1);
+		
 		String msg = "장바구니에 추가하지 못했습니다.";
 		int re = dao.insert(c);
 

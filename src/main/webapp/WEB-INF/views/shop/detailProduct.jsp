@@ -6,6 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <link href="/css/shop.css" rel="stylesheet"/> 	 
+<link href="/css/shop.css" rel="stylesheet"/> 	
+<style type="text/css">
+	 
+</style> 
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -17,29 +21,18 @@
 		let pro_saleprice = ${p.pro_saleprice};
 		let pro_name = "${p.pro_name}"
 		let pro_no = ${p.no}	
-		let member_no = 1;
-			  
+		let cart_option = "${option.pro_option_name}";
+		
 	//카트관련	
-		$("#cart").click(function(){		
-			let data = getProductInfo(member_no, pro_price,pro_saleprice, pro_name, pro_no );
- 			
-			$.ajax({
-				url: "isCart",
-				data: data,
-				success: function(cnt){
-					if(cnt == 0){ //장바구니에 없는 상품
-						$.ajax({
-							url: "insertCart",
-							data: data,
-							success: function(msg){
-								insertCartMSG(msg);
-							}
-						});//end ajax
-					}else{
-						insertCartMSG("이미 장바구니에 있는 상품입니다.");
-					}
-				}
-			});
+		$("#cart").click(function(){
+			let isOption = $("#optionList tr").length;
+			
+			if(isOption == 0 && ${cnt>=1 }){
+				alert("상품의 옵션을 선택해주세요");
+				return;
+			}
+			
+			insertCart(isOption, cart_option,pro_price,pro_saleprice, pro_name, pro_no );
 		});// end cart insert
 		
 		//수량 버튼
@@ -56,119 +49,142 @@
 		});
 		
 		$("#wishList").click(function(){
-			let data = getProductInfo(member_no, pro_price,pro_saleprice, pro_name, pro_no );
-		
-			$.ajax({
-					url: "insertWishList",
-					data: data,
-					success: function(msg){
-						
-					}
-				});//end ajax
+			let isOption = $("#optionList tr").length;
+			
+			if(isOption == 0 && ${cnt>=1 }){
+				alert("상품의 옵션을 선택해주세요");
+				return;
+			}
+			
+			
+			
+			insertWish(isOption,cart_option,pro_no );
+
 		})
 		
-		
-		
+	 	$("#pro_option_detail_name").change(function(){	
+			  
+	 		let tr = $("<tr></tr>");
+	 		let select = $("#pro_option_detail_name > option:selected").text();
+	 		let end = select.indexOf('(');
+	 		let option = $.trim(select.substr(0,end));
+	 		let addPrice = $("#pro_option_detail_name > option:selected").val();
+	 		
+	 		
+			let addSub = $("<td></td>").attr("id", "addSub");
+			let minus = $("<button></button>").html("-").attr("id", "minus");
+			let qty = $("<input></input>").attr("id", "qty").val("1").attr("readonly", "readonly");
+			let plus = $("<button></button>").html("+").attr("id", "plus");
+			$(addSub).append(minus, qty, plus);
+	 		
+			let list = $("#optionList").html();
+			$("#optionList tr").filter(function(i){
+				  let arr_td = $(this).find("td");
+				  selectedOption = $(arr_td[0]).text();
+				  
+				  if(option == selectedOption){
+					  alert("이미 선택한 상품입니다.");
+					  select='선택';
+					  return;
+				  }
+			  });
+			
+	 		if(select != '선택'){
+	 			$(tr).append( $("<td></td>").html( option ).attr( 'class', option )  );
+				$(tr).append( $("<td></td>").html( addPrice ).attr( 'class', addPrice )  );
+		 		$(tr).append(addSub);
+		 		$("#optionList").append(tr);
+	 		}	
+	 		
+			  
+	 		
+	 		$("select").find("option:first").attr("selected", "selected");
+	 	 });
+	 	
 	});
 </script>
 </head>
 <body>
-	<h2>상품 상세</h2>
-	<div id="btns">
-		<button id="cart">장바구니 추가</button>
-		<a href="" id="wishList">찜하기</a>
-		<a href="">카트</a>
-		<button id="cart">장바구니 추가</button>		 
-	</div>
-	<hr>
-	 <div id="root">
-		<header id="header">
-			<div id="header_box">
-				<jsp:include page="../shop/shopHeader.jsp"/>
-			</div>
-		</header>	
-		 <section id="container">		
-				<div id="container_box"> 
-				<!-- 본문 -->			
-					<section id="content">	
-							
-					 		<a href="/admin/updateProduct?no=${p.no}"> 상품수정</a>
-					 		<a href="/admin/deleteProduct?no=${p.no}"> 상품삭제</a>	
-					 		<hr>	
-							상품번호 : ${p.no }<br>	
-		 					상품이름 : ${p.pro_name }<br>				
-							상품가격 :${p.pro_price}<br>	
-							상품할인가 :${p.pro_saleprice}<br>
-							상품설명 : ${p.pro_content }<br>	
-							<img  src="/upload/${p.PRO_THUMBNAIL }" width="200" height="200"><br>
-							<a href="/shop/listReview_rate?pro_no=${p.no}">리뷰 목록 보기</a>						
-		 		            <a href="/shop/insertReview?pro_no=${p.no}"> 리뷰작성하기</a>
-		 	
-		 		 <c:if test="${cnt>=1}">	
-				 <hr>	 
-				      상품옵션 : 				 
-				        <select id="pro_option_name" name="pro_option_name">
-							<option value="">선택</option>					
-								<c:forEach var="op" items="${op}">							
-								<option value="${op.pro_option_code}">${op.pro_option_name}</option>				
-							</c:forEach>
-						</select>
-						
-						<select id="pro_option_detail_name" name="pro_option_detail_name">
-							<option value="">선택</option>
-							<c:forEach var="op" items="${op}">					
-								<option value="${op.pro_add_price}" name="${op.pro_option_detail_code}">${op.pro_option_detail_name}(+${op.pro_add_price})</option>										 		
-							</c:forEach>
-						</select>    
-						
-				</c:if>	
-				<div id="addSub">
-					<button type="button" id="minus" >-</button>
-					<input type="number" value="1" id="qty">
-					<button type="button" id="plus">+</button>
-				</div>				  
-				<hr>			 
-				 <img  src="/upload/${p.PRO_THUMBNAIL }" width="200" height="200">
-
-				 <hr>					 
-				 <a href="">상품평</a>
-				 <a href="">Q&A</a>
-				 <a href="">교환환불</a>
-					 
-					 
-		</section>					
-						 	<c:if test="${cnt>=1 }">
-						  			  <select id="option" name="option">
-										<option value="">선택</option>					
-											<c:forEach var="op" items="${op}">							
-											<option value="${op.pro_option_name}:${op.pro_option_detail_name }+${op.pro_add_price }">${op.pro_option_name}:${op.pro_option_detail_name }+${op.pro_add_price }</option>				
-										</c:forEach>
-									</select>
-						   </c:if>
-							 <div id="littleCart" style="border-style: solid;">
-								<table>
-									<thead>
-										<tr>
-											<td>선택옵션</td>
-											<td>구매수량</td>
-											 
-										</tr>
-									</thead>
-									<tbody id="optionList"></tbody>
-								</table>
-							 </div>
-						 
-						 <hr>					 
-						 <a href="">상품평</a>
-						 <a href="">Q&A</a>
-						 <a href="">교환환불</a>
-												 
-					</section><!-- 본문 -->					
-					<aside id="aside">
-						<jsp:include page="../shop/shopAside.jsp"/>
-					</aside>				
-				</div>
-			</section>
-	</div><!-- 전체  section box-->
+   <h2>상품 상세</h2>
+   <div id="btns">
+      <button id="cart">장바구니 추가</button>
+      <a href="" id="wishList">찜하기</a> 
+   </div>
+   <hr>
+    <div id="root">
+      <header id="header">
+         <div id="header_box">
+            <jsp:include page="../shop/shopHeader.jsp"/>
+         </div>
+      </header>   
+       <section id="container">      
+            <div id="container_box"> 
+            <!-- 본문 -->         
+               <section id="content">                  
+                       <hr>   
+                     상품번호 : ${p.no }<br>   
+                      상품이름 : ${p.pro_name }<br>            
+                     상품가격 : ${p.pro_price}<br>   
+                     상품할인가 :${p.pro_saleprice}<br>
+                     상품설명 : ${p.pro_content }<br>   
+                     <img  src="/upload/${p.PRO_THUMBNAIL }" width="200" height="200"><br>
+ 
+                   
+                      <c:if test="${cnt<1 }">                      
+						<div id="addSub">
+							<button type="button" id="minus" >-</button>
+							<input type="number" readonly="readonly" value="1" id="qty">
+							<button type="button" id="plus">+</button>
+						</div>	
+                      </c:if>
+                      
+ 
+                     <a href="/shop/listReview_rate?pro_no=${p.no}">리뷰 목록 보기</a>                  
+                         <a href="/shop/insertReview?pro_no=${p.no}"> 리뷰작성하기</a>
+ 
+                      <c:if test="${cnt>=1 }">
+                              <div id="combo">
+                              		<span id="pro_option_name">
+	                              		${option.pro_option_name}  
+                              		</span>
+                                    <select id="pro_option_detail_name" name="pro_option_detail_name">
+                                       <option value="">선택</option>               
+                                       <c:forEach var="op" items="${op}">                     
+                                          <option value="${op.pro_add_price}">
+                                          	${op.pro_option_detail_name}(${op.pro_add_price} )
+                                          </option>
+                                       </c:forEach>
+                                    </select>
+                                      
+                           </div>
+                    
+                            <div id="littleCart" style="border-style: solid;">
+                                  <table border="1">
+                                    <thead>
+                                       <tr>
+                                          <td>선택옵션</td>
+                                          <td>추가금액</td>
+                                          <td>구매수량</td>
+                                       </tr>
+                                    </thead>
+                                    <tbody id="optionList"></tbody>
+                                 </table>
+                           </div>   
+                           
+                                            
+                    </c:if>
+                     <hr>                
+                   <a href="">상품평</a>
+                   <a href="">Q&A</a>
+                   <a href="">교환환불</a>
+                                     
+               </section><!-- 본문 -->               
+                           <aside id="aside">
+                              <jsp:include page="../shop/shopAside.jsp"/>
+                           </aside>            
+            </div>
+         </section>
+   </div><!-- 전체  section box-->
+   
 </body>
 </html>

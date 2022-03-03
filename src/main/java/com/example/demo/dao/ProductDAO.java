@@ -57,7 +57,7 @@ public class ProductDAO {
 		return DBManager.findOptionView(no);
 	}
   
-	public List<ProductVO> findOptionName(int no){
+	public ProductVO findOptionName(int no){
 		return DBManager.findOptionName(no);	
 	}
  
