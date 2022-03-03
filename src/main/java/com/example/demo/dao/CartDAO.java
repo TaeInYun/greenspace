@@ -26,4 +26,8 @@ public class CartDAO {
 	public int updateQty(HashMap map) {
 		return DBManager.updateQty(map);
 	}
+	
+	public CartVO findByCartNo(HashMap map) {
+		return DBManager.findByCartNo(map);
+	}
 }

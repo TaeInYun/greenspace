@@ -70,19 +70,25 @@ public class MyWishController {
 		
 		HashMap map = new HashMap();
 		
-		List<MyWishVO> list = new ArrayList<MyWishVO>();
 		
 		int member_no = 1;
 		map.put("member_no", member_no);
 		
+		int rownum = 0;
+		List<MyWishVO> list = new ArrayList<MyWishVO>();
+		
 		for(String pro_no : proInfo) { 
 			int no = (Integer.parseInt(pro_no)); 
+			rownum += 1;
 			map.put("no", no);
-			list.add(dao_mywish.getProInfoForOrder(map));
+			MyWishVO mw = dao_mywish.getProInfoForOrder(map);
+			mw.setNo(no);
+			mw.setRownum(rownum);
+			list.add(mw);
 		}
-		
 		MemberVO m = dao_member.getMemberInfo(member_no);
 		
+		session.setAttribute("rownum", rownum);
 		session.setAttribute("list", list);
 		session.setAttribute("receiverInfo", receiverInfo);
 		session.setAttribute("orderInfo", orderInfo);

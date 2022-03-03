@@ -61,6 +61,10 @@ public class MemberDAO {
 		return DBManager.updatePwd(m);
 	}
 
+	public int buyProduct(HashMap map) {
+		return DBManager.buyProduct(map);
+	}
+
 
 	public List<MemberVO> findAllMember(){
 		return DBManager.findAllMember();

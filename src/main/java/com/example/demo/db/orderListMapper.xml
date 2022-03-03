@@ -13,9 +13,11 @@
 	and receiver_name=#{receiver_name}
  	and ord_id=#{ord_id}
   </select>
+  
   <!-- 장바구니 - 처음 주문정보 -->
   <select id="initOrderInfo" resultType="orderListVO">
   	SELECT
+  	a.no addr_no,
 	m.name name,
 	addr_postal, 
 	addr_road, 

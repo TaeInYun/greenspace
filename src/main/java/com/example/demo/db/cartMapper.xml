@@ -43,4 +43,14 @@
 	<update id="updateQty" parameterType="Hashmap">
 		update cart set cart_qty=#{cart_qty} where no= #{no} and member_no=#{member_no}
 	</update>
+	<select id="findByCartNo" resultType="cartVO">
+		SELECT
+			pro_no, cart_qty
+		FROM
+			cart
+		WHERE
+			member_no=#{member_no}
+		AND
+		no = #{cart_no}
+	</select>
 </mapper>

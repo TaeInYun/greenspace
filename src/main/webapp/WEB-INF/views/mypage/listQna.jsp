@@ -35,16 +35,6 @@
 							
 							<c:forEach var="q2" items="${q }">
 								<tr>													
-									<td>${ }</td>
-									<td><img  src="/upload/qna/${ }" width="100" height="100"></td>
-									<td>
-										<a href="/mypage/detailQna?no=${}">${} </a>					
-									</td>				 
-									<td>${ }</td>
-									<td>${ }</td>
-									<td>${ }</td>
-									<td>${ }</td>
-								 
 									
 								</tr>	
 							</c:forEach>

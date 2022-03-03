@@ -19,6 +19,8 @@ import com.example.demo.vo.MyReviewVO;
 import com.example.demo.vo.MyWishVO;
 import com.example.demo.vo.Pro_add_optionVO;
 import com.example.demo.vo.OrderListVO;
+import com.example.demo.vo.OrdersProductVO;
+import com.example.demo.vo.OrdersVO;
 import com.example.demo.vo.ProductVO;
 import com.example.demo.vo.QnaVO;
 import com.example.demo.vo.ReviewVO;
@@ -148,6 +150,13 @@ public class DBManager {
 			return cnt;
 	}
 	
+	public static CartVO findByCartNo(HashMap map){
+		SqlSession session = factory.openSession();
+		CartVO c = session.selectOne("cart.findByCartNo", map);
+		session.close();
+		return c;
+	}
+	
 	//-----------------------ProductVO---------------------------
 	//관리자 상품 리스트
 	public static List<ProductVO> findAll(HashMap map){
@@ -268,6 +277,15 @@ public class DBManager {
 		SqlSession session = factory.openSession();
 		int re=session.delete("pro_add_option.delete", no);
 		session.commit();
+		session.close();
+		return re;
+	}
+	public static Integer findProAddPriceNo(int no) {
+		SqlSession session = factory.openSession();
+		Integer re = session.selectOne("pro_add_option.findProAddPriceNo", no);
+		if(re == null) {
+			re = 0;
+		}
 		session.close();
 		return re;
 	}
@@ -462,7 +480,18 @@ public class DBManager {
 		session.close();
 		return re;
 	}
+	
+	public static int buyProduct(HashMap map) {
+		SqlSession session = factory.openSession();
+		int re = session.update("member.buyProduct", map);
+		session.commit();
+		session.close();
+		return re;
+	}
 
+	
+	
+	
 	/*-------- 회원 목록 -------*/
 	public static List<MemberVO> findAllMember(){
 		SqlSession session = factory.openSession();
@@ -493,6 +522,40 @@ public class DBManager {
 		session.close();
 		return o;
 	}
+	
+	//--------------------OrdersVO관련--------------
+	public static int getCntOfToday() {
+		SqlSession session = factory.openSession();
+		int cnt = session.selectOne("orders.getCntOfToday");
+		session.close();
+		return cnt;
+	}
+	
+	public static int insertOrders(OrdersVO o) {
+		SqlSession session = factory.openSession();
+		int cnt = session.insert("orders.insertOrders", o);
+		session.commit();
+		session.close();
+		return cnt;
+	}
+	public static int getTotalPay(HashMap map) {
+		SqlSession session = factory.openSession();
+		Integer re = session.selectOne("orders.getTotalPay", map);
+		session.close();
+		return re;
+	}
+	
+	//--------------------OrdersProductVO관련--------------
+	public static int insertOrdersProduct(HashMap map) {
+		SqlSession session = factory.openSession();
+		int cnt = session.insert("ordersProduct.insertOrdersProduct", map);
+		session.commit();
+		session.close();
+		return cnt;
+	}
+	
+	
+	
 	//---------------Challenge (챌린지 관련) ----------
 	/*관리자 - 챌린지 목록*/
 	public static List<ChallengeVO> findAllChg(){

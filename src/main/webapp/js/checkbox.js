@@ -26,6 +26,8 @@ function showOrderPriceInfo(){
 		delivery_price = 2500;
 	}
 	
+	tot_saleprice += delivery_price
+	
 	$("#tot_price").html(tot_price);
 	$("#tot_discount").html(tot_discount);
 	$("#tot_saleprice").html(tot_saleprice);

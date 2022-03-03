@@ -9,11 +9,10 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
+<script type="text/javascript" src="/js/order.js"></script>
+<script type="text/javascript" src="/js/address.js"></script>
 <script type="text/javascript">
-	IMP.init("imp27131305");
-
 	$(function(){
-		
 		if( $("#useMaxPoint").is(":checked") ){
 			$("#usePoint").val(${point}  )
 		};
@@ -33,9 +32,14 @@
 			let userPoint = ${point};
 			let totalPrice = ${orderInfo[3] };
 			
+			if(usePoint == userPoint){
+				$("#useMaxPoint").attr("checked", true);
+			}else if(usePoint != userPoint){
+				$("#useMaxPoint").attr("checked", false);
+			}
 			
-			if(isNaN(usePoint)){
-				alert("숫자만 입력해주세요!");
+			if(isNaN(usePoint) || usePoint < 0){
+				alert("0 또는 양의 정수(숫자)만 입력해주세요!");
 				$("#usePoint").val(0);
 				return;
 			}
@@ -51,13 +55,41 @@
 				$("#usePoint").val(totalPrice);
 			}
 			
-			let orderprice = ${orderInfo[3] };
+			let orderprice = ${orderInfo[3] }; 
 			orderprice -= usePoint;
 
-			$("#totalPrice").text(orderprice)
-		})
+			$("#totalPrice").text(orderprice);
+			$("#payPrice").text(orderprice);
+		})//end focusout
 		
+		$("#newAddr").click(function(){
+			chooseNewAddr();
+		});
 		
+		$("#basicAddr").click(function(){
+			chooseBasicAddr();
+			
+			$("input[name=addr_no]").val(${receiverInfo[0]});
+			$("input[name=name]").val("${receiverInfo[1]}");
+			$("input[name=phone]").val("${receiverInfo[2]}");
+			$("input[name=addr_postal]").val("${receiverInfo[3]}");
+			$("input[name=addr_road]").val("${receiverInfo[4]}");
+			$("input[name=addr_detail]").val("${receiverInfo[5]}");
+			$("input[name=addr_msg]").val("${receiverInfo[6]}");
+		});
+		
+		// "결제"
+		$("#pay").click(function(){
+			let cnt = ${rownum}
+			let arr = document.getElementsByClassName("cart_no");
+			let arr_cartNo = new Array();
+			
+			for( let i = 0; i < arr.length; i++){
+				arr_cartNo.push( $(arr[i]).val() );
+			} 
+			
+			requestPay(cnt, arr_cartNo);
+		});
 	});
 </script>
 </head>
@@ -69,6 +101,7 @@
 		<table border="1" width="80%">
 			<thead>
 				<tr>
+					<td>번호</td>
 					<td>상품 정보</td>
 					<td>수량</td>
 					<td>적립금</td>
@@ -79,6 +112,10 @@
 			<tbody id="listCart">
 				<c:forEach var="c" items="${list}">
 					<tr>
+						<td>
+							${c.rownum }
+							<input type="hidden" class="cart_no" value="${c.no }">
+						</td>
 						<td>
 							<div>
 								<img src="/upload/${c.img }">
@@ -117,55 +154,23 @@
 			2개 이상의 브랜드(업체) 상품을 주문하신 경우, 각 개별 배송됩니다.
 		</p>
 	</div>
-	<div>
-		<h3>배송 정보</h3>
+	<div id="receiver">
+		<h5>배송지</h5>
 		<div>
-			<ul>
-				<li>
-					배송지 선택
-				</li>
-				<li>
-					<div>
-						<input type="radio" name="address"  id="basicAddr" checked="checked">
-						<label for="basicAddr">기본 배송지</label>
-						<input type="radio" name="address"  id="newAddr">
-						<label for="newAddr">신규 배송지</label>
-						<button type="button" id="changeAddr">배송지 변경</button>
-					</div>
-				</li>
-			</ul>
-			<ul>
-				<li>
-					수령인
-				</li>
-				<li>
-					${receiverInfo[0]}
-				</li>
-			</ul>
-			<ul>
-				<li>
-					휴대전화
-				</li>
-				<li>
-					${receiverInfo[2]}
-				</li>
-			</ul>
-			<ul>
-				<li>
-					배송지 주소
-				</li>
-				<li>
-					${receiverInfo[1]}
-				</li>
-			</ul>
-			<ul>
-				<li>
-					배송 요청사항
-				</li>
-				<li>
-					${receiverInfo[3]}
-				</li>
-			</ul>
+			<input type="radio" name="address"  id="basicAddr" checked="checked">
+			<label for="basicAddr">기본 배송지</label>
+			<button type="button" id="changeAddr">주소록</button>
+			<input type="radio" name="address"  id="newAddr">
+			<label for="newAddr">신규 배송지</label>
+		</div>
+		<div id="receiverInfo">
+			<input type="hidden" id="receiverNo" class="receiverInfo" name="addr_no" value="${receiverInfo[0]}">
+			<input type="text" readonly="readonly" class="receiverInfo" name="name" value="${receiverInfo[1]}" placeholder="수령인">
+			<input type="text" readonly="readonly" class="receiverInfo" name="phone" value="${receiverInfo[2]}" placeholder="연락처">
+			<input type="text" readonly="readonly" class="receiverInfo" name="addr_postal" value="${receiverInfo[3]}" placeholder="우편번호">
+			<input type="text" readonly="readonly" class="receiverInfo" name="addr_road" value="${receiverInfo[4]}"placeholder="주소">
+			<input type="text" readonly="readonly"class="receiverInfo"  name="addr_detail" value="${receiverInfo[5]}" placeholder="상세주소">
+			<input type="hidden" name="addr_msg" class="receiverInfo" value="${receiverInfo[6]}">
 		</div>
 	</div>
 	<div>
@@ -196,12 +201,14 @@
 		<div>
 			<ul>
 				<li>최종 결제금액</li>
-				<li id="totalPrice">${orderInfo[3] }</li>
+				<li id="totalPrice">${orderInfo[3] - point }</li>
 			</ul>
 			<ul>
-				<li>							
-					<fmt:parseNumber integerOnly="true" value="${orderInfo[3] * 0.1}"></fmt:parseNumber>원
-					포인트 적립예정
+				<li>
+					<span id="savePoint">
+						<fmt:parseNumber integerOnly="true" value="${orderInfo[3] * 0.1}"></fmt:parseNumber>
+					</span>							
+					원 포인트 적립예정
 				</li>
 			</ul>
 		</div>
@@ -218,6 +225,6 @@
 		<input type="checkbox" id="accept">
 		<label for="accept">결제 진행 필수 동의</label>
 	</div>
-	<button>${orderInfo[3] }원 결제하기</button>
+	<button id="pay"><span id="payPrice">${orderInfo[3] - point }</span>원 결제하기</button>
 </body>
 </html>
