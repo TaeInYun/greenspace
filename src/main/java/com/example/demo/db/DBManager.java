@@ -272,6 +272,13 @@ public class DBManager {
 		session.close();
 		return re;				
 	}	
+	public static int updateStockcuzBuy(HashMap map) {
+		SqlSession session = factory.openSession(true);
+		int re = session.update("product.updateStockcuzBuy", map);
+		session.commit();
+		session.close();
+		return re;				
+	}	
 	
 	public static int delete(int no) {
 		SqlSession session  = factory.openSession();

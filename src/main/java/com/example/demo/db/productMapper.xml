@@ -167,4 +167,7 @@
   	update product set pro_hit=pro_hit+1 where no=#{no}
   </update>
   
+  <update id="updateStockcuzBuy">
+  	UPDATE product set pro_stock = (SELECT pro_stock FROM product WHERE no=#{pro_no}) - #{ord_pro_qty} WHERE no = #{pro_no}
+  </update>
 </mapper>

@@ -35,6 +35,9 @@ public class ProductDAO {
 	public int update(ProductVO b) {
 		return DBManager.update(b);
 	}
+	public int updateStockcuzBuy(HashMap map) {
+		return DBManager.updateStockcuzBuy(map);
+	}
 
 	public int delete(int no) {
 		// TODO Auto-generated method stub

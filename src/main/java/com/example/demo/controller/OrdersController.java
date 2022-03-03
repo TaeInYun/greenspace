@@ -15,6 +15,7 @@ import com.example.demo.dao.MemberDAO;
 import com.example.demo.dao.OrdersDAO;
 import com.example.demo.dao.OrdersProductDAO;
 import com.example.demo.dao.Pro_add_optionDAO;
+import com.example.demo.dao.ProductDAO;
 import com.example.demo.vo.ApplyOrderVO;
 import com.example.demo.vo.CartVO;
 import com.example.demo.vo.MemberVO;
@@ -43,6 +44,8 @@ public class OrdersController {
 	@Autowired
 	private Pro_add_optionDAO proAddOptionDAO;
 	
+	@Autowired
+	private ProductDAO productDAO;
 	
 	
 	@RequestMapping("/getCntOfToday")
@@ -68,7 +71,7 @@ public class OrdersController {
 		HashMap map = new HashMap();
 		map.put("member_no", member_no);
 		
-		//insert Orders
+		//주문내역 추가를 위한 변수
 		OrdersVO o = new OrdersVO();
 		o.setOrd_id(ord_id);
 		o.setOrd_use_point(ord_use_point);
@@ -81,9 +84,8 @@ public class OrdersController {
 		o.setAddress_no(address_no);
 		o.setReceiver_no(receiver_no);
 		
-		int re = ordersDao.insertOrders(o);
-		
-		System.out.println("insertOrders : " + re);
+		//주문내역 추가 ( 주문정보)
+		ordersDao.insertOrders(o);
 		
 		for(String s : data.getArr_cartNo() ) {
 			int no = Integer.parseInt(s);
@@ -97,6 +99,7 @@ public class OrdersController {
 			int pro_add_option_no = proAddOptionDAO.findProAddPriceNo(no);
 			System.out.println( "pro_no"+ pro_no + "pro_add_option_no" + pro_add_option_no);
 			
+			map.put("ord_pro_qty", ord_pro_qty);
 			map.put("pro_add_option_no", pro_add_option_no);
 			map.put("pro_no", pro_no);
 			map.put("ord_pro_qty", ord_pro_qty);
@@ -107,21 +110,18 @@ public class OrdersController {
 			System.out.println("map: " + map);
 			
 			int ord_pro_price = ordersDao.getTotalPay(map);
-			System.out.println("ord_pro_price" + ord_pro_price);
 			map.put("ord_pro_price", ord_pro_price);
 			
+			//주문상품테이블추가
+			ordersProductDAO.insertOrderProduct(map);
+			//상품 재고 수정
+			productDAO.updateStockcuzBuy(map);
 			
-			int a = ordersProductDAO.insertOrderProduct(map);
+			//회원 포인트정보 수정
+			memberDAO.buyProduct(map);
 			
-			int b = memberDAO.buyProduct(map);
 			//카트테이블 주문상품 삭제
-			int cd = cartDAO.delete(no);
-			
-			
-			 System.out.println("insertOrderProduct : " + a);
-			 System.out.println("buyProduct : " + b); 
-			 System.out.println("delete : " + cd);
-			 
+			cartDAO.delete(no);
 		}
 	}
 }
