@@ -75,6 +75,7 @@
 			deleteCart(noArr);
 		});
 		
+		//배송정보 관련 이벤트
 		$("#newAddr").click(function(){
 			chooseNewAddr();
 		});
@@ -90,6 +91,7 @@
 			$("input[name=addr_detail]").val("${info.addr_detail }");
 			$("input[name=addr_msg]").val("${info.addr_msg }");
 		});
+		
 		
 		//***** 선택 상품 주문하기
 		$("#order").click(function(){
@@ -166,6 +168,7 @@
 								<input type="hidden" name="saleprice" value="${c.saleprice }">
 								<input type="hidden" name="pro_no" value="${c.no }">
 								<input type="hidden" name="discount" value="${c.price - c.saleprice}">
+								<input type="hidden" name="qty" value="${c.qty}">
 							</td>
 							<td>
 								<div>
@@ -189,7 +192,7 @@
 								<c:if test="${c.qty != 1 }">
 									<button type="button" id="minus">-</button>
 								</c:if>
-									<input type="number" readonly="readonly" value="${c.qty }">
+									<input type="number" readonly="readonly" id="qty" value="${c.qty }">
 								<button type="button" id="plus">+</button>
 							</td>
 							<td>

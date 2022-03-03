@@ -90,7 +90,6 @@ public class OrdersController {
 			map.put("cart_no", no);
 			
 			CartVO c = cartDAO.findByCartNo(map);
-			
 
 			int pro_no = c.getPro_no();
 			int ord_pro_qty = c.getCart_qty();
@@ -108,7 +107,9 @@ public class OrdersController {
 			System.out.println("map: " + map);
 			
 			int ord_pro_price = ordersDao.getTotalPay(map);
+			System.out.println("ord_pro_price" + ord_pro_price);
 			map.put("ord_pro_price", ord_pro_price);
+			
 			
 			int a = ordersProductDAO.insertOrderProduct(map);
 			

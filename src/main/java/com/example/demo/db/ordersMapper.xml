@@ -55,6 +55,6 @@
   	 <if test="pro_add_option_no != 0 and pro_add_option_no != null">
   	 	,(SELECT pro_add_price FROM pro_add_option where no=#{pro_add_option_no}) p 
   	</if>
-  	 WHERE member_no=#{member_no} and pro_no=#{pro_no}
+  	 WHERE member_no=#{member_no} and no=#{cart_no}
   </select>
 </mapper>

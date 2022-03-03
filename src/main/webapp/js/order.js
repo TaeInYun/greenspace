@@ -1,8 +1,6 @@
 function requestPay(cnt, arr_cartNo) {
 	IMP.init("imp27131305");
 	
-	let member_no = 1;
-	
 	// 배송정보
 	let name = $("input[name=name]").val();
 	let phone = $("input[name=phone]").val();
@@ -46,27 +44,51 @@ function requestPay(cnt, arr_cartNo) {
 			let seconds = ("00" +today.getSeconds()).slice(-2);
 			
 			let ord_id = year + month + date + "-" + hours + minutes + seconds + "-" + cntOrder;
-			let data = {
+		    
+		    IMP.request_pay({ // param
+		        pg: "kcp",
+		        pay_method: "card",
+		        merchant_uid: ord_id,
+		        name: proName,
+		        amount: totalPrice,
+		        buyer_name: name,
+		        buyer_tel: phone,
+		        buyer_addr: addr_road,
+		        buyer_postcode: addr_postal
+		    }, function (rsp) { // callback
+		        if (rsp.success) {
+					
+					ord_id = rsp.merchant_uid;
+					ord_price = rsp.paid_amount;
+					let apply_num = rsp.apply_num;
+					let imp_uid = rsp.imp_uid;
+					
+					let data = {
 						ord_id: ord_id,
-						ord_use_point : 0,
-						ord_price: 5000,
+						ord_use_point : usePoint,
+						ord_price: ord_price,
 						payment_code: payment_code,
 						ord_status_code:ord_status_code,
-						apply_num:"5588",
+						apply_num:apply_num,
 						address_no: addr_no,
 						receiver_no:receiver_no,
 						point_save:savePoint,
 						arr_cartNo:arr_cartNo,
-						imp_uid:"00000"
-			}
-			
-		    $.ajax({
+						imp_uid:imp_uid
+					}
+					
+					$.ajax({
 						url: "/shop/resultOrder",
 						data: data,
 						success: function(){
 							alert("성공");
 						}
 					});//end insert
-		    }
+				
+		        } else {
+					alert(rsp.error_msg)
+		        }
+		    });
+		}//end success
 	});//end getCngOftoday
   }

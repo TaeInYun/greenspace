@@ -1,8 +1,6 @@
 function requestPay(cnt, arr_cartNo) {
 	IMP.init("imp27131305");
 	
-	let member_no = 1;
-	
 	// 배송정보
 	let name = $("input[name=name]").val();
 	let phone = $("input[name=phone]").val();
@@ -22,6 +20,13 @@ function requestPay(cnt, arr_cartNo) {
 	let addr_no = $("input[name=addr_no]").val();
 	let receiver_no = $("input[name=receiver_no]").val();
 	
+	if(addr_no == null){
+		addr_no = 0;
+	}
+	if(receiver_no == null){
+		receiver_no = 0;
+	}
+	
 	if(cnt > 1){
 		proName += "외 총 " + (cnt-1) + " 개의 상품"
 	}
@@ -39,10 +44,11 @@ function requestPay(cnt, arr_cartNo) {
 			let seconds = ("00" +today.getSeconds()).slice(-2);
 			
 			let ord_id = year + month + date + "-" + hours + minutes + seconds + "-" + cntOrder;
+		    
 		    IMP.request_pay({ // param
 		        pg: "kcp",
 		        pay_method: "card",
-		        merchant_uid: "123123222",
+		        merchant_uid: ord_id,
 		        name: proName,
 		        amount: totalPrice,
 		        buyer_name: name,
@@ -57,7 +63,6 @@ function requestPay(cnt, arr_cartNo) {
 					let apply_num = rsp.apply_num;
 					let imp_uid = rsp.imp_uid;
 					
-					alert("결제중")
 					let data = {
 						ord_id: ord_id,
 						ord_use_point : usePoint,
