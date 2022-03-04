@@ -87,7 +87,7 @@ public class AddressController {
 	@RequestMapping(value = "/mypage/updateAddress" , method = RequestMethod.POST)
 	public ModelAndView updateAddress(AddressVO a) {
 		
-		ModelAndView mav = new ModelAndView("redirect:/admin/listAddress");
+		ModelAndView mav = new ModelAndView("redirect:/mypage/mainAddress");
 		
 		System.out.println("update작동함");
 		System.out.println(a);
@@ -97,5 +97,28 @@ public class AddressController {
 		
 	}
 	
+	
+	@RequestMapping(value = "/mypage/updateMainBtnAddress" , method = RequestMethod.GET)
+	public void updateMainBtnForm(int no, Model model) {
+		model.addAttribute("a", dao.findAllDetail(no));  //detail no
+	}
+	
+	@RequestMapping(value = "/mypage/updateMainBtnAddress" , method = RequestMethod.POST)
+	public ModelAndView updateMainBtnAddress(AddressVO a,HttpSession session,Model model) {
+		
+		ModelAndView mav = new ModelAndView("redirect:/mypage/mainAddress");
+		
+		System.out.println("update작동함");
+		System.out.println(a);
+		
+		int member_no = ((MemberVO)session.getAttribute("m")).getNo();	//회원이 로그인 했을때 회원 번호를 m에 넣어서 상태유지 하는것을 가지고옴
+		
+		//model.addAttribute("a", dao.updateBtn(member_no));
+		
+		dao.updateBtn(member_no);
+		dao.updateMainBtn(a);
+		return mav;
+		
+	}
 	
 }

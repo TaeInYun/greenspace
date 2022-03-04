@@ -10,6 +10,7 @@
 <script type="text/javascript" src="/js/qty.js"></script>
 <script type="text/javascript" src="/js/product.js"></script>
 <script type="text/javascript" src="/js/checkbox.js"></script>
+<script type="text/javascript" src="/js/address.js"></script>
 <script type="text/javascript">
 	$(function(){
 		//***** 체크박스에 대한 변수 선언
@@ -74,9 +75,26 @@
 			deleteCart(noArr);
 		});
 		
+		//배송정보 관련 이벤트
+		$("#newAddr").click(function(){
+			chooseNewAddr();
+		});
+		
+		$("#basicAddr").click(function(){
+			chooseBasicAddr();
+			
+			$("input[name=addr_no]").val(${info.addr_no });
+			$("input[name=name]").val("${info.name }");
+			$("input[name=phone]").val("${info.phone }");
+			$("input[name=addr_postal]").val(${info.addr_postal });
+			$("input[name=addr_road]").val("${info.addr_road }");
+			$("input[name=addr_detail]").val("${info.addr_detail }");
+			$("input[name=addr_msg]").val("${info.addr_msg }");
+		});
+		
+		
 		//***** 선택 상품 주문하기
 		$("#order").click(function(){
-			
 			let select = $("input[name=checkList]:checked");
 			let noArr = new Array();
 			
@@ -84,18 +102,18 @@
 				let no = $($(this).siblings()[2]).val();
 				noArr.push(no);
 			});
-			
+		
 			let receiverInfo = new Array();
-			receiverInfo.push( $("#name").text() );
-			receiverInfo.push( $("#address").text() );
-			receiverInfo.push( $("#phone").text() );
-			
+			let arr_receiver = document.getElementsByClassName("receiverInfo");
+			for( let i = 0; i < arr_receiver.length; i++){
+				receiverInfo.push( $(arr_receiver[i]).val() );
+			} 
 			let orderInfo = new Array();
 			let arr = document.getElementsByClassName("orderInfo");
 			
 			for( let i = 0; i < arr.length; i++){
 				orderInfo.push( $(arr[i]).text() );
-			}
+			} 
 			
  			$.ajax({
 				url: "order_form",
@@ -107,7 +125,7 @@
 				},
 				success: function(){
 					location.href="/shop/order_form"
-				}
+				} 
 			});
 		});
 		
@@ -150,6 +168,7 @@
 								<input type="hidden" name="saleprice" value="${c.saleprice }">
 								<input type="hidden" name="pro_no" value="${c.no }">
 								<input type="hidden" name="discount" value="${c.price - c.saleprice}">
+								<input type="hidden" name="qty" value="${c.qty}">
 							</td>
 							<td>
 								<div>
@@ -173,7 +192,7 @@
 								<c:if test="${c.qty != 1 }">
 									<button type="button" id="minus">-</button>
 								</c:if>
-									<input type="number" readonly="readonly" value="${c.qty }">
+									<input type="number" readonly="readonly" id="qty" value="${c.qty }">
 								<button type="button" id="plus">+</button>
 							</td>
 							<td>
@@ -185,23 +204,35 @@
 			</table>
 		</form>
 	</div>
-	<div id="order">
+	<div id="orderList">
 		<div id="receiver">
 			<h5>배송지</h5>
-			받는 사람 : <span id="name">${info.name }</span>
-			주소 : <span id="address">${info.addr_road } ${info.addr_detail }</span>
-			전화번호 : <span id="phone">${info.phone }</span>
-			<button>배송지변경</button>
+			<div>
+				<input type="radio" name="address"  id="basicAddr" checked="checked">
+				<label for="basicAddr">기본 배송지</label>
+				<button type="button" id="changeAddr">주소록</button>
+				<input type="radio" name="address"  id="newAddr">
+				<label for="newAddr">신규 배송지</label>
+			</div>
+			<div id="receiverInfo">
+				<input type="hidden" id="receiverNo" class="receiverInfo" name="addr_no" value="${info.addr_no }">
+				<input type="text" readonly="readonly" class="receiverInfo" name="name" value="${info.name }" placeholder="수령인">
+				<input type="text" readonly="readonly" class="receiverInfo" name="phone" value="${info.phone }" placeholder="연락처">
+				<input type="text" readonly="readonly" class="receiverInfo" name="addr_postal" value="${info.addr_postal }" placeholder="우편번호">
+				<input type="text" readonly="readonly" class="receiverInfo" name="addr_road" value="${info.addr_road }"placeholder="주소">
+				<input type="text" readonly="readonly"class="receiverInfo"  name="addr_detail" value="${info.addr_detail }" placeholder="상세주소">
+				<input type="hidden" name="addr_msg" class="receiverInfo" value="${info.addr_msg }">
+			</div>
 		</div>
 		<hr>
 		<div id="orderInfo">
 			<p>상품금액 : <span id="tot_price" class="orderInfo">${info.pro_price }</span> 원</p>
 			<p>상품할인금액 : <span id="tot_discount" class="orderInfo">${info.pro_discount }</span> 원</p>
 			<p>배송비 : <span id="delivery_price" class="orderInfo">${info.delivery_price}</span> 원 </p>
-			<p>결제예정금액 : <span id="tot_saleprice" class="orderInfo">${info.pro_saleprice}</span> 원 </p>
+			<p>결제예정금액 : <span id="tot_saleprice" class="orderInfo">${info.pro_saleprice + info.delivery_price}</span> 원 </p>
 		</div>
 		<div>
-			<button>주문하기</button>
+			<button id="order">주문하기</button>
 		</div>
 	</div>
 </body>

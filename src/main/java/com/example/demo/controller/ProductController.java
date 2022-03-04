@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.dao.CartDAO;
 import com.example.demo.dao.Pro_add_optionDAO;
 import com.example.demo.dao.ProductDAO;
 
@@ -38,6 +39,7 @@ public class ProductController {
 	
 	@Autowired
 	private Pro_add_optionDAO prodao;
+	
    
 	//-------------------shop main----------------
 	@RequestMapping("/shop/listProduct_home")
@@ -83,7 +85,7 @@ public class ProductController {
 			dao.updateHit(no);				 	
 			model.addAttribute("p", dao.findByNo(no));	  	
 		 	model.addAttribute("cnt", dao.findOptionView(no));
-		 	model.addAttribute("cnt", dao.findOptionView(no));
+		 	model.addAttribute("option", dao.findOptionName(no));
 		 	model.addAttribute("op", dao.findOption(no));
 		}
 		
@@ -93,6 +95,7 @@ public class ProductController {
 		public void detailProduct_admin(int no, Model model) {	
 			model.addAttribute("p", dao.findByNo(no));	  	
 		 	model.addAttribute("cnt", dao.findOptionView(no));
+		 	model.addAttribute("option", dao.findOptionName(no));
 			model.addAttribute("findOptionByProNo", prodao.findOptionByProNo(no));
 			
 		}
@@ -213,6 +216,8 @@ public class ProductController {
 	
 	
 	//-----------------옵션-------------------
+
+		
 		@RequestMapping(value = "/admin/insertProductOption", method = RequestMethod.GET)
 		public void insertOptionForm(int no, Model model) {		
 			model.addAttribute("p", dao.findByNo(no));
@@ -246,7 +251,7 @@ public class ProductController {
 	//--구매시의 옵션 추가 ajax	
 		@ResponseBody
 		@RequestMapping("/findOptionName")
-		public List<ProductVO> findOptionName(int no) {		 
+		public ProductVO findOptionName(int no) {		 
 			return dao.findOptionName(no);	  	
 		}
 		

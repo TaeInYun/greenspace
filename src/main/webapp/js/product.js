@@ -46,48 +46,144 @@ function insertCartMSG(msg){
 	span.append( $("<a></a>").attr("href","./cart").html("장바구니로 가기") )
 	$("#btns").append(span);
 }
+//위시리스트 추가 메세지
+function insertWishMSG(msg){
+	let span = $("<span></span>").attr("class","animate");
+	span.html(msg);
+	span.append( $("<a></a>").attr("href","./wishList").html("위시리스트로 가기") )
+	$("#btns").append(span);
+}
 
-function getProductInfo(member_no, pro_price,pro_saleprice, pro_name, pro_no ) {
-
-	let cart_option = $("#pro_option_name > option:selected").text();
-	let option_detail = $("#pro_option_detail_name > option:selected").text();
-	let index = option_detail.indexOf("(");
-	let cart_option_detail = option_detail.substr(0,index);
-	let cart_qty = $("#qty").val();
-	let option_code = $("#pro_option_name > option:selected").val();
-	let option_detail_code = $("#pro_option_detail_name > option:selected").val();
-	
-	let option_price = $("#pro_option_detail_name > option:selected").val();
-	
-	//상품옵션이 아예없을경우
-	if(cart_option == null){
-		cart_option = "";
-		cart_option_detail="";
-	}
-	
-	if(cart_option == "선택" || option_detail == "선택"){
-		alert("옵션을 선택해주세요");
-		return
-	}
-	
-	// 상품가격 + 옵션가격
-	if(option_price != null && option_price!=""){
-		pro_price += Number(option_price)
-		pro_saleprice += Number(option_price)
-	}
-	
-	let data = {
+//카트 추가하기
+function insertCart(isOption,cart_option,pro_price,pro_saleprice, pro_name, pro_no ) {
+	// 옵션이 있는 상품
+	if(isOption != 0){
+		$.each( $("#optionList tr"), function(){
+			let selectOption = $(this).find("td");
+			let cart_option_detail = $(selectOption[0]).text();
+			let option_price = $(selectOption[1]).text();
+			let cart_qty = $($(this).find("#qty")).val();
+			
+			let totPrice = pro_price + Number(option_price)
+			let totSalePrice = pro_saleprice + Number(option_price)
+			
+			let data = {
+				cart_name: pro_name,
+				cart_price:totPrice,
+				cart_saleprice:totSalePrice,
+				pro_no:pro_no,
+				cart_option:cart_option,
+				cart_option_detail:cart_option_detail,
+				cart_qty:cart_qty
+			};
+			
+			$.ajax({
+				url:"isCart",
+				data:data,
+				success: function(cnt){
+					if(cnt == 0){ //장바구니에 없는 상품
+						$.ajax({
+							url: "insertCart",
+							data: data,
+							success: function(msg){
+								insertCartMSG(msg);
+							}
+						});//end insertCart ajax
+					}else{
+						insertCartMSG("이미 장바구니에 있는 상품입니다.");
+					} 					
+				}
+			});//end isCart
+		});//end each	
+	}else{
+		
+		let cart_qty = $("#qty").val();
+		
+		let data = {
 			cart_name: pro_name,
 			cart_price:pro_price,
 			cart_saleprice:pro_saleprice,
 			pro_no:pro_no,
-			cart_option:cart_option,
-			cart_option_detail:cart_option_detail,
-			cart_qty:cart_qty,
-			member_no:member_no,
-			option_code: option_code,
-			option_detail_code:option_detail_code
-	};
-	
-	return data;
+			cart_qty:cart_qty
+		};
+		
+		$.ajax({
+			url:"isCart",
+			data:data,
+			success: function(cnt){
+				if(cnt == 0){ //장바구니에 없는 상품
+					$.ajax({
+						url: "insertCart",
+						data: data,
+						success: function(msg){
+							insertCartMSG(msg);
+						}
+					});//end insertCart ajax
+				}else{
+					insertCartMSG("이미 장바구니에 있는 상품입니다.");
+				} 					
+			}
+		});//end isCart	
+	}
+}
+
+
+//위시리스트 추가하기
+function insertWish(isOption,cart_option,pro_no ) {
+	// 옵션이 있는 상품
+	if(isOption != 0){
+		$.each( $("#optionList tr"), function(){
+			let selectOption = $(this).find("td");
+			let cart_option_detail = $(selectOption[0]).text();
+			
+			
+			let data = {
+				pro_no:pro_no,
+				cart_option:cart_option,
+				cart_option_detail:cart_option_detail
+			};
+			
+			$.ajax({
+				url: "isWishList",
+				data: data,
+				success: function(cnt){
+					if(cnt == 0){
+						$.ajax({
+							url: "insertWishList",
+							data: data,
+							success: function(msg){
+								insertWishMSG(msg);
+							}
+						});//end insertWishList ajax
+					}else{
+						alert("위시리스트에 존재하는 상품입니다.");
+					}
+				}
+			});//end isWishList
+			
+		});//end each	
+	}else{
+		
+		let data = {
+			pro_no:pro_no
+		};
+		
+		$.ajax({
+			url: "isWishList",
+			data: data,
+			success: function(cnt){
+				if(cnt == 0){
+					$.ajax({
+						url: "insertWishList",
+						data: data,
+						success: function(msg){
+							insertWishMSG(msg);
+						}
+					});//end insertWishList ajax
+				}else{
+					alert("위시리스트에 존재하는 상품입니다.");
+				}
+			}
+		});//end isWishList
+	}
 }

@@ -5,8 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
+<script type="text/javascript" src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
 function kakaopost(){
     new daum.Postcode({
         oncomplete: function(data) {
@@ -19,6 +20,11 @@ function kakaopost(){
         }
     }).open();
  }
+ 
+var selectBoxChange = function(value){
+	 console.log("값변경테스트:"+value);
+	 $("#changeTest").val(value);
+}
 </script>
 </head>
 <body>
@@ -31,7 +37,12 @@ function kakaopost(){
 		<input type="hidden" name="no" value="${a.no }"> <br> <!-- hidden -->
 		 <input type="button" value="우편번호찾기" onclick="kakaopost()">
 		<!--메인/서브: -->
-		<input type="hidden" name="addr_main" value="${a.addr_main} "> <br> 
+		<%-- <input type="hidden" name="addr_main" value="${a.addr_main} "> <br> --%> 
+		<input type="hidden" id="changeInput"/>
+		<select id="changeTest" onchange="selectBoxChage(this.value);">
+		  <option value=1>메인</option>
+		  <option value=0>서브</option>
+		</select> <br>
 		우편번호: <input type="text" name="addr_postal" id="addr_postal" value="${a.addr_postal}"> <br>
 		주소: <input type="text" name="addr_road" id="addr_road" value="${a.addr_road}"> <br>			
 		주소상세: <input type="text" name="addr_detail" id="addr_detail" value="${a.addr_detail}"> <br> 

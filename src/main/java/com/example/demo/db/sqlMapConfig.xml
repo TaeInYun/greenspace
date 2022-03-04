@@ -12,6 +12,9 @@
   	<typeAlias type="com.example.demo.vo.MyWishVO" alias="myWishVO"/>
   	<typeAlias type="com.example.demo.vo.MyReviewVO" alias="myreviewVO"/>
 	<typeAlias type="com.example.demo.vo.OrderListVO" alias="orderListVO"/>
+	<typeAlias type="com.example.demo.vo.OrdersVO" alias="ordersVO"/>
+	<typeAlias type="com.example.demo.vo.OrdersProductVO" alias="ordersProductVO"/>
+	<typeAlias type="com.example.demo.vo.OrderBillVO" alias="orderBillVO"/>
   	<typeAlias type="com.example.demo.vo.ProductVO" alias="productVO"/>
   	<typeAlias type="com.example.demo.vo.ChallengeVO" alias="challengeVO"/>
   	<typeAlias type="com.example.demo.vo.WishListVO" alias="wishListVO"/>
@@ -21,6 +24,10 @@
 	<typeAlias type="com.example.demo.vo.CerBoardVO" alias="cerboardVO"/>
 	<typeAlias type="com.example.demo.vo.QnaVO" alias="qnaVO"/>
 	<typeAlias type="com.example.demo.vo.CommunityVO" alias="communityVO"/>
+	<typeAlias type="com.example.demo.vo.EasyToStartVO" alias="EasyToStartVO"/>
+    <typeAlias type="com.example.demo.vo.NoticeVO" alias="noticeVO"/>
+	
+
   </typeAliases>
   <environments default="development">  
     <environment id="development">
@@ -42,6 +49,8 @@
      <mapper resource="com/example/demo/db/myreviewMapper.xml"/> 
      <mapper resource="com/example/demo/db/memberMapper.xml"/> 
 	<mapper resource="com/example/demo/db/orderListMapper.xml"/> 
+	<mapper resource="com/example/demo/db/ordersMapper.xml"/> 
+	<mapper resource="com/example/demo/db/ordersProductMapper.xml"/> 
   	<mapper resource="com/example/demo/db/pro_add_optionMapper.xml"/> 
 	<mapper resource="com/example/demo/db/challengeMapper.xml"/> 
 	<mapper resource="com/example/demo/db/wishListMapper.xml"/> 
@@ -50,5 +59,8 @@
 	<mapper resource="com/example/demo/db/cerboardMapper.xml"/>  
 	<mapper resource="com/example/demo/db/qnaMapper.xml"/>  
 	<mapper resource="com/example/demo/db/communityMapper.xml"/>  
+	<mapper resource="com/example/demo/db/easyToStartMapper.xml"/>
+    <mapper resource="com/example/demo/db/noticeMapper.xml"/>
+	
   </mappers>
 </configuration>

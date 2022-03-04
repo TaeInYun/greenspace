@@ -6,10 +6,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+
+var selectBoxChange = function(value){
+	 console.log("값변경테스트:"+value);
+	 $("#changeTest").val(value);
+}
+
+</script>
+
 </head>
 <body>
 	<form action="/mypage/listQna" method="post">
-						 	<select name="qnaColumn">
+						<input type="hidden" id="changeInput"/>
+						 	<select id="changeTest" onchange="selectBoxChange(this.value)">
 						 		<option value="">전체</option>
 						 		<option value=1>상품상세</option>
 						 		<option value=2>배송관련</option>
@@ -35,16 +46,19 @@
 							
 							<c:forEach var="q2" items="${q }">
 								<tr>													
-									<td>${ }</td>
-									<td><img  src="/upload/qna/${ }" width="100" height="100"></td>
+<<<<<<< HEAD
+=======
+									<td>${q2.img_name }</td>
+									<td><img  src="/upload/qna/${q2.img_name }" width="100" height="100"></td>													 
 									<td>
-										<a href="/mypage/detailQna?no=${}">${} </a>					
-									</td>				 
-									<td>${ }</td>
-									<td>${ }</td>
-									<td>${ }</td>
-									<td>${ }</td>
+									<a href="/mypage/detailQna?pro_name=${q2.pro_name}">${q2.pro_name }</a>	
+									</td>
+									<td>${q2.title }</td>
+									<td>${q2.qna_type }</td>
+									<td>${q2.day }</td>
+									<td>${q2.status }</td>
 								 
+>>>>>>> branch 'master' of https://github.com/TaeInYun/greenspace.git
 									
 								</tr>	
 							</c:forEach>

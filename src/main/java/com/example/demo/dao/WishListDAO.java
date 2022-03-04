@@ -26,4 +26,8 @@ public class WishListDAO {
 	public int insert(WishListVO w) {
 		return DBManager.insertWishList(w);
 	}
+	
+	public int isWishList(WishListVO w) {
+		return DBManager.isWishList(w);
+	}
 }

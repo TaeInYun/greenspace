@@ -11,9 +11,7 @@
 		) 
 		values(seq_wishlist.nextval, #{pro_no}, #{member_no}
 		<if test="pro_add_option_no != ''">
-			, (select no from pro_add_option 
-			where pro_no=#{pro_no} and pro_option_code=#{option_code},
-			and pro_option_detail_code=#{option_detail_code})
+			,#{pro_add_option_no}
 		</if>
 		)
 	</insert>
@@ -41,12 +39,12 @@
 	<select id="cntOfWishList" resultType="Integer">
 		select nvl( count(*), 0) as cnt from wishlist where member_no = #{member_no}
 	</select>
-	<select id="isWishList">
-		select count(*) cnt from wishlist where member_no=2 and pro_no=1
+	<select id="isWishList" resultType="Integer">
+		select count(*) cnt from wishlist where member_no=#{member_no} and pro_no=#{pro_no}
 		<if test="pro_add_option_no != ''">
 			and pro_add_option_no = (select no from pro_add_option 
-			where pro_no=#{pro_no} and pro_option_code=#{option_code},
-			and pro_option_detail_code=#{option_detail_code})
+			where pro_no=#{pro_no} and pro_option_code= (SELECT pro_option_code from pro_option WHERE pro_option_name = #{pro_option_name}),
+			and pro_option_detail_code=(SELECT pro_option_detail_code from pro_option_detail WHERE pro_option_detail_name=#{pro_option_detail_name}))
 		</if>
 	</select>
 	<delete id="deleteWishList" parameterType="Integer">
