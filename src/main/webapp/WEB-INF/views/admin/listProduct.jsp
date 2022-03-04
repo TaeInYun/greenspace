@@ -75,10 +75,8 @@
  
 									<td> <a id="updateProduct" data-toggle="modal" data-target="#updateModal" role="button" href="/admin/updateProduct?no=${p.no }">수정</a></td>
 									<td> <a id="deleteProduct" data-toggle="modal" data-target="#deleteModal" role="button" href="/admin/deleteProduct?no=${p.no }">삭제</a></td>
-									<td> <a href="/admin/insertProductOption?no=${p.no }">옵션</a></td>
-									
+									<td> <a id="option" data-toggle="modal" data-target="#deleteModal" role="button" href="/admin/insertProductOption?no=${p.no }">옵션</a></td>
 									 
- 
 								 
 								</tr>	
 				 	
@@ -106,7 +104,12 @@
 					  			 				</div> 
 					  			 		    </div>
 					  			 		    
-					  			 		     
+					  			 		     <div id="optionModal" class="modal fade" tabindex="-1" role="dialog"> 
+					  			 				<div class="modal-dialog"> 
+					  			 					<div class="modal-content"> 
+					  			 					</div> 
+					  			 				</div> 
+					  			 		    </div>
 
  
 					  			 			

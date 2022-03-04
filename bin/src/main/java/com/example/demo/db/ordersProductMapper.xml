@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ordersProduct">
+  <insert id="insertOrdersProduct" parameterType="HashMap">
+  	insert into orders_product(no, ord_pro_qty, ord_pro_price,pro_no,ord_no
+  	<if test="pro_add_option_no != 0 and pro_add_option_no != null">
+  		, pro_add_option_no
+  	</if>
+  	)
+  	 values
+  	 (seq_orders_product.nextval, 
+  	  #{ord_pro_qty}, 
+  	  #{ord_pro_price},
+  	 #{pro_no}, 
+  	 (select max(no) from orders)
+  	  <if test="pro_add_option_no != 0 and pro_add_option_no != null">
+  		,#{pro_add_option_no}
+  	</if>
+  	 )
+  </insert>
+</mapper>

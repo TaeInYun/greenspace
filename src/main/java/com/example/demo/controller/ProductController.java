@@ -327,10 +327,9 @@ public class ProductController {
  
 		
 		@RequestMapping(value = "/admin/deleteProductOption", method = RequestMethod.GET)
-		public void deleteProductOptionget(int no, Model model,Pro_add_optionVO po,int pro_no ) {
-			 model.addAttribute("po", po);
+		public void deleteProductOptionget(int no, Model model,int pro_no ) {			 
+			 model.addAttribute("no", no);
 			 model.addAttribute("pro_no", pro_no);
-			
 		}
 
 		
@@ -338,10 +337,11 @@ public class ProductController {
 		
 		
 		@RequestMapping(value = "/admin/deleteProductOption", method = RequestMethod.POST)
-		public ModelAndView deleteProductOption( int no, Model model,Pro_add_optionVO po,int pro_no) {
+		public ModelAndView deleteProductOption( int no, Model model,int pro_no) {
 			//admin/insertProductOption?no=31
-			model.addAttribute("po", po); //no: 옵션에대한 no , insertProductOption로 갈 때 : 상품 no
-			ModelAndView mav = new ModelAndView("redirect:/admin/insertProductOption?"+"?no="+pro_no);	
+			
+			ModelAndView mav = new ModelAndView("redirect:/admin/insertProductOption"+"?no="+pro_no);
+			
 			
 			HashMap map= new HashMap();
 			map.put("pro_no", pro_no);

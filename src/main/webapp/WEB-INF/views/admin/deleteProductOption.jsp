@@ -5,6 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+
+let pro_no=${p.no}
+alert(pro_no)
+
+</script>
 </head>
 <body>
  
@@ -21,8 +28,8 @@
  
 			<form action="/admin/deleteProductOption" method="post">
 					<p>정말로 삭제하시겠습니까?<p>	 
-					<input type="hidden" name="no" value="${po.no}">		 				
-					<input type="hidden" name="pro_no" value="${p.no}">		 				
+					<input type="hidden" name="no" value="${no}">		 				
+					<input type="hidden" name="pro_no" value="${pro_no}">		 				
 					<button class="btn btn-lg btn-primary btn-block" type="submit">삭제</button> 
 			</form> 
 	</div> 

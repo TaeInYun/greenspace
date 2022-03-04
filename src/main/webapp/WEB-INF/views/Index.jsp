@@ -10,11 +10,11 @@ body { margin:0; padding:0; }
 div#root { width:900px; margin:0 auto; }
 header#header div#header_box { text-align:center; padding:30px 0; }		 
 section#content {   width:950px;text-align:center; } 
-section#content .sigleBox {   width:100%;  background: green; margin-bottom: 10px; border-style: solid; } 
-section#content .photo {    float:right;   border-style: solid; width: 47%; height: 300px; margin-top:170px; margin-right: 10px;  } 
-section#content .textBOX {    float:left; border-style: solid; width: 45%; height: 100%; background: pink; display: inline;  } 
-section#content .title {  border-style: solid; text-align: center; font-size: 30px; font-style: oblique; margin: 30px;line-height: 50px; clear: both;} 
-section#content .textBOX_content {     margin:10px; border-style: solid;   text-align: center; font-size: 20px; line-height: 30px; clear: both; } 
+section#content .sigleBox {  background-color:#03A65A; width:100%;    margin-bottom: 10px;   } 
+section#content .photo {    float:right;    width: 47%; height: 300px; margin-top:170px; margin-right: 10px;  } 
+section#content .textBOX {    float:left;   width: 45%; height: 100%;  display: inline;  } 
+section#content .title {   text-align: center; font-size: 30px; font-style: oblique; margin: 30px;line-height: 50px; clear: both;} 
+section#content .textBOX_content {     margin:10px;     text-align: center; font-size: 20px; line-height: 30px; clear: both; } 
 .textBOX_link{
 margin:10px;
 margin-top: 40px;
