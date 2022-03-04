@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,14 +8,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<table border="!", width="80%">
+	<h2>주문 상세 내역</h2>
+	<br>
+	<h5>주문번호 : ${id } / 주문일자 : ${day }</h5>
+	<table border="1" width="80%">
 		<thead>
 			<tr>
-				<td>상품 정보</td>
-				<td>주문 일자</td>
-				<td>주문 번호</td>
-				<td>주문 금액(수량)</td>
-				<td>주문 상태</td>
+				<td>주문상품 정보</td>
+				<td>판매가</td>
+				<td>수량</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -41,24 +42,17 @@
 						</div>
 					</td>
 					<td>
-						${c.day }
+						${c.pro_price }
 					</td>
 					<td>
-						<a href="/shop/detailOrderList?id=${c.id }&&day=${c.day}">
-							${c.id }
-						</a>
-					</td>
-					<td>
-						${c.pro_price }원<br>
-						(${c.pro_qty }개)
-					</td>
-					<td>
-						${c.status }
-						<input type="button" value="후기 작성">
+						${c.pro_qty }개
 					</td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	<div>
+		<h5>주문자 정보</h5>
+	</div>
 </body>
 </html>

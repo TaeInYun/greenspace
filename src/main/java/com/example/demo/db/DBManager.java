@@ -24,6 +24,7 @@ import com.example.demo.vo.Pro_add_optionVO;
 import com.example.demo.vo.OrderListVO;
 import com.example.demo.vo.OrdersProductVO;
 import com.example.demo.vo.OrdersVO;
+import com.example.demo.vo.PointVO;
 import com.example.demo.vo.ProductVO;
 import com.example.demo.vo.QnaVO;
 import com.example.demo.vo.ReviewVO;
@@ -539,6 +540,12 @@ public class DBManager {
 		session.close();
 		return m;
 	}
+	public static MemberVO orderInfo(int member_no) {
+		SqlSession session = factory.openSession();
+		MemberVO m = session.selectOne("member.orderInfo", member_no);
+		session.close();
+		return m;
+	}
 
 
 	public static String updatePwd(HashMap<String,String> m) {
@@ -596,6 +603,13 @@ public class DBManager {
 		
 		SqlSession session = factory.openSession();
 		List<OrderListVO> o = session.selectList("orderList.findAllOrderListByMemberNo", member_no);
+		session.close();
+		return o;
+	}
+	public static List<OrderListVO> findOrderListByOrdId(String id) {
+		
+		SqlSession session = factory.openSession();
+		List<OrderListVO> o = session.selectList("orderList.findOrderListByOrdId", id);
 		session.close();
 		return o;
 	}
@@ -833,7 +847,13 @@ public class DBManager {
 		return cnt;
 	}
 	
-	
-
+	//--------------POINT (포인트 관련) ----------
+	public static int insertPoint(PointVO p) {
+		SqlSession session = factory.openSession();
+		int re = session.insert("point.insert", p);
+		session.commit();
+		session.close();
+		return re;
+	}
 	 
 }

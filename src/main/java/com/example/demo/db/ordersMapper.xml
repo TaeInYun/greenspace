@@ -93,4 +93,18 @@
 		o.receiver_no = #{receiver_no}
 	</if>
   </select>
+  <select id="receiverInfoByOrdId">
+  	SELECT
+	receiver_no, address_no, ord_price, ord_use_point,
+	(
+		SELECT sum(ord_pro_price * ord_pro_qty)
+	FROM
+	orders_product op
+	WHERE
+	ord.no = op.ord_no) as ord_price
+	FROM
+	orders ord
+	WHERE
+	ord_id = #{ord_id}
+  </select>
 </mapper>
