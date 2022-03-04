@@ -11,6 +11,8 @@
 $(function(){  	
 	
 	
+	
+	
 		$(document).on("change","#pro_option_code",function(){	
 			let pro_option_code =$("#pro_option_code > option:selected").val();
 			let data={pro_option_code:pro_option_code};
@@ -34,8 +36,10 @@ $(function(){
 				$("#pro_option_detail_code > option:selected").prop('disabled',true);
 			}	
 		  
-		}) 
- 
+		})
+		
+		
+ 	 
 			   
 })//FUNCTION
 
@@ -83,8 +87,11 @@ $(function(){
 		 </c:if>
 		  	
 		 <c:if test="${cnt>=1 }">						 	 	
-		 	  <table border="1" width="80%">
-				<tr>
+		 	
+			 
+			  <table border="1" width="80%">
+				<tr>	
+					<td>번호</td>
 					<td> 옵션명 </td>
 					<td> 옵션상세명</td>
 					<td> 설정</td>
@@ -92,12 +99,23 @@ $(function(){
 				 
 				<c:forEach var="findOptionByProNo" items="${findOptionByProNo}">		
 					<tr>
+						<td class="${findOptionByProNo.no}">${findOptionByProNo.no }</td>				 
 						<td class="${findOptionByProNo.pro_option_code}">${findOptionByProNo.pro_option_name }</td>				 
 						<td class="${findOptionByProNo.pro_option_detail_code }">${findOptionByProNo.pro_option_detail_name }</td>
-				 		<td><a href="../admin/deleteProductOption?no=${findOptionByProNo.no}"><button>삭제</button></a></td>   
+						<td> <a id="deleteOption" data-toggle="modal" data-target="#deleteOptionModal" role="button"  href="../admin/deleteProductOption?no=${findOptionByProNo.no}">삭제</a></td>
+									
 					</tr>
 				</c:forEach>
-			</table>			 
+				
+			
+			</table>		 
+			
+					  			 			
+					  			 		    	 
 		 </c:if>	
+		 
+		 
+		 
+		 						
 </body>
 </html>

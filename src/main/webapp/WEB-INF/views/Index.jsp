@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<h2>INDEX</h2>
+ 
+		<div>
+			<img src="../images/main.png">
+				 
+		</div>
 </body>
 </html>

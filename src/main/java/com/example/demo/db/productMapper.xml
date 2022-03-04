@@ -8,17 +8,14 @@
   <!--관리자 상품 리스트-->	
   <select id="findAll" resultType="productVO">
     	select no ,pro_name, pro_brand, pro_price, pro_saleprice, pro_stock, PRO_THUMBNAIL from (
-		select rownum num, no ,pro_name, pro_brand, pro_price, pro_saleprice, pro_stock, PRO_THUMBNAIL from
-		(select no, pro_name, pro_brand, pro_price, pro_saleprice, pro_stock, PRO_THUMBNAIL from PRODUCT 
+		select rownum num, no ,pro_name, pro_brand, pro_price, pro_saleprice, pro_stock, PRO_THUMBNAIL  from
+		(select no, pro_name, pro_brand, pro_price, pro_saleprice, pro_stock, PRO_THUMBNAIL  from PRODUCT 
 			<if test="keyword != null">
 				where pro_name like '%'||#{keyword}||'%' 
-			</if>		
-			<if test="searchColumn != null">
-				order by ${searchColumn}
-			</if>		 
+			</if>				 
 		))
 	where num between #{start} and #{end}     
-	order by no
+	order by num
   </select>  
 	
  
@@ -28,10 +25,6 @@
   	<if test="keyword != null">
 			where pro_name like '%'||#{keyword}||'%' 
 	</if>
-	
-	<if test="searchColumn != null">
-			cat_code=${searchColumn}
-	</if> 
   </select>
   
   
@@ -147,7 +140,8 @@
              0,             
     #{pro_content},
     #{cat_code},
-    #{PRO_THUMBNAIL}
+    #{PRO_THUMBNAIL2},
+    #{PRO_THUMBNAIL1}
     )
   </insert>
  

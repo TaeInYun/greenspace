@@ -7,13 +7,22 @@
 <meta charset="UTF-8">
 <title>관리자설정_상품목록</title>
 <link href="/css/shop.css" rel="stylesheet"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/js/qty.js"></script>
 <script type="text/javascript" src="/js/cart.js"></script>
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
+ $function(){
+	  
+	 $("#deleteProduct").find(".modal-content").load("/admin/deleteProduct?no=${p.no }"); 
+	 $("#updateProduct").find(".modal-content").load("/admin/updateProduct?no=${p.no }"); 
 	 
+ }
 </script>
 </head>
 <body>
@@ -32,17 +41,6 @@
 					 	<H2>상품목록</H2>
 					 	
 					 	<form action="/admin/listProduct" method="post">
-						 	<select name="searchColumn">
-						 		<option value="">전체</option>
-						 		<option value="PBA">욕실</option>
-						 		<option value="PKI">주방</option>
-						 		<option value="PFO">식품</option>
-						 		<option value="PCO">화장품</option>
-						 		<option value="PPE">애완용품</option>
-						 		<option value="POF">사무용품</option>
-						 		<option value="PDA">일상용품</option>
-						 	</select>
-						  
 						 	<input type="text" name="keyword">
 							<input type="submit" value="검색">
 						</form>
@@ -72,16 +70,51 @@
 									<td>${p.pro_saleprice }</td>
 									<td>${p.pro_stock }</td>
 								 
-									<td><button><a  href="/admin/updateProduct?no=${p.no }">수정</a></button></td>
-									<td><button><a  href="/admin/deleteProduct?no=${p.no }">삭제</a></button></td>
-									<td><button><a  href="/admin/insertProductOption?no=${p.no }">옵션</a></button></td>
+									 
+							 
+ 
+									<td> <a id="updateProduct" data-toggle="modal" data-target="#updateModal" role="button" href="/admin/updateProduct?no=${p.no }">수정</a></td>
+									<td> <a id="deleteProduct" data-toggle="modal" data-target="#deleteModal" role="button" href="/admin/deleteProduct?no=${p.no }">삭제</a></td>
+									<td> <a href="/admin/insertProductOption?no=${p.no }">옵션</a></td>
+									
+									 
+ 
+								 
 								</tr>	
+				 	
+											
+ 
+								
 							</c:forEach>
 						</table>
+						
+						
+					  			 			<!-- 모달창 -->
+					  			 			<div id="updateModal" class="modal fade" tabindex="-1" role="dialog"> 
+					  			 				<div class="modal-dialog"> 
+					  			 					<div class="modal-content"> 
+					  			 					</div> 
+					  			 				</div> 
+					  			 		    </div>
+					  			 			
+					  			 			
+					  			 			
+					  			 			<div id="deleteModal" class="modal fade" tabindex="-1" role="dialog"> 
+					  			 				<div class="modal-dialog"> 
+					  			 					<div class="modal-content"> 
+					  			 					</div> 
+					  			 				</div> 
+					  			 		    </div>
+					  			 		    
+					  			 		     
+
+ 
+					  			 			
+					  			 			
 							<c:forEach var="i" begin="1" end="${totalPage }">
 								<a href="/admin/listProduct?pageNUM=${i }">${i }</a>&nbsp;&nbsp;
 							</c:forEach>	
-					  			 
+ 
 					</section>					
 					 
 					<aside id="aside">

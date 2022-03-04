@@ -267,9 +267,9 @@ public class DBManager {
 	
 	
 	//------------------------상품 자체 옵션(Pro_add_optionVO)--------------
-	public static int deletePro_add_option(int no) {
+	public static int deletePro_add_option(Pro_add_optionVO po) {
 		SqlSession session = factory.openSession();
-		int re=session.delete("pro_add_option.delete", no);
+		int re=session.delete("pro_add_option.delete", po);
 		session.commit();
 		session.close();
 		return re;

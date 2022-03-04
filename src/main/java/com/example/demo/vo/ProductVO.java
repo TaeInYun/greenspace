@@ -20,9 +20,11 @@ public class ProductVO {
 	private String pro_content;
 	private String cat_code;
 	private String cat_name;
-	private String img;
+ 
 	
 	private String PRO_THUMBNAIL;
+	 
+	 
 	private String pro_option_code;
 	private String pro_option_name;
 	private String pro_option_detail_name;
@@ -31,11 +33,10 @@ public class ProductVO {
 	
 	private int pro_add_price;
 	private int sum;
-	
-		
-	
-	
+	 
 	
 	
 	private MultipartFile uploadFile;
+	 
+	
 }

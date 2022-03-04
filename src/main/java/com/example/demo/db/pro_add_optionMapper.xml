@@ -25,7 +25,7 @@
   	</select>
   
   	
-	<delete id="delete">
+	<delete id="delete"  parameterType="pro_add_optionVO">
   		delete pro_add_option where no=#{no} 
 	</delete>
  

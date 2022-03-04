@@ -4,11 +4,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8"><title>관리자설정_${p.pro_name }_상세페이지</title>
 <link href="/css/shop.css" rel="stylesheet"/> 	 
-<title>관리자설정_${p.pro_name }_상세페이지</title>
  
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+ $(function(){
+	  
+	 
+ })
+ </script>
 </head>
 <body>
 	<div id="root">
@@ -71,18 +82,13 @@
 							<span> ${p.pro_hit }</span>
 						</div>	
 						 
-						<div class="label" >
-							<label for="PRO_THUMBNAIL">사진</label><br>
-							 <img  src="/upload/${p.PRO_THUMBNAIL }" width="200" height="200"><br>
-						</div> 
-						
 						
 						
 						<hr>
 						 <p>옵션설정</p>	
 						 <c:if test="${cnt<1 }">	
 					 		<P>옵션이 없습니다:(</P>
-					 		<button><a href="/admin/insertProductOption?no=${p.no}">옵션추가</a></button>
+					 		<td> <a id="option" data-toggle="modal" data-target="#optionModal" role="button" href="/admin/insertProductOption?no=${p.no }">추가</a></td>
 						 </c:if>
 						  	
 						 <c:if test="${cnt>=1 }">
@@ -91,18 +97,21 @@
 								<tr>
 									<td> 옵션명 </td>
 									<td> 옵션상세명</td>
-									<td> 설정</td>
+									 
 								</tr>
 								
 								<c:forEach var="findOptionByProNo" items="${findOptionByProNo}">		
 									<tr>
-										<td><a href="../admin/insertProductOption?no=${p.no }">${findOptionByProNo.pro_option_name }</a></td>				 
-										<td><a href="../admin/insertProductOption?no=${p.no }">${findOptionByProNo.pro_option_detail_name }</a></td>
-								 		<td><a href="../admin/deleteProductOption?no=${findOptionByProNo.no}"><button>삭제</button></a></td>   
+										<td>${findOptionByProNo.pro_option_name }</td>				 
+										<td>${findOptionByProNo.pro_option_detail_name }</td>
+								  
 									</tr>
 								</c:forEach>
 						</table>			 
 						 </c:if>	
+						 
+						  
+						 
 						
 						  
 					</section><!-- 본문 -->					

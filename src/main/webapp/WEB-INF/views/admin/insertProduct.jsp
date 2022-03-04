@@ -6,14 +6,27 @@
 <meta charset="UTF-8">
 <title>관리자설정_상품등록</title>
 <link href="/css/shop.css" rel="stylesheet"/> 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
-<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script> 
-<script type="text/javascript">
 
-$(function(){
  
-	 
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" ></script>
+<script src = "http://code.jquery.com/jquery-latest.js"></script>
+ 
+<script>
+$(function(){
+	$("#PRO_THUMBNAIL").change(function(){
+		 if(this.files && this.files[0]) {
+		  var reader = new FileReader;
+		  reader.onload = function(data) {
+		   $(".select_img img").attr("src", data.target.result).width(500);        
+		  }
+		  reader.readAsDataURL(this.files[0]);
+		 }
+		});
 })
+
 
 </script>
 </head>
@@ -80,14 +93,12 @@ $(function(){
 							<textarea rows="10" cols="80" name="pro_content"></textarea>
 						</div>	
 					  		 
-								
-						<div class="inputArea">
-							<label for="PRO_THUMBNAIL">이미지</label>
-							<input type="file" id="PRO_THUMBNAIL" name="uploadFile" />
-							
-							<div class="select_img"><img src="" /></div>		
-						</div>					 
-						 
+						 <div class="inputArea">
+							 <label for="PRO_THUMBNAIL">이미지</label>
+							 <input type="file" id="PRO_THUMBNAIL" name="uploadFile" />
+							  
+						</div>
+											 
 						<input type="submit" value="등록" id="optionButton">
 						<input type="reset" value="취소">
 					</form>
@@ -99,6 +110,7 @@ $(function(){
 			</div><!-- 전체  section box-->
 		</section>
 </div>
+
 
 
 
