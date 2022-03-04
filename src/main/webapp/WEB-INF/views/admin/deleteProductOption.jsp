@@ -19,7 +19,7 @@ alert(pro_no)
 	
 	
 	
-	<div class="card align-middle"> 
+<div class="card align-middle"> 
 	<div class="card-title"> 
 		<h2 class="card-title text-center">옵션삭제</h2> 
 	</div> 
