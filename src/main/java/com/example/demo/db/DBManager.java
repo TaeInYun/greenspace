@@ -244,7 +244,7 @@ public class DBManager {
 	}	
  	
  
-	 	public static List<ProductVO> findOptionDetailName(HashMap map){
+	 public static List<ProductVO> findOptionDetailName(HashMap map){
 		SqlSession session = factory.openSession();
 		List<ProductVO> list= session.selectList("product.findOptionDetailName",map);
 		session.close();
