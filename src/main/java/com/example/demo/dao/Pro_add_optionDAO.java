@@ -23,8 +23,8 @@ public class Pro_add_optionDAO {
 		return DBManager.findOptionByProNo(no);
 	}
 	
-	public int findProAddPriceNo(int no) {
-		return DBManager.findProAddPriceNo(no);
+	public int findProAddPriceNo(HashMap map) {
+		return DBManager.findProAddPriceNo(map);
 	}
 	public int findProAddOptionNoForWishList(HashMap map) {
 		return DBManager.findProAddOptionNoForWishList(map);

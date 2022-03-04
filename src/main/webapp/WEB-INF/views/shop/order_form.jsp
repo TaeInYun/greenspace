@@ -51,7 +51,6 @@
 			}
 			
 			if(usePoint > totalPrice){
-				alert("사용 적립금이 최종 결제금액을 초과하였습니다.");
 				$("#usePoint").val(totalPrice);
 			}
 			

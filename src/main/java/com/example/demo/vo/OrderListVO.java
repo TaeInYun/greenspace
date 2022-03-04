@@ -8,7 +8,7 @@ public class OrderListVO {
 	//주문정보
 	private String id;
 	private String status;
-	private Date day;
+	private String day;
 	private int delivery_price;
 	private String delivery_number;
 	
@@ -29,6 +29,7 @@ public class OrderListVO {
 	private String payment;
 	
 	//상품정보
+	private int pro_no;
 	private String pro_name;
 	private String option_name;
 	private String option_detail;
