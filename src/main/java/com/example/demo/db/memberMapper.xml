@@ -44,9 +44,11 @@
 	   <select id="findPwdByPhone" parameterType="HashMap" resultType="int">
 	  	select count(*) from member where phone=#{phone} and id=#{id} 
 	  </select>
-	   <select id="updatePwd" parameterType="HashMap" resultType="String">
+	  
+ 		<update id="updatePwd" parameterType="HashMap">
   		update member set pwd=#{pwd} where id=#{id}
-	   </select>
+	   </update>
+
 	   
 		<select id="findAll" resultType="memberVO" >
 		select * from member
@@ -62,6 +64,12 @@
 	  <select id="mainMemberInfo" resultType="memberVO">
 	  SELECT nickname, levels, point_use FROM member where no = #{member_no}
 	  </select>
+	  
+	 
+	<select id="isMember" parameterType="HashMap" resultType="int">
+		select count(*) from member where id=#{id} and pwd=#{pwd}
+	</select>
+	  
 
 
 </mapper> 

@@ -16,9 +16,11 @@ import com.example.demo.vo.CerBoardVO;
 import com.example.demo.vo.ChallengeListVO;
 import com.example.demo.vo.ChallengeUserVO;
 import com.example.demo.vo.ChallengeVO;
+import com.example.demo.vo.EasyToStartVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.MyReviewVO;
 import com.example.demo.vo.MyWishVO;
+import com.example.demo.vo.NoticeVO;
 import com.example.demo.vo.Pro_add_optionVO;
 import com.example.demo.vo.OrderListVO;
 import com.example.demo.vo.OrdersProductVO;
@@ -532,6 +534,9 @@ public class DBManager {
 		session.close();
 		return re;
 	}
+	
+
+	
 	public static MemberVO getMemberInfo(int member_no) {
 		SqlSession session = factory.openSession();
 		MemberVO m = session.selectOne("member.mainMemberInfo", member_no);
@@ -540,12 +545,16 @@ public class DBManager {
 	}
 
 
-	public static String updatePwd(HashMap<String,String> m) {
+	//비밀번호 update
+	public static int updatePwd(HashMap<String,String> m) {
 		SqlSession session = factory.openSession();
-		String re = session.selectOne("member.updatePwd", m);
+		int re = session.update("member.updatePwd", m);
+		System.out.println("result: " + re);
+		session.commit();
 		session.close();
 		return re;
 	}
+
 	
 	public static int buyProduct(HashMap map) {
 		SqlSession session = factory.openSession();
@@ -814,7 +823,49 @@ public class DBManager {
 		return cnt;
 	}
 	
-	
+	//---------------EasyToStart---------------
+
+		//게시물 목록 불러오기
+		public static List<EasyToStartVO> getEasyToStartAll(){
+			SqlSession session = factory.openSession();
+			List<EasyToStartVO> list = session.selectList("easyToStart.getEasyToStartAll");
+			session.close();
+			return list;
+		}
+
+
+		//myPage.memberInfo
+
+		//회원 본인확인
+		public static int isMember(HashMap<String, String> hashMap){
+			SqlSession session = factory.openSession();
+			int re = session.selectOne("member.isMember", hashMap);
+			session.close();
+			return re;
+		}
+
+		//notice
+		public static List<NoticeVO> getList(){
+			SqlSession session = factory.openSession();
+			List<NoticeVO> list = session.selectList("notice.getList");
+			session.close();
+			return list;
+		}
+
+		public static List<NoticeVO> findAllNotice(HashMap map){
+			SqlSession session = factory.openSession();
+			List<NoticeVO> list = session.selectList("notice.findAll", map);
+			session.close();
+			return list;
+		}
+
+		public static int getTotalRecord(){
+			SqlSession session = factory.openSession();
+			int no = session.selectOne("notice.getTotalRecord");
+			session.close();
+			return no;
+		}
+
 
 	 
 }
