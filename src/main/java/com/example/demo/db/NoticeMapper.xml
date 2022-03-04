@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="notice">
+
+    <select id="getList" resultType="noticeVO">
+        select NOTICE_TITLE,NOTICE_DATE from NOTICE
+    </select>
+    
+    <select id="getTotalRecord" resultType="java.lang.Integer">
+        select count(*) from NOTICE
+    </select>
+        
+    <select id="findAll" resultType="noticeVO">
+        select no, notice_title, notice_content, notice_date, notice_hit from NOTICE
+        order by notice_date desc
+        offset #{start} rows fetch first #{end} rows only
+    </select>
+
+</mapper>

@@ -18,5 +18,9 @@ public class ChallengeUserDAO {
 	public List<ChallengeUserVO> listChgUserByMemberNO(int member_no){
 		return DBManager.listChgUserByMemberNO(member_no);
 	}
+	
+	public ChallengeUserVO getSaveTree(int member_no) {
+		return DBManager.getSaveTree(member_no);
+	}
 
 }

@@ -5,4 +5,96 @@
 <mapper namespace="orderList">
   <select id="insertOrderList" resultType="myWishVO">
   </select>
+    
+  <!-- 주문조회로그인 -->
+  <select id="LoginByOrderId" resultType="orderListVO">
+  select o.ord_id as id,receiver_name as name,receiver_phone as phone from orders o,receiver r 
+	where o.receiver_no = r.no
+	and receiver_name=#{receiver_name}
+ 	and ord_id=#{ord_id}
+  </select>
+  
+  <!-- 장바구니 - 처음 주문정보 -->
+  <select id="initOrderInfo" resultType="orderListVO">
+  	SELECT
+  	addr.no addr_no,
+	m.name name,
+	addr_postal, 
+	addr_road, 
+	addr_detail, 
+	addr_phone phone, 
+	addr_msg,
+	a.price pro_price, 
+	a.saleprice pro_saleprice,
+	a.discount pro_discount
+	FROM
+	address addr,
+	(SELECT no, name FROM member WHERE no = #{member_no}) m,
+	(
+	SELECT 
+	SUM(cart_price * CART_QTY) price, SUM(cart_saleprice*CART_QTY) saleprice, 
+	SUM(cart_price * CART_QTY) - SUM(cart_saleprice*CART_QTY) discount 
+    FROM 
+    cart 
+    WHERE 
+    member_no=#{member_no} 
+	) a
+	WHERE
+	addr.member_no = m.no
+	AND
+	addr_main = 1
+  </select>
+  <select id="findAllOrderListByMemberNo" resultType="orderListVO">
+	SELECT 
+	pao.pro_option_name AS option_name,
+	pro.no AS pro_no,
+	pao.pro_option_detail_name AS option_detail, 
+	pro.pro_name AS pro_name, 
+	pro_thumbnail,
+	op.ord_pro_qty AS pro_qty, 
+	op.ord_pro_price AS pro_price, 
+	TO_CHAR(ord_date, 'yyyy.mm.dd') AS day, 
+	ord_id AS id, 
+	os.ord_status_name AS status
+	FROM
+	(
+		SELECT
+		pao.no no,
+		poc.pro_option_name pro_option_name,
+		pod.pro_option_detail_name pro_option_detail_name
+		FROM
+		pro_add_option pao
+		, (
+			SELECT
+			pro_option_code,pro_option_name
+			FROM
+			pro_option
+		) poc,(
+			SELECT
+			pro_option_detail_code,pro_option_detail_name
+			FROM
+			pro_option_detail		
+		) pod
+		WHERE
+		poc.pro_option_code = pao.pro_option_code
+		AND
+		pod.pro_option_detail_code = pao.pro_option_detail_code
+	) pao,
+	orders_product op,
+	product pro,
+	orders ord,
+	orders_status os
+	WHERE
+	op.pro_add_option_no = pao.no(+)
+	AND
+	op.pro_no = pro.no
+	AND
+	ord.no = op.ord_no
+	AND
+	ord.ord_status_code = os.ord_status_code
+	AND
+	member_no = #{member_no}
+	ORDER BY
+    TO_CHAR(ord_date, 'yyyy.mm.dd'), ord_id
+  </select>
 </mapper>
