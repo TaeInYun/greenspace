@@ -61,6 +61,10 @@ public class MemberDAO {
 		return DBManager.updatePwd(m);
 	}
 
+	public int buyProduct(HashMap map) {
+		return DBManager.buyProduct(map);
+	}
+
 
 	public List<MemberVO> findAllMember(){
 		return DBManager.findAllMember();
@@ -70,5 +74,6 @@ public class MemberDAO {
 	public MemberVO getMemberInfo(int member_no){
 		return DBManager.getMemberInfo(member_no);
 	}
+	
 	
 }

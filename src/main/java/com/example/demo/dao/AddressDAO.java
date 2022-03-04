@@ -24,6 +24,7 @@ public class AddressDAO {
 		return DBManager.findAllAddressDetail(no);
 	}
 	
+	
 	//메인주소출력 one
 	public AddressVO allMainAddress(int member_no) {
 		return DBManager.allMainAddress(member_no);
@@ -39,6 +40,21 @@ public class AddressDAO {
 	
 	public int update(AddressVO a) {
 		return DBManager.updateAddress(a);
+	}
+
+	//메인배송지로 변경
+	public int updateMainBtn(AddressVO a) {
+		return DBManager.updateMainBtnAddress(a);
+	}
+	
+	//서브배송지로 변경
+	public int updateSubBtn(AddressVO a) {
+		return DBManager.updateSubBtnAddress(a);
+	}
+	
+	//메인베송지로 변경하면 나머지 서브로 	
+	public void updateBtn(int member_no) {
+		 DBManager.updateBtnAddress(member_no);
 	}
 	
 	public int delete(int no) {

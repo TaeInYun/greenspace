@@ -22,6 +22,7 @@
 			<form action="/admin/deleteProductOption" method="post">
 					<p>정말로 삭제하시겠습니까?<p>	 
 					<input type="hidden" name="no" value="${po.no}">		 				
+					<input type="hidden" name="pro_no" value="${p.no}">		 				
 					<button class="btn btn-lg btn-primary btn-block" type="submit">삭제</button> 
 			</form> 
 	</div> 

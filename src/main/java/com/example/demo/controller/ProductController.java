@@ -31,6 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.dao.CartDAO;
 import com.example.demo.dao.Pro_add_optionDAO;
 import com.example.demo.dao.ProductDAO;
 import com.example.demo.vo.Pro_add_optionVO;
@@ -50,12 +51,14 @@ public class ProductController {
 	@Autowired
 	private Pro_add_optionDAO prodao;
 	
+ 
 	@RequestMapping("/Index")
 	public void index() {	
 		
 	}
 	
 	
+ 
    
 	//-------------------shop main----------------
 	@RequestMapping("/shop/listProduct_home")
@@ -101,7 +104,7 @@ public class ProductController {
 			dao.updateHit(no);				 	
 			model.addAttribute("p", dao.findByNo(no));	  	
 		 	model.addAttribute("cnt", dao.findOptionView(no));
-		 	model.addAttribute("cnt", dao.findOptionView(no));
+		 	model.addAttribute("option", dao.findOptionName(no));
 		 	model.addAttribute("op", dao.findOption(no));
 		}
 		
@@ -111,8 +114,12 @@ public class ProductController {
 		public void detailProduct_admin(int no, Model model) {	
 			model.addAttribute("p", dao.findByNo(no));	  	
 		 	model.addAttribute("cnt", dao.findOptionView(no));
+
 			model.addAttribute("findOptionByProNo", prodao.findOptionByProNo(no));	
-			
+
+		 	model.addAttribute("option", dao.findOptionName(no));
+
+
 		}
 	
 	
@@ -264,6 +271,8 @@ public class ProductController {
 	}
  	  
 	//-----------------옵션-------------------
+
+		
 		@RequestMapping(value = "/admin/insertProductOption", method = RequestMethod.GET)
 		public void insertOptionForm(int no, Model model) {		
 			model.addAttribute("p", dao.findByNo(no));
@@ -275,7 +284,18 @@ public class ProductController {
 		}		
 		
 		
-		 
+		@RequestMapping(value = "/admin/insertProductOption", method = RequestMethod.POST)
+		public ModelAndView insertOptionSubmit(Model model,  Pro_add_optionVO po) {
+			 
+			ModelAndView mav = new ModelAndView("redirect:/admin/insertProductOption"+"?no="+po.getPro_no());	
+			int re= prodao.insert(po);
+			if(re!=1) {
+				 model.addAttribute("msg","옵션 삽입에 실패하였습니다");
+				 mav.setViewName("error");
+			}			
+			return mav;
+		}
+		
 		
 		
 	//--상품에 대한 옵션 추가 ajax	
@@ -289,7 +309,7 @@ public class ProductController {
 	//--구매시의 옵션 추가 ajax	
 		@ResponseBody
 		@RequestMapping("/findOptionName")
-		public List<ProductVO> findOptionName(int no) {		 
+		public ProductVO findOptionName(int no) {		 
 			return dao.findOptionName(no);	  	
 		}
 		
@@ -307,32 +327,28 @@ public class ProductController {
  
 		
 		@RequestMapping(value = "/admin/deleteProductOption", method = RequestMethod.GET)
-		public void deleteProductOptionget(int no, Model model,Pro_add_optionVO po ) {
-			model.addAttribute("po", po);
+		public void deleteProductOptionget(int no, Model model,Pro_add_optionVO po,int pro_no ) {
+			 model.addAttribute("po", po);
+			 model.addAttribute("pro_no", pro_no);
+			
 		}
 
 		
 		
-		@RequestMapping(value = "/admin/insertProductOption", method = RequestMethod.POST)
-		public ModelAndView insertOptionSubmit(Model model,  Pro_add_optionVO po) {
-			 
-			ModelAndView mav = new ModelAndView("redirect:/admin/insertProductOption"+"?no="+po.getPro_no());	
-			int re= prodao.insert(po);
-			if(re!=1) {
-				 model.addAttribute("msg","옵션 삽입에 실패하였습니다");
-				 mav.setViewName("error");
-			}			
-			return mav;
-		}
 		
 		
 		@RequestMapping(value = "/admin/deleteProductOption", method = RequestMethod.POST)
-		public ModelAndView deleteProductOption( Model model,Pro_add_optionVO po) {
+		public ModelAndView deleteProductOption( int no, Model model,Pro_add_optionVO po,int pro_no) {
+			//admin/insertProductOption?no=31
+			model.addAttribute("po", po); //no: 옵션에대한 no , insertProductOption로 갈 때 : 상품 no
+			ModelAndView mav = new ModelAndView("redirect:/admin/insertProductOption?"+"?no="+pro_no);	
 			
-			ModelAndView mav = new ModelAndView("redirect:/admin/insertProductOption"+"?no="+po.getPro_no());	
+			HashMap map= new HashMap();
+			map.put("pro_no", pro_no);
+			map.put("no", no);
 			
-			int re= prodao.delete(po);
-			
+			int re= prodao.delete(map);
+			System.out.println("상품번호 : "+pro_no);
 			if(re!=1) {
 				mav.setViewName("error");
 			} 

@@ -16,17 +16,35 @@
   	</insert>
   
   	<select id="findOptionByProNo" resultType="pro_add_optionVO">
-	  	select pao.no, pao.pro_option_code, pro_option_name, pao.pro_option_detail_code,pro_option_detail_name 
+	  	select pao.no, pro_no, pao.pro_option_code, pro_option_name, pao.pro_option_detail_code,pro_option_detail_name 
 		from pro_add_option pao, pro_option po, pro_option_detail pod
 		where pao.pro_option_code = po.pro_option_code and
 		pao.pro_option_detail_code =  pod.pro_option_detail_code and
 		pro_no=#{no}
 		 
   	</select>
-  
+  	<select id="findProAddPriceNo" resultType="Integer">
+  	 select no from pro_add_option
+  	 WHERE
+  	 pro_option_code = (SELECT pro_option_code FROM pro_option WHERE pro_option_name = (SELECT cart_option FROM cart WHERE no= #{no}))
+  	 AND 
+  	 pro_option_detail_code = (SELECT pro_option_detail_code FROM pro_option_detail WHERE pro_option_detail_name = (SELECT cart_option_detail FROM cart WHERE no= #{no}))
+	 AND
+	 pro_no = #{pro_no}  	
+  	</select>
   	
-	<delete id="delete"  parameterType="pro_add_optionVO">
-  		delete pro_add_option where no=#{no} 
+  	<select id="findProAddOptionNoForWishList" resultType="Integer">
+  	 select no from pro_add_option
+  	 WHERE
+  	 pro_option_code = (SELECT pro_option_code FROM pro_option WHERE pro_option_name = #{pro_option_name})
+  	 AND 
+  	 pro_option_detail_code = (SELECT pro_option_detail_code FROM pro_option_detail WHERE pro_option_detail_name = #{pro_option_detail_name})
+	 AND
+	 pro_no = #{pro_no}  	
+  	</select>
+  	
+	<delete id="delete" >
+  		delete pro_add_option where no=#{no} and pro_no=#{pro_no} 
 	</delete>
  
   

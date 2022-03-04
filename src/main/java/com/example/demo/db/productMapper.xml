@@ -84,7 +84,7 @@
  
  <!-- 상품에 있는 옵션이름 찾기(leve1) -->
   <select id="findOptionName" resultType="productVO" >
- 	select distinct po.pro_option_code, pro_option_name
+ 	select distinct po.pro_option_code as pro_option_code, pro_option_name
 	from pro_option po, pro_add_option pao
 	where po.pro_option_code= pao.pro_option_code and
 	pao.pro_no=#{no}
@@ -92,7 +92,7 @@
  
  <!-- 상품에 있는 자세한 옵션 이름 찾기(leve2) -->
   <select id="findOptionDetailName" resultType="productVO" >
- 	select distinct pao.pro_option_detail_code ,pro_option_detail_name
+ 	select distinct pao.pro_option_detail_code pro_option_detail_code, pro_option_detail_name
 	from pro_option_detail pod, pro_add_option pao,pro_option po
 	where pod.pro_option_detail_code= pao.pro_option_detail_code and
     po.pro_option_code =pao.pro_option_code and
@@ -161,4 +161,7 @@
   	update product set pro_hit=pro_hit+1 where no=#{no}
   </update>
   
+  <update id="updateStockcuzBuy">
+  	UPDATE product set pro_stock = (SELECT pro_stock FROM product WHERE no=#{pro_no}) - #{ord_pro_qty} WHERE no = #{pro_no}
+  </update>
 </mapper>

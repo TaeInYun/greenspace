@@ -6,7 +6,7 @@
 	<insert id="insert" parameterType="cartVO">
 		insert into cart(no, cart_name, cart_qty, pro_no, member_no, 
 		cart_price, cart_saleprice
-		<if test="cart_option != ''">
+		<if test="cart_option != '' and cart_option != null">
 			,cart_option
 			,cart_option_detail
 		</if>
@@ -19,24 +19,38 @@
 			#{member_no},
 			#{cart_price},
 			#{cart_saleprice}
-			<if test="cart_option != ''">
+			<if test="cart_option != '' and cart_option != null">
 				,#{cart_option}
 				,#{cart_option_detail}
 			</if>
 		)
 	</insert>
+	
 	<delete id="delete" parameterType="Integer">
 		delete cart where no = #{no}
 	</delete>
+	
 	<select id="isCart" resultType="Integer">
 		select nvl(count(pro_no), 0) cnt from cart 
 		where pro_no=#{pro_no}
 		and member_no=#{member_no} 
-		<if test="cart_option != '' ">
+		<if test="cart_option != '' and cart_option != null">
+			and cart_option = #{cart_option}
 			and cart_option_detail = #{cart_option_detail}
 		</if>
 	</select>
+	
 	<update id="updateQty" parameterType="Hashmap">
 		update cart set cart_qty=#{cart_qty} where no= #{no} and member_no=#{member_no}
 	</update>
+	<select id="findByCartNo" resultType="cartVO">
+		SELECT
+			pro_no, cart_qty
+		FROM
+			cart
+		WHERE
+			member_no=#{member_no}
+		AND
+		no = #{cart_no}
+	</select>
 </mapper>

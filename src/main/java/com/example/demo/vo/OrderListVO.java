@@ -13,6 +13,9 @@ public class OrderListVO {
 	private String delivery_number;
 	
 	//배송자정보
+	private int addr_no;
+	private int receiver_no;
+	private String addr_postal;
 	private String addr_road;
 	private String addr_detail;
 	private String addr_name;

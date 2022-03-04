@@ -5,8 +5,8 @@
 <mapper namespace="address">
   <select id="getMainAddress" resultType="addressVO">
 		SELECT
-		addr_receiver, 
-		addr_road, addr_detail, addr_phone
+		addr_receiver, addr_postal,
+		addr_road, addr_detail, addr_phone, addr_msg
 		FROM
 		address
 		WHERE
@@ -78,6 +78,35 @@
   	
   </insert> 
      
+   <!-- <insert id="insert" parameterType="addressVO">
+  	insert into address(
+  	no,
+  	addr_main,
+  	addr_postal,
+  	addr_road,
+  	addr_detail,
+  	addr_msg,
+  	addr_receiver,
+  	addr_phone,
+  	addr_title,
+  	member_no)
+  	
+  	values(
+  	seq_comment.nextval,
+  	#{addr_main},   
+  	#{addr_postal},
+  	#{addr_road},
+  	#{addr_detail},
+  	#{addr_msg},	
+  	#{addr_receiver},
+  	#{addr_phone},
+  	#{addr_title},  
+  	#{member_no}
+  	)
+  	
+  </insert>    -->
+     
+     
   
   <update id="update" parameterType="addressVO">
    update address set 
@@ -95,6 +124,18 @@
   </update>
   
   
+   <update id="updatemainbtn" parameterType="addressVO">
+   update address set addr_main=1 where no=#{no}  
+  </update> 
+  
+  <update id="updatesubbtn" parameterType="addressVO">
+   update address set addr_main=0 where no=#{no}  
+  </update>
+  
+  <update id="updatebtn" parameterType="addressVO">
+   update address set addr_main=0 where member_no = #{member_no}  
+  </update>
+    
   <delete id="delete">
   	delete address where no=#{no}
   </delete>

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.AddressDAO;
+import com.example.demo.dao.CartDAO;
 import com.example.demo.dao.MemberDAO;
 import com.example.demo.dao.MyWishDAO;
 import com.example.demo.dao.OrderListDAO;
@@ -39,10 +40,12 @@ public class MyWishController {
 	@Autowired
 	private MemberDAO dao_member;
 	
+	@Autowired
+	private CartDAO dao_cart;
+	
 	@RequestMapping("/shop/cart")
 	public void myWishList(Model model) {
 		int member_no = 1;
-		
 		List<MyWishVO> list = dao_mywish.findByMember(member_no);
 		OrderListVO info = dao_orderList.initOrderInfo(member_no);
 
@@ -67,19 +70,25 @@ public class MyWishController {
 		
 		HashMap map = new HashMap();
 		
-		List<MyWishVO> list = new ArrayList<MyWishVO>();
 		
 		int member_no = 1;
 		map.put("member_no", member_no);
 		
+		int rownum = 0;
+		List<MyWishVO> list = new ArrayList<MyWishVO>();
+		
 		for(String pro_no : proInfo) { 
 			int no = (Integer.parseInt(pro_no)); 
+			rownum += 1;
 			map.put("no", no);
-			list.add(dao_mywish.getProInfoForOrder(map));
+			MyWishVO mw = dao_mywish.getProInfoForOrder(map);
+			mw.setNo(no);
+			mw.setRownum(rownum);
+			list.add(mw);
 		}
-		
 		MemberVO m = dao_member.getMemberInfo(member_no);
 		
+		session.setAttribute("rownum", rownum);
 		session.setAttribute("list", list);
 		session.setAttribute("receiverInfo", receiverInfo);
 		session.setAttribute("orderInfo", orderInfo);

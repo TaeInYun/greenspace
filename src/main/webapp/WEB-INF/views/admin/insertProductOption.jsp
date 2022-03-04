@@ -102,7 +102,7 @@ $(function(){
 						<td class="${findOptionByProNo.no}">${findOptionByProNo.no }</td>				 
 						<td class="${findOptionByProNo.pro_option_code}">${findOptionByProNo.pro_option_name }</td>				 
 						<td class="${findOptionByProNo.pro_option_detail_code }">${findOptionByProNo.pro_option_detail_name }</td>
-						<td> <a id="deleteOption" data-toggle="modal" data-target="#deleteOptionModal" role="button"  href="../admin/deleteProductOption?no=${findOptionByProNo.no}">삭제</a></td>
+						<td> <a id="deleteOption" data-toggle="modal" data-target="#deleteOptionModal" role="button"  href="../admin/deleteProductOption?pro_no=${p.no }&no=${findOptionByProNo.no}">삭제</a></td>
 									
 					</tr>
 				</c:forEach>

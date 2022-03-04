@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
@@ -24,5 +25,9 @@ public class CartDAO {
 	
 	public int updateQty(HashMap map) {
 		return DBManager.updateQty(map);
+	}
+	
+	public CartVO findByCartNo(HashMap map) {
+		return DBManager.findByCartNo(map);
 	}
 }

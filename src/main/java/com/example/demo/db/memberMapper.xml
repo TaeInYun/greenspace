@@ -51,17 +51,17 @@
 		<select id="findAll" resultType="memberVO" >
 		select * from member
 		</select>
-
-
 	
-
+		<update id="buyProduct" parameterType="HashMap">
+			UPDATE member SET point_use = (SELECT point_use FROM member WHERE no = #{member_no}) - #{point_use}+ #{point_save}, 
+			point_save = (SELECT point_save FROM member WHERE no=#{member_no}) + #{point_save} 
+			WHERE no = #{member_no}
+		</update>
 
 	  <!-- 메인 유저정보 -->
 	  <select id="mainMemberInfo" resultType="memberVO">
 	  SELECT nickname, levels, point_use FROM member where no = #{member_no}
 	  </select>
 
- 
-		
 
 </mapper> 

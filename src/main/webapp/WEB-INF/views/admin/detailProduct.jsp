@@ -82,7 +82,7 @@
 							<span> ${p.pro_hit }</span>
 						</div>	
 						 
-						
+						  <img  src="/upload/${p.PRO_THUMBNAIL }" width="200" height="200"><br>
 						
 						<hr>
 						 <p>옵션설정</p>	

@@ -13,4 +13,6 @@ public class CartVO {
 	int cart_qty;
 	int pro_no;
 	int member_no;
+	int option_combination_no;
+	
 }

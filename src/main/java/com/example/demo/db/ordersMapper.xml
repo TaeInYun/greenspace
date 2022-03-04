@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="orders">
+	<select id="getCntOfToday" resultType="Integer">
+		SELECT
+		count(*) cnt
+		FROM
+		orders
+		WHERE
+		TO_CHAR(ord_date, 'yy/mm/dd') = TO_CHAR(sysdate, 'yy/mm/dd')
+	</select>
+	<insert id="insertOrders" parameterType="ordersVO">
+		INSERT INTO orders(
+			no, ord_id, ord_date, ord_use_point, ord_price, payment_code,
+			ord_status_code, apply_num,imp_uid
+			<if test="address_no != 0">
+				, address_no
+			</if>			
+			<if test="receiver_no != 0">
+				, receiver_no
+			</if>			
+			<if test="member_no != null and member_no != ''">
+				, member_no
+			</if>			
+		) 
+		VALUES (
+			seq_orders.nextval,
+			#{ord_id},
+			sysdate,
+			#{ord_use_point},
+			#{ord_price},
+			#{payment_code},
+			#{ord_status_code},
+			#{apply_num},
+			#{imp_uid}
+			<if test="address_no != 0">
+				, #{address_no}
+			</if>			
+			<if test="receiver_no != 0">
+				, #{receiver_no}
+			</if>			
+			<if test="member_no != null and member_no != ''">
+				, #{member_no}
+			</if>
+		)
+	</insert>
+	  <select id="getTotalPay" resultType="Integer">
+    SELECT cart_saleprice
+  	 <if test="pro_add_option_no != 0 and pro_add_option_no != null">
+  	 	+ p.pro_add_price 
+  	</if> 
+  	 FROM cart 
+  	 <if test="pro_add_option_no != 0 and pro_add_option_no != null">
+  	 	,(SELECT pro_add_price FROM pro_add_option where no=#{pro_add_option_no}) p 
+  	</if>
+  	 WHERE member_no=#{member_no} and no=#{cart_no}
+  </select>
+</mapper>
