@@ -64,6 +64,15 @@
 	  <select id="mainMemberInfo" resultType="memberVO">
 	  SELECT nickname, levels, point_use FROM member where no = #{member_no}
 	  </select>
+	  
+	  <select id="orderInfo" resultType="memberVO">
+	  	SELECT
+		name, email, phone
+		FROM
+		member
+		WHERE
+		no = #{member_no}
+	  </select>
 
 	  <!-- 다음레벨까지 남은 포인트 -->
 	  <select id="nextlevelpoint" resultType="int">

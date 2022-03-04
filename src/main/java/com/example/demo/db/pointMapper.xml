@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="point">
+	<insert id="insert" parameterType="pointVO">
+		INSERT
+		INTO
+		point
+		(no, point_date, point_status, point_amount, member_no
+		<if test="point_type_code != null and point_type_code != ''">
+			, point_type_code
+		</if>
+		)
+		VALUES
+		(
+			seq_point.nextval, sysdate, #{point_status}, #{point_amount}, #{member_no}
+		<if test="point_type_code != null and point_type_code != ''">	
+			, #{point_type_code}
+		</if>
+		)
+	</insert>
+</mapper>

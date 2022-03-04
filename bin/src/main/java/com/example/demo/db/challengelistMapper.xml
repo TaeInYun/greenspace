@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="challengelist">
+
+  <!-- 관리자 오늘의챌린지 목록 -->
+  <select id="todayChgList" resultType="challengelistVO">
+	select distinct chg_no,chg_title,chg_status_code from challenge_list l,challenge c  
+	where l.chg_no = c.no and 
+	to_char(l.chg_list_date,'yy/mm/dd') = TO_CHAR(SYSDATE, 'yy/mm/dd') 
+  </select>
+  
+    <!-- 관리자 내일 챌린지 목록 -->
+  <select id="tomorrowChgList" resultType="challengelistVO">
+	select distinct chg_no,chg_title,chg_status_code from challenge_list l,challenge c  
+	where l.chg_no = c.no and 
+	to_char(l.chg_list_date,'yy/mm/dd') = TO_CHAR(SYSDATE+1, 'yy/mm/dd') 
+  </select>
+  
+    <!-- 관리자 어제 챌린지 목록 -->
+  <select id="yesterdayChgList" resultType="challengelistVO">
+	select distinct chg_no,chg_title,chg_status_code from challenge_list l,challenge c  
+	where l.chg_no = c.no and 
+	to_char(l.chg_list_date,'yy/mm/dd') = TO_CHAR(SYSDATE-1, 'yy/mm/dd') 
+  </select>  
+  
+  
+  <!-- 관리자 오늘의 챌린지리스트 추가하기 -->
+  <insert id="insert" parameterType="challengelistVO">
+		insert into challenge_list(no,CHG_LIST_DATE,chg_no,member_no,chg_status_code) values(
+        seq_chg_list.nextval,
+        sysdate+1 ,
+        #{chg_no} , 
+        #{member_no},
+        'STA')
+  </insert>
+ 
+ 	<!-- 메인 - 회원 챌린지 리스트 -->
+ 	<select id="findByNo" resultType="challengelistVO">
+ 	select distinct chg_no,chg_title,chg_status_code from challenge_list l,challenge c
+	where l.chg_no = c.no and
+	to_char(l.chg_list_date,'yy/mm/dd') = TO_CHAR(SYSDATE, 'yy/mm/dd') and
+    member_no=#{member_no} order by chg_no
+ 	</select>
+ 
+   <!-- 메인 - 회원 도전버튼클릭시 챌린지 상태수정 -->  
+	<update id="updateChgStatus" parameterType="challengelistVO">
+		update challenge_list set 
+		chg_status_code=#{chg_status_code} 
+		where chg_no=#{chg_no} and member_no=#{member_no}
+		and to_char(chg_list_date,'yy/mm/dd') = to_char(sysdate, 'yy/mm/dd') 
+	</update> 
+	
+	
+	<!-- 오늘 챌린지 완료시 ING상태 STA로 수정 / 상태버튼 '도전하기'로 돌려놓기위해 -->
+	<update id="updateChgStatusSTA" parameterType="challengelistVO">
+		update challenge_list set 
+		chg_status_code='STA' 
+		where member_no=#{member_no}
+		and chg_status_code='ING'
+		and to_char(chg_list_date,'yy/mm/dd') = to_char(sysdate, 'yy/mm/dd') 
+	</update>
+
+
+	
+</mapper>

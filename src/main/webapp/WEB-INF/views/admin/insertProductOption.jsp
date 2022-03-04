@@ -6,9 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script> 
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <script type="text/javascript">
 $(function(){  	
+	
+	
 	
 	
 		$(document).on("change","#pro_option_code",function(){	
@@ -34,9 +44,9 @@ $(function(){
 				$("#pro_option_detail_code > option:selected").prop('disabled',true);
 			}	
 		  
-		}) 
- 
-			   
+		})
+		
+	   
 })//FUNCTION
 
 </script>
@@ -44,7 +54,12 @@ $(function(){
 <body>
 <h2>옵션추가</h2>
 <hr>
- 	<form action="/admin/insertProductOption" method="post"  enctype="multipart/form-data">				 		
+ 	<div class="card align-middle"> 
+	<div class="card-title"> 
+		<h2 class="card-title text-center">옵션</h2> 
+	</div> 
+	<div class="card-body"> 
+	 	<form action="/admin/insertProductOption" method="post"  enctype="multipart/form-data">				 		
 		<div class="inputArea">
 			<label for="pro_add_price">추가금액</label>
 			<input type="text" id="pro_add_price" name="pro_add_price" value="0" />
@@ -83,8 +98,11 @@ $(function(){
 		 </c:if>
 		  	
 		 <c:if test="${cnt>=1 }">						 	 	
-		 	  <table border="1" width="80%">
-				<tr>
+		 	
+			 
+			  <table border="1" width="80%">
+				<tr>	
+					<td>번호</td>
 					<td> 옵션명 </td>
 					<td> 옵션상세명</td>
 					<td> 설정</td>
@@ -92,12 +110,36 @@ $(function(){
 				 
 				<c:forEach var="findOptionByProNo" items="${findOptionByProNo}">		
 					<tr>
+						<td class="${findOptionByProNo.no}">${findOptionByProNo.no }</td>				 
 						<td class="${findOptionByProNo.pro_option_code}">${findOptionByProNo.pro_option_name }</td>				 
 						<td class="${findOptionByProNo.pro_option_detail_code }">${findOptionByProNo.pro_option_detail_name }</td>
-				 		<td><a href="../admin/deleteProductOption?no=${findOptionByProNo.no}"><button>삭제</button></a></td>   
+						<td> <a id="deleteOption" data-toggle="modal" data-target="#deleteOptionModal" role="button"  href="../admin/deleteProductOption?pro_no=${p.no }&no=${findOptionByProNo.no}">삭제</a></td>
+									
 					</tr>
 				</c:forEach>
-			</table>			 
+				
+			
+			</table>		 
+			
+				<div id="deleteOptionModal" class="modal fade" tabindex="-1" role="dialog"> 
+	 				<div class="modal-dialog"> 
+	 					<div class="modal-content"> 
+	 					</div> 
+	 				</div> 
+	 		    </div>	  			 			
+  			 		    	 
 		 </c:if>	
+  
+	</div> 
+</div>
+ 	
+ 	
+ 	
+ 	
+ 	
+		 
+		 
+		 
+		 						
 </body>
 </html>

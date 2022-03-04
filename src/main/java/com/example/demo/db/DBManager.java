@@ -27,8 +27,10 @@ import com.example.demo.vo.Pro_add_optionVO;
 import com.example.demo.vo.OrderListVO;
 import com.example.demo.vo.OrdersProductVO;
 import com.example.demo.vo.OrdersVO;
+import com.example.demo.vo.PointVO;
 import com.example.demo.vo.ProductVO;
 import com.example.demo.vo.QnaVO;
+import com.example.demo.vo.ReceiverVO;
 import com.example.demo.vo.ReviewVO;
 import com.example.demo.vo.WishListVO;
  
@@ -312,9 +314,9 @@ public class DBManager {
 	
 	
 	//------------------------상품 자체 옵션(Pro_add_optionVO)--------------
-	public static int deletePro_add_option(int no) {
+	public static int deletePro_add_option(HashMap map) {
 		SqlSession session = factory.openSession();
-		int re=session.delete("pro_add_option.delete", no);
+		int re=session.delete("pro_add_option.delete", map);
 		session.commit();
 		session.close();
 		return re;
@@ -379,6 +381,13 @@ public class DBManager {
 		AddressVO main =  session.selectOne("address.allMainAddress", member_no);
 		session.close();
 		return main;
+	}
+	
+	public static AddressVO findAddressInfoByNo(int addr_no) {
+		SqlSession session = factory.openSession();
+		AddressVO a =  session.selectOne("address.findAddressInfoByNo", addr_no);
+		session.close();
+		return a;
 	}
 	
 	public static List<AddressVO> allSubAddress(int member_no) {
@@ -545,6 +554,12 @@ public class DBManager {
 		session.close();
 		return m;
 	}
+	public static MemberVO orderInfo(int member_no) {
+		SqlSession session = factory.openSession();
+		MemberVO m = session.selectOne("member.orderInfo", member_no);
+		session.close();
+		return m;
+	}
 
 
 	//비밀번호 update
@@ -609,6 +624,13 @@ public class DBManager {
 		session.close();
 		return o;
 	}
+	public static List<OrderListVO> findOrderListByOrdId(String id) {
+		
+		SqlSession session = factory.openSession();
+		List<OrderListVO> o = session.selectList("orderList.findOrderListByOrdId", id);
+		session.close();
+		return o;
+	}
 	
 	
 	
@@ -640,6 +662,12 @@ public class DBManager {
 		return ob;
 	}
 	
+	public static OrdersVO receiverInfoByOrdId(String ord_id) {
+		SqlSession session = factory.openSession();
+		OrdersVO o = session.selectOne("orders.receiverInfoByOrdId", ord_id);
+		session.close();
+		return o;
+	}
 	
 	
 	//--------------------OrdersProductVO관련--------------
@@ -906,6 +934,16 @@ public class DBManager {
 		return cnt;
 	}
 	
+	//--------------POINT (포인트 관련) ----------
+	public static int insertPoint(PointVO p) {
+		SqlSession session = factory.openSession();
+		int re = session.insert("point.insert", p);
+		session.commit();
+		session.close();
+		return re;
+	}
+	 
+	
 	
 
 	
@@ -1016,5 +1054,13 @@ public class DBManager {
 			session.close();
 			return no;
 		}
-
+		
+		//-------------------RECEIVERVO------------------
+		public static AddressVO findByReceiverNo(int receiver_no) {
+			SqlSession session = factory.openSession();
+			AddressVO r = session.selectOne("receiver.findByNo", receiver_no);
+			session.close();
+			return r;
+		}
+		
 }

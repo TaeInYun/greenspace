@@ -218,7 +218,6 @@ $(function(){
 
 </div>
 <jsp:include page="../mainpage/popup.jsp"/>
-   
-  
+
 </body>
 </html>

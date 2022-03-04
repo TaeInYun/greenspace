@@ -15,8 +15,8 @@ public class Pro_add_optionDAO {
 		return DBManager.insertPro_add_option(po);
 	}
 	
-	public int delete(int no) {
-		return DBManager.deletePro_add_option(no);
+	public int delete(HashMap map) {
+		return DBManager.deletePro_add_option(map);
 	}	
 	
 	public List<Pro_add_optionVO> findOptionByProNo(int no) {

@@ -44,7 +44,9 @@
 						${c.day }
 					</td>
 					<td>
-						${c.id }
+						<a href="/shop/detailOrderList?id=${c.id }&&day=${c.day}">
+							${c.id }
+						</a>
 					</td>
 					<td>
 						${c.pro_price }원<br>
