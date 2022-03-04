@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.db.DBManager;
+import com.example.demo.vo.OrderBillVO;
 import com.example.demo.vo.OrdersVO;
 
 @Repository
@@ -18,5 +19,8 @@ public class OrdersDAO {
 	}
 	public int getTotalPay(HashMap map) {
 		return DBManager.getTotalPay(map);
+	}
+	public OrderBillVO billOfOrder(HashMap map) {
+		return DBManager.billOfOrder(map);
 	}
 }

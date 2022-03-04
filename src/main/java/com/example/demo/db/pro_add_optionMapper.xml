@@ -21,14 +21,13 @@
 		where pao.pro_option_code = po.pro_option_code and
 		pao.pro_option_detail_code =  pod.pro_option_detail_code and
 		pro_no=#{no}
-		 
   	</select>
   	<select id="findProAddPriceNo" resultType="Integer">
   	 select no from pro_add_option
   	 WHERE
-  	 pro_option_code = (SELECT pro_option_code FROM pro_option WHERE pro_option_name = (SELECT cart_option FROM cart WHERE no= #{no}))
+  	 pro_option_code = (SELECT pro_option_code FROM pro_option WHERE pro_option_name = (SELECT cart_option FROM cart WHERE no= #{cart_no}))
   	 AND 
-  	 pro_option_detail_code = (SELECT pro_option_detail_code FROM pro_option_detail WHERE pro_option_detail_name = (SELECT cart_option_detail FROM cart WHERE no= #{no}))
+  	 pro_option_detail_code = (SELECT pro_option_detail_code FROM pro_option_detail WHERE pro_option_detail_name = (SELECT cart_option_detail FROM cart WHERE no= #{cart_no}))
 	 AND
 	 pro_no = #{pro_no}  	
   	</select>

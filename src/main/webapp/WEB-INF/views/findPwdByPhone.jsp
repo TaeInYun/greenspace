@@ -15,7 +15,7 @@
 	
 	<form action="/resetPwd" method="POST">
 		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
-		
+		<input type="hidden" id="email" name="email" value="null" required>
 			<p>
 				<label>id</label>
 				<input type="text" id="id" name="id" required>

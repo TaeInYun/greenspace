@@ -24,7 +24,7 @@ $(function(){
 					chg_status_code:chg_status_code,
 					member_no:member_no
 					}
-			
+		console.log(data);	
 			$.ajax({
 				url: "updateChgStatus",
 				data:  data,
@@ -95,7 +95,8 @@ $(function(){
 				data:  data,
 				success: function(data){
 					console.log(data)
-					location.href = "/mainpage/member"
+					$("#listTable").load("/mainpage/member #listTable")
+					//location.href = "/mainpage/member"
 				},
 				error:function(request,status,error){
 			        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -116,23 +117,19 @@ $(function(){
 					console.log(data)
 					if(data==1){
 						alert("오늘의 챌린지 완료!");
-						//document.getElementById("#startBtn").disabled=true;
-						//$("#startBtn").attr("disabled",false);
-						//$("#endBtn").attr("disabled",false);
-						//$('#endBtn').unbind("click");
+						location.href = "/mainpage/member"
 					}else{
 						alert("도전완료한 챌린지가 없습니다!");
+						location.href = "/mainpage/member"
 					}
 				}
 		});//end ajax	
 
 	});
 	
-	
 	//인증글쓰러가기 클릭
 	$("#insertCerBtn").on("click",function(){
-		let member_no = $( $(document).find("input[name=member_no]")).val();
-		
+	//	let member_no = $( $(document).find("input[name=member_no]")).val();
 		window.open("/board/insertCerBoard",'인증글 작성','width=500px,height=600px,menubar=0');
 
 	});
@@ -146,20 +143,26 @@ $(function(){
 		<jsp:include page="../header.jsp"/>
 	</div>
 
+<div id=memberInfo>
 <input type="hidden" name="member_no" value=${m.no }>
 	<strong>${m.nickname}</strong>님<br>
 	에코레벨 : ${m.levels}Lv&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사용가능 포인트 : ${m.point_save}
+</div>
+
 <hr>
-<div id=chglist>
-	<div id="tree_num">
-	<p>지금까지 x그루의 나무를 살렸어요!</p>
-	</div>
+
+	<div id=chglist>
+		<div id="tree_num">
+		<p>지금까지 ${tree.tree_num }그루의 나무를 살렸어요!</p>
+		</div>
+	
 	챌린지목록
 	<div id="listTable">
 	<table border="1" width="50%">
 		<c:forEach var="c" items="${chglist}">
 		<tr>
 			<td>${c.chg_title}</td>
+			
 			<c:if test="${c.chg_status_code eq 'STA'}">
 				<c:choose>
 					<c:when test="${empty endlist}">
@@ -189,34 +192,26 @@ $(function(){
 		</tr>
 		</c:forEach>
 	</table>
-</div>
+</div><!-- end 도전 목록 -->
+
 <br>
  <c:if test="${empty endlist}">
 <button type="button" id="modal-open" class="btn btn-primary btn-lg"   >오늘 챌린지 완료</button>
  </c:if>
  <c:if test="${not empty endlist}">
+ <c:choose>
+ <c:when test="${cercnt eq 0 }">
 <button type="button" id="insertCerBtn" class="btn btn-primary btn-lg" >인증글 쓰러가기</button>
+</c:when>
+<c:when test="${cercnt eq 1 }">
+<button type="button" id="modal-goCerBtn" class="btn btn-primary btn-lg" >챌린지 인증 완료!</button>
+</c:when>
+</c:choose>
 </c:if>
+
 </div>
-	<!-- popup -->
-	<div class="container"> 
- 	<div class="popup-wrap" id="popup">
-    <div class="popup">	
-      <div class="popup-head"></div>
-      <div class="popup-body">
-        <div class="body-content">
-            <p>챌린지를 완료하시면<br>
-            더이상 도전상태를 변경할 수 없습니다.<br>
-            완료하시겠습니까?</p>
-        </div>
-      </div>
-      <div class="popup-foot">
-        <span class="pop-btn" id="confirmBtn">완료</span>
-        <span class="pop-btn" id="closeBtn">취소</span>
-      </div>
-    </div>
-   </div>
-   </div><!-- end popup -->
+<jsp:include page="../mainpage/popup.jsp"/>
    
+  
 </body>
 </html>

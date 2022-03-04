@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,17 +41,19 @@ section#content ul li { display:inline-block; margin:10px; }
 						 <li>
 								<div class="cer_thumbnail">
 									<a href="/board/detailCerBoard?no=${c.no}">
-										<img  src="/upload/${c.cer_thumbnail }" width="200" height="200">
+										<img  src="/upload/cer/${c.cer_thumbnail }" width="200" height="200">
 									</a>
 								</div> 
 								<div class="nickname">
 									<span>${c.nickname}</span>
 								</div>
 								<div class="date">
-									<span>${c.cer_date}</span>
+								<span><fmt:formatDate value="${c.cer_date}" pattern="yy.MM.dd"/></span>
+									
 								</div>
 								<div class="content">
-									<span style="text-overflow: ">${c.cer_content}</span>
+										<a href="/board/detailCerBoard?no=${c.no}">
+										<span style="text-overflow: ">${c.cer_content}</span></a>
 								</div>	
 						</li>		 
 					  	</c:forEach>	

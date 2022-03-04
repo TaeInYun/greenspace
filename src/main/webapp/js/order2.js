@@ -70,7 +70,7 @@ function requestPay(cnt, arr_cartNo) {
 						payment_code: payment_code,
 						ord_status_code:ord_status_code,
 						apply_num:apply_num,
-						address_no: address_no,
+						address_no: addr_no,
 						receiver_no:receiver_no,
 						point_save:savePoint,
 						arr_cartNo:arr_cartNo,

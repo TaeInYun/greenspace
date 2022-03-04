@@ -8,6 +8,7 @@ import lombok.Data;
 
 @Data
 public class CerBoardVO {
+	private int num;
 	private int no;
 	private String cer_status;
 	private String cer_content;
@@ -17,7 +18,7 @@ public class CerBoardVO {
 	private int member_no;
 	private int chg_user_no;
 	private String nickname;
-	private String img;
+	private String img_name;
 	
 	private String cer_thumbnail;
 	private MultipartFile uploadFile;

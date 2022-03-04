@@ -57,7 +57,7 @@ public class MemberDAO {
 	
 
 	//새비밀번호 설정
-	public String updatePwd(HashMap<String, String> m) {
+	public int updatePwd(HashMap<String, String> m) {
 		return DBManager.updatePwd(m);
 	}
 

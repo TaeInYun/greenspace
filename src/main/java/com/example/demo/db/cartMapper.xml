@@ -45,7 +45,7 @@
 	</update>
 	<select id="findByCartNo" resultType="cartVO">
 		SELECT
-			pro_no, cart_qty
+			pro_no, cart_qty, cart_name, cart_saleprice, cart_option, cart_option_detail
 		FROM
 			cart
 		WHERE
@@ -53,4 +53,6 @@
 		AND
 		no = #{cart_no}
 	</select>
+	
+	
 </mapper>
