@@ -16,6 +16,7 @@ import com.example.demo.vo.CerBoardVO;
 import com.example.demo.vo.ChallengeListVO;
 import com.example.demo.vo.ChallengeUserVO;
 import com.example.demo.vo.ChallengeVO;
+import com.example.demo.vo.CommunityVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.MyReviewVO;
 import com.example.demo.vo.MyWishVO;
@@ -635,9 +636,26 @@ public class DBManager {
 		return list;
 	}		
 	
+	//--------------완료한 챌린지 나무수
+	public static ChallengeUserVO getSaveTree(int member_no) {
+		SqlSession session = factory.openSession();
+		ChallengeUserVO c = session.selectOne("challengeuser.getSaveTree", member_no);
+		session.close();
+		return c;		
+	}		
 	
 	
-	//------------------챌린지 인증게시판 목록 ----------------------
+	//---------------CerBoard  (인증게시판) ---------------------
+	
+	/* 오늘 인증글 있는지 체크*/
+	public static int checkTodayCer(int member_no) {
+		SqlSession session = factory.openSession();
+		int cnt = session.selectOne("cerboard.checkTodayCer",member_no);
+		session.close();
+		return cnt;
+	}	
+	
+	/*  챌린지 인증게시판 목록   */
 	public static List<CerBoardVO> findCerBoard(){
 		SqlSession session = factory.openSession();
 		List<CerBoardVO> list= session.selectList("cerboard.findAll");
@@ -646,7 +664,7 @@ public class DBManager {
 	}		
 
 	
-	//------------------챌린지 인증게시판 등록 ----------------------
+	/*  챌린지 인증게시판 등록   */
 	public static int insertCerBoard(CerBoardVO c) {
 		SqlSession session  = factory.openSession();
 		int re=session.insert("cerboard.insert",c);
@@ -654,7 +672,52 @@ public class DBManager {
 		session.close();
 		return re;
 	}	
-
+	
+	
+	/* 인증게시판 상세 */
+	public static CerBoardVO getCerBoard(int no) {
+		SqlSession session = factory.openSession();
+		CerBoardVO c = session.selectOne("cerboard.getCerBoard", no);
+		session.close();
+		return c;		
+	}
+	
+	/* 인증게시판 수정 */
+	public static int updateCerBoard(CerBoardVO c) {
+		SqlSession session = factory.openSession();
+		int re = session.update("cerboard.update", c);
+		session.commit();
+		session.close();
+		return re;	
+	}
+	
+	/* 인증게시판 삭제 */
+	public static int deleteCerBoard(int no) {
+		SqlSession session = factory.openSession();
+		int re = session.delete("cerboard.delete", no);
+		session.commit();
+		session.close();
+		return re;	
+	}	
+	
+	/* 인증게시판 조회수 */
+	public static void updateHitCer(int no) {
+		SqlSession session = factory.openSession();
+		session.update("cerboard.updateHit", no);
+		session.commit();
+		session.close();
+	}
+	
+	
+	/*  My 챌린지 인증 게시판 목록 */
+	public static List<CerBoardVO> findCerByMember(int member_no){
+		SqlSession session = factory.openSession();
+		List<CerBoardVO> list= session.selectList("cerboard.findCerByMember",member_no);
+		session.close();
+		return list;
+	}		
+	
+	
 	
 	//---------------WishList (위시리스트 관련) ----------
 	public static List<WishListVO> findByMemberWish(int member_no){
@@ -685,6 +748,71 @@ public class DBManager {
 	}
 	
 	
+	//---------------Community (커뮤니티) ---------------------
+	
+	/*  커뮤니티게시판 목록   */
+	public static List<CommunityVO> findCommunity(){
+		SqlSession session = factory.openSession();
+		List<CommunityVO> list= session.selectList("community.findAll");
+		session.close();
+		return list;
+	}		
+
+	
+	/*  커뮤니티게시판 등록   */
+	public static int insertCommunity(CommunityVO c) {
+		SqlSession session  = factory.openSession();
+		int re=session.insert("community.insert",c);
+		session.commit();
+		session.close();
+		return re;
+	}	
+	
+	
+	/* 커뮤니티게시판 상세 */
+	public static CommunityVO getCommunity(int no) {
+		SqlSession session = factory.openSession();
+		CommunityVO c = session.selectOne("community.getCommunity", no);
+		session.close();
+		return c;		
+	}
+	
+	/* 커뮤니티게시판 수정 */
+	public static int updateCommunity(CommunityVO c) {
+		SqlSession session = factory.openSession();
+		int re = session.update("community.update", c);
+		session.commit();
+		session.close();
+		return re;	
+	}
+	
+	/* 커뮤니티게시판 삭제 */
+	public static int deleteCommunity(int no) {
+		SqlSession session = factory.openSession();
+		int re = session.delete("community.delete", no);
+		session.commit();
+		session.close();
+		return re;	
+	}	
+	
+	/* 커뮤니티게시판 조회수 */
+	public static void updateHitCommu(int no) {
+		SqlSession session = factory.openSession();
+		session.update("community.updateHit", no);
+		session.commit();
+		session.close();
+	}
+	
+	
+	/*  My 커뮤니티게시판 목록 */
+	public static List<CommunityVO> findCommuByMember(int member_no){
+		SqlSession session = factory.openSession();
+		List<CommunityVO> list= session.selectList("community.findCommuByMember",member_no);
+		session.close();
+		return list;
+	}		
+
+
 
 	 
 }

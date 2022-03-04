@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="/css/mypage.css" rel="stylesheet"/> 
 <style type="text/css">
 .content{
 width: 200px;
@@ -24,18 +25,30 @@ section#content ul li { display:inline-block; margin:10px; }
  
 </head>
 <body>
-
 	<div id="header">
 		<jsp:include page="../header.jsp"/>
 	</div>
+	
+  		<aside id="aside">
+			<jsp:include page="../mypage/myAside.jsp"/>
+		</aside>	
+		
 
-<h3>인증 게시판</h3>
-<a href="/board/insertCerBoard">글등록</a>
 	<div id="root">
-		<section id="container">	
+	<section id="container">
+	
 		<div id="container_box">	
 				<!-- 본문 -->			
 					<section id="content">
+					
+	<div id="submenu">
+		<jsp:include page="../mypage/myActiveMenu.jsp"/>
+	</div>	
+		
+		<h3>My 인증 게시판</h3>
+		<div>
+		<a href="/board/insertCerBoard">글등록</a>
+		</div>
 					<ul>
 						 <c:forEach var="c" items="${list }">
 						 <li>

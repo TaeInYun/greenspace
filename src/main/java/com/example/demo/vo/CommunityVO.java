@@ -7,20 +7,17 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.Data;
 
 @Data
-public class CerBoardVO {
-	private int num;
+public class CommunityVO {
+	private int num;	
 	private int no;
-	private String cer_status;
-	private String cer_content;
-	private Date cer_date;
-	private int cer_like;
-	private int cer_hit;
+	private String commu_title;
+	private String commu_content;
+	private Date commu_date;
+	private int commu_hit;
 	private int member_no;
-	private int chg_user_no;
 	private String nickname;
 	private String img_name;
 	
-	private String cer_thumbnail;
 	private MultipartFile uploadFile;
 	
 }
