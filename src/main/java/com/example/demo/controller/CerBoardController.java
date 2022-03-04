@@ -181,7 +181,6 @@ public class CerBoardController {
 	@RequestMapping("/mypage/myCerBoard")
 	public void listMyChg(Model model,HttpSession session) {
 		MemberVO m = (MemberVO)session.getAttribute("m");
-		
 		int member_no = m.getNo();
 		model.addAttribute("list", dao.findAllByMember(member_no));	
 	}

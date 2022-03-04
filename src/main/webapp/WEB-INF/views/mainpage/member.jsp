@@ -96,7 +96,7 @@ $(function(){
 				success: function(data){
 					console.log(data)
 					$("#listTable").load("/mainpage/member #listTable")
-					//location.href = "/mainpage/member"
+					
 				},
 				error:function(request,status,error){
 			        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -127,12 +127,19 @@ $(function(){
 
 	});
 	
-	//인증글쓰러가기 클릭
+	
+	//인증글 쓰러가기 클릭
 	$("#insertCerBtn").on("click",function(){
 	//	let member_no = $( $(document).find("input[name=member_no]")).val();
 		window.open("/board/insertCerBoard",'인증글 작성','width=500px,height=600px,menubar=0');
 
 	});
+	
+	//인증글 확인가기 클릭
+	$("#goCerBtn").on("click",function(){
+		location.href = "/mypage/myCerBoard"
+	});
+	
 	
 })
 </script>
@@ -204,7 +211,7 @@ $(function(){
 <button type="button" id="insertCerBtn" class="btn btn-primary btn-lg" >인증글 쓰러가기</button>
 </c:when>
 <c:when test="${cercnt eq 1 }">
-<button type="button" id="modal-goCerBtn" class="btn btn-primary btn-lg" >챌린지 인증 완료!</button>
+<button type="button" id="goCerBtn" class="btn btn-primary btn-lg" >인증글 확인하기</button>
 </c:when>
 </c:choose>
 </c:if>
