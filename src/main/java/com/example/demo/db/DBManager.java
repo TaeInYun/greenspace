@@ -21,6 +21,7 @@ import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.MyReviewVO;
 import com.example.demo.vo.MyWishVO;
 import com.example.demo.vo.NoticeVO;
+import com.example.demo.vo.OrderBillVO;
 import com.example.demo.vo.Pro_add_optionVO;
 import com.example.demo.vo.OrderListVO;
 import com.example.demo.vo.OrdersProductVO;
@@ -317,9 +318,9 @@ public class DBManager {
 		session.close();
 		return re;
 	}
-	public static Integer findProAddPriceNo(int no) {
+	public static Integer findProAddPriceNo(HashMap map) {
 		SqlSession session = factory.openSession();
-		Integer re = session.selectOne("pro_add_option.findProAddPriceNo", no);
+		Integer re = session.selectOne("pro_add_option.findProAddPriceNo", map);
 		if(re == null) {
 			re = 0;
 		}
@@ -600,6 +601,16 @@ public class DBManager {
 		return o;
 	}
 	
+	public static List<OrderListVO> findAllOrderListByMemberNo(int member_no) {
+		
+		SqlSession session = factory.openSession();
+		List<OrderListVO> o = session.selectList("orderList.findAllOrderListByMemberNo", member_no);
+		session.close();
+		return o;
+	}
+	
+	
+	
 	//--------------------OrdersVO관련--------------
 	public static int getCntOfToday() {
 		SqlSession session = factory.openSession();
@@ -621,6 +632,14 @@ public class DBManager {
 		session.close();
 		return re;
 	}
+	public static OrderBillVO billOfOrder(HashMap map) {
+		SqlSession session = factory.openSession();
+		OrderBillVO ob = session.selectOne("orders.billOfOrder", map);
+		session.close();
+		return ob;
+	}
+	
+	
 	
 	//--------------------OrdersProductVO관련--------------
 	public static int insertOrdersProduct(HashMap map) {

@@ -1,14 +1,20 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.CartDAO;
 import com.example.demo.dao.MemberDAO;
@@ -19,6 +25,7 @@ import com.example.demo.dao.ProductDAO;
 import com.example.demo.vo.ApplyOrderVO;
 import com.example.demo.vo.CartVO;
 import com.example.demo.vo.MemberVO;
+import com.example.demo.vo.OrderBillVO;
 import com.example.demo.vo.OrdersProductVO;
 import com.example.demo.vo.OrdersVO;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -53,9 +60,15 @@ public class OrdersController {
 	public int getCntOfToday() {
 		return ordersDao.getCntOfToday();
 	}
+	@RequestMapping(value = "/shop/resultOrder", method = RequestMethod.GET)
+	public void OrderOK() {
+		
+	}
 	
-	@RequestMapping("/shop/resultOrder")
-	public void applyOrder(Model model, ApplyOrderVO data) {
+	@RequestMapping(value = "/shop/resultOrder", method = RequestMethod.POST)
+	public void applyOrder(HttpServletRequest request,ApplyOrderVO data) {
+		HttpSession session = request.getSession();
+		
 		int member_no = 1;
 		String ord_id = data.getOrd_id();
 		int ord_use_point = data.getOrd_use_point();
@@ -70,6 +83,13 @@ public class OrdersController {
 		
 		HashMap map = new HashMap();
 		map.put("member_no", member_no);
+		map.put("ord_id", ord_id);
+		map.put("addr_no", address_no);
+		map.put("receiver_no", receiver_no);
+		System.out.println("address_no" + address_no);
+		System.out.println("ord_id" + ord_id);
+		System.out.println("receiver_no" + receiver_no);
+
 		
 		//주문내역 추가를 위한 변수
 		OrdersVO o = new OrdersVO();
@@ -87,24 +107,34 @@ public class OrdersController {
 		//주문내역 추가 ( 주문정보)
 		ordersDao.insertOrders(o);
 		
+		//주문정보 상태유지
+		OrderBillVO ob = ordersDao.billOfOrder(map);
+		
+		System.out.println("ob" + ob);
+		
+		//주문상품 상태유지를 위한 변수
+		List<CartVO> proInfo = new ArrayList<>();
+		
 		for(String s : data.getArr_cartNo() ) {
 			int no = Integer.parseInt(s);
 			map.put("cart_no", no);
 			
 			CartVO c = cartDAO.findByCartNo(map);
-
+			System.out.println("카트정보:" + c);
+			//상태유지 변수에 추가
+			proInfo.add(c);
+			
 			int pro_no = c.getPro_no();
 			int ord_pro_qty = c.getCart_qty();
+			map.put("pro_no", pro_no);
 			
-			int pro_add_option_no = proAddOptionDAO.findProAddPriceNo(no);
+			int pro_add_option_no = proAddOptionDAO.findProAddPriceNo(map);
 			System.out.println( "pro_no"+ pro_no + "pro_add_option_no" + pro_add_option_no);
 			
 			map.put("ord_pro_qty", ord_pro_qty);
 			map.put("pro_add_option_no", pro_add_option_no);
-			map.put("pro_no", pro_no);
 			map.put("ord_pro_qty", ord_pro_qty);
 			map.put("point_save", point_save);
-			map.put("ord_no", ord_id);
 			map.put("point_use", ord_use_point);
 			
 			System.out.println("map: " + map);
@@ -121,7 +151,10 @@ public class OrdersController {
 			memberDAO.buyProduct(map);
 			
 			//카트테이블 주문상품 삭제
-			cartDAO.delete(no);
+			//cartDAO.delete(no);
+			
 		}
+		session.setAttribute("orderInfo", ob);
+		session.setAttribute("proInfo", proInfo);
 	}
 }

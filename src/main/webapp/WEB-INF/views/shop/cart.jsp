@@ -229,7 +229,7 @@
 			<p>상품금액 : <span id="tot_price" class="orderInfo">${info.pro_price }</span> 원</p>
 			<p>상품할인금액 : <span id="tot_discount" class="orderInfo">${info.pro_discount }</span> 원</p>
 			<p>배송비 : <span id="delivery_price" class="orderInfo">${info.delivery_price}</span> 원 </p>
-			<p>결제예정금액 : <span id="tot_saleprice" class="orderInfo">${info.pro_saleprice}</span> 원 </p>
+			<p>결제예정금액 : <span id="tot_saleprice" class="orderInfo">${info.pro_saleprice + info.delivery_price}</span> 원 </p>
 		</div>
 		<div>
 			<button id="order">주문하기</button>
