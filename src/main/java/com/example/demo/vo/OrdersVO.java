@@ -21,4 +21,5 @@ public class OrdersVO {
 	private String ord_status_code;
 	private String apply_num;
 	private String imp_uid;
+	private int total;
 }

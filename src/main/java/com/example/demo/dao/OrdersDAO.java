@@ -23,4 +23,7 @@ public class OrdersDAO {
 	public OrderBillVO billOfOrder(HashMap map) {
 		return DBManager.billOfOrder(map);
 	}
+	public OrdersVO receiverInfoByOrdId(String ord_id) {
+		return DBManager.receiverInfoByOrdId(ord_id);
+	}
 }

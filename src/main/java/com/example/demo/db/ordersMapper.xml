@@ -93,9 +93,9 @@
 		o.receiver_no = #{receiver_no}
 	</if>
   </select>
-  <select id="receiverInfoByOrdId">
+  <select id="receiverInfoByOrdId" resultType="ordersVO" parameterType="String">
   	SELECT
-	receiver_no, address_no, ord_price, ord_use_point,
+	nvl(receiver_no,0) AS receiver_no, nvl(address_no,0) AS address_no, ord_price AS total, ord_use_point,
 	(
 		SELECT sum(ord_pro_price * ord_pro_qty)
 	FROM

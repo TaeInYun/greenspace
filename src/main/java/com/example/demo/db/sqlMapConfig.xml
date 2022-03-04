@@ -16,6 +16,7 @@
 	<typeAlias type="com.example.demo.vo.OrdersProductVO" alias="ordersProductVO"/>
 	<typeAlias type="com.example.demo.vo.OrderBillVO" alias="orderBillVO"/>
   	<typeAlias type="com.example.demo.vo.ProductVO" alias="productVO"/>
+  	<typeAlias type="com.example.demo.vo.ReceiverVO" alias="receiverVO"/>
   	<typeAlias type="com.example.demo.vo.ChallengeVO" alias="challengeVO"/>
   	<typeAlias type="com.example.demo.vo.WishListVO" alias="wishListVO"/>
   	<typeAlias type="com.example.demo.vo.ChallengeListVO" alias="challengelistVO"/>
@@ -55,6 +56,7 @@
 	<mapper resource="com/example/demo/db/ordersProductMapper.xml"/> 
   	<mapper resource="com/example/demo/db/pro_add_optionMapper.xml"/> 
   	<mapper resource="com/example/demo/db/pointMapper.xml"/> 
+  	<mapper resource="com/example/demo/db/receiverMapper.xml"/> 
 	<mapper resource="com/example/demo/db/challengeMapper.xml"/> 
 	<mapper resource="com/example/demo/db/wishListMapper.xml"/> 
 	<mapper resource="com/example/demo/db/challengelistMapper.xml"/>  

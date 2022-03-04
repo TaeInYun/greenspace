@@ -42,6 +42,10 @@ public class AddressDAO {
 		return DBManager.updateAddress(a);
 	}
 
+	public AddressVO findAddressInfoByNo(int addr_no) {
+		return DBManager.findAddressInfoByNo(addr_no);
+	}
+	
 	//메인배송지로 변경
 	public int updateMainBtn(AddressVO a) {
 		return DBManager.updateMainBtnAddress(a);

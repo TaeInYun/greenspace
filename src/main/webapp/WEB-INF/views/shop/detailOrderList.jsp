@@ -53,6 +53,87 @@
 	</table>
 	<div>
 		<h5>주문자 정보</h5>
+		<table>
+			<tr>
+				<td>주문자</td>
+				<td>${member.name }</td>
+			</tr>
+			<tr>
+				<td>전화번호</td>
+				<td>${member.phone }</td>
+			</tr>
+			<tr>
+				<td>이메일</td>
+				<td>${member.email }</td>
+			</tr>
+		</table>
+	</div>
+	<div>
+		<h5>배송 정보</h5>
+		<table>
+			<tr>
+				<td>받는 사람</td>
+				<td>${addr.addr_receiver }</td>
+			</tr>
+			<tr>
+				<td>전화번호</td>
+				<td>${addr.addr_phone}</td>
+			</tr>
+			<tr>
+				<td>주소</td>
+				<td>${addr.addr_road}</td>
+			</tr>
+			<tr>
+				<td>상세주소</td>
+				<td>${addr.addr_detail }</td>
+			</tr>
+			<tr>
+				<td>요청메세지</td>
+				<td>${addr.addr_msg}</td>
+			</tr>
+		</table>
+	</div>
+	<div>
+		<h5>결제 정보</h5>
+		<table>
+			<tr>
+				<td>
+					주문 금액			
+				</td>
+				<td>
+					${ord.ord_price }			
+				</td>
+			</tr>
+			<tr>
+				<td>
+					배송비		
+				</td>
+				<td>
+					<c:if test="${ord.ord_price >= 50000 } ">
+						0
+					</c:if>
+					<c:if test="${ord.ord_price < 50000 }">
+						2500
+					</c:if>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					사용 포인트		
+				</td>
+				<td>
+					${ord.ord_use_point }			
+				</td>
+			</tr>
+			<tr>
+				<td>
+					총 결제금액			
+				</td>
+				<td>
+					${ord.total}			
+				</td>
+			</tr>
+		</table>
 	</div>
 </body>
 </html>

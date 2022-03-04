@@ -30,6 +30,7 @@ import com.example.demo.vo.OrdersVO;
 import com.example.demo.vo.PointVO;
 import com.example.demo.vo.ProductVO;
 import com.example.demo.vo.QnaVO;
+import com.example.demo.vo.ReceiverVO;
 import com.example.demo.vo.ReviewVO;
 import com.example.demo.vo.WishListVO;
  
@@ -382,6 +383,13 @@ public class DBManager {
 		return main;
 	}
 	
+	public static AddressVO findAddressInfoByNo(int addr_no) {
+		SqlSession session = factory.openSession();
+		AddressVO a =  session.selectOne("address.findAddressInfoByNo", addr_no);
+		session.close();
+		return a;
+	}
+	
 	public static List<AddressVO> allSubAddress(int member_no) {
 		SqlSession session = factory.openSession();
 		List<AddressVO> sub =  session.selectList("address.allSubAddress", member_no);
@@ -654,6 +662,12 @@ public class DBManager {
 		return ob;
 	}
 	
+	public static OrdersVO receiverInfoByOrdId(String ord_id) {
+		SqlSession session = factory.openSession();
+		OrdersVO o = session.selectOne("orders.receiverInfoByOrdId", ord_id);
+		session.close();
+		return o;
+	}
 	
 	
 	//--------------------OrdersProductVO관련--------------
@@ -1040,5 +1054,13 @@ public class DBManager {
 			session.close();
 			return no;
 		}
-
+		
+		//-------------------RECEIVERVO------------------
+		public static AddressVO findByReceiverNo(int receiver_no) {
+			SqlSession session = factory.openSession();
+			AddressVO r = session.selectOne("receiver.findByNo", receiver_no);
+			session.close();
+			return r;
+		}
+		
 }
