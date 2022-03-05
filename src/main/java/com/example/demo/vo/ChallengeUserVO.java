@@ -13,5 +13,6 @@ public class ChallengeUserVO {
 	private String chg_title;
 	private String chg_content;
 	private int member_no;
+	private int tree_num;
 	
 }

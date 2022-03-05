@@ -34,6 +34,10 @@ public class MemberDAO {
 	public MemberVO findById(String id) {
 		return DBManager.findById(id);
 	}
+
+	public MemberVO orderInfo(int id) {
+		return DBManager.orderInfo(id);
+	}
 	
 	//이메일 아이디 찾기
 	public String findIdByEmail(HashMap<String,String> m) {

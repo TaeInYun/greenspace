@@ -3,23 +3,36 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cerboard">
+
+	<!-- 오늘 글쓴거 체크 -->
+	<select id="checkTodayCer" resultType="int">
+	select count(*) from certification_board where member_no=#{member_no}
+	and to_char(cer_date,'yy/mm/dd') = TO_CHAR(SYSDATE, 'yy/mm/dd')
+	</select>
 	
 	<!-- 인증게시판 리스트  -->
 	<select id="findAll" resultType="cerboardVO">
-		select cer.no,cer_thumbnail,cer_content, cer_date , nickname from
-		(select cer.no,cer_thumbnail,cer_content, cer_date , nickname
+	select num, no ,cer_status,cer_thumbnail,cer_content, cer_date , nickname , cer_hit, cer_like from(
+    select rownum num, no ,cer_status,cer_thumbnail,cer_content, cer_date , nickname , cer_hit, cer_like from (
+     select cer.no no,cer_status,cer_thumbnail,cer_content, cer_date , nickname , cer_hit, cer_like from
+		(select  cer.no,cer_status,cer_thumbnail,cer_content, cer_date , nickname , cer_hit, cer_like
 		from certification_board cer, member m
-		where m.no=cer.member_no) cer
+		where m.no=cer.member_no 
+		<if test="keyword != null">
+		 and ${searchColumn} like '%'||#{keyword}||'%' 
+		 </if>
+         ) cer
 		left outer join img i
 		on i.cer_no = cer.no
-		order by CER_DATE
+        order by CER_DATE))
+    <!-- where num between #{start} and #{end} -->
+		
 	</select>
 	
-	
-		<!-- My 인증게시판 리스트  -->
-	<select id="findByMemberNo" resultType="cerboardVO">
-		select cer.no,cer_thumbnail,CER_CONTENT, CER_DATE , nickname from
-		(select cer.no,cer_thumbnail,CER_CONTENT, CER_DATE , nickname
+	<!-- My 인증게시판 리스트  -->
+	<select id="findCerByMember" resultType="cerboardVO">
+		select cer.no,cer_status,cer_thumbnail,cer_content, cer_date , nickname , cer_hit, cer_like from
+		(select cer.no,cer_status,cer_thumbnail,cer_content, cer_date , nickname , cer_hit, cer_like
 		from certification_board cer, member m
 		where m.no=cer.member_no 
 		and member_no=#{member_no}
@@ -30,10 +43,36 @@
 	</select>
 	
 	
+	<!-- 인증게시판 상세  -->
+	<select id="getCerBoard" resultType="cerboardVO">
+		select cer.no,cer_thumbnail,cer_content, cer_date , nickname ,cer_status,cer_hit, cer_like , i.no,img_name from
+		(select cer.no,cer_thumbnail,cer_content, cer_date , nickname,cer_status,cer_hit, cer_like
+		from certification_board cer, member m
+		where m.no=cer.member_no and cer.no=#{cer_no}) cer
+		left outer join img i
+		on i.cer_no = cer.no
+	</select>	
+	
+	   <!-- 인증게시판 수정-->
+	  <update id="update" parameterType="cerboardVO">
+	  	update certification_board set cer_status=#{cer_status},cer_content=#{cer_content},cer_thumbnail=#{cer_thumbnail} where no=#{no}
+	  </update>
+	  
+	   <!-- 인증게시판 삭제-->
+	  <delete id="delete">
+	  	delete certification_board where no=#{no}
+	  </delete>
+	  
+	   <!-- 인증게시판 조회수-->
+	  <update id="updateHit">
+	  	update certification_board set cer_hit=cer_hit+1 where no=#{no}
+	  </update>	
+
+
 	<insert id="insert" parameterType="cerboardVO">
 	   	insert into certification_board values(
 	    seq_cer.nextval,
-	   #{cer_status},
+	   	#{cer_status},
 	    #{cer_content},
 	     sysdate,
 	     0,

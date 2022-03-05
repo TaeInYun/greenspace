@@ -78,6 +78,15 @@
   	
   </insert> 
      
+   <select id="findAddressInfoByNo" resultType="addressVO">
+   	SELECT
+		addr_receiver, addr_phone, addr_postal, addr_road, addr_detail, addr_msg
+	FROM
+		address
+	WHERE
+		no = #{addr_no}	
+   </select>  
+     
    <!-- <insert id="insert" parameterType="addressVO">
   	insert into address(
   	no,

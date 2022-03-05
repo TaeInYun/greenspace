@@ -16,6 +16,7 @@ import com.example.demo.vo.CerBoardVO;
 import com.example.demo.vo.ChallengeListVO;
 import com.example.demo.vo.ChallengeUserVO;
 import com.example.demo.vo.ChallengeVO;
+import com.example.demo.vo.CommunityVO;
 import com.example.demo.vo.EasyToStartVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.MyReviewVO;
@@ -26,8 +27,10 @@ import com.example.demo.vo.Pro_add_optionVO;
 import com.example.demo.vo.OrderListVO;
 import com.example.demo.vo.OrdersProductVO;
 import com.example.demo.vo.OrdersVO;
+import com.example.demo.vo.PointVO;
 import com.example.demo.vo.ProductVO;
 import com.example.demo.vo.QnaVO;
+import com.example.demo.vo.ReceiverVO;
 import com.example.demo.vo.ReviewVO;
 import com.example.demo.vo.WishListVO;
  
@@ -311,9 +314,9 @@ public class DBManager {
 	
 	
 	//------------------------상품 자체 옵션(Pro_add_optionVO)--------------
-	public static int deletePro_add_option(int no) {
+	public static int deletePro_add_option(HashMap map) {
 		SqlSession session = factory.openSession();
-		int re=session.delete("pro_add_option.delete", no);
+		int re=session.delete("pro_add_option.delete", map);
 		session.commit();
 		session.close();
 		return re;
@@ -378,6 +381,13 @@ public class DBManager {
 		AddressVO main =  session.selectOne("address.allMainAddress", member_no);
 		session.close();
 		return main;
+	}
+	
+	public static AddressVO findAddressInfoByNo(int addr_no) {
+		SqlSession session = factory.openSession();
+		AddressVO a =  session.selectOne("address.findAddressInfoByNo", addr_no);
+		session.close();
+		return a;
 	}
 	
 	public static List<AddressVO> allSubAddress(int member_no) {
@@ -544,6 +554,12 @@ public class DBManager {
 		session.close();
 		return m;
 	}
+	public static MemberVO orderInfo(int member_no) {
+		SqlSession session = factory.openSession();
+		MemberVO m = session.selectOne("member.orderInfo", member_no);
+		session.close();
+		return m;
+	}
 
 
 	//비밀번호 update
@@ -608,6 +624,13 @@ public class DBManager {
 		session.close();
 		return o;
 	}
+	public static List<OrderListVO> findOrderListByOrdId(String id) {
+		
+		SqlSession session = factory.openSession();
+		List<OrderListVO> o = session.selectList("orderList.findOrderListByOrdId", id);
+		session.close();
+		return o;
+	}
 	
 	
 	
@@ -639,6 +662,12 @@ public class DBManager {
 		return ob;
 	}
 	
+	public static OrdersVO receiverInfoByOrdId(String ord_id) {
+		SqlSession session = factory.openSession();
+		OrdersVO o = session.selectOne("orders.receiverInfoByOrdId", ord_id);
+		session.close();
+		return o;
+	}
 	
 	
 	//--------------------OrdersProductVO관련--------------
@@ -787,9 +816,26 @@ public class DBManager {
 		return list;
 	}		
 	
+	//--------------완료한 챌린지 나무수
+	public static ChallengeUserVO getSaveTree(int member_no) {
+		SqlSession session = factory.openSession();
+		ChallengeUserVO c = session.selectOne("challengeuser.getSaveTree", member_no);
+		session.close();
+		return c;		
+	}		
 	
 	
-	//------------------챌린지 인증게시판 목록 ----------------------
+	//---------------CerBoard  (인증게시판) ---------------------
+	
+	/* 오늘 인증글 있는지 체크*/
+	public static int checkTodayCer(int member_no) {
+		SqlSession session = factory.openSession();
+		int cnt = session.selectOne("cerboard.checkTodayCer",member_no);
+		session.close();
+		return cnt;
+	}	
+	
+	/*  챌린지 인증게시판 목록   */
 	public static List<CerBoardVO> findCerBoard(){
 		SqlSession session = factory.openSession();
 		List<CerBoardVO> list= session.selectList("cerboard.findAll");
@@ -798,7 +844,7 @@ public class DBManager {
 	}		
 
 	
-	//------------------챌린지 인증게시판 등록 ----------------------
+	/*  챌린지 인증게시판 등록   */
 	public static int insertCerBoard(CerBoardVO c) {
 		SqlSession session  = factory.openSession();
 		int re=session.insert("cerboard.insert",c);
@@ -806,7 +852,52 @@ public class DBManager {
 		session.close();
 		return re;
 	}	
-
+	
+	
+	/* 인증게시판 상세 */
+	public static CerBoardVO getCerBoard(int no) {
+		SqlSession session = factory.openSession();
+		CerBoardVO c = session.selectOne("cerboard.getCerBoard", no);
+		session.close();
+		return c;		
+	}
+	
+	/* 인증게시판 수정 */
+	public static int updateCerBoard(CerBoardVO c) {
+		SqlSession session = factory.openSession();
+		int re = session.update("cerboard.update", c);
+		session.commit();
+		session.close();
+		return re;	
+	}
+	
+	/* 인증게시판 삭제 */
+	public static int deleteCerBoard(int no) {
+		SqlSession session = factory.openSession();
+		int re = session.delete("cerboard.delete", no);
+		session.commit();
+		session.close();
+		return re;	
+	}	
+	
+	/* 인증게시판 조회수 */
+	public static void updateHitCer(int no) {
+		SqlSession session = factory.openSession();
+		session.update("cerboard.updateHit", no);
+		session.commit();
+		session.close();
+	}
+	
+	
+	/*  My 챌린지 인증 게시판 목록 */
+	public static List<CerBoardVO> findCerByMember(int member_no){
+		SqlSession session = factory.openSession();
+		List<CerBoardVO> list= session.selectList("cerboard.findCerByMember",member_no);
+		session.close();
+		return list;
+	}		
+	
+	
 	
 	//---------------WishList (위시리스트 관련) ----------
 	public static List<WishListVO> findByMemberWish(int member_no){
@@ -835,12 +926,91 @@ public class DBManager {
 		session.close();
 		return re;
 	}
+	
 	public static int isWishList(WishListVO w) {
 		SqlSession session = factory.openSession();
 		int cnt = session.selectOne("wishList.isWishList", w);
 		session.close();
 		return cnt;
 	}
+	
+	//--------------POINT (포인트 관련) ----------
+	public static int insertPoint(PointVO p) {
+		SqlSession session = factory.openSession();
+		int re = session.insert("point.insert", p);
+		session.commit();
+		session.close();
+		return re;
+	}
+	 
+	
+	
+
+	
+	//---------------Community (커뮤니티) ---------------------
+	
+	/*  커뮤니티게시판 목록   */
+	public static List<CommunityVO> findCommunity(){
+		SqlSession session = factory.openSession();
+		List<CommunityVO> list= session.selectList("community.findAll");
+		session.close();
+		return list;
+	}		
+
+	
+	/*  커뮤니티게시판 등록   */
+	public static int insertCommunity(CommunityVO c) {
+		SqlSession session  = factory.openSession();
+		int re=session.insert("community.insert",c);
+		session.commit();
+		session.close();
+		return re;
+	}	
+	
+	
+	/* 커뮤니티게시판 상세 */
+	public static CommunityVO getCommunity(int no) {
+		SqlSession session = factory.openSession();
+		CommunityVO c = session.selectOne("community.getCommunity", no);
+		session.close();
+		return c;		
+	}
+	
+	/* 커뮤니티게시판 수정 */
+	public static int updateCommunity(CommunityVO c) {
+		SqlSession session = factory.openSession();
+		int re = session.update("community.update", c);
+		session.commit();
+		session.close();
+		return re;	
+	}
+	
+	/* 커뮤니티게시판 삭제 */
+	public static int deleteCommunity(int no) {
+		SqlSession session = factory.openSession();
+		int re = session.delete("community.delete", no);
+		session.commit();
+		session.close();
+		return re;	
+	}	
+	
+	/* 커뮤니티게시판 조회수 */
+	public static void updateHitCommu(int no) {
+		SqlSession session = factory.openSession();
+		session.update("community.updateHit", no);
+		session.commit();
+		session.close();
+	}
+	
+	
+	/*  My 커뮤니티게시판 목록 */
+	public static List<CommunityVO> findCommuByMember(int member_no){
+		SqlSession session = factory.openSession();
+		List<CommunityVO> list= session.selectList("community.findCommuByMember",member_no);
+		session.close();
+		return list;
+	}		
+
 	
 	//---------------EasyToStart---------------
 
@@ -885,6 +1055,7 @@ public class DBManager {
 			return no;
 		}
 		
+<<<<<<< HEAD
 		public static NoticeVO findByNoNotice(int no) {
 			SqlSession session = factory.openSession();
 			NoticeVO b = session.selectOne("notice.findByNoNotice", no);
@@ -916,4 +1087,14 @@ public class DBManager {
 		}
 
 	 
+=======
+		//-------------------RECEIVERVO------------------
+		public static AddressVO findByReceiverNo(int receiver_no) {
+			SqlSession session = factory.openSession();
+			AddressVO r = session.selectOne("receiver.findByNo", receiver_no);
+			session.close();
+			return r;
+		}
+		
+>>>>>>> branch 'master' of https://github.com/TaeInYun/greenspace.git
 }

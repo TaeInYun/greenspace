@@ -21,4 +21,7 @@ public class OrderListDAO {
 	public List<OrderListVO> findAllOrderListByMemberNo(int member_no) {
 		return DBManager.findAllOrderListByMemberNo(member_no);
 	}
+	public List<OrderListVO> findOrderListByOrdId(String id) {
+		return DBManager.findOrderListByOrdId(id);
+	}
 }

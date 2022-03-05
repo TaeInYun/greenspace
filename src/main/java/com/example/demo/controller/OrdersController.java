@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +21,7 @@ import com.example.demo.dao.CartDAO;
 import com.example.demo.dao.MemberDAO;
 import com.example.demo.dao.OrdersDAO;
 import com.example.demo.dao.OrdersProductDAO;
+import com.example.demo.dao.PointDAO;
 import com.example.demo.dao.Pro_add_optionDAO;
 import com.example.demo.dao.ProductDAO;
 import com.example.demo.vo.ApplyOrderVO;
@@ -28,6 +30,7 @@ import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OrderBillVO;
 import com.example.demo.vo.OrdersProductVO;
 import com.example.demo.vo.OrdersVO;
+import com.example.demo.vo.PointVO;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Setter;
@@ -54,6 +57,9 @@ public class OrdersController {
 	@Autowired
 	private ProductDAO productDAO;
 	
+	@Autowired
+	private PointDAO pointDAO;
+	
 	
 	@RequestMapping("/getCntOfToday")
 	@ResponseBody
@@ -70,6 +76,7 @@ public class OrdersController {
 		HttpSession session = request.getSession();
 		
 		int member_no = 1;
+		
 		String ord_id = data.getOrd_id();
 		int ord_use_point = data.getOrd_use_point();
 		int ord_price = data.getOrd_price();
@@ -80,6 +87,12 @@ public class OrdersController {
 		int receiver_no = data.getReceiver_no();
 		int point_save = data.getPoint_save();
 		String imp_uid = data.getImp_uid();
+		
+		PointVO savePoint = new PointVO(0, null, "적립", point_save, member_no, "BUY");
+		PointVO usePoint = new PointVO(0, null, "사용", ord_use_point, member_no, null);
+		pointDAO.insertPoint(savePoint);
+		int re = pointDAO.insertPoint(usePoint);
+		System.out.println("point:" + re);
 		
 		HashMap map = new HashMap();
 		map.put("member_no", member_no);
