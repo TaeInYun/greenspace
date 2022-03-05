@@ -21,10 +21,30 @@ function kakaopost(){
     }).open();
  }
  
-var selectBoxChange = function(value){
-	 console.log("값변경테스트:"+value);
-	 $("#changeTest").val(value);
-}
+$(function(){
+	$("#changeTest").change(function(){
+		let n=$(this).val();
+		$("#addr_main").val(n);
+	})
+});
+
+
+/*
+$(function(){
+	$("select[name=location]").change(function(){
+	  console.log($(this).val()); //value값 가져오기
+	  console.log($("select[name=location] option:selected").text()); //text값 가져오기
+	  
+	  $(this).val()
+	  $("select[name=location] option:selected").text()
+	  $
+	  
+	});
+	
+});
+*/
+
+
 </script>
 </head>
 <body>
@@ -38,11 +58,14 @@ var selectBoxChange = function(value){
 		 <input type="button" value="우편번호찾기" onclick="kakaopost()">
 		<!--메인/서브: -->
 		<%-- <input type="hidden" name="addr_main" value="${a.addr_main} "> <br> --%> 
-		<input type="hidden" id="changeInput"/>
-		<select id="changeTest" onchange="selectBoxChage(this.value);">
+		<input type="hidden" name="addr_main" id="changeInput">
+		<select id="changeTest" >		
 		  <option value=1>메인</option>
 		  <option value=0>서브</option>
+		  
 		</select> <br>
+		
+		<input type="hidden" name="addr_main" id="addr_main" value=""/><br>
 		우편번호: <input type="text" name="addr_postal" id="addr_postal" value="${a.addr_postal}"> <br>
 		주소: <input type="text" name="addr_road" id="addr_road" value="${a.addr_road}"> <br>			
 		주소상세: <input type="text" name="addr_detail" id="addr_detail" value="${a.addr_detail}"> <br> 

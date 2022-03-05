@@ -20,6 +20,8 @@
 	<typeAlias type="com.example.demo.vo.ChallengeUserVO" alias="challengeuserVO"/>
 	<typeAlias type="com.example.demo.vo.CerBoardVO" alias="cerboardVO"/>
 	<typeAlias type="com.example.demo.vo.QnaVO" alias="qnaVO"/>
+	<typeAlias type="com.example.demo.vo.OneVO" alias="oneVO"/>
+	<typeAlias type="com.example.demo.vo.ProQnaVO" alias="proqnaVO"/>
   </typeAliases>
   <environments default="development">  
     <environment id="development">
@@ -48,5 +50,7 @@
 	<mapper resource="com/example/demo/db/challengeUserMapper.xml"/>  
 	<mapper resource="com/example/demo/db/cerboardMapper.xml"/>  
 	<mapper resource="com/example/demo/db/qnaMapper.xml"/>  
+	<mapper resource="com/example/demo/db/oneMapper.xml"/>
+	<mapper resource="com/example/demo/db/proQnaMapper.xml"/>
   </mappers>
 </configuration>

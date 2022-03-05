@@ -43,8 +43,8 @@ public class AddressDAO {
 	}
 
 	//메인배송지로 변경
-	public int updateMainBtn(AddressVO a) {
-		return DBManager.updateMainBtnAddress(a);
+	public int updateMainBtn(int no) {
+		return DBManager.updateMainBtnAddress(no);
 	}
 	
 	//서브배송지로 변경

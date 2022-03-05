@@ -21,6 +21,7 @@ import com.example.demo.vo.MyReviewVO;
 import com.example.demo.vo.MyWishVO;
 import com.example.demo.vo.Pro_add_optionVO;
 import com.example.demo.vo.OrderListVO;
+import com.example.demo.vo.ProQnaVO;
 import com.example.demo.vo.ProductVO;
 import com.example.demo.vo.QnaVO;
 import com.example.demo.vo.ReviewVO;
@@ -99,11 +100,41 @@ public class DBManager {
 		session.close();
 	}
 	
+	//--------------------ProQna-------------------------------
+	
+	public static int insertProQna(ProQnaVO p) {
+		
+		SqlSession session  = factory.openSession();
+		int re=session.insert("proqna.insert",p);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
+	public static int updateProQna(ProQnaVO p) {
+		SqlSession session = factory.openSession(true);
+		int re = session.update("proqna.update", p);
+		session.commit();
+		session.close();
+		return re;				
+	}	
+	
+	public static int deleteProQna(int no) {
+		SqlSession session  = factory.openSession();
+		int re=session.delete("proqna.delete", no);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
+	
+	
+	
 	//-----------------------QnaVO---------------------------
 	
-	public static List<QnaVO> findAllQna(){
+	public static List<QnaVO> findAllQna(HashMap map){
 		SqlSession session = factory.openSession();
-		List<QnaVO> list = session.selectList("qna.findAll");
+		List<QnaVO> list = session.selectList("qna.findAll",map);
 		session.close();
 		return list;
 	}
@@ -123,6 +154,8 @@ public class DBManager {
 	}
 	
 	public static List<QnaVO> findAllQnaSearch(HashMap map){
+		//{start=1, end=5, searchColumn=QDE, qnaColumn=null, keyword=색상}
+		System.out.println("map에 저장된 내용"+map);
 		SqlSession session = factory.openSession();
 		List<QnaVO> list = session.selectList("qna.findAllSearch",map);
 		session.close();
@@ -375,9 +408,9 @@ public class DBManager {
 	}	
 	
 	
-	public static int updateMainBtnAddress(AddressVO a) {
+	public static int updateMainBtnAddress(int no) {
 		SqlSession session = factory.openSession(true);
-		int re = session.update("address.updatemainbtn", a);
+		int re = session.update("address.updatemainbtn", no);
 		session.commit();
 		session.close();
 		return re;				
