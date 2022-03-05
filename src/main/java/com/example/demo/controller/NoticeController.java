@@ -29,13 +29,6 @@ public class NoticeController {
   //      return "/notice/listNotice";
   //  }
 
-    @GetMapping("/notice/detail")
-    public String getDetail(Model model){
-        model.addAttribute("noticeList", dao.getList());
-        return "/notice/detail";
-    }
-
-
 
     @RequestMapping("/notice/listNotice")
     public void list(HttpSession session,  Model model,//View페이지에서 필요한 데이터를 유지하기 위하여 Model을 선언
@@ -55,9 +48,9 @@ public class NoticeController {
         map.put("totalRecord", dao.totalRecord);
         map.put("totalPage", dao.totalPage);
 
-        //dao를 통해 검색한 결과를 model에 저장한다.
+        //dao를 통해 검색한 결과를 model에 저장
         //이대 findAll메소드에서 전체레코드수를 구하고
-        //그 값을 갖고 전체페이지수도 계산합니다.
+        //그 값을 갖고 전체페이지수도 계산
         model.addAttribute("list", dao.findAll(map));
         //dao에 계산된 전체페이지수를 model에 상태유지합니다.
         model.addAttribute("totalPage", dao.totalPage);
@@ -67,7 +60,8 @@ public class NoticeController {
 		@RequestMapping("/notice/detail")
 		public void detail(int no, Model model) {
 			dao.updateHit(no);
-			model.addAttribute("b", dao.findByNo(no));
+			model.addAttribute("n", dao.findByNo(no));
+
 	}
 
 

@@ -9,12 +9,12 @@
 <body>
 	<h2>게시물 상세</h2>
 	<hr>
-	글번호 : ${b.no }<br>
-	글제목 : ${b.notice_title }<br>
+	글번호 : ${n.no }<br>
+	글제목 : ${n.notice_title }<br>
 	글내용 : <br>
-	<textarea rows="10" cols="80" readonly="readonly">${b.notice_content }</textarea><br>
-	조회수 : ${b.notice_hit }<br>
-	<a href="updateBoard?no=${b.no }">수정</a>
-	<a href="deleteBoard?no=${b.no }">삭제</a>
+	<textarea rows="10" cols="80" readonly="readonly">${n.notice_content }</textarea><br>
+	조회수 : ${n.notice_hit }<br>
+	<a href="updateBoard?no=${n.no }">수정</a>
+	<a href="deleteBoard?no=${n.no }">삭제</a>
 </body>
 </html>

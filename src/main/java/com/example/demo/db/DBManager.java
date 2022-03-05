@@ -1068,12 +1068,11 @@ public class DBManager {
 			int re = session.update("notice.updateNotice", b);
 			session.close();
 			return re;
-					
 		}
 
 		public static int deleteNotice(HashMap map) {
 			SqlSession session  = factory.openSession();
-			int re=session.delete("notice.deleteNotice", map);
+			int re = session.delete("notice.deleteNotice", map);
 			session.commit();
 			session.close();
 			return re;

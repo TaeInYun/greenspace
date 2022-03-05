@@ -7,7 +7,7 @@
     <select id="getList" resultType="noticeVO">
         select NOTICE_TITLE,NOTICE_DATE from NOTICE
     </select>
-    
+
     <select id="getTotalRecord" resultType="java.lang.Integer">
         select count(*) from NOTICE
     </select>
@@ -23,8 +23,8 @@
   	</select>
   	
   	<update id="updateNotice" parameterType="noticeVO"> 
-  		update notice set notice_title=#{notice_title}, notice_content=#{notice_content},notice_date=#{notice_date}, notice_hit=#{notice_hit} where no=#{no} 
-  	</update>
+  		update notice set notice_title=#{notice_title}, notice_content=#{notice_content},notice_date=#{notice_date}, notice_hit=#{notice_hit} where no=#{no}
+    </update>
   
  	 <delete id="deleteNotice">
   		delete notice where no=#{no}

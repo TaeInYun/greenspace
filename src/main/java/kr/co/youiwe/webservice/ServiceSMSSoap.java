@@ -1,4 +1,4 @@
-﻿/**
+/**
  * ServiceSMSSoap.java
  *
  * This file was auto-generated from WSDL
