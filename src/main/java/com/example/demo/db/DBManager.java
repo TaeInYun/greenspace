@@ -884,7 +884,36 @@ public class DBManager {
 			session.close();
 			return no;
 		}
+		
+		public static NoticeVO findByNoNotice(int no) {
+			SqlSession session = factory.openSession();
+			NoticeVO b = session.selectOne("notice.findByNoNotice", no);
+			session.close();
+			return b;		
+		}
+		
+		public static int updateNotice(NoticeVO b) {
+			SqlSession session = factory.openSession(true);
+			int re = session.update("notice.updateNotice", b);
+			session.close();
+			return re;
+					
+		}
 
+		public static int deleteNotice(HashMap map) {
+			SqlSession session  = factory.openSession();
+			int re=session.delete("notice.deleteNotice", map);
+			session.commit();
+			session.close();
+			return re;
+		}
+		
+		public static void updateHitNotice(int no) {
+			SqlSession session = factory.openSession();
+			session.update("notice.updateHitNotice", no);
+			session.commit();
+			session.close();
+		}
 
 	 
 }

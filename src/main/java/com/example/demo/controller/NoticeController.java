@@ -37,7 +37,7 @@ public class NoticeController {
 
 
 
-    @RequestMapping("notice/listNotice")
+    @RequestMapping("/notice/listNotice")
     public void list(HttpSession session,  Model model,//View페이지에서 필요한 데이터를 유지하기 위하여 Model을 선언
             @RequestParam(value = "pageNUM", defaultValue = "1")  int pageNUM//페이지 번호를 받아오기 위한 변수
     ) {
@@ -53,7 +53,7 @@ public class NoticeController {
         map.put("start", start);
         map.put("end", end);
         map.put("totalRecord", dao.totalRecord);
-        map.put("totalPage",dao.totalPage);
+        map.put("totalPage", dao.totalPage);
 
         //dao를 통해 검색한 결과를 model에 저장한다.
         //이대 findAll메소드에서 전체레코드수를 구하고
@@ -62,11 +62,13 @@ public class NoticeController {
         //dao에 계산된 전체페이지수를 model에 상태유지합니다.
         model.addAttribute("totalPage", dao.totalPage);
         model.addAttribute("totalRecord", dao.totalRecord);
-
-
-
     }
-
+    
+		@RequestMapping("/notice/detail")
+		public void detail(int no, Model model) {
+			dao.updateHit(no);
+			model.addAttribute("b", dao.findByNo(no));
+	}
 
 
 }

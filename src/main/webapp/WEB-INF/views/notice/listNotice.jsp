@@ -15,14 +15,13 @@
             <td>글제목</td>
             <td>작성일</td>
         </tr>
-        <c:set var="num" value="${searchVo.totalCount - ((searchVo.curPage-1) * 10) }"/>
+       
         <c:forEach var="notice" items="${list}">
             <tr>
-                <c:set>
-
-                </c:set>
                 <td>${notice.no}</td>
-                <td>${notice.notice_title}</td>
+                <td>
+                	<a href="detail?no=${notice.no}">${notice.notice_title}</a>
+                </td>
                 <td>${notice.notice_date}</td>
             </tr>
         </c:forEach>

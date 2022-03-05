@@ -20,9 +20,28 @@ public class NoticeDAO {
 
     //페이지로 나누기
    public List<NoticeVO> findAll(HashMap map){
+	   
         totalRecord = DBManager.getTotalRecord();
         totalPage = (int)Math.ceil(totalRecord/(double)pageSIZE);
-        return DBManager.findAllNotice(map);}
+        return DBManager.findAllNotice(map);
+    }
+   
+	public NoticeVO findByNo(int no) {
+		return DBManager.findByNoNotice(no);
+	}
+	
+	public int update(NoticeVO b) {
+		return DBManager.updateNotice(b);
+	}
+
+	public int delete(HashMap map) {
+		// TODO Auto-generated method stub
+		return DBManager.deleteNotice(map);
+	}
+	
+	public void updateHit(int no) {
+		DBManager.updateHitNotice(no);
+	}
 
 
 }

@@ -17,5 +17,21 @@
         order by notice_date desc
         offset #{start} rows fetch first #{end} rows only
     </select>
+    
+    <select id="findByNoNotice" resultType="noticeVO">
+  		select * from notice where no=#{no}
+  	</select>
+  	
+  	<update id="updateNotice" parameterType="noticeVO"> 
+  		update notice set notice_title=#{notice_title}, notice_content=#{notice_content},notice_date=#{notice_date}, notice_hit=#{notice_hit} where no=#{no} 
+  	</update>
+  
+ 	 <delete id="deleteNotice">
+  		delete notice where no=#{no}
+  	</delete>
+  
+ 	 <update id="updateHitNotice">
+  		update notice set notice_hit=notice_hit+1 where no=#{no}
+  	</update>
 
 </mapper>
