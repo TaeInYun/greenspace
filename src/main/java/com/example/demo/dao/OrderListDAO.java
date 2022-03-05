@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
@@ -16,5 +17,11 @@ public class OrderListDAO {
 	
 	public OrderListVO initOrderInfo(int member_no) {
 		return DBManager.initOrderInfo(member_no);
+	}
+	public List<OrderListVO> findAllOrderListByMemberNo(int member_no) {
+		return DBManager.findAllOrderListByMemberNo(member_no);
+	}
+	public List<OrderListVO> findOrderListByOrdId(String id) {
+		return DBManager.findOrderListByOrdId(id);
 	}
 }

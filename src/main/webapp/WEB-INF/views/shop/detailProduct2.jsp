@@ -126,7 +126,7 @@
 		 <section id="container">		
 				<div id="container_box"> 
 				<!-- 본문 -->			
-<<<<<<< HEAD
+
 					<section id="content">	
 							
 					 		<a href="/admin/updateProduct?no=${p.no}"> 상품수정</a>
@@ -175,8 +175,7 @@
 					 
 					 
 		</section>					
-=======
- 
+
 
 						 
 						 	<c:if test="${cnt>=1 }">

@@ -16,14 +16,22 @@ import com.example.demo.vo.CerBoardVO;
 import com.example.demo.vo.ChallengeListVO;
 import com.example.demo.vo.ChallengeUserVO;
 import com.example.demo.vo.ChallengeVO;
+import com.example.demo.vo.CommunityVO;
+import com.example.demo.vo.EasyToStartVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.MyReviewVO;
 import com.example.demo.vo.MyWishVO;
+import com.example.demo.vo.NoticeVO;
+import com.example.demo.vo.OrderBillVO;
 import com.example.demo.vo.Pro_add_optionVO;
 import com.example.demo.vo.OrderListVO;
 import com.example.demo.vo.ProQnaVO;
+import com.example.demo.vo.OrdersProductVO;
+import com.example.demo.vo.OrdersVO;
+import com.example.demo.vo.PointVO;
 import com.example.demo.vo.ProductVO;
 import com.example.demo.vo.QnaVO;
+import com.example.demo.vo.ReceiverVO;
 import com.example.demo.vo.ReviewVO;
 import com.example.demo.vo.WishListVO;
  
@@ -209,9 +217,13 @@ public class DBManager {
 			return cnt;
 	}
 	
+	public static CartVO findByCartNo(HashMap map){
+		SqlSession session = factory.openSession();
+		CartVO c = session.selectOne("cart.findByCartNo", map);
+		session.close();
+		return c;
+	}
 	
-	
- 
 	//-----------------------ProductVO---------------------------
 	//관리자 상품 리스트
 	public static List<ProductVO> findAll(HashMap map){
@@ -260,15 +272,15 @@ public class DBManager {
 		return re;
 	}	
  
-	public static List<ProductVO> findOptionName(int no){
+	public static ProductVO findOptionName(int no){
 		SqlSession session = factory.openSession();
-		List<ProductVO> list= session.selectList("product.findOptionName",no);
+		ProductVO list= session.selectOne("product.findOptionName",no);
 		session.close();
 		return list;
 	}	
  	
  
-	 	public static List<ProductVO> findOptionDetailName(HashMap map){
+	 public static List<ProductVO> findOptionDetailName(HashMap map){
 		SqlSession session = factory.openSession();
 		List<ProductVO> list= session.selectList("product.findOptionDetailName",map);
 		session.close();
@@ -295,6 +307,13 @@ public class DBManager {
 	public static int update(ProductVO b) {
 		SqlSession session = factory.openSession(true);
 		int re = session.update("product.update", b);
+		session.commit();
+		session.close();
+		return re;				
+	}	
+	public static int updateStockcuzBuy(HashMap map) {
+		SqlSession session = factory.openSession(true);
+		int re = session.update("product.updateStockcuzBuy", map);
 		session.commit();
 		session.close();
 		return re;				
@@ -328,12 +347,27 @@ public class DBManager {
 	
 	
 	//------------------------상품 자체 옵션(Pro_add_optionVO)--------------
-	public static int deletePro_add_option(int no) {
+	public static int deletePro_add_option(HashMap map) {
 		SqlSession session = factory.openSession();
-		int re=session.delete("pro_add_option.delete", no);
+		int re=session.delete("pro_add_option.delete", map);
 		session.commit();
 		session.close();
 		return re;
+	}
+	public static Integer findProAddPriceNo(HashMap map) {
+		SqlSession session = factory.openSession();
+		Integer re = session.selectOne("pro_add_option.findProAddPriceNo", map);
+		if(re == null) {
+			re = 0;
+		}
+		session.close();
+		return re;
+	}
+	public static int findProAddOptionNoForWishList(HashMap map) {
+		SqlSession session = factory.openSession();
+		int no = session.selectOne("pro_add_option.findProAddOptionNoForWishList", map);
+		session.close();
+		return no;
 	}
 	
 	
@@ -380,6 +414,13 @@ public class DBManager {
 		AddressVO main =  session.selectOne("address.allMainAddress", member_no);
 		session.close();
 		return main;
+	}
+	
+	public static AddressVO findAddressInfoByNo(int addr_no) {
+		SqlSession session = factory.openSession();
+		AddressVO a =  session.selectOne("address.findAddressInfoByNo", addr_no);
+		session.close();
+		return a;
 	}
 	
 	public static List<AddressVO> allSubAddress(int member_no) {
@@ -472,6 +513,7 @@ public class DBManager {
 		session.close();
 		return re;
 	}
+	
 	//-----------------Member ( 회원관련 )------------------------
 	
 	public static int insertMember(MemberVO m) {
@@ -536,21 +578,54 @@ public class DBManager {
 		session.close();
 		return re;
 	}
+	
+
+	
 	public static MemberVO getMemberInfo(int member_no) {
 		SqlSession session = factory.openSession();
 		MemberVO m = session.selectOne("member.mainMemberInfo", member_no);
 		session.close();
 		return m;
 	}
-
-
-	public static String updatePwd(HashMap<String,String> m) {
+	public static MemberVO orderInfo(int member_no) {
 		SqlSession session = factory.openSession();
-		String re = session.selectOne("member.updatePwd", m);
+		MemberVO m = session.selectOne("member.orderInfo", member_no);
+		session.close();
+		return m;
+	}
+
+
+	//비밀번호 update
+	public static int updatePwd(HashMap<String,String> m) {
+		SqlSession session = factory.openSession();
+		int re = session.update("member.updatePwd", m);
+		System.out.println("result: " + re);
+		session.commit();
 		session.close();
 		return re;
 	}
 
+	
+	public static int buyProduct(HashMap map) {
+		SqlSession session = factory.openSession();
+		int re = session.update("member.buyProduct", map);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
+	//게시물 작성시 포인트 수정
+	public static int insertBoardPoint(HashMap map) {
+		SqlSession session = factory.openSession();
+		int re = session.update("member.insertBoardPoint", map);
+		session.commit();
+		session.close();
+		return re;
+	}
+
+	
+	
+	
 	/*-------- 회원 목록 -------*/
 	public static List<MemberVO> findAllMember(){
 		SqlSession session = factory.openSession();
@@ -583,7 +658,71 @@ public class DBManager {
 		session.close();
 		return o;
 	}
-
+	
+	public static List<OrderListVO> findAllOrderListByMemberNo(int member_no) {
+		
+		SqlSession session = factory.openSession();
+		List<OrderListVO> o = session.selectList("orderList.findAllOrderListByMemberNo", member_no);
+		session.close();
+		return o;
+	}
+	public static List<OrderListVO> findOrderListByOrdId(String id) {
+		
+		SqlSession session = factory.openSession();
+		List<OrderListVO> o = session.selectList("orderList.findOrderListByOrdId", id);
+		session.close();
+		return o;
+	}
+	
+	
+	
+	//--------------------OrdersVO관련--------------
+	public static int getCntOfToday() {
+		SqlSession session = factory.openSession();
+		int cnt = session.selectOne("orders.getCntOfToday");
+		session.close();
+		return cnt;
+	}
+	
+	public static int insertOrders(OrdersVO o) {
+		SqlSession session = factory.openSession();
+		int cnt = session.insert("orders.insertOrders", o);
+		session.commit();
+		session.close();
+		return cnt;
+	}
+	public static int getTotalPay(HashMap map) {
+		SqlSession session = factory.openSession();
+		Integer re = session.selectOne("orders.getTotalPay", map);
+		session.close();
+		return re;
+	}
+	public static OrderBillVO billOfOrder(HashMap map) {
+		SqlSession session = factory.openSession();
+		OrderBillVO ob = session.selectOne("orders.billOfOrder", map);
+		session.close();
+		return ob;
+	}
+	
+	public static OrdersVO receiverInfoByOrdId(String ord_id) {
+		SqlSession session = factory.openSession();
+		OrdersVO o = session.selectOne("orders.receiverInfoByOrdId", ord_id);
+		session.close();
+		return o;
+	}
+	
+	
+	//--------------------OrdersProductVO관련--------------
+	public static int insertOrdersProduct(HashMap map) {
+		SqlSession session = factory.openSession();
+		int cnt = session.insert("ordersProduct.insertOrdersProduct", map);
+		session.commit();
+		session.close();
+		return cnt;
+	}
+	
+	
+	
 	//---------------Challenge (챌린지 관련) ----------
 
 	/*관리자 - 챌린지 목록*/
@@ -699,6 +838,15 @@ public class DBManager {
 		return re;				
 	}	
 	
+	/* 도전완료한 챌린지 있는지 체크 */
+	public static int checkEndstatus(int member_no) {
+		SqlSession session = factory.openSession();
+		int cnt = session.selectOne("challengelist.checkEndstatus",member_no);
+		session.close();
+		return cnt;
+	}
+	
+	
 	
 	//--------------ChallengeUser (완료한 챌린지만 담는 테이블) ----------------
 	/* 완료한 챌린지만 insert */
@@ -719,9 +867,28 @@ public class DBManager {
 		return list;
 	}		
 	
+	//--------------완료한 챌린지 나무수
+	public static ChallengeUserVO getSaveTree(int member_no) {
+		SqlSession session = factory.openSession();
+		ChallengeUserVO c = session.selectOne("challengeuser.getSaveTree", member_no);
+		session.close();
+		return c;		
+	}
 	
 	
-	//------------------챌린지 인증게시판 목록 ----------------------
+	
+	
+	//---------------CerBoard  (인증게시판) ---------------------
+	
+	/* 오늘 인증글 있는지 체크*/
+	public static int checkTodayCer(int member_no) {
+		SqlSession session = factory.openSession();
+		int cnt = session.selectOne("cerboard.checkTodayCer",member_no);
+		session.close();
+		return cnt;
+	}	
+	
+	/*  챌린지 인증게시판 목록   */
 	public static List<CerBoardVO> findCerBoard(){
 		SqlSession session = factory.openSession();
 		List<CerBoardVO> list= session.selectList("cerboard.findAll");
@@ -730,7 +897,7 @@ public class DBManager {
 	}		
 
 	
-	//------------------챌린지 인증게시판 등록 ----------------------
+	/*  챌린지 인증게시판 등록   */
 	public static int insertCerBoard(CerBoardVO c) {
 		SqlSession session  = factory.openSession();
 		int re=session.insert("cerboard.insert",c);
@@ -738,7 +905,52 @@ public class DBManager {
 		session.close();
 		return re;
 	}	
-
+	
+	
+	/* 인증게시판 상세 */
+	public static CerBoardVO getCerBoard(int no) {
+		SqlSession session = factory.openSession();
+		CerBoardVO c = session.selectOne("cerboard.getCerBoard", no);
+		session.close();
+		return c;		
+	}
+	
+	/* 인증게시판 수정 */
+	public static int updateCerBoard(CerBoardVO c) {
+		SqlSession session = factory.openSession();
+		int re = session.update("cerboard.update", c);
+		session.commit();
+		session.close();
+		return re;	
+	}
+	
+	/* 인증게시판 삭제 */
+	public static int deleteCerBoard(int no) {
+		SqlSession session = factory.openSession();
+		int re = session.delete("cerboard.delete", no);
+		session.commit();
+		session.close();
+		return re;	
+	}	
+	
+	/* 인증게시판 조회수 */
+	public static void updateHitCer(int no) {
+		SqlSession session = factory.openSession();
+		session.update("cerboard.updateHit", no);
+		session.commit();
+		session.close();
+	}
+	
+	
+	/*  My 챌린지 인증 게시판 목록 */
+	public static List<CerBoardVO> findCerByMember(int member_no){
+		SqlSession session = factory.openSession();
+		List<CerBoardVO> list= session.selectList("cerboard.findCerByMember",member_no);
+		session.close();
+		return list;
+	}		
+	
+	
 	
 	//---------------WishList (위시리스트 관련) ----------
 	public static List<WishListVO> findByMemberWish(int member_no){
@@ -762,13 +974,191 @@ public class DBManager {
 	}
 	public static int insertWishList(WishListVO w) {
 		SqlSession session = factory.openSession();
-		int re = session.delete("wishList.insert", w);
+		int re = session.insert("wishList.insert", w);
 		session.commit();
 		session.close();
 		return re;
 	}
 	
+	public static int isWishList(WishListVO w) {
+		SqlSession session = factory.openSession();
+		int cnt = session.selectOne("wishList.isWishList", w);
+		session.close();
+		return cnt;
+	}
+	
+	//--------------POINT (포인트 관련) ----------
+	public static int insertPoint(PointVO p) {
+		SqlSession session = factory.openSession();
+		int re = session.insert("point.insert", p);
+		session.commit();
+		session.close();
+		return re;
+	}
+	 
+	/* 인증게시판 공개/비공개 수정시 포인트 수정 */
+	public static int updateCerPoint(HashMap map) {
+		SqlSession session = factory.openSession();
+		int re = session.update("point.updateCerPoint",map);
+		session.commit();
+		session.close();
+		return re;	
+	}	
 	
 
+	
+	//---------------Community (커뮤니티) ---------------------
+	
+	/*  커뮤니티게시판 목록   */
+	public static List<CommunityVO> findCommunity(){
+		SqlSession session = factory.openSession();
+		List<CommunityVO> list= session.selectList("community.findAll");
+		session.close();
+		return list;
+	}		
+
+	
+	/*  커뮤니티게시판 등록   */
+	public static int insertCommunity(CommunityVO c) {
+		SqlSession session  = factory.openSession();
+		int re=session.insert("community.insert",c);
+		session.commit();
+		session.close();
+		return re;
+	}	
+	
+	
+	/* 커뮤니티게시판 상세 */
+	public static CommunityVO getCommunity(int no) {
+		SqlSession session = factory.openSession();
+		CommunityVO c = session.selectOne("community.getCommunity", no);
+		session.close();
+		return c;		
+	}
+	
+	/* 커뮤니티게시판 수정 */
+	public static int updateCommunity(CommunityVO c) {
+		SqlSession session = factory.openSession();
+		int re = session.update("community.update", c);
+		session.commit();
+		session.close();
+		return re;	
+	}
+	
+	/* 커뮤니티게시판 삭제 */
+	public static int deleteCommunity(int no) {
+		SqlSession session = factory.openSession();
+		int re = session.delete("community.delete", no);
+		session.commit();
+		session.close();
+		return re;	
+	}	
+	
+	/* 커뮤니티게시판 조회수 */
+	public static void updateHitCommu(int no) {
+		SqlSession session = factory.openSession();
+		session.update("community.updateHit", no);
+		session.commit();
+		session.close();
+	}
+	
+	
+	/*  My 커뮤니티게시판 목록 */
+	public static List<CommunityVO> findCommuByMember(int member_no){
+		SqlSession session = factory.openSession();
+		List<CommunityVO> list= session.selectList("community.findCommuByMember",member_no);
+		session.close();
+		return list;
+	}		
+
+	
+	//---------------EasyToStart---------------
+
+		//게시물 목록 불러오기
+		public static List<EasyToStartVO> getEasyToStartAll(){
+			SqlSession session = factory.openSession();
+			List<EasyToStartVO> list = session.selectList("easyToStart.getEasyToStartAll");
+			session.close();
+			return list;
+		}
+
+
+		//myPage.memberInfo
+
+		//회원 본인확인
+		public static int isMember(HashMap<String, String> hashMap){
+			SqlSession session = factory.openSession();
+			int re = session.selectOne("member.isMember", hashMap);
+			session.close();
+			return re;
+		}
+
+		//notice
+		public static List<NoticeVO> getList(){
+			SqlSession session = factory.openSession();
+			List<NoticeVO> list = session.selectList("notice.getList");
+			session.close();
+			return list;
+		}
+
+		public static List<NoticeVO> findAllNotice(HashMap map){
+			SqlSession session = factory.openSession();
+			List<NoticeVO> list = session.selectList("notice.findAll", map);
+			session.close();
+			return list;
+		}
+
+		public static int getTotalRecord(){
+			SqlSession session = factory.openSession();
+			int no = session.selectOne("notice.getTotalRecord");
+			session.close();
+			return no;
+		}
+
+		
+		public static NoticeVO findByNoNotice(int no) {
+			SqlSession session = factory.openSession();
+			NoticeVO b = session.selectOne("notice.findByNoNotice", no);
+			session.close();
+			return b;		
+		}
+		
+		public static int updateNotice(NoticeVO b) {
+			SqlSession session = factory.openSession(true);
+			int re = session.update("notice.updateNotice", b);
+			session.close();
+			return re;
+		}
+
+		public static int deleteNotice(HashMap map) {
+			SqlSession session  = factory.openSession();
+			int re = session.delete("notice.deleteNotice", map);
+			session.commit();
+			session.close();
+			return re;
+		}
+		
+		public static void updateHitNotice(int no) {
+			SqlSession session = factory.openSession();
+			session.update("notice.updateHitNotice", no);
+			session.commit();
+			session.close();
+		}
+
+		public static int insertNotice(NoticeVO n){
+			SqlSession session = factory.openSession();
+			int re = session.insert("notice.insert", n);
+			session.commit();
+			session.close();
+			return re;
+		}
 	 
+		//-------------------RECEIVERVO------------------
+		public static AddressVO findByReceiverNo(int receiver_no) {
+			SqlSession session = factory.openSession();
+			AddressVO r = session.selectOne("receiver.findByNo", receiver_no);
+			session.close();
+			return r;
+		}
+		
 }

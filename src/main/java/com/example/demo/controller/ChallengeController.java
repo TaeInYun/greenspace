@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.dao.CerBoardDAO;
 import com.example.demo.dao.ChallengeDAO;
 import com.example.demo.dao.ChallengeListDAO;
 import com.example.demo.dao.ChallengeUserDAO;
@@ -34,6 +35,9 @@ public class ChallengeController {
 	
 	@Autowired
 	private ChallengeUserDAO userdao;
+	
+	@Autowired
+	private CerBoardDAO cerdao;
 	
 
 	//-------------------관리자 챌린지 항목 리스트-------------------- 
@@ -98,22 +102,28 @@ public class ChallengeController {
 
 
 	//-------------------메인 회원 챌린지 목록-------------------- 
-	@RequestMapping("/mainpage/member")
+	@RequestMapping(value={"/mainpage/member","/mypage/myChallenge"})
 	public void memberChgList(Model model,HttpSession session) {
 		
 		MemberVO m = (MemberVO)session.getAttribute("m");
 		
-		int member_no = m.getNo();
+		int member_no = m.getNo();		
+
 		System.out.println(member_no);
 		//도전챌린지목록
 		model.addAttribute("chglist",listdao.memberChgList(member_no));
 		//완료 챌린지목록
 		model.addAttribute("endlist", userdao.listChgUserByMemberNO(member_no));		
-	
+		//나무수
+		model.addAttribute("tree", userdao.getSaveTree(member_no));
+		//오늘 인증글 있는지 체크
+		model.addAttribute("cercnt", cerdao.checkTodayCer(member_no));
+		
+		
 	}
 	
-	// 회원 버튼클릭 도전상태 변경 
-	@RequestMapping("/mainpage/updateChgStatus")
+	// 회원 버튼클릭 도전상태 변경
+	@RequestMapping( value={"/mainpage/updateChgStatus","/mypage/updateChgStatus"})
 	@ResponseBody
 	public int changeChgStatus(ChallengeListVO c) {
 		
@@ -132,22 +142,34 @@ public class ChallengeController {
 	}	
 	
 	
-	
-	//오늘 챌린지 완료 버튼 클릭시 도전상태가 'END'인것만 insert되게
-	@RequestMapping("/mainpage/insertEndChg")
+	// 회원 버튼클릭 도전상태 변경
+	@RequestMapping( value={"/mainpage/checkEndStatus","/mypage/checkEndStatus"})
 	@ResponseBody
-	public int insertEndChg(int member_no) {
-	
-		System.out.println(member_no);	
-		
-		int re = userdao.insertEndChg(member_no);
+	public int checkEndStatus(int member_no) {
 
 		
-		if(re==1) {
-			System.out.println("추가성공");
-			listdao.updateChgStatusSTA(member_no);
-		}else {
+		int cnt = listdao.checkEndstatus(member_no);
+		System.out.println(cnt);
+		
+		return cnt;
+	}	
+		
+
+	
+	//오늘 챌린지 완료 버튼 클릭시 도전상태가 'END'인것만 insert되게
+	@RequestMapping(value={"/mainpage/insertEndChg","/mypage/insertEndChg"})
+	@ResponseBody
+	public int insertEndChg(int member_no) {
+		int re=-1;
+		re = userdao.insertEndChg(member_no);
+		//re=1,2,3
+		
+		if(re == -1) {
 			System.out.println("추가실패");
+			
+		}else {
+			System.out.println("추가성공");
+			listdao.updateChgStatusSTA(member_no);	
 		}
 		System.out.println(member_no);
 		

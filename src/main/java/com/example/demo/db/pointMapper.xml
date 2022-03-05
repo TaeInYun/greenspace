@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="point">
+	<insert id="insert" parameterType="pointVO">
+		INSERT
+		INTO
+		point
+		(no, point_date, point_status, point_amount, member_no
+		<if test="point_type_code != null and point_type_code != ''">
+			, point_type_code
+		</if>
+		)
+		VALUES
+		(
+			seq_point.nextval, sysdate, #{point_status}, #{point_amount}, #{member_no}
+		<if test="point_type_code != null and point_type_code != ''">	
+			, #{point_type_code}
+		</if>
+		)
+	</insert>
+	
+	<!-- 인증게시판 공개/비공개 수정시 포인트 수정 -->
+	<update id="updateCerPoint" parameterType="pointVO">
+	update point set point_amount=#{point_amount}
+	,point_type_code = #{point_type_code} 
+	where member_no = #{member_no} and to_char(point_date,'yy/mm/dd') 
+	= to_char((select cer_date from certification_board where no=#{cer_no}),'yy/mm/dd')
+	</update>
+</mapper>

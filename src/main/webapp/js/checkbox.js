@@ -16,15 +16,18 @@ function showOrderPriceInfo(){
 	let delivery_price = 0;
 	
 	$.each(select, function() {
-		tot_price += Number( $($(this).siblings()[0]).val() );
-		tot_discount += Number( $($(this).siblings()[3]).val() );
-		tot_saleprice += Number( $($(this).siblings()[1]).val() );
+		let qty = $( $(this).siblings()[4] ).val();
+		tot_price += Number( $($(this).siblings()[0]).val() ) * qty;
+		tot_discount += Number( $($(this).siblings()[3]).val() ) * qty;
+		tot_saleprice += Number( $($(this).siblings()[1]).val() ) * qty ;
 	});
 	
 	
 	if( tot_saleprice < 50000){
 		delivery_price = 2500;
 	}
+	
+	tot_saleprice += delivery_price
 	
 	$("#tot_price").html(tot_price);
 	$("#tot_discount").html(tot_discount);

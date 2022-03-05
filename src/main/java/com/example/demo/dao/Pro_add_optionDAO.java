@@ -1,5 +1,6 @@
 package com.example.demo.dao;
  
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -14,13 +15,19 @@ public class Pro_add_optionDAO {
 		return DBManager.insertPro_add_option(po);
 	}
 	
-	public int delete(int no) {
-		return DBManager.deletePro_add_option(no);
+	public int delete(HashMap map) {
+		return DBManager.deletePro_add_option(map);
 	}	
 	
 	public List<Pro_add_optionVO> findOptionByProNo(int no) {
 		return DBManager.findOptionByProNo(no);
 	}
 	
+	public int findProAddPriceNo(HashMap map) {
+		return DBManager.findProAddPriceNo(map);
+	}
+	public int findProAddOptionNoForWishList(HashMap map) {
+		return DBManager.findProAddOptionNoForWishList(map);
+	}
 	
 }

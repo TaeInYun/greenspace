@@ -9,6 +9,9 @@ public class WishListVO {
 	private int member_no;
 	private int cnt;
 	private int pro_add_option_no;
+	private String cart_option;
+	private String cart_option_detail;
+	
 	
 	private String pro_brand;
 	private String pro_name;
@@ -19,4 +22,6 @@ public class WishListVO {
 	private int saleprice;
 	private int pro_add_price;
 	private int stock;
+	
+	
 }

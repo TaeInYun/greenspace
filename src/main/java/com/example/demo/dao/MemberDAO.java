@@ -34,6 +34,10 @@ public class MemberDAO {
 	public MemberVO findById(String id) {
 		return DBManager.findById(id);
 	}
+
+	public MemberVO orderInfo(int id) {
+		return DBManager.orderInfo(id);
+	}
 	
 	//이메일 아이디 찾기
 	public String findIdByEmail(HashMap<String,String> m) {
@@ -57,8 +61,16 @@ public class MemberDAO {
 	
 
 	//새비밀번호 설정
-	public String updatePwd(HashMap<String, String> m) {
+	public int updatePwd(HashMap<String, String> m) {
 		return DBManager.updatePwd(m);
+	}
+
+	public int buyProduct(HashMap map) {
+		return DBManager.buyProduct(map);
+	}
+	
+	public int insertBoardPoint(HashMap map) {
+		return DBManager.insertBoardPoint(map);
 	}
 
 

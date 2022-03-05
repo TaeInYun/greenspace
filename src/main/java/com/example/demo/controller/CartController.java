@@ -24,9 +24,12 @@ public class CartController {
 	@Autowired
 	private CartDAO dao;
 	
+	
 	@RequestMapping("/shop/insertCart")
 	@ResponseBody
 	public String insertCart(CartVO c) {
+		c.setMember_no(1);
+		
 		String msg = "장바구니에 추가하지 못했습니다.";
 		int re = dao.insert(c);
 
@@ -44,7 +47,6 @@ public class CartController {
 		map.put("cart_option", c.getCart_option());
 		map.put("cart_option_detail", c.getCart_option_detail());
 		map.put("member_no", 1);
-		
 		int re = dao.isCart(map);
 		return re;
 	}

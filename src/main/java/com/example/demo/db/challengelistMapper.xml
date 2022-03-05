@@ -62,6 +62,13 @@
 		and to_char(chg_list_date,'yy/mm/dd') = to_char(sysdate, 'yy/mm/dd') 
 	</update>
 
+  
+  <!-- 도전완료된 챌린지 있나 체크 -->
+  <select id="checkEndstatus" resultType="int">
+  select count(*) from challenge_list where member_no=#{member_no} 
+  and chg_status_code='END' 
+  and to_char(chg_list_date,'yy/mm/dd') = to_char(sysdate, 'yy/mm/dd')
+  </select>
 
 	
 </mapper>

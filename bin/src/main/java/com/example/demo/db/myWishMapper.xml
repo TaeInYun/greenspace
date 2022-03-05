@@ -13,6 +13,18 @@
 	AND
 	member_no = #{member_no}
   </select>
+  <select id="getProInfoForOrder" resultType="myWishVO">
+  	SELECT
+	c.no no, cart_name pro_name, cart_option pro_option, cart_option_detail option_detail, cart_price price, cart_saleprice saleprice, cart_qty qty, pro_thumbNail img, pro_stock stock
+	FROM
+	cart c, (SELECT no,pro_thumbNail, pro_stock FROM product) p
+	WHERE
+	c.pro_no = p.no
+	AND
+    c.no = #{no}
+    AND
+	member_no = #{member_no}
+  </select>
   <select id="cntOfCart" resultType="Integer">
 	SELECT nvl(count(*), 0) cnt
 	FROM cart

@@ -48,7 +48,7 @@ public class MemberService implements UserDetailsService{
 		return details;
 	}
 	
-	
+
 	public String findId(HttpServletResponse response, String email, String name, String phone ) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -104,8 +104,10 @@ public class MemberService implements UserDetailsService{
 		//사용자가 입력한 핸드폰 값이 null이 아니면 findPwdPhon메서드를 실행하여 회원인지 판별
 		if (!phone.equals( "null")) {		
 			re = dao.findPwdByPhone(map);
+			System.out.println("findPwdByPhone가 실행중");
 		} else {
-			re = dao.findPwdByEmail(map);			
+			re = dao.findPwdByEmail(map);
+			System.out.println("findPwdByEmail가 실행중");
 		}
 		
 		//만약 회원일 경우 세션에 해당 정보를 입력함.
@@ -118,17 +120,21 @@ public class MemberService implements UserDetailsService{
 	}
 	
 
-	public String updatePwd(String id, String pwd) {
+	public int updatePwd(String id, String pwd) {
 		HashMap<String, String> map = new HashMap<String, String>();
 
 		map.put("id", id);
 		map.put("pwd", pwd);
 		
-		String re = dao.updatePwd(map);
+		int re = dao.updatePwd(map);
 		System.out.println(re);
 		
 		return re;
 	}
+
+
+	
+
 	
 
 }

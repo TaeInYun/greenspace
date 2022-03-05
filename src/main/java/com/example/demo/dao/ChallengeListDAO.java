@@ -45,5 +45,8 @@ public class ChallengeListDAO {
 		return DBManager.updateChgStatusSTA(member_no);
 	}
 	
+	public int checkEndstatus(int member_no) {
+		return DBManager.checkEndstatus(member_no);
+	}
 	
 }

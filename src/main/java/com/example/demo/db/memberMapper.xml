@@ -44,18 +44,54 @@
 	   <select id="findPwdByPhone" parameterType="HashMap" resultType="int">
 	  	select count(*) from member where phone=#{phone} and id=#{id} 
 	  </select>
-	   <select id="updatePwd" parameterType="HashMap" resultType="String">
+	  
+ 		<update id="updatePwd" parameterType="HashMap">
   		update member set pwd=#{pwd} where id=#{id}
-	   </select>
+	   </update>
+
 	   
 		<select id="findAll" resultType="memberVO" >
 		select * from member
 		</select>
+	
+		<update id="buyProduct" parameterType="HashMap">
+			UPDATE member SET point_use = (SELECT point_use FROM member WHERE no = #{member_no}) - #{point_use}+ #{point_save}, 
+			point_save = (SELECT point_save FROM member WHERE no=#{member_no}) + #{point_save} 
+			WHERE no = #{member_no}
+		</update>
+		
+		
+		<update id="insertBoardPoint" parameterType="HashMap">
+			UPDATE member SET point_save = (SELECT point_save FROM member WHERE no=#{member_no}) + #{point_save} 
+			WHERE no = #{member_no}
+		</update>
+		
+		
 
 	  <!-- 메인 유저정보 -->
 	  <select id="mainMemberInfo" resultType="memberVO">
 	  SELECT nickname, levels, point_use FROM member where no = #{member_no}
 	  </select>
+	  
+	  <select id="orderInfo" resultType="memberVO">
+	  	SELECT
+		name, email, phone
+		FROM
+		member
+		WHERE
+		no = #{member_no}
+	  </select>
 
+	  <!-- 다음레벨까지 남은 포인트 -->
+	  <select id="nextlevelpoint" resultType="int">
+	 	select 5000-sum(point_use + point_save) from member 
+		where levels=#{levels}
+		and no=#{no}
+	  </select>
+
+	 
+	<select id="isMember" parameterType="HashMap" resultType="int">
+		select count(*) from member where id=#{id} and pwd=#{pwd}
+	</select>
 
 </mapper> 
