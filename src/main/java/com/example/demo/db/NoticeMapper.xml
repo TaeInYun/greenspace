@@ -34,4 +34,7 @@
   		update notice set notice_hit=notice_hit+1 where no=#{no}
   	</update>
 
+    <insert id="insert" parameterType="NoticeVO">
+        insert into notice (no, notice_title, notice_content, notice_date, notice_hit) values (seq_notice.nextval, #{notice_title}, #{notice_content}, sysdate, 0 )
+    </insert>
 </mapper>

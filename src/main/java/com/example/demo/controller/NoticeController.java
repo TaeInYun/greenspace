@@ -7,12 +7,12 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 
@@ -62,7 +62,41 @@ public class NoticeController {
 			dao.updateHit(no);
 			model.addAttribute("n", dao.findByNo(no));
 
-	}
+	    }
 
+    @GetMapping(value = "/notice/insertNotice")
+    public void insertNotice(){
+    }
 
+    @PostMapping(value = "/notice/insertNotice")
+    public void insertNotice(HttpServletResponse response, @ModelAttribute NoticeVO notice, ModelAndView mav){
+        int re = dao.insertNotice(notice);
+
+        if(re != 1) {
+            mav.setViewName("error");
+            mav.addObject("msg", "공지사항 등록에 실패하였습니다.");
+        }else {
+            try{
+                response.setContentType("text/html;charset=utf-8");
+                PrintWriter out = response.getWriter();
+                out.println("<script>");
+                out.println("alert('게시물 등록이 완료되었습니다');");
+                out.println("history.go(-2);");
+                out.println("</script>");
+                out.close();
+            }catch (Exception e){
+                System.out.println("예외발생" + e.getMessage());
+            }
+
+        }
+    }
 }
+
+//    @PostMapping(value = "/notice/insertNotice")
+//    public void insertNotice(@RequestParam String content, @RequestParam String title){
+//        NoticeVO notice = new NoticeVO();
+//        notice.setNotice_title(title);
+//        notice.setNotice_content(content);
+//        System.out.println(notice);
+//
+//    }

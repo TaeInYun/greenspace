@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,21 @@
     <title>Insert title here</title>
 </head>
 <body>
-    <h3>공지사항</h3>
+    <h3> 고객센터 </h3>
+
+    <hr>
+    <a href="#">공지사항 </a>
+    <a href="listOne"> 문의사항(QnA)</a>
+    <br>
+    <br>
+    <a href="insertNotice">  글 등록  </a><br>
+    <form action="listBoard" method="post">
+        <input type="text" name="keyword">
+        <input type="submit" value="검색">
+    </form>
+
+
+
     <table border="1" width="80%">
         <tr>
             <td>목록</td>
@@ -22,7 +37,9 @@
                 <td>
                 	<a href="detail?no=${notice.no}">${notice.notice_title}</a>
                 </td>
-                <td>${notice.notice_date}</td>
+                <td>
+                    <fmt:formatDate value="${notice.notice_date}" pattern="yyyy.MM.dd"/>
+                </td>
             </tr>
         </c:forEach>
     </table>

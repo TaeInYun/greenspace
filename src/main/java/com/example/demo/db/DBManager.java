@@ -1085,6 +1085,13 @@ public class DBManager {
 			session.close();
 		}
 
+		public static int insertNotice(NoticeVO n){
+			SqlSession session = factory.openSession();
+			int re = session.insert("notice.insert", n);
+			session.commit();
+			session.close();
+			return re;
+		}
 	 
 		//-------------------RECEIVERVO------------------
 		public static AddressVO findByReceiverNo(int receiver_no) {

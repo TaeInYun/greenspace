@@ -43,5 +43,8 @@ public class NoticeDAO {
 		DBManager.updateHitNotice(no);
 	}
 
+    public int insertNotice(NoticeVO n){
+        return DBManager.insertNotice(n);
+    }
 
 }
