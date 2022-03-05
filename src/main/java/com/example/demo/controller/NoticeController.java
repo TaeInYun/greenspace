@@ -23,16 +23,16 @@ public class NoticeController {
     @Autowired
     public NoticeDAO dao;
 
-  //  @RequestMapping(value = "/notice/listNotice",method = RequestMethod.GET)
-  //  public String getList(Model model){
-  //      model.addAttribute("noticeList", dao.getList());
-  //      return "/notice/listNotice";
-  //  }
+    //  @RequestMapping(value = "/notice/listNotice",method = RequestMethod.GET)
+    //  public String getList(Model model){
+    //      model.addAttribute("noticeList", dao.getList());
+    //      return "/notice/listNotice";
+    //  }
 
 
     @RequestMapping("/notice/listNotice")
     public void list(HttpSession session,  Model model,//View페이지에서 필요한 데이터를 유지하기 위하여 Model을 선언
-            @RequestParam(value = "pageNUM", defaultValue = "1")  int pageNUM//페이지 번호를 받아오기 위한 변수
+                     @RequestParam(value = "pageNUM", defaultValue = "1")  int pageNUM//페이지 번호를 받아오기 위한 변수
     ) {
 
         //현재페이지에 보여줄 시작레코드와 마지막레코드의 위치를 계산한다.
@@ -56,13 +56,13 @@ public class NoticeController {
         model.addAttribute("totalPage", dao.totalPage);
         model.addAttribute("totalRecord", dao.totalRecord);
     }
-    
-		@RequestMapping("/notice/detail")
-		public void detail(int no, Model model) {
-			dao.updateHit(no);
-			model.addAttribute("n", dao.findByNo(no));
 
-	    }
+    @RequestMapping("/notice/detail")
+    public void detail(int no, Model model) {
+        dao.updateHit(no);
+        model.addAttribute("n", dao.findByNo(no));
+
+    }
 
     @GetMapping(value = "/notice/insertNotice")
     public void insertNotice(){
