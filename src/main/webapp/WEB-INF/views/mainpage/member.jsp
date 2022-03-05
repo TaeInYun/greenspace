@@ -12,6 +12,7 @@
 <script type="text/javascript" src="/js/popup.js"></script>
 <script type="text/javascript">
 $(function(){
+
 	
 	//도전하기 버튼 클릭시 상태 ING로 변경
 	$(document).on("click", "#startBtn", function() {
@@ -107,23 +108,35 @@ $(function(){
 	
 	//완료된 리스트 insert
 	$("#confirmBtn").on("click",function(){
-	       
+	    
 		let member_no = $( $(document).find("input[name=member_no]")).val();
 		
 		$.ajax({
-				url: "insertEndChg",
-				data:  {member_no:member_no},
-				success: function(data){
-					console.log(data)
-					if(data==1){
-						alert("오늘의 챌린지 완료!");
-						location.href = "/mainpage/member"
-					}else{
-						alert("도전완료한 챌린지가 없습니다!");
-						location.href = "/mainpage/member"
+			url:"checkEndStatus",
+			data:{member_no:member_no},
+			success:function(data){
+			if(data==0){
+				alert("도전완료한 챌린지가 없습니다!");
+			}else{
+				
+				$.ajax({
+					url: "insertEndChg",
+					data:  {member_no:member_no},
+					success: function(data){
+						console.log(data)
+						if(data == -1) {
+							alert("오류입니다!");
+							location.href = "/mainpage/member"
+							}else {
+								alert("오늘의 챌린지 완료!");
+								location.href = "/mainpage/member"
+							}
 					}
-				}
-		});//end ajax	
+			});//end ajax	*/
+	
+			}
+		}});
+
 
 	});
 	

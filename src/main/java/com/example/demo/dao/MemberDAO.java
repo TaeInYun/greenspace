@@ -68,6 +68,10 @@ public class MemberDAO {
 	public int buyProduct(HashMap map) {
 		return DBManager.buyProduct(map);
 	}
+	
+	public int insertBoardPoint(HashMap map) {
+		return DBManager.insertBoardPoint(map);
+	}
 
 
 	public List<MemberVO> findAllMember(){

@@ -580,6 +580,15 @@ public class DBManager {
 		session.close();
 		return re;
 	}
+	
+	//게시물 작성시 포인트 수정
+	public static int insertBoardPoint(HashMap map) {
+		SqlSession session = factory.openSession();
+		int re = session.update("member.insertBoardPoint", map);
+		session.commit();
+		session.close();
+		return re;
+	}
 
 	
 	
@@ -796,6 +805,15 @@ public class DBManager {
 		return re;				
 	}	
 	
+	/* 도전완료한 챌린지 있는지 체크 */
+	public static int checkEndstatus(int member_no) {
+		SqlSession session = factory.openSession();
+		int cnt = session.selectOne("challengelist.checkEndstatus",member_no);
+		session.close();
+		return cnt;
+	}
+	
+	
 	
 	//--------------ChallengeUser (완료한 챌린지만 담는 테이블) ----------------
 	/* 완료한 챌린지만 insert */
@@ -822,7 +840,9 @@ public class DBManager {
 		ChallengeUserVO c = session.selectOne("challengeuser.getSaveTree", member_no);
 		session.close();
 		return c;		
-	}		
+	}
+	
+	
 	
 	
 	//---------------CerBoard  (인증게시판) ---------------------
@@ -943,7 +963,14 @@ public class DBManager {
 		return re;
 	}
 	 
-	
+	/* 인증게시판 공개/비공개 수정시 포인트 수정 */
+	public static int updateCerPoint(HashMap map) {
+		SqlSession session = factory.openSession();
+		int re = session.update("point.updateCerPoint",map);
+		session.commit();
+		session.close();
+		return re;	
+	}	
 	
 
 	

@@ -118,7 +118,7 @@ public class ChallengeController {
 		model.addAttribute("tree", userdao.getSaveTree(member_no));
 		//오늘 인증글 있는지 체크
 		model.addAttribute("cercnt", cerdao.checkTodayCer(member_no));
-
+		
 		
 	}
 	
@@ -142,23 +142,34 @@ public class ChallengeController {
 	}	
 	
 	
+	// 회원 버튼클릭 도전상태 변경
+	@RequestMapping( value={"/mainpage/checkEndStatus","/mypage/checkEndStatus"})
+	@ResponseBody
+	public int checkEndStatus(int member_no) {
+
+		
+		int cnt = listdao.checkEndstatus(member_no);
+		System.out.println(cnt);
+		
+		return cnt;
+	}	
+		
 
 	
 	//오늘 챌린지 완료 버튼 클릭시 도전상태가 'END'인것만 insert되게
 	@RequestMapping(value={"/mainpage/insertEndChg","/mypage/insertEndChg"})
 	@ResponseBody
 	public int insertEndChg(int member_no) {
-	
-		System.out.println(member_no);	
+		int re=-1;
+		re = userdao.insertEndChg(member_no);
+		//re=1,2,3
 		
-		int re = userdao.insertEndChg(member_no);
-
-		
-		if(re==1) {
-			System.out.println("추가성공");
-			listdao.updateChgStatusSTA(member_no);
-		}else {
+		if(re == -1) {
 			System.out.println("추가실패");
+			
+		}else {
+			System.out.println("추가성공");
+			listdao.updateChgStatusSTA(member_no);	
 		}
 		System.out.println(member_no);
 		

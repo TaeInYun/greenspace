@@ -38,7 +38,7 @@ ul, li { margin:10px; padding:0; list-style:none; display: inline-block;}
 			<strong>${m.nickname }</strong>
 		<ul>	
 			<li><a href="/logout">로그아웃</a></li>
-			<li><a href="/memberInfo">마이페이지</a></li>
+			<li><a href="/mypage/memberInfo">마이페이지</a></li>
 			<li><a href="/shop/cart">장바구니</a><li>
 		</ul>	
 		</div>	
