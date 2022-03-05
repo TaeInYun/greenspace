@@ -10,8 +10,13 @@
 </head>
 <body>
 
-<H2>커뮤니티</H2>
+	<div id="header">
+		<jsp:include page="../header.jsp"/>
+	</div>
 
+
+<H2>커뮤니티</H2>
+<a href="/board/insertCommunity">글등록</a>
 	<table border="1" width="80%">
 		<tr>
 			<td>제목</td>

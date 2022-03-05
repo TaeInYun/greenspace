@@ -61,16 +61,17 @@
 
 
 	<insert id="insert" parameterType="communityVO">
-	   	insert into certification_board values(
-	    seq_cer.nextval,
-	   	#{cer_status},
-	    #{cer_content},
+	   	<selectKey resultType="integer" keyProperty="idx" order="AFTER">
+    	SELECT LAST_INSERT_ID()
+		</selectKey>
+	   	insert into community values(
+	    seq_community.nextval,
+	   	#{commu_title},
+	    #{commu_content},
 	     sysdate,
 	     0,
 	     0,             
-	    #{member_no},
-	    #{chg_user_no},
-	    #{cer_thumbnail}
+	    #{member_no}
 	    )
 	</insert>
 

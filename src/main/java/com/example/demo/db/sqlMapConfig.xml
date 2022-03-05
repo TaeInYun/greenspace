@@ -25,6 +25,7 @@
 	<typeAlias type="com.example.demo.vo.ChallengeUserVO" alias="challengeuserVO"/>
 	<typeAlias type="com.example.demo.vo.CerBoardVO" alias="cerboardVO"/>
 	<typeAlias type="com.example.demo.vo.QnaVO" alias="qnaVO"/>
+	<typeAlias type="com.example.demo.vo.ImgVO" alias="imgVO"/>
  
 	<typeAlias type="com.example.demo.vo.CommunityVO" alias="communityVO"/>
 	<typeAlias type="com.example.demo.vo.EasyToStartVO" alias="EasyToStartVO"/>
@@ -67,6 +68,7 @@
 	<mapper resource="com/example/demo/db/communityMapper.xml"/>  
 	<mapper resource="com/example/demo/db/easyToStartMapper.xml"/>
     <mapper resource="com/example/demo/db/noticeMapper.xml"/>
+    <mapper resource="com/example/demo/db/imgMapper.xml"/>
  
 	
   </mappers>

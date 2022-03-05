@@ -1128,4 +1128,15 @@ public class DBManager {
 			return r;
 		}
 		
+		
+		//-------------IMG (파일)------------
+		public static int uploadFile(HashMap map){
+			SqlSession session = factory.openSession();
+			int re = session.insert("img.uploadFile", map);
+			session.commit();
+			session.close();
+			return re;
+		}	
+		
+		
 }
