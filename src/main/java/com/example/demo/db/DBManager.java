@@ -1054,8 +1054,8 @@ public class DBManager {
 			session.close();
 			return no;
 		}
+
 		
-<<<<<<< HEAD
 		public static NoticeVO findByNoNotice(int no) {
 			SqlSession session = factory.openSession();
 			NoticeVO b = session.selectOne("notice.findByNoNotice", no);
@@ -1087,7 +1087,6 @@ public class DBManager {
 		}
 
 	 
-=======
 		//-------------------RECEIVERVO------------------
 		public static AddressVO findByReceiverNo(int receiver_no) {
 			SqlSession session = factory.openSession();
@@ -1096,5 +1095,4 @@ public class DBManager {
 			return r;
 		}
 		
->>>>>>> branch 'master' of https://github.com/TaeInYun/greenspace.git
 }
