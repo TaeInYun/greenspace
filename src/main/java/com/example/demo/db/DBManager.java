@@ -1040,13 +1040,44 @@ public class DBManager {
 
 	
 	//---------------EasyToStart---------------
-
-		//게시물 목록 불러오기
-		public static List<EasyToStartVO> getEasyToStartAll(){
+		
+		
+		
+		public static List<EasyToStartVO> findAllETS(HashMap map){
 			SqlSession session = factory.openSession();
-			List<EasyToStartVO> list = session.selectList("easyToStart.getEasyToStartAll");
+			List<EasyToStartVO> list = session.selectList("easyToStart.findAll", map);
 			session.close();
 			return list;
+			
+		}
+
+		public static int getTotalRecordETS(){
+			SqlSession session = factory.openSession();
+			int no = session.selectOne("easyToStart.getTotalRecord");
+			session.close();
+			return no;
+		}
+
+		
+		public static EasyToStartVO findByNoETS(int no) {
+			SqlSession session = factory.openSession();
+			EasyToStartVO b = session.selectOne("easyToStart.findByNoETS", no);
+			session.close();
+			return b;		
+		}
+		
+		public static void updateHitETS(int no) {
+			SqlSession session = factory.openSession();
+			session.update("easyToStart.updateHitETS", no);
+			session.commit();
+			session.close();
+		}
+		
+		public static void updateLikeETS(int no) {
+			SqlSession session = factory.openSession();
+			session.update("easyToStart.updateLikeETS", no);
+			session.commit();
+			session.close();
 		}
 
 
@@ -1060,7 +1091,7 @@ public class DBManager {
 			return re;
 		}
 
-		//notice
+		//notice------------------------------------------
 		public static List<NoticeVO> getList(){
 			SqlSession session = factory.openSession();
 			List<NoticeVO> list = session.selectList("notice.getList");
@@ -1093,6 +1124,7 @@ public class DBManager {
 		public static int updateNotice(NoticeVO b) {
 			SqlSession session = factory.openSession(true);
 			int re = session.update("notice.updateNotice", b);
+			session.commit();
 			session.close();
 			return re;
 		}

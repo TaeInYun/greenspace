@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -36,15 +37,13 @@ public class NoticeController {
     ) {
 
         //현재페이지에 보여줄 시작레코드와 마지막레코드의 위치를 계산한다.
-        int start = (pageNUM-1)* dao.pageSIZE + 1;
-        int end = start + dao.pageSIZE - 1;
+        int start = (pageNUM-1)* dao.pageSIZE;
 
         //Dao가 게시물 목록을 검색할 때 필요한
         //정보(현재페이지에 보여줄 시작레코드,마지막레코드)
         //들을 map에 저장한다.
         HashMap map = new HashMap();
         map.put("start", start);
-        map.put("end", end);
         map.put("totalRecord", dao.totalRecord);
         map.put("totalPage", dao.totalPage);
 
@@ -55,10 +54,14 @@ public class NoticeController {
         //dao에 계산된 전체페이지수를 model에 상태유지합니다.
         model.addAttribute("totalPage", dao.totalPage);
         model.addAttribute("totalRecord", dao.totalRecord);
+        model.addAttribute("start", start);
+        model.addAttribute("pageSIZE", dao.pageSIZE);
+   
     }
 
     @RequestMapping("/notice/detail")
     public void detail(int no, Model model) {
+    	System.out.println(no);
         dao.updateHit(no);
         model.addAttribute("n", dao.findByNo(no));
 
@@ -77,11 +80,12 @@ public class NoticeController {
             mav.addObject("msg", "공지사항 등록에 실패하였습니다.");
         }else {
             try{
+            	System.out.println(re);
                 response.setContentType("text/html;charset=utf-8");
                 PrintWriter out = response.getWriter();
                 out.println("<script>");
                 out.println("alert('게시물 등록이 완료되었습니다');");
-                out.println("history.go(-2);");
+                out.println("location.href=\"notice/listNotice\";");
                 out.println("</script>");
                 out.close();
             }catch (Exception e){
