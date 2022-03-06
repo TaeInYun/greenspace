@@ -13,8 +13,13 @@
 	<div id="root">
 		<header id="header">
 			<div id="header_box">
-				<jsp:include page="../header.jsp"/>
-				<jsp:include page="../shop/shopHeader.jsp"/>
+				<div id="header1_box">
+					<jsp:include page="../header.jsp"/>
+				</div>
+				<div id="header2_box">
+					 <jsp:include page="../shop/shopHeader.jsp"/>
+				</div>
+				
 			</div>
 		</header>		 
 		
