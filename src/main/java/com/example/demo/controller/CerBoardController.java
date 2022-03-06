@@ -5,11 +5,13 @@ import java.io.FileOutputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.CerBoardDAO;
@@ -44,6 +47,8 @@ public class CerBoardController {
 	@Autowired
 	private MemberDAO memberDAO;
 	
+
+	
 	// 인증 게시판 목록
 	@RequestMapping("/board/listCerBoard")
 	public void listChg(Model model) {
@@ -66,78 +71,80 @@ public class CerBoardController {
 			return mav;
 	}
 	
+	
+	
 	//-------인증 게시판 등록------------
-	@RequestMapping(value="/board/insertCerBoard", method = RequestMethod.POST)
-	public ModelAndView insertCerBoard_submit(CerBoardVO c,HttpServletRequest request,HttpSession session) {
-		
-		MemberVO m = (MemberVO)session.getAttribute("m");
+		@RequestMapping(value="/board/insertCerBoard", method = RequestMethod.POST)
+		public ModelAndView insertCerBoard_submit(CerBoardVO c,HttpServletRequest request,HttpSession session) {
+			
+			MemberVO m = (MemberVO)session.getAttribute("m");
 
-		HashMap map = new HashMap();
-		
-		String cer_status=c.getCer_status();
-		int member_no = c.getMember_no();
-		int point_use = m.getPoint_use();
-		System.out.println("point_use"+point_use);
-		
-		ModelAndView mav = new ModelAndView("redirect:/board/listCerBoard");
-		
-		String path = request.getRealPath("upload");
-		System.out.println("path:"+path);
-		
-		c.setCer_thumbnail("");		
-		MultipartFile uploadFile = c.getUploadFile();
-		
-		String cer_thumbnail = uploadFile.getOriginalFilename();
-		if(cer_thumbnail != null && !cer_thumbnail.equals("")) {
-			c.setCer_thumbnail(cer_thumbnail);
-		}	
-		
-		int re = dao.insert(c);
-		 
-		if(re != 1 ) {
-			mav.setViewName("error");
-			mav.addObject("msg", "게시물 등록에 실패하였습니다.");
-		}else {
-			try {
-				byte []data = uploadFile.getBytes();
-				if(cer_thumbnail != null && !cer_thumbnail.equals("")) {
-					FileOutputStream fos = new FileOutputStream(path + "/"+cer_thumbnail);
-					fos.write(data);
-					fos.close();
+			HashMap map = new HashMap();
+			
+			String cer_status=c.getCer_status();
+			int member_no = c.getMember_no();
+			int point_use = m.getPoint_use();
+			System.out.println("point_use"+point_use);
+			
+			ModelAndView mav = new ModelAndView("redirect:/board/listCerBoard");
+			
+			String path = request.getRealPath("upload");
+			System.out.println("path:"+path);
+			
+			c.setCer_thumbnail("");		
+			MultipartFile uploadFile = c.getUploadFile();
+			
+			String cer_thumbnail = uploadFile.getOriginalFilename();
+			if(cer_thumbnail != null && !cer_thumbnail.equals("")) {
+				c.setCer_thumbnail(cer_thumbnail);
+			}	
+			
+			int re = dao.insert(c);
+			 
+			if(re != 1 ) {
+				mav.setViewName("error");
+				mav.addObject("msg", "게시물 등록에 실패하였습니다.");
+			}else {
+				try {
+					byte []data = uploadFile.getBytes();
+					if(cer_thumbnail != null && !cer_thumbnail.equals("")) {
+						FileOutputStream fos = new FileOutputStream(path + "/"+cer_thumbnail);
+						fos.write(data);
+						fos.close();
+					}
+					
+				}catch (Exception e) {
+					// TODO: handle exception
 				}
 				
-			}catch (Exception e) {
-				// TODO: handle exception
-			}
-			
-			if(cer_status.equals("비공개")) {
-				
-			PointVO PointVO = new PointVO(0, null, "적립", 10, member_no, "CHG");
-			pointDAO.insertPoint(PointVO);
-			
-			int point_save = PointVO.getPoint_amount();
-			System.out.println("point_save"+point_save);
-			
-			//회원 포인트 수정
-			map.put("member_no", member_no);
-			map.put("point_save", point_save);
-			memberDAO.insertBoardPoint(map);
-			
-			}else if(cer_status.equals("공개")){
-				PointVO PointVO = new PointVO(0, null, "적립", 50, member_no, "PUB");
+				if(cer_status.equals("비공개")) {
+					
+				PointVO PointVO = new PointVO(0, null, "적립", 10, member_no, "CHG");
 				pointDAO.insertPoint(PointVO);
 				
 				int point_save = PointVO.getPoint_amount();
 				System.out.println("point_save"+point_save);
+				
 				//회원 포인트 수정
 				map.put("member_no", member_no);
 				map.put("point_save", point_save);
 				memberDAO.insertBoardPoint(map);
-		
-			}
-		}		
-		return mav;
-	}
+				
+				}else if(cer_status.equals("공개")){
+					PointVO PointVO = new PointVO(0, null, "적립", 50, member_no, "PUB");
+					pointDAO.insertPoint(PointVO);
+					
+					int point_save = PointVO.getPoint_amount();
+					System.out.println("point_save"+point_save);
+					//회원 포인트 수정
+					map.put("member_no", member_no);
+					map.put("point_save", point_save);
+					memberDAO.insertBoardPoint(map);
+			
+				}
+			}		
+			return mav;
+		}
 
 	
 	//------------------인증게시판 수정하기--------------------
