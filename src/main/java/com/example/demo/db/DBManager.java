@@ -655,9 +655,9 @@ public class DBManager {
 		session.close();
 		return re;
 	}
-	public static OrderBillVO billOfOrder(HashMap map) {
+	public static OrderBillVO billOfOrder(OrdersVO o) {
 		SqlSession session = factory.openSession();
-		OrderBillVO ob = session.selectOne("orders.billOfOrder", map);
+		OrderBillVO ob = session.selectOne("orders.billOfOrder", o);
 		session.close();
 		return ob;
 	}

@@ -145,7 +145,7 @@
 	</div>
 	<div>
 		<form action="insertOrder" >
-			<table border="1" width="80%">
+			<table border="1" width="80px">
 				<thead>
 					<tr>
 						<td>전체 ${cnt } 개</td>

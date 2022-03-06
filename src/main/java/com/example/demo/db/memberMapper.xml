@@ -55,8 +55,8 @@
 		</select>
 	
 		<update id="buyProduct" parameterType="HashMap">
-			UPDATE member SET point_use = (SELECT point_use FROM member WHERE no = #{member_no}) - #{point_use}+ #{point_save}, 
-			point_save = (SELECT point_save FROM member WHERE no=#{member_no}) + #{point_save} 
+			UPDATE member SET point_use = (SELECT point_use- #{point_use}+ #{point_save} FROM member WHERE no = #{member_no}) , 
+			point_save = (SELECT point_save + #{point_save}  FROM member WHERE no=#{member_no}) 
 			WHERE no = #{member_no}
 		</update>
 

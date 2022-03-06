@@ -97,7 +97,7 @@
 	<hr>
 	<div>
 		<h3>Product Info <span>상품정보</span></h3>
-		<table border="1" width="80%">
+		<table border="1" width="800px">
 			<thead>
 				<tr>
 					<td>번호</td>
