@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="img">
+
+	<insert id="uploadFile" parameterType="HashMap">
+		insert into img (no,o_img_name,save_img_name,
+		cer_no,chg_no,eco_no,ets_no,re_no,commu_no,pro_no,
+		one_no,pro_qna_no,notice_no)
+		values(
+			seq_img.nextval,
+			#{originalfileName},
+			#{saveFileName},
+			#{cer_nobbs_seq.currval, jdbcType=INTEGER},
+			#{chg_no, jdbcType=INTEGER},
+			#{eco_no, jdbcType=INTEGER},
+			#{ets_no, jdbcType=INTEGER},
+			#{re_no, jdbcType=INTEGER},
+			#{commu_no, jdbcType=INTEGER},
+			#{pro_no, jdbcType=INTEGER},
+			#{one_no, jdbcType=INTEGER},
+			#{pro_qna_no, jdbcType=INTEGER},
+			#{notice_no, jdbcType=INTEGER}
+		)
+	</insert>
+	
+	<select id="listCommuImg" resultType="imgvo">
+	select no,o_img_name,save_img_name from img where commu_no=#{no}
+	</select>
+	
+		<select id="updateCommuImg" resultType="imgvo">
+	update img set o_img_name=#{o_img_name},   where commu_no=#{no}
+	</select>
+	
+	<delete id="deleteCommuImg">
+		delete img where commu_no = #{no}
+	</delete>
+	
+<!-- 
+ <insert id="uploadFile" parameterType="HashMap">
+		insert into img (no,o_img_name,save_img_name,
+		cer_no,chg_no,eco_no,ets_no,re_no,commu_no,pro_no,
+		one_no,pro_qna_no,notice_no)
+		values(
+			seq_img.nextval,
+			#{originalfileName},
+			#{saveFileName},
+			#{seq_cer.currval, jdbcType=INTEGER},
+			#{seq_chg.currval, jdbcType=INTEGER},
+			#{seq_ecomagazine.currval, jdbcType=INTEGER},
+			#{seq_easytostart.currval, jdbcType=INTEGER},
+			#{seq_review.currval, jdbcType=INTEGER},
+			#{seq_community.currval, jdbcType=INTEGER},
+			#{seq_product.currval, jdbcType=INTEGER},
+			#{seq_one.currval, jdbcType=INTEGER},
+			#{seq_pro_qna.currval, jdbcType=INTEGER},
+			#{seq_notice.currval, jdbcType=INTEGER}
+		)
+	</insert>
+ -->
+ 
+
+	
+</mapper>

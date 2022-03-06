@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<table border="!", width="80%">
+	<table border="!", width="800px">
 		<thead>
 			<tr>
 				<td>상품 정보</td>

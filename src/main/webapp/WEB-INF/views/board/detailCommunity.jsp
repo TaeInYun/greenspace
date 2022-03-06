@@ -21,7 +21,9 @@ section#content ul li { display:inline-block; margin:10px; }
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
- 
+ <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script type="text/javascript">
+ </script>
 </head>
 <body>
 	<div id="header">
@@ -46,13 +48,21 @@ section#content ul li { display:inline-block; margin:10px; }
 		<div class="content">
 		<span>${c.commu_content}</span>
 		</div>	
+	<div class="result-images">
+		<!-- 업로드한 파일들을 forEach문을 이용해 <img> 태그에 표시 -->
+		<c:forEach var="list" items="${imglist}" >
+			<img src="../upload/commu/${list.save_img_name}">
+	        <br><br><br>
+	    </c:forEach>         
+	</div>
 		</li>
  	</ul>					 
 </section>	
-<c:if test="${m.nickname == c.nickname}">
-<a href="/board/updateCerBoard?no=${c.no }">글수정</a>
-<a href="/board/deleteCerBoard?no=${c.no }">글삭제</a>
-</c:if>
-<a href="/board/listCerBoard">글목록</a>
+<!--<c:if test="${m.nickname == c.nickname}"></c:if>-->
+<a href="/board/updateCommunity?no=${c.no }">글수정</a>
+<a href="/board/deleteCommunity?no=${c.no }">글삭제</a>
+
+<a href="/board/listCommunity">글목록</a>
 </body>
+
 </html>
