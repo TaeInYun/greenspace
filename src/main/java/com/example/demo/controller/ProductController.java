@@ -53,8 +53,10 @@ public class ProductController {
 	
 	
  
-	
-	@RequestMapping("/Index")
+	@RequestMapping("/header")
+	public void header() {
+	}
+	@RequestMapping("main/nonmember")
 	public void Index() {
 	}
    
