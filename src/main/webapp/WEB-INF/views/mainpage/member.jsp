@@ -167,6 +167,7 @@ $(function(){
 <input type="hidden" name="member_no" value=${m.no }>
 	<strong>${m.nickname}</strong>님<br>
 	에코레벨 : ${m.levels}Lv&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사용가능 포인트 : ${m.point_save}
+	 
 </div>
 
 <hr>

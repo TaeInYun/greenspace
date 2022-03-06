@@ -8,6 +8,10 @@ aside { float:left; width:100px; }
 header#header div#header_box { text-align:center; padding:30px 0; }
  
 section#content ul li { display:inline-block; margin:10px; }
+a:link {
+  color : black;
+  text-decoration: none;
+}
 section#content div.PRO_THUMBNAIL img { width:200px; height:200px; }
 section#content div.pro_name { padding:10px 0; text-align:center; }
 section#content div.pro_name a { color:black;font-size:15px; }
