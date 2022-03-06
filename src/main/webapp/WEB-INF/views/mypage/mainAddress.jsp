@@ -33,6 +33,8 @@
 			<td>배송지</td>
 			<td>배송지상세</td>
 			<td>배송지휴대폰번호</td>
+			<td>메인주소변경</td>
+			<td>삭제하기</td>
 			
 		</tr>
 		<c:forEach var="a2" items="${list }">	<!-- taglib -->	
@@ -42,13 +44,16 @@
 				<a href="/mypage/updateAddress?no=${a2.no}">${a2.addr_title }</a>
 				</td>
 				<td>
-					${a2.addr_postal} 				
+					${a2.addr_postal}	
 				</td>				 
 				<td>${a2.addr_receiver }</td>
 				<td>${a2.addr_road }</td>
 				<td>${a2.addr_detail }</td>
 				<td>${a2.addr_phone }</td>
-				<td><a href="/mypage/updateMainBtnAddress?no=${a2.no}">	<button>메인주소로변경</button></a></td>	
+				
+				<%-- <td><a href="/mypage/updateMainBtnAddress?no=${a2.no}">	<button>메인주소로변경</button></a></td> --%> 	
+				 <td><a href="/mypage/updateMainBtnAddress?no=${a2.no}">	<button>메인주소로변경</button></a></td>  
+				 <td><a href="/mypage/deleteAddress?no=${a2.no}">	<button>삭제하기</button></a></td>  
 			</tr>		
 				
 				

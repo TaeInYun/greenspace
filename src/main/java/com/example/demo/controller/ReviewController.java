@@ -156,6 +156,7 @@ public class ReviewController {
 		
 		//findAllRate()
 		
+		@RequestMapping(value = "/shop/deleteReview" , method = RequestMethod.GET)
 		public ModelAndView delete(HttpServletRequest request, int no) {
 			String oldFname = dao.findAllDetail(no).getRe_thumbnail();
 			
