@@ -77,8 +77,9 @@ public class OrdersController {
 	@RequestMapping(value = "/shop/resultOrder", method = RequestMethod.POST)
 	@ResponseBody
 	public String applyOrder(HttpServletRequest request, @RequestBody ApplyOrderVO data) {
-		Gson gson = new Gson();
-		String result = gson.toJson(data.getOrders().getOrd_id());
+		 Gson gson = new Gson(); String result =
+		 gson.toJson(data.getOrders().getOrd_id());
+		 
 		
 		HttpSession session = request.getSession();
 		int member_no = 1;

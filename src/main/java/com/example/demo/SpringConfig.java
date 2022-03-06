@@ -14,19 +14,19 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 @Configuration
 public class SpringConfig {
 
-	@Bean  
-	public CommonsMultipartResolver multipartResolver() throws IOException{	
-		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
-		resolver.setMaxUploadSize(1024*1024*10);
-		resolver.setMaxUploadSizePerFile(1024*1024*2);
-		resolver.setMaxInMemorySize(1024*1024);
-		//resolver.setUploadTempDir(new FileSystemResource("C:\\upload"));
-		resolver.setDefaultEncoding("UTF-8");
-	 
-		return resolver;
-	}	
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-	}
+   @Bean  
+   public CommonsMultipartResolver multipartResolver() throws IOException{   
+      CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+      resolver.setMaxUploadSize(1024*1024*10);
+      resolver.setMaxUploadSizePerFile(1024*1024*2);
+      resolver.setMaxInMemorySize(1024*1024);
+      //resolver.setUploadTempDir(new FileSystemResource("C:\\upload"));
+      resolver.setDefaultEncoding("UTF-8");
+    
+      return resolver;
+   }   
+   @Bean
+   public PasswordEncoder passwordEncoder() {
+      return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+   }
 }
