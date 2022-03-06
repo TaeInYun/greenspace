@@ -11,17 +11,21 @@
 <script type="text/javascript">
 $(function(){
 	
-	var check = $("input[type='checkbox']");
-
+	var chg_title1=$("input[name='chg_title1']").val();
+	var chg_title2=$("input[name='chg_title2']").val();
+	var chg_title3=$("input[name='chg_title3']").val();
 	
+	var check = $("input[type='checkbox']");
+	
+
     $(check).click(function(){
         var chk = $(this).is(":checked");
         if(chk){
         	$('#cer_status').val('공개');   	 
         } else {
         	$('#cer_status').val('비공개');
-
         }
+       console.log(cer_status);
 	});
 	
 });
@@ -35,7 +39,7 @@ $(function(){
 	<i class="material-icons" style="font-size: 1rem">&#xe001; 하루에 한번만 작성 가능합니다.</i>
 
 	<div>
-		인증글 공개
+		글 공개
 		<label class="switch">
 			<input type="checkbox" checked>
 			<span class="slider round"></span>
@@ -46,16 +50,16 @@ $(function(){
 	<form action="insertCerBoard" method="post" enctype="multipart/form-data">	
 	<input type="hidden" name="member_no" value="${m.no }">
 	<input type="hidden" name="chg_user_no" value="${endlist[0].no}">		
-	<input type="hidden" name="cer_status" id="cer_status" value="">		
+	<input type="hidden" name="cer_status" id="cer_status" value="공개">		
 		<div class="inputArea">
 			<p></p>
-			<table border="1" width="50%">
+			<table id="chgTable" border="1" width="50%">
 			<tr>
 			<td>완료한 챌린지 목록</td>
 			</tr>
-			<c:forEach var="c" items="${endlist}">
+			<c:forEach var="c" items="${endlist}"  varStatus="status">
 			<tr>
-				<td>${c.chg_title}</td>	
+				<td><input type="hidden" name="chg_title${status.index+1}" value="${c.chg_title}">${c.chg_title}</td>	
 			</tr>
 			</c:forEach>
 			</table>
@@ -63,7 +67,7 @@ $(function(){
 		<div class="inputArea">
 		내용<br>
 		<textarea rows="10" cols="60" name="cer_content"></textarea><br>		
-		
+		</div>
 		<div class="inputArea">
 		<label for="cer_thumbnail">이미지</label>
 		<input type="file" id="cer_thumbnail" name="uploadFile" />

@@ -5,44 +5,29 @@
 <head>
 <meta charset="UTF-8">
 <title>녹지공간</title>
-<style type="text/css">
-body { margin:0; padding:0; }
-div#root { width:900px; margin:0 auto; }
-header#header div#header_box { text-align:center; padding:30px 0; }		 
-section#content {   width:950px;text-align:center; } 
-section#content .sigleBox {  background-color:#03A65A; width:100%;    margin-bottom: 10px;   } 
-section#content .photo {    float:right;    width: 47%; height: 300px; margin-top:170px; margin-right: 10px;  } 
-section#content .textBOX {    float:left;   width: 45%; height: 100%;  display: inline;  } 
-section#content .title {  margin:50px; text-align: center; font-size: 25px; font-style: oblique; line-height: 40px; clear: both;} 
-section#content .textBOX_content {    margin:30px;        text-align: center; font-size: 15px; line-height: 20px; clear: both; } 
-.textBOX_link{
-margin:10px;
-margin-top: 40px;
-}
+ <link href="/css/main.css" rel="stylesheet"/> 	 
+ <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#mainButton").click(function(){
+			location.href='login'
+		})
+		$("#etsButton").click(function(){
+			location.href='../easyToStart/easyToStartList'
+		})
+		$("#shopButton").click(function(){
+			location.href='../shop/listProduct_home'
+		})
+		$("#commuButton").click(function(){
+			location.href='../board/listCommunity'
+		})
+		$("#ecoButton").click(function(){
+			location.href=''
+		})
+		
+	})
 
-span{
-	display: block;
-}
-#main_textBOX{
-	 
-	 
-	position: absolute;
-	top: 30%;
-	left: 50%;
-	transform: translate( -50%, -50% )
-	
-}
-#main_photo{
-	width: 100%;
-	height: 500px;
-	border-style: solid;
-	 
-}
-#mainsigleBox{
-	position: relative
-}
- 
-</style>
+</script>
 </head>
 <body>
  
@@ -60,18 +45,15 @@ span{
 					 			 
 									<div id="mainsigleBox" style=" width: 100%; height: 500px" class="sigleBox">
 										 <img src="/upload/main.png"  id="main_photo"  >
-										<div id="main_textBOX"  >
-											 
+										<div id="main_textBOX"  >									 
 										 	   
-										 		<span id="title" class="title">지구를 지키는 에코라이프!<br> 녹지공간과 함께!</span>
-										 		<span id="textBOX_content" class="textBOX_content">일상 속 생활습관 몇가지를
-													바꾸는 것만으로도 가능한 에코라이프!
+										 		<span id="title"  style="text-align: center; font-size: 30px; margin: 15px;  "><strong>지구를 지키는 에코라이프!<br></strong> 
+										 		<strong>녹지공간과 함께!</strong></span>
+										 		<span id="textBOX_content"  style="text-align: center;">일상 속 생활습관 몇가지를
+													바꾸는 것만으로도 가능한 에코라이프!<br>
 													여러사람들과 챌린지도 하고 달성하며
 													내가 얼마나 환경에 기여했는지 확인해볼까요?</span>
-										 		<span id="textBOX_link" class="textBOX_link"><a href="/login">회원가입/로그인</a></span>
-										 	
-										 	 
-										 	
+												 <button id="mainButton"> 로그인/회원가입 </button>     
 										</div>										
 									</div>
 									  									
@@ -79,42 +61,66 @@ span{
 										 <img src="/upload/main_eco.png"   class="photo"  > 
 										 <div id="eco_textBOX"  class="textBOX">
 										 	 
-										 		<span id="title" class="title">제목 : 항상 새로운 환경뉴스를 알려주는 친구항상 새로운 환경뉴스를 알려주는 친구</span>
-										 		<span id="textBOX_content" class="textBOX_content">아래 멘트: 항상 새로운 환경뉴스를 알려주는 
-										 		친구아래 멘트: 항상 새로운 환경뉴스를 알려주는 친구</span>
-										 		<span id="textBOX_link" class="textBOX_link"><a href="">ECO매거진 이동하기</a></span>
+										 		<span id="title" class="title">생활속에서 환경보호를<br> 
+																			   어떻게 실천하는지<br>
+																			   궁금한 당신에게<br></span>
+											 	<span id="textBOX_content" class="textBOX_content">
+												 	환경에 대한 여러 정보를 담은 잡지<br>
+													일상생활에서, 욕실에서, 주방에서도 <br>
+													환경보를 실천할 수 있고 심지어는 잘몰랐던<br> 
+													분리수거에 대한 정보까지 알뜰하게 담았어요!<br>
+											 	</span>
+										 		
 										 	
-										 	 
+										 	 <button class="btn" id="ecoButton" style="background-color: #fff">  ECO Magazine 바로가기 </button> 
 										 	
 										</div>
 									</div>			 
-									<div id="ets" style=" width: 100%; height: 500px" class="sigleBox">
+									<div id="ets" style=" width: 100%; background-color:#f1f3f5; height: 500px" class="sigleBox" >
 										<img src="/upload/main_ets.png"  class="photo">	
 										<div id="ets_textBOX" class="textBOX">
-												<span id="title" class="title">제목 : 항상 새로운 환경뉴스를 알려주는 친구항상 새로운 환경뉴스를 알려주는 친구</span>
-										 		<span id="textBOX_content" class="textBOX_content">아래 멘트: 항상 새로운 환경뉴스를 알려주는 
-										 		친구아래 멘트: 항상 새로운 환경뉴스를 알려주는 친구</span>
-										 		<span id="textBOX_link" class="textBOX_link"><a href="">ECO매거진 이동하기</a></span>
+												<span id="title" class="title">관심은 있지만 <br>어떻게 실천해야할지<br>막막한 당신에게</span>
+												<span id="textBOX_content" class="textBOX_content"> 환경에 관심은 많지만 어떻게, 어떤 것부터<br>
+													 실천해야 할지 모르는 분들을 위해 준비했어요.<br>
+													 Easy To Start 가이드를 통해<br>
+													일상 속 실천할 수 있는 친환경적 습관을 길러봐요!<br>
+												 </span>
+										 		  <button class="btn" id="etsButton"> Easy To Start 바로가기 </button> 
 										 	
 										</div>	
 									</div>		 
 									<div id="shop"style=" width: 100%; height: 500px"  class="sigleBox">
 										<img src="/upload/main_shop.png"    class="photo">
 										<div id="shop_textBOX" class="textBOX">
-												<span id="title" class="title">제목 : 항상 새로운 환경뉴스를 알려주는 친구항상 새로운 환경뉴스를 알려주는 친구</span>
-										 		<span id="textBOX_content" class="textBOX_content">아래 멘트: 항상 새로운 환경뉴스를 알려주는 
-										 		친구아래 멘트: 항상 새로운 환경뉴스를 알려주는 친구</span>										 		 
-												<span id="textBOX_link" class="textBOX_link"><a href="../shop/listProduct_home">shop 이동하기</a></span>
-										 	
+												<span id="title" class="title">
+													소비까지도<br>
+													환경보호를 하면서<br> 
+													즐기고 싶은 당신에게<br>
+												</span>
+										 		<span id="textBOX_content" class="textBOX_content">
+										 			친환경적인 물건을 구매하고 싶은데<br>
+													여러 사이트 찾으러 돌아다니기 힘드시진 않나요?<br>
+													녹지공간에서 자체적으로 생산하고 있는<br>
+													친환경 제품을 만나보세요! ZERO Plastic<br>										 			
+										 		</span>										 		 
+											 <button class="btn" id="shopButton" style="background-color: #fff"> Shop으로 쇼핑 바로가기 </button> 
 										</div>	
 									</div>			 
-									<div id="commu" style=" width: 100%; height: 500px" class="sigleBox">
+									<div id="commu" style=" width: 100%; background-color:#f1f3f5; height: 500px" class="sigleBox">
 										<img src="/upload/main_Community_img.png" class="photo">	
 										<div id="commu_textBOX" class="textBOX" >
-												<span id="title" class="title">제목 : 항상 새로운 환경뉴스를 알려주는 친구항상 새로운 환경뉴스를 알려주는 친구</span>
-										 		<span id="textBOX_content" class="textBOX_content">아래 멘트: 항상 새로운 환경뉴스를 알려주는 
-										 		친구아래 멘트: 항상 새로운 환경뉴스를 알려주는 친구</span>
-										 		<span id="textBOX_link" class="textBOX_link"><a href="">ECO매거진 이동하기</a></span>
+												<span id="title" class="title"> 
+													환경보호를 같이 하면서<br>
+													일상을 공유하고 <br>
+													소통하고 싶은 당신에게<br>
+												</span>
+										 		<span id="textBOX_content" class="textBOX_content">
+										 		환경에 대해서 궁금은 한데 물어볼 곳은 없고<br>
+												그래서 녹지공간에서 커뮤니티 공간을 마련했습니다.<br>
+												일반 게시판에서 다같이 소통하고<br>
+												공유 게시판에서 사람들의 환경실천을 같이 구경해요!<br>
+										 		</span>
+										 	 <button class="btn" id="commuButton"> Community 바로가기 </button> 
 										</div>
 									</div>			 
 								  

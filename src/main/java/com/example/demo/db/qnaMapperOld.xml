@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qna">
+  <select id="findAll" resultType="QnaVO">  <!-- 내 qna 리스트 -->
+  	SELECT
+	img_name img_name, 
+	pro_name pro_name, 
+	pro_qna_title title, 
+	pro_qna_type_name qna_type, 
+	pro_qna_date day, 
+	qna_type_name status
+	FROM
+	img i, 
+	product pro, 
+	pro_qna pq, 
+	pro_qna_type tc, 
+	qna_status qs
+	WHERE
+	pro.no = i.pro_no 
+	and pro.no = pq.pro_no
+	and pq.pro_qna_type_code = tc.pro_qna_type_code
+	and qs.qna_status_code = pq.qna_Status_code
+	and pq.no=#{searchColumn}  <!--선택  int no 1= 상품상세 2= 배송관련 3= 재입고  -->
+  </select>
+  
+  
+  <select id="findAllList" resultType="QnaVO">
+  select 
+  q.no no,
+  pro_name pro_name,
+  pro_qna_type_name qna_type,
+  pro_qna_title title,
+  nickname nickname,
+  pro_qna_date day ,
+  qna_type_name status
+  from pro_qna q, pro_qna_type t,
+  qna_status s,product p,member m
+  where q.pro_qna_type_code = t.pro_qna_type_code 
+  and q.qna_status_code = s.qna_status_code
+  and p.no=q.pro_no
+  and m.no=q.member_no
+  
+  </select>
+  
+  <select id="findAllDetail" resultType="QnaVO">
+  select q.no no,
+  pro_name pro_name,
+  pro_qna_type_name qna_type,
+  pro_qna_title title,
+  nickname nickname,
+  pro_qna_date day,
+  qna_type_name status
+  from pro_qna q, pro_qna_type t,
+  qna_status s,product p,member m
+  where q.pro_qna_type_code = t.pro_qna_type_code 
+  and q.qna_status_code = s.qna_status_code
+  and p.no=q.pro_no
+  and m.no=q.member_no
+  and q.no=#{no}  <!--선택 ? 1상품상세 2배송관련3재입고관련-->
+  
+  </select>
+  
+  <select id="findAllSearch" resultType="QnaVO">
+  select p.no no,
+  pro_name pro_name,
+  pro_qna_type_name qna_type,
+  pro_qna_title title,
+  pro_qna_content content,
+  name nickname,
+  pro_qna_date day,
+  qna_type_name status
+  from
+ (select rownum num,
+ q.no no,
+ pro_name pro_name,
+ pro_qna_type_name qna_type,
+ pro_qna_title title,
+ pro_qna_content content,
+ name nickname,
+ pro_qna_date day,
+ qna_type_name status
+ from pro_qna q, pro_qna_type t,
+ qna_status s,product p,member m
+ where q.pro_qna_type_code = t.pro_qna_type_code 
+ and q.qna_status_code = s.qna_status_code
+ and p.no=q.pro_no
+ and m.no=q.member_no
+ <if test="searchColumn != null">
+ and q.pro_qna_type_code=#{searchColumn}  <!--선택 pro_qna_type_code=searchColumn(QSZ=사이즈 QDE=배송 QRE=재입고 QDT=상품상세)이 콤보박스  -->
+ </if>
+ ) p
+ <if test="keyword != null">
+ where pro_qna_content like '%'  || #{keyword} || '%'  OR  <!--선택   pro_qna_content(content) search(키워드) -->
+ pro_qna_title like '%'  || #{keyword} || '%'
+ </if>
+ 
+ <!-- <if test="qnaColumn != null">
+ 	order by ${qnaColumn}				 이건 행정렬  pro_qna_content
+ </if> -->
+ 
+ where num between #{start} and #{end}
+  
+  
+  
+  </select>
+  
+  <select id="totalRecord" resultType="java.lang.Integer">
+  	select count(*) from pro_qna
+  	<if test="keyword != null">
+			where pro_qna_content like '%'||#{keyword}||'%' or   <!--선택   pro_qna_content search(키워드) column이 콤보박스-->
+			pro_qna_title like '%'  || #{keyword} || '%'
+	</if>
+		   
+  </select>
+  
+</mapper>

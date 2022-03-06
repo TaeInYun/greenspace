@@ -12,6 +12,7 @@
 <script type="text/javascript" src="/js/popup.js"></script>
 <script type="text/javascript">
 $(function(){
+
 	
 	//도전하기 버튼 클릭시 상태 ING로 변경
 	$(document).on("click", "#startBtn", function() {
@@ -96,7 +97,7 @@ $(function(){
 				success: function(data){
 					console.log(data)
 					$("#listTable").load("/mainpage/member #listTable")
-					//location.href = "/mainpage/member"
+					
 				},
 				error:function(request,status,error){
 			        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -107,32 +108,51 @@ $(function(){
 	
 	//완료된 리스트 insert
 	$("#confirmBtn").on("click",function(){
-	       
+	    
 		let member_no = $( $(document).find("input[name=member_no]")).val();
 		
 		$.ajax({
-				url: "insertEndChg",
-				data:  {member_no:member_no},
-				success: function(data){
-					console.log(data)
-					if(data==1){
-						alert("오늘의 챌린지 완료!");
-						location.href = "/mainpage/member"
-					}else{
-						alert("도전완료한 챌린지가 없습니다!");
-						location.href = "/mainpage/member"
+			url:"checkEndStatus",
+			data:{member_no:member_no},
+			success:function(data){
+			if(data==0){
+				alert("도전완료한 챌린지가 없습니다!");
+			}else{
+				
+				$.ajax({
+					url: "insertEndChg",
+					data:  {member_no:member_no},
+					success: function(data){
+						console.log(data)
+						if(data == -1) {
+							alert("오류입니다!");
+							location.href = "/mainpage/member"
+							}else {
+								alert("오늘의 챌린지 완료!");
+								location.href = "/mainpage/member"
+							}
 					}
-				}
-		});//end ajax	
+			});//end ajax	*/
+	
+			}
+		}});
+
 
 	});
 	
-	//인증글쓰러가기 클릭
+	
+	//인증글 쓰러가기 클릭
 	$("#insertCerBtn").on("click",function(){
 	//	let member_no = $( $(document).find("input[name=member_no]")).val();
 		window.open("/board/insertCerBoard",'인증글 작성','width=500px,height=600px,menubar=0');
 
 	});
+	
+	//인증글 확인가기 클릭
+	$("#goCerBtn").on("click",function(){
+		location.href = "/mypage/myCerBoard"
+	});
+	
 	
 })
 </script>
@@ -147,6 +167,7 @@ $(function(){
 <input type="hidden" name="member_no" value=${m.no }>
 	<strong>${m.nickname}</strong>님<br>
 	에코레벨 : ${m.levels}Lv&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사용가능 포인트 : ${m.point_save}
+	 
 </div>
 
 <hr>
@@ -204,7 +225,7 @@ $(function(){
 <button type="button" id="insertCerBtn" class="btn btn-primary btn-lg" >인증글 쓰러가기</button>
 </c:when>
 <c:when test="${cercnt eq 1 }">
-<button type="button" id="modal-goCerBtn" class="btn btn-primary btn-lg" >챌린지 인증 완료!</button>
+<button type="button" id="goCerBtn" class="btn btn-primary btn-lg" >인증글 확인하기</button>
 </c:when>
 </c:choose>
 </c:if>

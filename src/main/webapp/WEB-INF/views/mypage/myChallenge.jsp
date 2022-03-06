@@ -138,6 +138,13 @@ $(function(){
 
 	});
 	
+	
+	//인증글보러가기 클릭
+	$("#goCerBtn").on("click",function(){
+		location.href = "/mypage/myCerBoard"
+	});
+	
+	
 })
 </script>
 </head>
@@ -217,7 +224,7 @@ $(function(){
 	<button type="button" id="insertCerBtn" class="btn btn-primary btn-lg" >인증글 쓰러가기</button>
 	</c:when>
 	<c:when test="${cercnt eq 1 }">
-	<button type="button" id="modal-goCerBtn" class="btn btn-primary btn-lg" >챌린지 인증 완료!</button>
+	<button type="button" id="goCerBtn" class="btn btn-primary btn-lg" >인증글 확인하기</button>
 	</c:when>
 	</c:choose>
 	</c:if>

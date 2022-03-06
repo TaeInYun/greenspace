@@ -1,13 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-        <!DOCTYPE mapper
-                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="easyToStart">
 
-        <select id="getEasyToStartAll" resultType="EasyToStartVO">
-            select no, ETS_TITLE, ETS_LIKE, ETS_CONTENT, ETS_HIT, CAT_CODE, ETS_THUMBNAIL from EASYTOSTART
-        </select>
+    <select id="getTotalRecord" resultType="java.lang.Integer">
+        select count(*) from easytostart
+    </select>
+        
+    <select id="findAll" resultType="EasyToStartVO">
+        select * from easytostart
+        order by ets_date desc
+        offset #{start} rows fetch first 10 rows only
+    </select>
+    
+    <select id="findByNoETS" resultType="EasyToStartVO">
+  		select * from easytostart where no=#{no}
+  	</select>
+  
+ 	 <update id="updateHitETS">
+  		update easytostart set ets_hit=ets_hit+1 where no=#{no}
+  	</update>
+  	
+  	<update id="updateLikeETS">
+  		update easytostart set ets_like=ets_like+1 where no=#{no}
+  	</update>
+  	
+    <insert id="insert" parameterType="EasyToStartVO">
+        insert into easytostart values (seq_easytostart.nextval, #{ets_title}, 0,#{ets_content}, sysdate, 0, #{cat_code}, #{ets_thumbnail})
+    </insert>
 
 
 

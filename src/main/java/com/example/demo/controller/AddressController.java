@@ -97,28 +97,63 @@ public class AddressController {
 		
 	}
 	
+	//public void updateMainBtnForm(int no, Model model,HttpSession session,AddressVO a) {
 	
 	@RequestMapping(value = "/mypage/updateMainBtnAddress" , method = RequestMethod.GET)
-	public void updateMainBtnForm(int no, Model model) {
-		model.addAttribute("a", dao.findAllDetail(no));  //detail no
-	}
-	
-	@RequestMapping(value = "/mypage/updateMainBtnAddress" , method = RequestMethod.POST)
-	public ModelAndView updateMainBtnAddress(AddressVO a,HttpSession session,Model model) {
+	public ModelAndView updateMainBtnForm(int no, Model model,HttpSession session,AddressVO a) {
 		
 		ModelAndView mav = new ModelAndView("redirect:/mypage/mainAddress");
 		
-		System.out.println("update작동함");
+		model.addAttribute("a", dao.findAllDetail(no));  //detail no  finaAllDetail주소상세 에 있는 정보를
+		
+		
+		int member_no = ((MemberVO)session.getAttribute("m")).getNo();
+		int no2 = a.getNo();
+		
+		System.out.println("main주소로 설정할 주소번호"+no2);
+		System.out.println("main주소로 설정할 회원번호"+member_no);
+		dao.updateBtn(member_no);
+		dao.updateMainBtn(no2);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/mypage/deleteAddress" , method = RequestMethod.GET)
+	public ModelAndView deleteForm(int no,Model model,HttpSession session, AddressVO a) {
+		ModelAndView mav = new ModelAndView("redirect:/mypage/mainAddress");
+		model.addAttribute("a", dao.findAllDetail(no));
+		
+		dao.delete(no);
+		return mav;
+	}
+	
+	//mypage/updateMainBtnAddress?no=121
+	//update/updateMainBtnAddress
+	
+	//@RequestMapping(value = "/mypage/updateMainBtnAddress" , method = RequestMethod.POST)
+	//public ModelAndView updateMainBtnAddress(AddressVO a,HttpSession session,Model model) {
+		
+		//ModelAndView mav = new ModelAndView("redirect:/mypage/mainAddress");  이거를 그냥 get에서 해도 될듯?
+		//ModelAndView mav = new ModelAndView();
+		
+		/*
+		System.out.println("updateMainBtnAddress post동작함");
 		System.out.println(a);
 		
 		int member_no = ((MemberVO)session.getAttribute("m")).getNo();	//회원이 로그인 했을때 회원 번호를 m에 넣어서 상태유지 하는것을 가지고옴
 		
 		//model.addAttribute("a", dao.updateBtn(member_no));
 		
+		int no = a.getNo();
+		System.out.println("main주소로 설정할 주소번호"+no);
+		System.out.println("main주소로 설정할 회원번호"+member_no);
 		dao.updateBtn(member_no);
-		dao.updateMainBtn(a);
-		return mav;
+		dao.updateMainBtn(no);
+		*/
+		//return mav;
 		
-	}
+		
+	//}
+   
 	
 }

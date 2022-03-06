@@ -25,6 +25,7 @@ import com.example.demo.vo.NoticeVO;
 import com.example.demo.vo.OrderBillVO;
 import com.example.demo.vo.Pro_add_optionVO;
 import com.example.demo.vo.OrderListVO;
+import com.example.demo.vo.ProQnaVO;
 import com.example.demo.vo.OrdersProductVO;
 import com.example.demo.vo.OrdersVO;
 import com.example.demo.vo.PointVO;
@@ -107,11 +108,41 @@ public class DBManager {
 		session.close();
 	}
 	
+	//--------------------ProQna-------------------------------
+	
+	public static int insertProQna(ProQnaVO p) {
+		
+		SqlSession session  = factory.openSession();
+		int re=session.insert("proqna.insert",p);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
+	public static int updateProQna(ProQnaVO p) {
+		SqlSession session = factory.openSession(true);
+		int re = session.update("proqna.update", p);
+		session.commit();
+		session.close();
+		return re;				
+	}	
+	
+	public static int deleteProQna(int no) {
+		SqlSession session  = factory.openSession();
+		int re=session.delete("proqna.delete", no);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
+	
+	
+	
 	//-----------------------QnaVO---------------------------
 	
-	public static List<QnaVO> findAllQna(){
+	public static List<QnaVO> findAllQna(HashMap map){
 		SqlSession session = factory.openSession();
-		List<QnaVO> list = session.selectList("qna.findAll");
+		List<QnaVO> list = session.selectList("qna.findAll",map);
 		session.close();
 		return list;
 	}
@@ -131,6 +162,8 @@ public class DBManager {
 	}
 	
 	public static List<QnaVO> findAllQnaSearch(HashMap map){
+		//{start=1, end=5, searchColumn=QDE, qnaColumn=null, keyword=색상}
+		System.out.println("map에 저장된 내용"+map);
 		SqlSession session = factory.openSession();
 		List<QnaVO> list = session.selectList("qna.findAllSearch",map);
 		session.close();
@@ -416,9 +449,9 @@ public class DBManager {
 	}	
 	
 	
-	public static int updateMainBtnAddress(AddressVO a) {
+	public static int updateMainBtnAddress(int no) {
 		SqlSession session = factory.openSession(true);
-		int re = session.update("address.updatemainbtn", a);
+		int re = session.update("address.updatemainbtn", no);
 		session.commit();
 		session.close();
 		return re;				
@@ -576,6 +609,15 @@ public class DBManager {
 	public static int buyProduct(HashMap map) {
 		SqlSession session = factory.openSession();
 		int re = session.update("member.buyProduct", map);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
+	//게시물 작성시 포인트 수정
+	public static int insertBoardPoint(HashMap map) {
+		SqlSession session = factory.openSession();
+		int re = session.update("member.insertBoardPoint", map);
 		session.commit();
 		session.close();
 		return re;
@@ -796,6 +838,15 @@ public class DBManager {
 		return re;				
 	}	
 	
+	/* 도전완료한 챌린지 있는지 체크 */
+	public static int checkEndstatus(int member_no) {
+		SqlSession session = factory.openSession();
+		int cnt = session.selectOne("challengelist.checkEndstatus",member_no);
+		session.close();
+		return cnt;
+	}
+	
+	
 	
 	//--------------ChallengeUser (완료한 챌린지만 담는 테이블) ----------------
 	/* 완료한 챌린지만 insert */
@@ -822,7 +873,9 @@ public class DBManager {
 		ChallengeUserVO c = session.selectOne("challengeuser.getSaveTree", member_no);
 		session.close();
 		return c;		
-	}		
+	}
+	
+	
 	
 	
 	//---------------CerBoard  (인증게시판) ---------------------
@@ -943,7 +996,14 @@ public class DBManager {
 		return re;
 	}
 	 
-	
+	/* 인증게시판 공개/비공개 수정시 포인트 수정 */
+	public static int updateCerPoint(HashMap map) {
+		SqlSession session = factory.openSession();
+		int re = session.update("point.updateCerPoint",map);
+		session.commit();
+		session.close();
+		return re;	
+	}	
 	
 
 	
@@ -1013,13 +1073,44 @@ public class DBManager {
 
 	
 	//---------------EasyToStart---------------
-
-		//게시물 목록 불러오기
-		public static List<EasyToStartVO> getEasyToStartAll(){
+		
+		
+		
+		public static List<EasyToStartVO> findAllETS(HashMap map){
 			SqlSession session = factory.openSession();
-			List<EasyToStartVO> list = session.selectList("easyToStart.getEasyToStartAll");
+			List<EasyToStartVO> list = session.selectList("easyToStart.findAll", map);
 			session.close();
 			return list;
+			
+		}
+
+		public static int getTotalRecordETS(){
+			SqlSession session = factory.openSession();
+			int no = session.selectOne("easyToStart.getTotalRecord");
+			session.close();
+			return no;
+		}
+
+		
+		public static EasyToStartVO findByNoETS(int no) {
+			SqlSession session = factory.openSession();
+			EasyToStartVO b = session.selectOne("easyToStart.findByNoETS", no);
+			session.close();
+			return b;		
+		}
+		
+		public static void updateHitETS(int no) {
+			SqlSession session = factory.openSession();
+			session.update("easyToStart.updateHitETS", no);
+			session.commit();
+			session.close();
+		}
+		
+		public static void updateLikeETS(int no) {
+			SqlSession session = factory.openSession();
+			session.update("easyToStart.updateLikeETS", no);
+			session.commit();
+			session.close();
 		}
 
 
@@ -1033,7 +1124,7 @@ public class DBManager {
 			return re;
 		}
 
-		//notice
+		//notice------------------------------------------
 		public static List<NoticeVO> getList(){
 			SqlSession session = factory.openSession();
 			List<NoticeVO> list = session.selectList("notice.getList");
@@ -1054,7 +1145,46 @@ public class DBManager {
 			session.close();
 			return no;
 		}
+
 		
+		public static NoticeVO findByNoNotice(int no) {
+			SqlSession session = factory.openSession();
+			NoticeVO b = session.selectOne("notice.findByNoNotice", no);
+			session.close();
+			return b;		
+		}
+		
+		public static int updateNotice(NoticeVO b) {
+			SqlSession session = factory.openSession(true);
+			int re = session.update("notice.updateNotice", b);
+			session.commit();
+			session.close();
+			return re;
+		}
+
+		public static int deleteNotice(HashMap map) {
+			SqlSession session  = factory.openSession();
+			int re = session.delete("notice.deleteNotice", map);
+			session.commit();
+			session.close();
+			return re;
+		}
+		
+		public static void updateHitNotice(int no) {
+			SqlSession session = factory.openSession();
+			session.update("notice.updateHitNotice", no);
+			session.commit();
+			session.close();
+		}
+
+		public static int insertNotice(NoticeVO n){
+			SqlSession session = factory.openSession();
+			int re = session.insert("notice.insert", n);
+			session.commit();
+			session.close();
+			return re;
+		}
+	 
 		//-------------------RECEIVERVO------------------
 		public static AddressVO findByReceiverNo(int receiver_no) {
 			SqlSession session = factory.openSession();

@@ -20,4 +20,12 @@
 		</if>
 		)
 	</insert>
+	
+	<!-- 인증게시판 공개/비공개 수정시 포인트 수정 -->
+	<update id="updateCerPoint" parameterType="pointVO">
+	update point set point_amount=#{point_amount}
+	,point_type_code = #{point_type_code} 
+	where member_no = #{member_no} and to_char(point_date,'yy/mm/dd') 
+	= to_char((select cer_date from certification_board where no=#{cer_no}),'yy/mm/dd')
+	</update>
 </mapper>

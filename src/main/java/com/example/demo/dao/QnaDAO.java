@@ -16,8 +16,10 @@ public class QnaDAO {
 	public static int totalRecord;	 
 	public static int totalPage;
 	
-	public List<QnaVO> findAll(){
-		return DBManager.findAllQna();
+	public List<QnaVO> findAll(HashMap map){
+		totalRecord = DBManager.getTotalRecordQna(map);
+		totalPage = (int)Math.ceil(totalRecord/(double)pageSIZE);
+		return DBManager.findAllQna(map);
 	}
 	
 	public List<QnaVO> findAllList(){

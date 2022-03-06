@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,13 +17,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.CerBoardDAO;
 import com.example.demo.dao.ChallengeUserDAO;
+import com.example.demo.dao.MemberDAO;
+import com.example.demo.dao.PointDAO;
 import com.example.demo.vo.CerBoardVO;
 import com.example.demo.vo.MemberVO;
+import com.example.demo.vo.PointVO;
 
 @Controller
 public class CerBoardController {
@@ -31,6 +37,12 @@ public class CerBoardController {
 
 	@Autowired
 	private ChallengeUserDAO userdao;
+	
+	@Autowired
+	private PointDAO pointDAO;
+	
+	@Autowired
+	private MemberDAO memberDAO;
 	
 	// 인증 게시판 목록
 	@RequestMapping("/board/listCerBoard")
@@ -56,8 +68,16 @@ public class CerBoardController {
 	
 	//-------인증 게시판 등록------------
 	@RequestMapping(value="/board/insertCerBoard", method = RequestMethod.POST)
-	public ModelAndView insertCerBoard_submit(CerBoardVO c,HttpServletRequest request) {
+	public ModelAndView insertCerBoard_submit(CerBoardVO c,HttpServletRequest request,HttpSession session) {
 		
+		MemberVO m = (MemberVO)session.getAttribute("m");
+
+		HashMap map = new HashMap();
+		
+		String cer_status=c.getCer_status();
+		int member_no = c.getMember_no();
+		int point_use = m.getPoint_use();
+		System.out.println("point_use"+point_use);
 		
 		ModelAndView mav = new ModelAndView("redirect:/board/listCerBoard");
 		
@@ -85,13 +105,40 @@ public class CerBoardController {
 					fos.write(data);
 					fos.close();
 				}
+				
 			}catch (Exception e) {
 				// TODO: handle exception
-			}	
+			}
+			
+			if(cer_status.equals("비공개")) {
+				
+			PointVO PointVO = new PointVO(0, null, "적립", 10, member_no, "CHG");
+			pointDAO.insertPoint(PointVO);
+			
+			int point_save = PointVO.getPoint_amount();
+			System.out.println("point_save"+point_save);
+			
+			//회원 포인트 수정
+			map.put("member_no", member_no);
+			map.put("point_save", point_save);
+			memberDAO.insertBoardPoint(map);
+			
+			}else if(cer_status.equals("공개")){
+				PointVO PointVO = new PointVO(0, null, "적립", 50, member_no, "PUB");
+				pointDAO.insertPoint(PointVO);
+				
+				int point_save = PointVO.getPoint_amount();
+				System.out.println("point_save"+point_save);
+				//회원 포인트 수정
+				map.put("member_no", member_no);
+				map.put("point_save", point_save);
+				memberDAO.insertBoardPoint(map);
+		
+			}
 		}		
 		return mav;
 	}
-	
+
 	
 	//------------------인증게시판 수정하기--------------------
 	
@@ -100,14 +147,27 @@ public class CerBoardController {
 		
 		MemberVO m = (MemberVO)session.getAttribute("m");
 		int member_no = m.getNo();
+		
 		model.addAttribute("endlist", userdao.listChgUserByMemberNO(member_no));
 		model.addAttribute("c", dao.getCerBoard(no));
-		System.out.println(no);
+		
 	}
 	
 	@RequestMapping(value = "/board/updateCerBoard", method = RequestMethod.POST)
-	public ModelAndView updateSubmit(CerBoardVO c, HttpServletRequest request,Model model) {
-
+	public ModelAndView updateSubmit(CerBoardVO c, HttpServletRequest request,Model model,HttpSession session) {
+	
+		MemberVO m = (MemberVO)session.getAttribute("m");
+		int member_no = m.getNo();
+		int cer_no = c.getNo();
+		
+		String cer_status=c.getCer_status();
+		//String point_date = c.getCer_date().toString()  ;
+		//System.out.println(point_date);
+		System.out.println(cer_status);
+		System.out.println(member_no);
+		System.out.println(cer_no);
+			
+		
 		ModelAndView mav = new ModelAndView("redirect:/board/detailCerBoard"+"?no="+c.getNo());
 		String path = request.getRealPath("upload/cer");
 		String oldFname = c.getCer_thumbnail();
@@ -129,11 +189,73 @@ public class CerBoardController {
 		int re = dao.updateCerBoard(c);
 		
 		if(re ==1) {
+		
 			if(thumbnail !=null && !thumbnail.equals("")) {
 				File file = new File(path + "/" + oldFname);
 				file.delete();
-				//model.addAttribute("c", dao.getCerBoard(no));
 			}
+			/*
+			HashMap map = new HashMap();
+			
+			if(cer_status.equals("비공개")) {	
+				System.out.println("비공개일때");
+				
+				PointVO pointvo = new PointVO(0, "", "적립", 10, member_no, "CHG");
+				int point_amount = pointvo.getPoint_amount();
+				String point_type_code = pointvo.getPoint_type_code();
+				
+				System.out.println(point_amount);
+				System.out.println(point_type_code);
+				
+				map.put("point_amount", point_amount);
+				map.put("point_type_code", point_type_code);
+				map.put("member_no", member_no);
+				map.put("cer_no", c.getNo());
+				
+				int rr = pointDAO.updateCerPoint(map);
+				System.out.println("포인트수정"+rr);
+				
+				
+				
+				//회원포인트 수정
+				int point_save = pointVO.getPoint_amount() -50 ;
+				System.out.println("수정 : point_save"+point_save);
+				
+				map1.put("member_no", member_no);
+				map1.put("point_save", point_save);
+				memberDAO.insertBoardPoint(map1);				
+				
+				 
+				}else if(cer_status.equals("공개")) {
+					
+					System.out.println("공개일때");
+					
+					PointVO pointvo = new PointVO(0, "", "적립",50, member_no, "CHG");
+				
+					int point_amount = pointvo.getPoint_amount();
+					String point_type_code = pointvo.getPoint_type_code();
+					
+					System.out.println(point_amount);
+					System.out.println(point_type_code);
+					
+					map.put("point_amount", point_amount);
+					map.put("point_type_code", point_type_code);
+					map.put("member_no", member_no);
+					map.put("cer_no", c.getNo());
+					
+					int rr = pointDAO.updateCerPoint(map);
+					System.out.println("포인트수정"+rr);
+					
+					//회원포인트 수정
+					int point_save = pointVO.getPoint_amount()-10;
+					System.out.println("point_save"+point_save);
+					
+					map1.put("member_no", member_no);
+					map1.put("point_save", point_save);
+					memberDAO.insertBoardPoint(map1);
+
+				}*/
+			
 		}else {
 			mav.setViewName("error");
 			mav.addObject("msg", "게시물 수정에 실패하였습니다.");
@@ -181,7 +303,6 @@ public class CerBoardController {
 	@RequestMapping("/mypage/myCerBoard")
 	public void listMyChg(Model model,HttpSession session) {
 		MemberVO m = (MemberVO)session.getAttribute("m");
-		
 		int member_no = m.getNo();
 		model.addAttribute("list", dao.findAllByMember(member_no));	
 	}

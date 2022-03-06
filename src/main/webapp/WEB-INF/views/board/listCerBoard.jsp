@@ -31,6 +31,9 @@ section#content ul li { display:inline-block; margin:10px; }
 
 <h3>인증 게시판</h3>
 <a href="/board/insertCerBoard">글등록</a>
+<c:if test="${not empty m }">
+<a href="/mypage/myCerBoard">내글 모아보기</a>
+</c:if>
 	<div id="root">
 		<section id="container">	
 		<div id="container_box">	
@@ -38,12 +41,21 @@ section#content ul li { display:inline-block; margin:10px; }
 					<section id="content">
 					<ul>
 						 <c:forEach var="c" items="${list }">
+						 <c:if test="${c.cer_status eq '공개' }">
 						 <li>
 								<div class="cer_thumbnail">
 									<a href="/board/detailCerBoard?no=${c.no}">
+									<c:choose>
+								<c:when test="${c.cer_thumbnail ne null }">
 										<img  src="/upload/cer/${c.cer_thumbnail }" width="200" height="200">
+								</c:when>
+								<c:when test="${c.cer_thumbnail eq null }">
+										<img  src="/upload/nothumbnail.png" width="200" height="200">
+								</c:when>
+								</c:choose>	
 									</a>
 								</div> 
+							
 								<div class="nickname">
 									<span>${c.nickname}</span>
 								</div>
@@ -55,7 +67,8 @@ section#content ul li { display:inline-block; margin:10px; }
 										<a href="/board/detailCerBoard?no=${c.no}">
 										<span style="text-overflow: ">${c.cer_content}</span></a>
 								</div>	
-						</li>		 
+						</li>	
+						</c:if>	 
 					  	</c:forEach>	
  					</ul>					 
 					</section>	

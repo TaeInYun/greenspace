@@ -18,7 +18,6 @@
 	 휴대전화번호:${a.addr_phone} <br>
 	 주소이름:${a.addr_title} <br>
 	 회원번호:${a.member_no} <br>
-	 메인/서브:${a.addr_main} <br>
 	 
 	 <a href="/mypage/updateAddress?no=${a.no}">수정하기</a>
 </body>
