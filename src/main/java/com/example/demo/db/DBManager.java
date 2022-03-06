@@ -18,6 +18,7 @@ import com.example.demo.vo.ChallengeUserVO;
 import com.example.demo.vo.ChallengeVO;
 import com.example.demo.vo.CommunityVO;
 import com.example.demo.vo.EasyToStartVO;
+import com.example.demo.vo.ImgVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.MyReviewVO;
 import com.example.demo.vo.MyWishVO;
@@ -1137,6 +1138,24 @@ public class DBManager {
 			session.close();
 			return re;
 		}	
+		
+		//---커뮤니티 이미지리스트
+		public static List<ImgVO> listCommuImg(int no){
+			SqlSession session = factory.openSession();
+			List<ImgVO> list = session.selectList("img.listCommuImg",no);
+			session.close();
+			return list;	
+		}
+		
+		//---커뮤니티 이미지 삭제
+		public static int deleteCommuImg(int no) {
+			SqlSession session  = factory.openSession();
+			int re=session.delete("img.deleteCommuImg", no);
+			session.commit();
+			session.close();
+			return re;
+		}
+				
 		
 		
 }

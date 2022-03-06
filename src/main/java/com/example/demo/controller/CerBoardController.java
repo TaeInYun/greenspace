@@ -24,7 +24,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.demo.ImgService;
 import com.example.demo.dao.CerBoardDAO;
 import com.example.demo.dao.ChallengeUserDAO;
 import com.example.demo.dao.MemberDAO;
@@ -48,8 +47,7 @@ public class CerBoardController {
 	@Autowired
 	private MemberDAO memberDAO;
 	
-	@Autowired
-	private ImgService imgService;
+
 	
 	// 인증 게시판 목록
 	@RequestMapping("/board/listCerBoard")

@@ -107,18 +107,18 @@ $(function(){
 </head>
 <body>
 
-	<h2>자유게시판 작성</h2>
+	<h2>자유게시판 수정</h2>
 
 	<div>
 	<form action="insertCommunity" method="post" enctype="multipart/form-data">	
 	<input type="hidden" name="member_no" value="${m.no }">
 		<div class="inputArea">
 			제목<br>
-			<input type="text" name="commu_title"><br>		
+			<input type="text" name="commu_title" value="${c.commu_title }"><br>		
 		</div>		
 		<div class="inputArea">
 			내용<br>
-			<textarea rows="10" cols="60" name="commu_content"></textarea><br>		
+			<textarea rows="10" cols="60" name="commu_content">${c.commu_content}</textarea><br>		
 		</div>
 	<input type='file' id='btnAtt' name="uploadFile" multiple='multiple'/>
 	<div id='att_zone' 

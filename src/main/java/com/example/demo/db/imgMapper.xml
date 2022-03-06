@@ -3,10 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="img">
-<!-- 
+
 	<insert id="uploadFile" parameterType="HashMap">
 		insert into img (no,o_img_name,save_img_name,
-		cer_no,chg_no,eco_no,ets_no,re_no,commu_no,pro_no
+		cer_no,chg_no,eco_no,ets_no,re_no,commu_no,pro_no,
 		one_no,pro_qna_no,notice_no)
 		values(
 			seq_img.nextval,
@@ -24,11 +24,23 @@
 			#{notice_no, jdbcType=INTEGER}
 		)
 	</insert>
- -->
- 
+	
+	<select id="listCommuImg" resultType="imgvo">
+	select no,o_img_name,save_img_name from img where commu_no=#{no}
+	</select>
+	
+		<select id="updateCommuImg" resultType="imgvo">
+	update img set o_img_name=#{o_img_name},   where commu_no=#{no}
+	</select>
+	
+	<delete id="deleteCommuImg">
+		delete img where commu_no = #{no}
+	</delete>
+	
+<!-- 
  <insert id="uploadFile" parameterType="HashMap">
 		insert into img (no,o_img_name,save_img_name,
-		cer_no,chg_no,eco_no,ets_no,re_no,commu_no,pro_no
+		cer_no,chg_no,eco_no,ets_no,re_no,commu_no,pro_no,
 		one_no,pro_qna_no,notice_no)
 		values(
 			seq_img.nextval,
@@ -46,5 +58,8 @@
 			#{seq_notice.currval, jdbcType=INTEGER}
 		)
 	</insert>
+ -->
+ 
+
 	
 </mapper>
