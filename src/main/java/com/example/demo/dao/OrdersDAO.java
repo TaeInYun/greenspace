@@ -20,8 +20,8 @@ public class OrdersDAO {
 	public int getTotalPay(HashMap map) {
 		return DBManager.getTotalPay(map);
 	}
-	public OrderBillVO billOfOrder(HashMap map) {
-		return DBManager.billOfOrder(map);
+	public OrderBillVO billOfOrder(OrdersVO o) {
+		return DBManager.billOfOrder(o);
 	}
 	public OrdersVO receiverInfoByOrdId(String ord_id) {
 		return DBManager.receiverInfoByOrdId(ord_id);

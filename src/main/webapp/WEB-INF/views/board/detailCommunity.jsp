@@ -64,4 +64,5 @@ section#content ul li { display:inline-block; margin:10px; }
 
 <a href="/board/listCommunity">글목록</a>
 </body>
+
 </html>

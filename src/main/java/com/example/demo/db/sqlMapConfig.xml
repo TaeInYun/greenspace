@@ -26,12 +26,13 @@
 	<typeAlias type="com.example.demo.vo.CerBoardVO" alias="cerboardVO"/>
 	<typeAlias type="com.example.demo.vo.QnaVO" alias="qnaVO"/>
 	<typeAlias type="com.example.demo.vo.ImgVO" alias="imgVO"/>
- 
+	<typeAlias type="com.example.demo.vo.OneVO" alias="oneVO"/>
+	<typeAlias type="com.example.demo.vo.ProQnaVO" alias="proqnaVO"/>
 	<typeAlias type="com.example.demo.vo.CommunityVO" alias="communityVO"/>
 	<typeAlias type="com.example.demo.vo.EasyToStartVO" alias="EasyToStartVO"/>
     <typeAlias type="com.example.demo.vo.NoticeVO" alias="noticeVO"/>
+    <typeAlias type="com.example.demo.vo.LikeVO" alias="likeVO"/>
 	
- 
   </typeAliases>
   <environments default="development">  
     <environment id="development">
@@ -64,12 +65,13 @@
 	<mapper resource="com/example/demo/db/challengeUserMapper.xml"/>  
 	<mapper resource="com/example/demo/db/cerboardMapper.xml"/>  
 	<mapper resource="com/example/demo/db/qnaMapper.xml"/>  
- 
+	<mapper resource="com/example/demo/db/oneMapper.xml"/>
+	<mapper resource="com/example/demo/db/proQnaMapper.xml"/>
 	<mapper resource="com/example/demo/db/communityMapper.xml"/>  
 	<mapper resource="com/example/demo/db/easyToStartMapper.xml"/>
     <mapper resource="com/example/demo/db/noticeMapper.xml"/>
     <mapper resource="com/example/demo/db/imgMapper.xml"/>
- 
-	
+ 	<mapper resource="com/example/demo/db/likeMapper.xml"/>
+
   </mappers>
 </configuration>

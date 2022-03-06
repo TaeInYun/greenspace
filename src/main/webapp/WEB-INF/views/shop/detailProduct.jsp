@@ -139,8 +139,11 @@
                       </c:if>
                       
  
-                     <a href="/shop/listReview_rate?pro_no=${p.no}">리뷰 목록 보기</a>                  
-                         <a href="/shop/insertReview?pro_no=${p.no}"> 리뷰작성하기</a>
+
+							<a href="/shop/listReview_rate?pro_no=${p.no}">리뷰 목록 보기</a>						
+		 		            <a href="/shop/insertReview?pro_no=${p.no}"> 리뷰작성하기</a>
+		 		            <a href="/shop/insertProQna?pro_no=${p.no}"> 1대1문의작성하기</a>
+
  
                       <c:if test="${cnt>=1 }">
                               <div id="combo">

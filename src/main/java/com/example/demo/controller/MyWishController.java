@@ -48,7 +48,7 @@ public class MyWishController {
 		int member_no = 1;
 		List<MyWishVO> list = dao_mywish.findByMember(member_no);
 		OrderListVO info = dao_orderList.initOrderInfo(member_no);
-
+		
 		if(info.getPro_saleprice() < 50000) {
 			info.setDelivery_price(2500);
 		}else {

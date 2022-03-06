@@ -22,4 +22,5 @@ public class OrdersVO {
 	private String apply_num;
 	private String imp_uid;
 	private int total;
+	private int point_save;
 }

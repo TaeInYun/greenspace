@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="proqna">
+  <select id="insert" resultType="ProQnaVO">  <!-- 내 qna 리스트 -->
+  	insert into pro_qna(
+	NO,
+	PRO_QNA_TITLE,
+	PRO_QNA_CONTENT,
+	PRO_QNA_PWD,
+	PRO_QNA_DATE,
+	PRO_NO,
+	MEMBER_NO,
+	PRO_QNA_TYPE_CODE,
+	QNA_STATUS_CODE
+	) 
+	values(
+	seq_comment.nextval,
+	#{pro_qna_title},
+	#{pro_qna_content},
+	#{pro_qna_pwd},
+	sysdate,
+	#{pro_no},			<!-- 상품번호로이동 int pro_no -->
+	#{member_no},     <!-- value에 m.no 넣으면됨  -->
+	#{PRO_QNA_TYPE_CODE},  <!-- QSZ사이즈 QDE배송관련 QRE재입고 QDT상품상세  -->
+	#{QNA_STATUS_CODE})  <!-- 무조건 WA 답변대기 넣으면됨  -->
+  
+	  
+  </select>
+  
+  
+  <update id="update" parameterType="ProQnaVO">
+      update pro_qna set
+      no=#{no},
+      PRO_QNA_TITLE=#{pro_qna_title},
+      PRO_QNA_CONTENT=#{pro_qna_content},
+	  PRO_QNA_PWD=#{PRO_QNA_PWD},
+	  PRO_QNA_DATE=#{PRO_QNA_DATE},
+	  PRO_NO=#{PRO_NO},
+	  MEMBER_NO=#{MEMBER_NO},
+	  PRO_QNA_TYPE_CODE=#{PRO_QNA_TYPE_CODE},
+	  QNA_STATUS_CODE=#{QNA_STATUS_CODE}
+  
+  </update>
+  
+  <delete id="delete">
+     delete pro_qna where no=#{no}
+  </delete>
+  
+  
+  
+  
+  
+  
+</mapper>

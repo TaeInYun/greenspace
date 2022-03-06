@@ -18,15 +18,13 @@ var selectBoxChange = function(value){
 
 </head>
 <body>
-	<form action="/mypage/listQna" method="post">
-						<input type="hidden" id="changeInput"/>
-						 	<select id="changeTest" onchange="selectBoxChange(this.value)">
-						 		<option value="">전체</option>
-						 		<option value=1>상품상세</option>
-						 		<option value=2>배송관련</option>
-						 		<option value=3>재입고</option>
-						 		
-						 	</select>
+	<form action="/mypage/listQna" method="post">						
+						 	<select name="searchColumn">							 							 		
+								<option value="QSZ">사이즈</option>
+								<option value="QDE">배송관련</option>
+								<option value="QRE">재입고</option>
+								<option value="QDT">상품상세</option>
+							</select>
 						 	<input type="submit" value="검색">
 						 	</form>
 						 	
