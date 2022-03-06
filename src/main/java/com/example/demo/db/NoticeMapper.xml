@@ -15,7 +15,7 @@
     <select id="findAll" resultType="noticeVO">
         select no, notice_title, notice_content, notice_date, notice_hit from NOTICE
         order by notice_date desc
-        offset #{start} rows fetch first #{end} rows only
+        offset #{start} rows fetch first 10 rows only
     </select>
     
     <select id="findByNoNotice" resultType="noticeVO">
@@ -37,4 +37,6 @@
     <insert id="insert" parameterType="NoticeVO">
         insert into notice (no, notice_title, notice_content, notice_date, notice_hit) values (seq_notice.nextval, #{notice_title}, #{notice_content}, sysdate, 0 )
     </insert>
+
+
 </mapper>
