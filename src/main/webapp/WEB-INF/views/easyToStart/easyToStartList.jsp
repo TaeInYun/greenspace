@@ -6,6 +6,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+	    $(document).ready(function(){	
+	    	//만약 하트를 클릭? + 해당 게시판의 하트 좋아요 +1을 해주세요
+	    	//클라이언트가 클릭 - 서버로 controller에 있는 좋아요 +1 해주기 
+	    	$('.addlike').click(function(){
+	    		var likeDiv = $(this)
+	    		var no = likeDiv.siblings(".ets-no").val()
+	    		
+	    		$.ajax({
+	      		  method: "GET",
+	      		  url: "/easyToStart/like/" + no,
+	      		}).done(function( likeCount ) {
+	      			likeDiv.children(".like-count").text(likeCount)
+	  	   		});
+	    	});
+	    });
+    
+	</script>
+	
 </head>
 <body>
     <h3>EasyToStart</h3>
@@ -31,10 +51,22 @@
 	        <tr>
 	            <td>${e.ets_thumbnail}</td>
 	            <td>${e.ets_title }</td>
-	            <td> 
-	            	<div onclick="updateLike()">
-	            		♡♥ ${e.ets_like}
-	            	</div>
+	            <td style="user-select: none"> 
+	            	<input type="hidden" class="ets-no" value="${e.no}">
+	            	<c:set var="h" scope="session" value="0"/>
+	            	<c:choose >
+	            		<c:when test="${h == 0}">
+		            		<div class="addlike">
+		            			♡ <span class="like-count">${e.ets_like}</span>
+		            		</div>
+	            		</c:when>
+	            		<c:otherwise>
+	            			<div class="addlike">
+            					♥ <span class="like-count">${e.ets_like}</span>
+	            			</div>
+	            		</c:otherwise>
+	            	</c:choose>
+	            	
 	           		
 	            </td>
 	        </tr>
@@ -47,12 +79,7 @@
 	
 	
 	
-	<script type="text/javascript">
-		function updateLike() {
-			alert('클릭이벤트 발생');
-		}
-		
-	</script>
+
 	
 </body>
 </html>

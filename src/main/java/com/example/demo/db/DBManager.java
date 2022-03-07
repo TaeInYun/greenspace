@@ -1099,6 +1099,13 @@ public class DBManager {
 			return b;		
 		}
 		
+		public static int findLikeETS(int no) {
+			SqlSession session = factory.openSession();
+			int likeCount = session.selectOne("easyToStart.findLikeETS", no);
+			session.close();
+			return likeCount;		
+		}
+		
 		public static void updateHitETS(int no) {
 			SqlSession session = factory.openSession();
 			session.update("easyToStart.updateHitETS", no);

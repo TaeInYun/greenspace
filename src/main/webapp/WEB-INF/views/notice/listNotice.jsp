@@ -28,10 +28,11 @@
             <td>작성일</td>
         </tr>
 	    <c:forEach var="notice" items="${list}">
-	    	<c:set var="i" value="${i+1}"/>
+	    	<c:set var="i" value="${(i + 1)}"/>
 	            <tr>
 	                <td>
-	                	${i+start}
+	                	
+	                	 ${totalRecord} 
 	                </td> 
 	                <td>
 	                	<a href="detail?no=${notice.no}">${notice.notice_title}</a>
