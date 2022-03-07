@@ -22,6 +22,7 @@ import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.MyReviewVO;
 import com.example.demo.vo.MyWishVO;
 import com.example.demo.vo.NoticeVO;
+import com.example.demo.vo.OneVO;
 import com.example.demo.vo.OrderBillVO;
 import com.example.demo.vo.Pro_add_optionVO;
 import com.example.demo.vo.OrderListVO;
@@ -173,6 +174,74 @@ public class DBManager {
 	public static int getTotalRecordQna(HashMap map) {
 		SqlSession session = factory.openSession();
 		int no = session.selectOne("qna.totalRecord", map);
+		session.close();
+		return no;
+	}
+	
+	
+	//---------------------oneVO------------------------
+	
+	public static List<OneVO> findAllOne(HashMap map){
+		SqlSession session = factory.openSession();
+		List<OneVO> list = session.selectList("one.findAll",map);
+		session.close();
+		return list;
+	}
+	
+	
+	public static List<OneVO> findAllOneMy(HashMap map){
+		SqlSession session = factory.openSession();
+		List<OneVO> list = session.selectList("one.findAllMy",map);
+		session.close();
+		return list;
+	}
+	
+	   
+	public static OneVO findAllOneDetail(int no) {
+		SqlSession session = factory.openSession();
+		OneVO o = session.selectOne("one.findAllDetail", no);
+		session.close();
+		return o;
+	}
+	
+	public static List<OneVO> findAllOneSearch(HashMap map){
+		System.out.println("map에 저장된 내용"+map);
+		SqlSession session = factory.openSession();
+		List<OneVO> list = session.selectList("one.findAllSearch",map);
+		session.close();
+		return list;
+	}
+	
+    public static int insertOne(OneVO o) {
+		
+		SqlSession session  = factory.openSession();
+		int re=session.insert("one.insert",o);
+		session.commit();
+		session.close();
+		return re;
+	}
+    
+    
+    public static int updateOne(OneVO o) {
+		SqlSession session = factory.openSession(true);
+		int re = session.update("one.update", o);
+		session.commit();
+		session.close();
+		return re;				
+	}	
+	
+	public static int deleteOne(int no) {
+		SqlSession session  = factory.openSession();
+		int re=session.delete("one.delete", no);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
+	
+	public static int getTotalRecordOne(HashMap map) {
+		SqlSession session = factory.openSession();
+		int no = session.selectOne("one.totalRecord", map);
 		session.close();
 		return no;
 	}

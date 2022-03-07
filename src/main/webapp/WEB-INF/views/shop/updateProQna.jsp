@@ -20,18 +20,18 @@
 <body>
 
 
-	<h2>1대1상품문의작성</h2>
-	<form action="insertProQna" method="post"
+	<h2>1대1상품문의수정</h2>
+	<form action="updateProQna" method="post"
 			enctype="multipart/form-data">		
 													  
-		<!-- 1메인0서브 이건 value사용할듯? 아니면 maininsert insert -->
-		1대1상품문의제목: <input type="text" name="pro_qna_title"> <br>		
-		내용: <input type="text" name="pro_qna_content"> <br>					
-		비밀번호: <input type="password" name="pro_qna_pwd"> <br> 		
+		<input type="hidden" name="no" value="${q.no}">  <br> <!-- hidden -->
+		1대1상품문의제목: <input type="text" name="pro_qna_title" value="${q.title }"> <br>		
+		내용: <input type="text" name="pro_qna_content" value="${q.content }"> <br>					
+		비밀번호: <input type="password" name="pro_qna_pwd" > <br> 		
 		<!-- 작성일:	<input type="text" name="pro_qna_date" > <br> -->
-		상품번호:	<input type="text" name="pro_no" value="${pro_no }" > <br>
+		상품번호: <input type="hidden" name="pro_no" value="${q.pro_no }"> <br> 
 		<!-- 회원번호:-->	
-		<input type="hidden" name="member_no" value="${m.no }" > <br> <!-- hidden -->
+		<input type="hidden" name="member_no" value="${m.no }"> <br> <!-- hidden -->
 		
 		<!-- QSZ사이즈 QDE배송관련 QRE재입고 QDT상품상세  -->		
 		<select id="changeTest" >
