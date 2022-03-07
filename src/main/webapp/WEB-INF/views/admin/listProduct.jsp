@@ -7,13 +7,41 @@
 <meta charset="UTF-8">
 <title>관리자설정_상품목록</title>
 <link href="/css/admin.css" rel="stylesheet"/>
+<style type="text/css">
+	table {
+	text-align: center;
+	width: 100%;
+	margin: 10px;
+}
+
+.search {
+  position: relative;
+  width: 300px;
+  margin: 10px;
+}
+
+#input {
+  width: 100%;
+  border: 1px solid #bbb;
+  border-radius: 20px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+#icon {
+  position : absolute;
+  width: 17px;
+  top: 10px;
+  right: 12px;
+  margin: 0;
+}
+</style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/js/qty.js"></script>
 <script type="text/javascript" src="/js/cart.js"></script>
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
- 
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
@@ -38,15 +66,17 @@
 			<div id="container_box"> 
 				<!-- 본문 -->			
 					<section id="content">
-					 	<H2>상품목록</H2>
-					 	
+					 	 
 					 	<form action="/admin/listProduct" method="post">
-						 	<input type="text" name="keyword">
-							<input type="submit" value="검색">
+						   
+							    <div class="search">
+									  <input type="text"name="keyword" id="input" placeholder="검색어 입력">
+									  <img id="icon" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+								</div>
 						</form>
 						<table border="1" width="80%">
 							<tr>
-								<td><input type="checkbox" id="checkedAll" checked="checked"></td>
+								 
 								<td>상품번호</td>
 								<td>사진</td>
 								<td>상품이름</td>
@@ -59,7 +89,7 @@
 							
 							<c:forEach var="p" items="${list }">
 								<tr>
-									<td><input type="checkbox" name="checkList"></td>				
+									 
 									<td>${p.no }</td>
 									<td><img  src="/upload/${p.PRO_THUMBNAIL }" width="100" height="100"></td>
 									<td>
@@ -75,7 +105,7 @@
  
 									<td> <a id="updateProduct" data-toggle="modal" data-target="#updateModal" role="button" href="/admin/updateProduct?no=${p.no }">수정</a></td>
 									<td> <a id="deleteProduct" data-toggle="modal" data-target="#deleteModal" role="button" href="/admin/deleteProduct?no=${p.no }">삭제</a></td>
-									<td> <a id="option" data-toggle="modal" data-target="#deleteModal" role="button" href="/admin/insertProductOption?no=${p.no }">옵션</a></td>
+									<td> <a id="option" data-toggle="modal" data-target="#optionModal" role="button" href="/admin/insertProductOption?no=${p.no }">옵션</a></td>
 									 
 								 
 								</tr>	

@@ -6,22 +6,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
- 
- 	
 <style type="text/css">
 body{
 	font-size: 15px;
 }
 div#root { width:900px; margin:0 auto; }		 
 section#content { float:right; width:900px; margin-top: 30px;}
-	 .label{
-	 	margin:5px 10PX; 10PX; 5px;
-	 	 
-	 }
+	 
 	 #content_1{
 	 	display: inline-block;	 	 
-	 	width: 100%;
-	 	
+	 	width: 100%;	 	
 	 }
 	 img{
 	 	display: inline-block;	 	 
@@ -30,38 +24,29 @@ section#content { float:right; width:900px; margin-top: 30px;}
 	 	margin-left:10px;
 	 	float: left;
 	 }
-	 .lableZip{	 	 
-	 	 
+	 .lableZip{ 	 
 	 	margin:0px;
 	 	width:450px; 	
 	 	margin-right: 10px;
-	 }
-	  
-	 
+	 	 
+	 }	 
 	 .pro_priceZip { 
-	  padding:10px 0;
-	  text-align:center;
-	  position: relative;	 
-	  display:inline;
-	 
+		  padding:10px 0;
+		  text-align:center;
+		  position: relative;	 
+		  display:inline; 
 	  }
 	  
 	.pro_price { padding:10px 0; text-decoration:line-through;color: gray;position: relative;display:inline;}
 	.pro_saleprice { padding:10px 0; position: relative;display:inline; }
-	 #combo{
-		margin: 5px;
-		margin-bottom: 20px;
-		margin-top: 20px;		 
+	 
+	 .context_header{
+	 	margin: 10px;
 	 }
-	 #littleCart{
-		margin: 5px;		 
-		margin-bottom: 20px;
-		margin-top: 20px;		 
-	 }
-	 #btns{
-	 	margin: 5px;
-	 	margin-bottom: 20px;
-		margin-top: 20px;		 
+	 .context_text{
+	  	margin: 10px;
+	  	margin-top: 20px;
+	  	margin-bottom: 20px;
 	 }
 </style> 
 <title>Insert title here</title>
@@ -166,44 +151,56 @@ section#content { float:right; width:900px; margin-top: 30px;}
             <jsp:include page="../header.jsp"/>
          </div>
       </header>   
-       <section id="container">      
-            <div id="container_box"> 
+                  
             <!-- 본문 -->         
                <section id="content">                  
                 <div id="content_1"> 
                 	<img src="/upload/${p.PRO_THUMBNAIL }" width="370" height="400"><br>   
-                    <div class="lableZip" style="float: right;">  
-                       <div class="label" >							 
+                    <div class="lableZip" style="float: right;"> 
+                     
+                       <div class="context_header" >							 
 							<strong><span> ${p.pro_name }</span></strong>
 						</div>          
                    	  	
-                   	   <div class="label"  id="priceZip">
-							 	<label for="pro_price" id="pro_price"></label>
-							<div class="pro_priceZip">   
+                   	   <div class="context_header" id="priceZip">
+							 	<strong><label for="pro_price">가격</label></strong>			
 									  <div class="pro_price">
 									    <span> ${p.pro_price } </span>
 									  </div>   		
 								  
 									   <div class="pro_saleprice">
 									    <span> ${p.pro_saleprice } </span>
-									  </div>   		
-							</div>			
-						</div>	
-						 <HR>
-                     	<div class="label" style="margin: 10px" >							 
+									  </div>  
+						</div>
+						
+						<div class="context_header" >			
+						 	<strong><label for="review_count">리뷰</label></strong>				 
+							 <span> ${review.count}개(${review.avg }점)</span> 
+						</div>   
+						
+						<HR>
+                     	<div class="context_text" style="margin: 10px" >							 
 							 <span style="font-size: 13px;">${p.pro_content }</span>
 						</div>	 	 
 						 
-						<div class="label" style="margin: 10px" >
+						<div class="context_text" style="margin: 10px" >
 							<strong><label for="pro_delivery">평균출고일자</label></strong>
 							 <span>${p.pro_delivery }일</span>
 						</div>
-						<div class="label" style="margin: 10px" >
+						<div class="context_text" style="margin: 10px" >
 							<strong><label for="pro_brand">브랜드</label></strong>
 							 <span>${p.pro_brand }</span>
 						</div>
+						<hr>
+						<c:if test="${cnt<1 }">                      
+							<div id="addSub" class="context_text">
+								<button type="button" id="minus" >-</button>
+								<input type="number" readonly="readonly" value="1" id="qty">
+								<button type="button" id="plus">+</button>
+							</div>	
+	                      </c:if>
 						 <c:if test="${cnt>=1 }">
-                              <div id="combo">
+                              <div id="combo" class="context_text">
                               		<span id="pro_option_name">
 	                              		${option.pro_option_name}  
                               		</span>
@@ -215,10 +212,9 @@ section#content { float:right; width:900px; margin-top: 30px;}
                                           </option>
                                        </c:forEach>
                                     </select>
-                                      
-                           </div>
+                               </div>
                     
-                            <div id="littleCart">
+                            <div id="littleCart" class="context_text">
                                   <table border="1">
                                     <thead>
                                        <tr>
@@ -232,22 +228,17 @@ section#content { float:right; width:900px; margin-top: 30px;}
                            </div>          
                     </c:if>
                     
-                     <div id="btns">
-				      <button id="cart">장바구니 추가</button>
-				      <a href="" id="wishList">찜하기</a> 
+                     <div id="btns" class="context_text">
+					      <button id="cart">장바구니 추가</button>
+					      <a href="" id="wishList">찜하기</a> 
 				     </div>
-				</div> 	
+				 </div>	<!-- lableZip -->
+				</div> 	<!-- content_1 -->
 					
                         
- 				</div>
+ 				 
                    
-                      <c:if test="${cnt<1 }">                      
-						<div id="addSub">
-							<button type="button" id="minus" >-</button>
-							<input type="number" readonly="readonly" value="1" id="qty">
-							<button type="button" id="plus">+</button>
-						</div>	
-                      </c:if>
+                      
                       <hr>
  						<div id="other" style="clear: both; margin: 10PX;">
 							<a href="/shop/listReview_rate?pro_no=${p.no}">리뷰 목록 보기</a>						
@@ -258,9 +249,8 @@ section#content { float:right; width:900px; margin-top: 30px;}
                  
                </section><!-- 본문 -->               
                                    
-            </div>
-         </section>
-   </div><!-- 전체  section box-->
+            </div><!-- root -->
+         
    
 </body>
 </html>
