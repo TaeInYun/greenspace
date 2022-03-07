@@ -5,10 +5,63 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="/css/shop.css" rel="stylesheet"/> 	 
-<link href="/css/shop.css" rel="stylesheet"/> 	
+ 
+ 	
 <style type="text/css">
+body{
+	font-size: 15px;
+}
+div#root { width:900px; margin:0 auto; }		 
+section#content { float:right; width:900px; margin-top: 30px;}
+	 .label{
+	 	margin:5px 10PX; 10PX; 5px;
+	 	 
+	 }
+	 #content_1{
+	 	display: inline-block;	 	 
+	 	width: 100%;
+	 	
+	 }
+	 img{
+	 	display: inline-block;	 	 
+	 	 
+	 	margin: 20px;
+	 	margin-left:10px;
+	 	float: left;
+	 }
+	 .lableZip{	 	 
+	 	 
+	 	margin:0px;
+	 	width:450px; 	
+	 	margin-right: 10px;
+	 }
+	  
 	 
+	 .pro_priceZip { 
+	  padding:10px 0;
+	  text-align:center;
+	  position: relative;	 
+	  display:inline;
+	 
+	  }
+	  
+	.pro_price { padding:10px 0; text-decoration:line-through;color: gray;position: relative;display:inline;}
+	.pro_saleprice { padding:10px 0; position: relative;display:inline; }
+	 #combo{
+		margin: 5px;
+		margin-bottom: 20px;
+		margin-top: 20px;		 
+	 }
+	 #littleCart{
+		margin: 5px;		 
+		margin-bottom: 20px;
+		margin-top: 20px;		 
+	 }
+	 #btns{
+	 	margin: 5px;
+	 	margin-bottom: 20px;
+		margin-top: 20px;		 
+	 }
 </style> 
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -105,47 +158,50 @@
 </script>
 </head>
 <body>
-   <h2>상품 상세</h2>
-   <div id="btns">
-      <button id="cart">장바구니 추가</button>
-      <a href="" id="wishList">찜하기</a> 
-   </div>
-   <hr>
+    
     <div id="root">
       <header id="header">
          <div id="header_box">
-            <jsp:include page="../shop/shopHeader.jsp"/>
+            <jsp:include page="../header.jsp"/>
          </div>
       </header>   
        <section id="container">      
             <div id="container_box"> 
             <!-- 본문 -->         
                <section id="content">                  
-                       <hr>   
-                     상품번호 : ${p.no }<br>   
-                      상품이름 : ${p.pro_name }<br>            
-                     상품가격 : ${p.pro_price}<br>   
-                     상품할인가 :${p.pro_saleprice}<br>
-                     상품설명 : ${p.pro_content }<br>   
-                     <img  src="/upload/${p.PRO_THUMBNAIL }" width="200" height="200"><br>
- 
-                   
-                      <c:if test="${cnt<1 }">                      
-						<div id="addSub">
-							<button type="button" id="minus" >-</button>
-							<input type="number" readonly="readonly" value="1" id="qty">
-							<button type="button" id="plus">+</button>
+                <div id="content_1"> 
+                	<img src="/upload/${p.PRO_THUMBNAIL }" width="370" height="400"><br>   
+                    <div class="lableZip" style="float: right;">  
+                       <div class="label" >							 
+							<strong><span> ${p.pro_name }</span></strong>
+						</div>          
+                   	  	
+                   	   <div class="label"  id="priceZip">
+							 	<label for="pro_price" id="pro_price"></label>
+							<div class="pro_priceZip">   
+									  <div class="pro_price">
+									    <span> ${p.pro_price } </span>
+									  </div>   		
+								  
+									   <div class="pro_saleprice">
+									    <span> ${p.pro_saleprice } </span>
+									  </div>   		
+							</div>			
 						</div>	
-                      </c:if>
-                      
- 
-
-							<a href="/shop/listReview_rate?pro_no=${p.no}">리뷰 목록 보기</a>						
-		 		            <a href="/shop/insertReview?pro_no=${p.no}"> 리뷰작성하기</a>
-		 		            <a href="/shop/insertProQna?pro_no=${p.no}"> 1대1문의작성하기</a>
-
- 
-                      <c:if test="${cnt>=1 }">
+						 <HR>
+                     	<div class="label" style="margin: 10px" >							 
+							 <span style="font-size: 13px;">${p.pro_content }</span>
+						</div>	 	 
+						 
+						<div class="label" style="margin: 10px" >
+							<strong><label for="pro_delivery">평균출고일자</label></strong>
+							 <span>${p.pro_delivery }일</span>
+						</div>
+						<div class="label" style="margin: 10px" >
+							<strong><label for="pro_brand">브랜드</label></strong>
+							 <span>${p.pro_brand }</span>
+						</div>
+						 <c:if test="${cnt>=1 }">
                               <div id="combo">
                               		<span id="pro_option_name">
 	                              		${option.pro_option_name}  
@@ -161,30 +217,46 @@
                                       
                            </div>
                     
-                            <div id="littleCart" style="border-style: solid;">
+                            <div id="littleCart">
                                   <table border="1">
                                     <thead>
                                        <tr>
-                                          <td>선택옵션</td>
+                                          <td>옵션</td>
                                           <td>추가금액</td>
-                                          <td>구매수량</td>
+                                          <td>수량</td>
                                        </tr>
                                     </thead>
                                     <tbody id="optionList"></tbody>
                                  </table>
-                           </div>   
-                           
-                                            
+                           </div>          
                     </c:if>
-                     <hr>                
-                   <a href="">상품평</a>
-                   <a href="">Q&A</a>
-                   <a href="">교환환불</a>
-                                     
+                    
+                     <div id="btns">
+				      <button id="cart">장바구니 추가</button>
+				      <a href="" id="wishList">찜하기</a> 
+				     </div>
+				</div> 	
+					
+                        
+ 				</div>
+                   
+                      <c:if test="${cnt<1 }">                      
+						<div id="addSub">
+							<button type="button" id="minus" >-</button>
+							<input type="number" readonly="readonly" value="1" id="qty">
+							<button type="button" id="plus">+</button>
+						</div>	
+                      </c:if>
+                      <hr>
+ 						<div id="other" style="clear: both; margin: 10PX;">
+							<a href="/shop/listReview_rate?pro_no=${p.no}">리뷰 목록 보기</a>						
+		 		            <a href="/shop/insertReview?pro_no=${p.no}"> 리뷰작성하기</a>
+		 		            <a href="/shop/insertProQna?pro_no=${p.no}"> 1대1문의작성하기</a>
+						</div>
+ 
+                 
                </section><!-- 본문 -->               
-                           <aside id="aside">
-                              <jsp:include page="../shop/shopAside.jsp"/>
-                           </aside>            
+                                   
             </div>
          </section>
    </div><!-- 전체  section box-->

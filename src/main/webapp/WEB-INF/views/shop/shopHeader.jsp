@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
- #header_shop{
+#header_shop{
  margin: 0;
  padding:0px;
  }
@@ -20,21 +19,16 @@ margin:0px;
 #form{
 	margin-left: 20px;
 }
-
 #other{
 margin: 30px;
 margin-left:170px;
 text-align: right;
 border: solid;
  
-
 }
-
-
 ::selection {
    background: #212129;
 }
-
 .search-wrapper {
     position: absolute;
     transform: translate(-50%, -50%);
@@ -42,7 +36,6 @@ border: solid;
    	left:850px;
 }
 .search-wrapper.active {}
-
 .search-wrapper .input-holder {    
     height: 70px;
     width:70px;
@@ -190,7 +183,7 @@ function searchToggle(obj, evt){
 </head>
 <body>
 <div id="header_shop">
-	<div id="a" style="border-style: solid;">
+	<div id="a" >
 		<a href="/shop/listProduct_home?filter=pro_hit">베스트</a>&nbsp; 
 		<a href="/shop/listProduct_home?filterASC=pro_saleprice">특가</a>&nbsp;	
 		<a href="/shop/listProduct_home?filter=pro_date">신상품</a>&nbsp;
@@ -209,14 +202,11 @@ function searchToggle(obj, evt){
 		</form>
 	</div>
 	
-	<div id="other">
-		<a href="/shop/cart">찜하기</a> 
-		<a href="/shop/cart">카트</a> 
-	</div>
 	
 </div>	 
 	
 	<hr> 
 </body>
+
 
 </html>

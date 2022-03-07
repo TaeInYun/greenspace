@@ -70,7 +70,7 @@
 
 	  <!-- 메인 유저정보 -->
 	  <select id="mainMemberInfo" resultType="memberVO">
-	  SELECT nickname, levels, point_use FROM member where no = #{member_no}
+	  SELECT nickname, levels, point_use,point_save, point_save-point_use presentPoint FROM member where no = #{member_no}
 	  </select>
 	  
 	  <select id="orderInfo" resultType="memberVO">

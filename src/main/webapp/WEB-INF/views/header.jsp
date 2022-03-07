@@ -26,8 +26,9 @@ a:visited {
  <div id="header_wrap">
 
 		<div id="logo">
-			<span><a href="../mainpage/nonmember">녹지공간</a></span>
+			<span style="font-size: 25px"><a href="../mainpage/nonmember">녹지공간</a></span>
 		</div>	
+		 
 		
 		<c:if test="${empty m }"> 
 		<div id="memu">
@@ -51,6 +52,7 @@ a:visited {
 		</ul>	
 		</div>	
 		</c:if>	
+		
 </div>		
  
 </body>

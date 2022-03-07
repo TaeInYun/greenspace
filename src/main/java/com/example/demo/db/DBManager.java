@@ -1220,6 +1220,21 @@ public class DBManager {
 			session.close();
 			return re;
 		}
+
+		public static PointVO findPresentPoint(int no) {			 
+			SqlSession session = factory.openSession();
+			PointVO p = session.selectOne("point.findPresentPoint", no);
+			session.close();
+			return p;
+		}
+ 
+
+		public static List<PointVO> findAllPointByNO(HashMap map) {
+			SqlSession session = factory.openSession();
+			List<PointVO> list = session.selectList("point.findAllPointByNO",map);
+			session.close();
+			return list;
+		}
 				
 		
 		
