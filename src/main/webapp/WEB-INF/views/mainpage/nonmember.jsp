@@ -10,7 +10,7 @@
 <script type="text/javascript">
 	$(function(){
 		$("#mainButton").click(function(){
-			location.href='login'
+			location.href='../login'
 		})
 		$("#etsButton").click(function(){
 			location.href='../easyToStart/easyToStartList'
