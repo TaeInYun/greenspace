@@ -501,8 +501,7 @@ $(function(){
 			<span class="error_msg" id="phoneMsg" style="display:none"></span>
 			<span class="success_msg" id="phoneMsg" style="display:none"></span>
 			<span class="error_msg" id="codeMsg" style="display:none"></span>
-			<span class="success_msg" id="codeMsg" style="display:none"></span>
-			
+			<span class="success_msg" id="codeMsg" style="display:none"></span>		
 		</div>				
 		
 		

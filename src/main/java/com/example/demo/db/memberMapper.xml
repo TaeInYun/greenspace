@@ -93,5 +93,25 @@
 	<select id="isMember" parameterType="HashMap" resultType="int">
 		select count(*) from member where id=#{id} and pwd=#{pwd}
 	</select>
+	
+	<!-- 마이페이지 회원 정보 수정 -->
+	<update id="updateNickName" parameterType="HashMap">
+		update member set nickname=#{nickName} where no=#{no}
+	</update>
+	
+	<update id="updateEmail" parameterType="HashMap">
+		update member set email=#{email} where no=#{no}
+	</update>
+	
+	<update id="updatePhone">
+		update member set phone=#{phone} where no=#{no}
+	</update>
+	
+	<update id="updateAccount">
+	update member set account_number= #{account_number} ,account_bank=#{account_bank}  where no=#{no}
+	</update>
+	
+	
+	
 
 </mapper> 

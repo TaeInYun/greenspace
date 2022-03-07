@@ -1228,6 +1228,44 @@ public class DBManager {
 			return re;
 		}
 				
+	//memberInfo------------------------------------------
 		
+		/* 이메일 변경 */
+		public static int updateEmail(HashMap map) {
+			SqlSession session = factory.openSession();
+			int re = session.update("member.updateEmail", map);
+			session.commit();
+			session.close();
+			return re;
+		}
+		
+		/* 닉네임 변경 */
+		public static int updateNickName(HashMap map) {
+			SqlSession session = factory.openSession();
+			int re = session.update("member.updateNickName", map);
+			session.commit();
+			session.close();
+			return re;
+		}
+		
+		/* 전화번호 변경 */
+		public static int updatePhone(HashMap map) {
+			SqlSession session = factory.openSession();
+			int re = session.update("member.updatePhone", map);
+			session.commit();
+			session.close();
+			return re;
+		}
+		
+		
+		/* 환불계좌 변경 */
+		public static int updateAccount(HashMap map) {
+			SqlSession session = factory.openSession();
+			int re = session.update("member.updateAccount", map);
+			session.commit();
+			session.close();
+			return re;
+		}
+
 		
 }

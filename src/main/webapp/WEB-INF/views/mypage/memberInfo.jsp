@@ -1,21 +1,132 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-		 pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+		 pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <HTML>
 <HEAD>
 	<meta charset="EUC-KR">
 	<title>Insert title here</title>
+	<style type="text/css">
+		.success_msg{
+			
+			font-size: 0.7em;
+			color: green;
+		}
+
+		.error_msg{
+			display:none;
+			font-size: 0.7em;
+			color: red;
+		}
+
+		#input_code{
+				display: none;
+		}
+	</style>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript">
+	
+	$(document).ready(function(){
+		function showErrorMsg(obj, msg) {
+	        obj.attr("class", "error_msg");
+	        obj.html(msg);
+	        obj.show();
+		}
 
-	<script>
+		function showSuccessMsg(obj, msg) {
+	        obj.attr("class", "success_msg");
+	        obj.html(msg);
+	        obj.show();
+		}
 
-		$(document).ready(function(){
+		$(function(){
+			//ì—ëŸ¬ë©”ì„¸ì§€ ì¶œë ¥í•¨ìˆ˜--------------------------------------
+			
+			
+			 var phoneCheck = false;            // íœ´ëŒ€ë²ˆí˜¸
+			 var codeCheck = false;      		//ì¸ì¦ë²ˆí˜¸ ê³µë°±
+			 var codeckCheck = false;      		//ì¸ì¦ë²ˆí˜¸ ì¼ì¹˜
+			
+			 var phone = $("#phone").val();
+		     var userCode = $("#userCode").val();
+		     
+		     
+		     /* ì „í™” ì…ë ¥ì¹¸ ê³µë°±ì¼ì‹œ */
+		     if ( phone == "") {
+			        showErrorMsg($("#phoneMsg"),"í•„ìˆ˜ì…ë ¥ì…ë‹ˆë‹¤.");
+			        phoneCheck=false;
+			}else{
+			        phoneCheck = true;
+			}
+		      
+				
+		   if ($("#input_code").css("display") == "none") {
+			   
+		      } else { 
+		        		/* ì¸ì¦ë²ˆí˜¸ ì…ë ¥ì¹¸ ê³µë°±ì¼ì‹œ */
+		    	if ( userCode == "") {
+		    			showErrorMsg($("#codeMsg"),"í•„ìˆ˜ì…ë ¥ì…ë‹ˆë‹¤.");
+		    			codeCheck=false;
+		    	}else{
+		    		codeCheck=true;
+		    	}
+		    }
+			
+		})
+		
+		$("#phone").blur(function(){
+			var phone = $("#phone").val();
+			var oMsg = $("#phoneMsg");
+		    var isPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+			
+		/* ì „í™” ì…ë ¥ì¹¸ ê³µë°±ì¼ì‹œ */
+        if ( phone == "") {
+	            showErrorMsg(oMsg,"í•„ìˆ˜ì…ë ¥ì…ë‹ˆë‹¤.");
+	            phoneCheck=false;
+	        }else{
+	        	phoneCheck = true;
+	        }
+	
+		    /* ì „í™” ì •ê·œì‹í‘œí˜„ ì¼ì¹˜í•˜ëŠ”ì§€ */
+		    if(phone != ""&& !isPhone.test(phone)){
+				showErrorMsg(oMsg,"í˜•ì‹ì— ë§ì§€ ì•ŠëŠ” ë²ˆí˜¸ì…ë‹ˆë‹¤.");
+				$("#btnSend").attr("disabled", true);
+				phoneCheck=false;
+		        return false;	
+			} else{
+				$(oMsg).css('display', 'none');
+				$("#btnSend").attr("disabled", false);
 
-			//ºñ¹Ğ¹øÈ£
+				phoneCheck=true;
+			}
+		    
+		    
+			//--------------íœ´ëŒ€í° ìœ íš¨ì„±ê²€ì‚¬ ì¸ì¦ë²ˆí˜¸ ë°œì†¡ ---------------
+			$("#btnSend").click(function(){
+				var phone = $("#phone").val();
+				var oMsg = $("#phoneMsg");
+				
+		    	/* ì¸ì¦ë²ˆí˜¸ ë°œì†¡ */
+				$.ajax({
+					url:"http://localhost:8080/checkVerification",
+					data:{phone:phone},
+					
+					success:function(data){
+						code = data;
+						console.log(code);
+						 showSuccessMsg(oMsg, "ì¸ì¦ë²ˆí˜¸ë¥¼ ë°œì†¡í–ˆìŠµë‹ˆë‹¤.");
+						 phoneCheck = true;
+						$("#input_code").css("display","block");
+					}
+				})	
+			});//end íœ´ëŒ€í° ìœ íš¨ì„± ê²€ì‚¬
+			
+		})
+			//ë¹„ë°€ë²ˆí˜¸
 			$("#changePwdBtn").click(function(){
 				if($("#changePwdHiddenBtn").is(":visible")){
-				/*toggleClass(±âÁ¸Å¬·¡½º¸í ¹Ù²ÜÅ¬·¡½º¸í);*/
+				/*toggleClass(ê¸°ì¡´í´ë˜ìŠ¤ëª… ë°”ê¿€í´ë˜ìŠ¤ëª…);*/
 					$("#changePwdBtn").toggleClass("btn01 btn02");
 					$("#changePwdHiddenBtn").slideUp();
 				}else {
@@ -24,7 +135,36 @@
 				}
 			});
 
-			//ºñ¹Ğ¹øÈ£ Áßº¹ À¯È¿¼º È®ÀÎ
+		//-------------- ì¸ì¦ë²ˆí˜¸ ê³µë°±í™•ì¸ ---------------
+		$("#userCode").blur(function(){
+			var userCode = $("#userCode").val();
+			var oMsg = $("#codeMsg").css("display","block");
+				
+			/* ì¸ì¦ë²ˆí˜¸ ì…ë ¥ì¹¸ ê³µë°±ì¼ì‹œ */
+		    if ( userCode == "") {
+			      showErrorMsg(oMsg,"ì¸ì¦ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”.");
+			       codeCheck=false;
+			       return false;
+			    }
+		
+		  //-------------- ì¸ì¦ë²ˆí˜¸ í™•ì¸ë²„íŠ¼ í´ë¦­ì‹œ ---------------
+			$("#btnCheck").click(function(){
+				var userCode = $("#userCode").val();
+				var oMsg = $("#codeMsg").css("display","block");
+				
+				if(userCode == code){
+					showSuccessMsg(oMsg, "ì¸ì¦ë²ˆí˜¸ê°€ ì¼ì¹˜í•©ë‹ˆë‹¤.");
+					$("#phone_form").submit();  
+				}else{
+					showErrorMsg(oMsg, "ì¸ì¦ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
+					
+				}
+				
+			});//end ì¸ì¦ë²ˆí˜¸ í™•ì¸ë²„íŠ¼ í´ë¦­ì‹œ
+			
+		})
+		
+			//ë¹„ë°€ë²ˆí˜¸ ì¤‘ë³µ ìœ íš¨ì„± í™•ì¸
 			$(function(){
 				$('#newPwd').keyup(function(){
 					$('#chkNotice').html('');
@@ -33,10 +173,10 @@
 				$('#newPwdChk').keyup(function(){
 
 					if($('#newPwd').val() != $('#newPwdChk').val()){
-						$('#chkNotice').html('ºñ¹Ğ¹øÈ£ ÀÏÄ¡ÇÏÁö ¾ÊÀ½<br><br>');
+						$('#chkNotice').html('ë¹„ë°€ë²ˆí˜¸ ì¼ì¹˜í•˜ì§€ ì•ŠìŒ<br><br>');
 						$('#chkNotice').attr('color', '#f82a2aa3');
 					} else{
-						$('#chkNotice').html('ºñ¹Ğ¹øÈ£ ÀÏÄ¡ÇÔ<br><br>');
+						$('#chkNotice').html('ë¹„ë°€ë²ˆí˜¸ ì¼ì¹˜í•¨<br><br>');
 						$('#chkNotice').attr('color', '#199894b3');
 					}
 
@@ -44,16 +184,16 @@
 			});
 
 
-			//ºñ¹Ğ¹øÈ£ÀÇ Ãë¼Ò ¹öÆ°
+			//ë¹„ë°€ë²ˆí˜¸ì˜ ì·¨ì†Œ ë²„íŠ¼
 			$("#cancelPwdBtn").click(function (){
 				$("#changePwdHiddenBtn").slideUp();
 			})
 
-			//´Ğ³×ÀÓ º¯°æ
+			//ë‹‰ë„¤ì„ ë³€ê²½
 			$(document).ready(function(){
 				$("#changeNickNameBtn").click(function(){
 					if($("#changeNickNameHiddenBtn").is(":visible")){
-						/*toggleClass(±âÁ¸Å¬·¡½º¸í ¹Ù²ÜÅ¬·¡½º¸í);*/
+						/*toggleClass(ê¸°ì¡´í´ë˜ìŠ¤ëª… ë°”ê¿€í´ë˜ìŠ¤ëª…);*/
 						$("#changeNickNameBtn").toggleClass("btn01 btn02");
 						$("#changeNickNameHiddenBtn").slideUp();
 					}else{ $("#changeNickNameBtn").toggleClass("btn02 btn01");
@@ -62,16 +202,16 @@
 				});
 			});
 
-			//´Ğ³×ÀÓ Ãë¼Ò¹øÆ°
+			//ë‹‰ë„¤ì„ ì·¨ì†Œë²ˆíŠ¼
 			$("#cancelNickNameBtn").click(function (){
 				$("#changeNickNameHiddenBtn").slideUp();
 			})
 
-			//ÀÌ¸ŞÀÏ º¯°æ
+			//ì´ë©”ì¼ ë³€ê²½
 			$(document).ready(function(){
 				$("#changeEmailBtn").click(function(){
 					if($("#changeEmailHiddenBtn").is(":visible")){
-						/*toggleClass(±âÁ¸Å¬·¡½º¸í ¹Ù²ÜÅ¬·¡½º¸í);*/
+						/*toggleClass(ê¸°ì¡´í´ë˜ìŠ¤ëª… ë°”ê¿€í´ë˜ìŠ¤ëª…);*/
 						$("#changeEmailBtn").toggleClass("btn01 btn02");
 						$("#changeEmailHiddenBtn").slideUp();
 					}else{ $("#changeEmailBtn").toggleClass("btn02 btn01");
@@ -80,16 +220,16 @@
 				});
 			});
 
-			//ÀÌ¸ŞÀÏ Ãë¼Ò¹öÆ°
+			//ì´ë©”ì¼ ì·¨ì†Œë²„íŠ¼
 			$("#cancelEmailBtn").click(function (){
 				$("#changeEmailHiddenBtn").slideUp();
 			})
 
-			//ÈŞ´ëÀüÈ­ º¯°æ
+			//íœ´ëŒ€ì „í™” ë³€ê²½
 			$(document).ready(function(){
 				$("#changeCellphone").click(function(){
 					if($("#hiddenChangeCellphone").is(":visible")){
-						/*toggleClass(±âÁ¸Å¬·¡½º¸í ¹Ù²ÜÅ¬·¡½º¸í);*/
+						/*toggleClass(ê¸°ì¡´í´ë˜ìŠ¤ëª… ë°”ê¿€í´ë˜ìŠ¤ëª…);*/
 						$("#changeCellphone").toggleClass("btn01 btn02");
 						$("#hiddenChangeCellphone").slideUp();
 					}else{ $("#changeCellphone").toggleClass("btn02 btn01");
@@ -97,17 +237,18 @@
 					}
 				});
 			});
-
-			//ÈŞ´ëÀüÈ­ Ãë¼Ò
+			
+			
+			//íœ´ëŒ€ì „í™” ì·¨ì†Œ
 			$("#cancelCellphoneBtn").click(function (){
 				$("#hiddenChangeCellphone").slideUp();
 			})
 
-			//È¯ºÒ°èÁÂ º¯°æ
+			//í™˜ë¶ˆê³„ì¢Œ ë³€ê²½
 			$(document).ready(function(){
 				$("#changeAccountBtn").click(function(){
 					if($("#changeAccountHiddenBtn").is(":visible")){
-						/*toggleClass(±âÁ¸Å¬·¡½º¸í ¹Ù²ÜÅ¬·¡½º¸í);*/
+						/*toggleClass(ê¸°ì¡´í´ë˜ìŠ¤ëª… ë°”ê¿€í´ë˜ìŠ¤ëª…);*/
 						$("#changeAccountBtn").toggleClass("btn01 btn02");
 						$("#changeAccountHiddenBtn").slideUp();
 					}else{ $("#changeAccountBtn").toggleClass("btn02 btn01");
@@ -116,10 +257,12 @@
 				});
 			});
 
-			//È¯ºÒ°èÁÂ Ãë¼Ò
+			//í™˜ë¶ˆê³„ì¢Œ ì·¨ì†Œ
 			$("#cancelAccountBtn").click(function (){
 				$("#changeAccountHiddenBtn").slideUp();
 			})
+			
+			
 
 		});
 	</script>
@@ -129,93 +272,104 @@
 </HEAD>
 <BODY>
 	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
-	<h3>±âº» È¸¿øÁ¤º¸</h3>
+	<h3>ê¸°ë³¸ íšŒì›ì •ë³´</h3>
 
-	¾ÆÀÌµğ : ${m.id}
+	ì•„ì´ë”” : ${m.id}
 
-	<br> ºñ¹Ğ¹øÈ£ : ${m.pwd}
-	<button id="changePwdBtn" class="btn01">ºñ¹Ğ¹øÈ£ º¯°æ</button>
-	<form method="post">
+	<br> ë¹„ë°€ë²ˆí˜¸ : 
+	<button id="changePwdBtn" class="btn01">ë¹„ë°€ë²ˆí˜¸ ë³€ê²½</button>
+	<form action="/mypage/updatePwd2" method="post">
 		<ul id="changePwdHiddenBtn" class="example01" style="display: none;">
-			<br> ÇöÀçºñ¹Ğ¹øÈ£ <input type="password" id="pwd" name="pwd" required>
-			<br> ½Å±Ôºñ¹Ğ¹øÈ£ <input type="password" id="newPwd" name="newPwd" required>
-			<br> ½Å±Ôºñ¹Ğ¹øÈ£ È®ÀÎ <input type="password" id="newPwdChk" name="newPwdChk" required>
+			<br> í˜„ì¬ë¹„ë°€ë²ˆí˜¸ <input type="password" id="pwd" name="pwd" required>
+			<br> ì‹ ê·œë¹„ë°€ë²ˆí˜¸ <input type="password" id="newPwd" name="newPwd" required>
+			<br> ì‹ ê·œë¹„ë°€ë²ˆí˜¸ í™•ì¸ <input type="password" id="newPwdChk" name="newPwdChk" required>
 			<font id="chkNotice" size="2"></font>
-			<button id="cancelPwdBtn" type="button">Ãë¼Ò</button>
-			<input type="submit" value="È®ÀÎ">
+			<button id="cancelPwdBtn" type="button">ì·¨ì†Œ</button>
+			<input type="submit" value="í™•ì¸">
 		</ul>
 	</form>
 
-	<br> ÀÌ¸§ : ${m.name}
+	<br> ì´ë¦„ : ${m.name}
 
-	<br> ´Ğ³×ÀÓ : ${m.nickname }
-	<button id="changeNickNameBtn" class="btn01">´Ğ³×ÀÓ º¯°æ</button>
-	<form>
+	<br> ë‹‰ë„¤ì„ : ${m.nickname }
+	<button id="changeNickNameBtn" class="btn01">ë‹‰ë„¤ì„ ë³€ê²½</button>
+	<form action="/mypage/updateNickName" method="POST" >
 		<ul id="changeNickNameHiddenBtn" class="example01" style="display: none;">
-			*±æÀÌ´Â ÃÖ´ë 15ÀÚ ÀÌ³»·Î ÀÛ¼ºÇØÁÖ¼¼¿ä
-			<br>*Áßº¹ ´Ğ³×ÀÓ ºÒ°¡
-			<br>*ÀÌ¸ğÆ¼ÄÜ ¹× ÀÏºÎ Æ¯¼ö¹®ÀÚ »ç¿ëºÒ°¡
+			*ê¸¸ì´ëŠ” ìµœëŒ€ 15ì ì´ë‚´ë¡œ ì‘ì„±í•´ì£¼ì„¸ìš”
+			<br>*ì¤‘ë³µ ë‹‰ë„¤ì„ ë¶ˆê°€
+			<br>*ì´ëª¨í‹°ì½˜ ë° ì¼ë¶€ íŠ¹ìˆ˜ë¬¸ì ì‚¬ìš©ë¶ˆê°€
 			<div class="nickname_wrap">
-				<div >´Ğ³×ÀÓ</div>
+				<div >ë‹‰ë„¤ì„</div>
 				<input type="text" name="nickName" id="nickName"><br>
 				<span class="error_msg" id="nickNameMsg" style="display:none"></span>
 				<span class="success_msg" id="" style="display:none"></span>
 			</div>
-			<button id="cancelNickNameBtn" type="button">Ãë¼Ò</button>
-			<button name="button">¿Ï·á</button>
+			<button id="cancelNickNameBtn" type="button">ì·¨ì†Œ</button>
+			<button type="submit">ë³€ê²½</button>
 		</ul>
 	</form>
 
 
-	<br> ÀÌ¸ŞÀÏ : ${m.email}
-	<button id="changeEmailBtn" class="btn01">ÀÌ¸ŞÀÏ º¯°æ</button>
-	<form>
-		<ul id="changeEmailHiddenBtn" class="example01" style="display: none;">
-			ÀÌ¸ŞÀÏ º¯°æ
-			<br> ÀÌ¸ŞÀÏ <input type="text" name="student_id">
-			<br>
-			<button id="cancelEmailBtn" type="button">Ãë¼Ò</button>
-			<button name="button">¿Ï·á</button>
-		</ul>
-
-	</form>
+	<br> ì´ë©”ì¼ : ${m.email}
+	<button id="changeEmailBtn" class="btn01">ì´ë©”ì¼ ë³€ê²½</button>
+		<form action="/mypage/memberInfo" method="POST" >
+			<ul id="changeEmailHiddenBtn" class="example01" style="display: none;">
+				ì´ë©”ì¼ <input type="text" name="email">
+				<br>
+				<button id="cancelEmailBtn" type="button">ì·¨ì†Œ</button>
+				<button type="submit">ë³€ê²½</button>
+			</ul>
+		</form>
 
 
-	<br> ÈŞ´ëÀüÈ­ : ${m.phone}
-	<button id="changeCellphone" class="btn01">ÇÚµåÆù ¹øÈ£ º¯°æ</button>
-	<form>
+	<br> íœ´ëŒ€ì „í™” : ${m.phone}
+	<button id="changeCellphone" class="btn01">í•¸ë“œí° ë²ˆí˜¸ ë³€ê²½</button>
 		<ul id="hiddenChangeCellphone" class="example01" style="display: none;">
-			<br> ÇÚµåÆù¹øÈ£ <input type="text" name="cellPhone">
-			<br> ÀÎÁõ¹øÈ£  <input type="text" name="cellPhone">
-			<button name="button">ÀÎÁõÈ®ÀÎ</button>
-			<button id="cancelCellphoneBtn" type="button">Ãë¼Ò</button>
-			<button name="button">¿Ï·á</button>
-		</ul>
-	</form>
+        <form id="phone_form" action="/mypage/updatePhone" method="post">
+			<div class="phone_wrap">
+				<div >íœ´ëŒ€ì „í™”</div>
+			<input type="number" pattern="[0-9]*" name="phone" id="phone" placeholder="ìˆ«ìë§Œ ì…ë ¥í•˜ì„¸ìš”" max="11">
+			<input id="btnSend" type="button"  disabled="disabled" value="ì¸ì¦ì½”ë“œ ë°›ê¸°"><br>
+			
+			<div id="input_code">
+			<input type="number" id="userCode">
+			<input id="btnCheck" type="button" value="ì¸ì¦ë²ˆí˜¸ í™•ì¸"><br>
+			</div>
+		
+			<span class="error_msg" id="phoneMsg" style="display:none"></span>
+			<span class="success_msg" id="phoneMsg" style="display:none"></span>
+			<span class="error_msg" id="codeMsg" style="display:none"></span>
+			<span class="success_msg" id="codeMsg" style="display:none"></span>		
+		</div>		
+		</form>
+
+      </ul>
+	
+	
+	
+			
 
 
-	<br> È¯ºÒ°èÁÂ : ${m.account_number}
-	<button id="changeAccountBtn" class="btn01">È¯ºÒ°èÁÂ µî·Ï</button>
-	<form>
+	<br> í™˜ë¶ˆê³„ì¢Œ : ${m.account_bank} ${m.account_number}
+	<button id="changeAccountBtn" class="btn01">í™˜ë¶ˆê³„ì¢Œ ë“±ë¡</button>
+	<form action="/mypage/updateAccount" method="POST" >
 		<ul id="changeAccountHiddenBtn" class="example01" style="display: none;">
-			<select name="bank">
-				<option value="bankName">ÀºÇà¼±ÅÃ</option>
-				<option value="ÇĞ»ı">±¹¹ÎÀºÇà</option>
-				<option value="È¸»ç¿ø">½ÅÇÑÀºÇà</option>
-				<option value="±âÅ¸">¿ì¸®ÀºÇà</option>
-				<option value="±âÅ¸">Ä«Ä«¿À¹ğÅ©</option>
-				<option value="±âÅ¸">±âÅ¸</option>
+			<select name="bank" >
+				<option value="bankName">ì€í–‰ì„ íƒ</option>
+				<option value="êµ­ë¯¼ì€í–‰">êµ­ë¯¼ì€í–‰</option>
+				<option value="ì‹ í•œì€í–‰">ì‹ í•œì€í–‰</option>
+				<option value="ìš°ë¦¬ì€í–‰">ìš°ë¦¬ì€í–‰</option>
+				<option value="ì¹´ì¹´ì˜¤ë±…í¬">ì¹´ì¹´ì˜¤ë±…í¬</option>
+				<option value="ê¸°íƒ€">ê¸°íƒ€</option>
 			</select>
-			<br> °èÁÂ¹øÈ£ : <input type="text" name="cellPhone">
-			<button id="cancelAccountBtn" type="button">Ãë¼Ò</button>
-			<button name="button">µî·Ï</button>
+			<br> ê³„ì¢Œë²ˆí˜¸ : <input type="text" name="accountNumber">
+			<button id="cancelAccountBtn" type="button">ì·¨ì†Œ</button>
+			<button  type="submit">ë“±ë¡</button>
 		</ul>
 	</form>
 
 
-
-	<br> ¹è¼ÛÁö :	<button name="button">¹è¼ÛÁö °ü¸®</button>
-
+	<a href = "/mainpage/member">ë©”ì¸í˜ì´ì§€ë¡œ</a>
 
 
 </BODY>
