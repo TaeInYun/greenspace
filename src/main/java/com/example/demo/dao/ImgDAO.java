@@ -14,14 +14,26 @@ public class ImgDAO {
 	public int uploadFile(HashMap map) {
 		return DBManager.uploadFile(map);
 	}
+
+	// 이미지 레코드 삭제
+	public int delete(int no) {
+		return DBManager.deleteImg(no);
+	}
+	
+	//이미지 정보
+	public ImgVO findImgByNo(int no) {
+		return DBManager.findImgByNo(no);
+	}
 	
 	//커뮤니티 게시판이미지 리스트
 	public List<ImgVO> listCommuImg(int no){
 		return DBManager.listCommuImg(no);		
 	}
 	
-	//커뮤니티 이미지 삭제
-	public int deleteCommuImg(int no) {
-		return DBManager.deleteCommuImg(no);
+	//인증 게시판이미지 리스트
+	public List<ImgVO> listCerImg(int no){
+		return DBManager.listCerImg(no);		
 	}
+	
+	
 }

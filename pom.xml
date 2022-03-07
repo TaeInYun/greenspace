@@ -84,12 +84,14 @@
          <optional>true</optional>
       </dependency>
       <!-- LOMBOK -->
+      
       <dependency>
           <groupId>org.projectlombok</groupId>
           <artifactId>lombok</artifactId>
           <version>1.18.22</version>
           <scope>provided</scope>
       </dependency>
+      
       <!-- 서버 재가동 없이 적용 -->
       <dependency>
          <groupId>org.springframework.boot</groupId>
@@ -146,6 +148,25 @@
          <artifactId>axis</artifactId>
          <version>1.4</version>
       </dependency>
+      <!-- https://mvnrepository.com/artifact/org.json/json -->
+	<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+	<dependency>
+	    <groupId>com.google.code.gson</groupId>
+	    <artifactId>gson</artifactId>
+	    <version>2.9.0</version>
+	</dependency>
+      
+      <dependency>
+		   <groupId>jstl</groupId>
+		   <artifactId>jstl</artifactId>
+		   <version>1.2</version>
+  		</dependency>
+	
+	<dependency>
+          <groupId>com.google.code.gson</groupId>
+          <artifactId>gson</artifactId>
+          <version>2.9.0</version>
+      </dependency>
       
    </dependencies>
    <build>
@@ -155,10 +176,6 @@
             <artifactId>spring-boot-maven-plugin</artifactId>
          </plugin>
       </plugins>
-
-
-
    </build>
 
 </project>
-

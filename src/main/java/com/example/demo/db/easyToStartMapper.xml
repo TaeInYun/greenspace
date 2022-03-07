@@ -18,6 +18,10 @@
     <select id="findByNoETS" resultType="EasyToStartVO">
   		select * from easytostart where no=#{no}
   	</select>
+  	
+  	<select id="findLikeETS" resultType="integer">
+  		select ets_like from easytostart where no=#{no}
+  	</select>
   
  	 <update id="updateHitETS">
   		update easytostart set ets_hit=ets_hit+1 where no=#{no}

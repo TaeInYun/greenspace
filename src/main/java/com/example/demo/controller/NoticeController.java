@@ -38,10 +38,11 @@ public class NoticeController {
 
         //현재페이지에 보여줄 시작레코드와 마지막레코드의 위치를 계산한다.
         int start = (pageNUM-1)* dao.pageSIZE;
-
+        int end = start + dao.pageSIZE - 1;
         //Dao가 게시물 목록을 검색할 때 필요한
         //정보(현재페이지에 보여줄 시작레코드,마지막레코드)
         //들을 map에 저장한다.
+        
         HashMap map = new HashMap();
         map.put("start", start);
         map.put("totalRecord", dao.totalRecord);
@@ -55,6 +56,7 @@ public class NoticeController {
         model.addAttribute("totalPage", dao.totalPage);
         model.addAttribute("totalRecord", dao.totalRecord);
         model.addAttribute("start", start);
+        model.addAttribute("end", end);
         model.addAttribute("pageSIZE", dao.pageSIZE);
    
     }
