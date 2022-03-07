@@ -18,12 +18,12 @@
   font-size: .9em;
 }
 </style>
-<link rel="stylesheet" href="/css/toggleSwitch.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(function(){
+
 	
 	( /* att_zone : 이미지들이 들어갈 위치 id, btn : file tag id */
 			  imageView = function imageView(att_zone, btn){
@@ -98,7 +98,12 @@ $(function(){
 			  }
 			)('att_zone', 'btnAtt')
 	
+
+
+
 })
+
+
 
 
 </script>
@@ -110,8 +115,9 @@ $(function(){
 	<h2>자유게시판 수정</h2>
 
 	<div>
-	<form action="insertCommunity" method="post" enctype="multipart/form-data">	
+	<form action="updateCommunity" method="post" enctype="multipart/form-data">	
 	<input type="hidden" name="member_no" value="${m.no }">
+	<input type="hidden" name="no" value="${c.no}">
 		<div class="inputArea">
 			제목<br>
 			<input type="text" name="commu_title" value="${c.commu_title }"><br>		
@@ -120,10 +126,23 @@ $(function(){
 			내용<br>
 			<textarea rows="10" cols="60" name="commu_content">${c.commu_content}</textarea><br>		
 		</div>
-	<input type='file' id='btnAtt' name="uploadFile" multiple='multiple'/>
-	<div id='att_zone' 
-	      data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하세요'></div>
-		<input type="submit" value="등록">
+	      
+ 		<div id="fileDiv">
+ 		첨부이미지<br>
+                            <c:forEach items="${imglist }" varStatus="row" var="i" >
+                                <p>
+                                <input type="hidden" name="img_no" value="${i.no}">
+                                  <img src="../upload/commu/${i.save_img_name }" width="100" height="100">
+                                </p>
+                            </c:forEach>
+                        </div>
+        
+        <input type='file' id='btnAtt' name="files" multiple='multiple'/>
+		<div id='att_zone' 
+	      data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하세요'></div>             
+
+	      
+		<input type="submit" value="수정">
 		<button type="button" onclick="history.go(-1);" >취소</button>
 	</form>
 	</div>

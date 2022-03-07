@@ -74,7 +74,7 @@ public class MemberController {
 	@RequestMapping(value="/checkNickname", method = RequestMethod.GET)
 	public int checkNickname(@RequestParam("nickname") String nickname,Model model) {
 		System.out.println(nickname);
-		return dao.checkNicname(nickname);
+		return dao.checkNickname(nickname);
 	}	
 	
 	//이메일 체크  : 0이면 사용가능 1이면 중복

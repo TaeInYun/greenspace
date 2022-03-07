@@ -34,7 +34,6 @@ import com.example.demo.vo.OrdersProductVO;
 import com.example.demo.vo.OrdersVO;
 import com.example.demo.vo.PointVO;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.gson.Gson;
 
 import lombok.Setter;
 
@@ -73,13 +72,11 @@ public class OrdersController {
 	public void OrderOK() {
 		
 	}
-	
+	/*
 	@RequestMapping(value = "/shop/resultOrder", method = RequestMethod.POST)
 	@ResponseBody
 	public String applyOrder(HttpServletRequest request, @RequestBody ApplyOrderVO data) {
-		Gson gson = new Gson();
-		String result = gson.toJson(data.getOrders().getOrd_id());
-		
+	
 		HttpSession session = request.getSession();
 		int member_no = 1;
 		
@@ -147,6 +144,6 @@ public class OrdersController {
 		session.setAttribute("orderInfo", ob);
 		session.setAttribute("proInfo", proInfo);
 		
-		return result;
-	}
+		//return result;
+	}*/
 }
