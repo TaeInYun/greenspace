@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>    
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%> 
+   
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,7 +71,7 @@ $(function(){
 		</div>
 		<div class="inputArea">
 		<label for="cer_thumbnail">이미지</label>
-		<input type="file" id="cer_thumbnail" name="uploadFile" />
+		<input type="file" name="uploadFile" multiple/>
 		<div class="select_img"><img src="" /></div>		
 		</div>	
 

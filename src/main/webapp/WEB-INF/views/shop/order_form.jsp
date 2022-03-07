@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -97,7 +98,7 @@
 	<hr>
 	<div>
 		<h3>Product Info <span>상품정보</span></h3>
-		<table border="1" width="80%">
+		<table border="1" width="800px">
 			<thead>
 				<tr>
 					<td>번호</td>

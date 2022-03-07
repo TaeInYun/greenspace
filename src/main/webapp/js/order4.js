@@ -45,50 +45,37 @@ function requestPay(cnt, arr_cartNo) {
 			
 			let ord_id = year + month + date + "-" + hours + minutes + seconds + "-" + cntOrder;
 		    
-		    IMP.request_pay({ // param
-		        pg: "kcp",
-		        pay_method: "card",
-		        merchant_uid: ord_id,
-		        name: proName,
-		        amount: totalPrice,
-		        buyer_name: name,
-		        buyer_tel: phone,
-		        buyer_addr: addr_road,
-		        buyer_postcode: addr_postal
-		    }, function (rsp) { // callback
-		        if (rsp.success) {
-					
-					ord_id = rsp.merchant_uid;
-					ord_price = rsp.paid_amount;
-					let apply_num = rsp.apply_num;
-					let imp_uid = rsp.imp_uid;
-					
-					let data = {
-						ord_id: ord_id,
-						ord_use_point : usePoint,
-						ord_price: ord_price,
-						payment_code: payment_code,
-						ord_status_code:ord_status_code,
-						apply_num:apply_num,
-						address_no: addr_no,
-						receiver_no:receiver_no,
-						point_save:savePoint,
-						arr_cartNo:arr_cartNo,
-						imp_uid:imp_uid
-					}
-					
+		    let orders = {
+				ord_id: ord_id,
+				ord_use_point : usePoint,
+				ord_price: "2000000",
+				payment_code: payment_code,
+				ord_status_code:ord_status_code,
+				apply_num:"2585222",
+				address_no: addr_no,
+				receiver_no:receiver_no,
+				point_save:savePoint,
+				imp_uid:"111111"
+			
+			};
+		    
+			let data = {
+				arr_cartNo:arr_cartNo,
+				orders:orders
+			}
+					console.log(data);
 					$.ajax({
 						url: "/shop/resultOrder",
-						data: data,
-						success: function(){
-							alert("성공");
+						type: "post",
+						data: JSON.stringify(data),
+						contentType: "application/json; charset=utf-8",
+						async: false,
+						dataType: 'json',
+						success: function(msg){
+							alert("성공")
+							location.href="resultOrder";
 						}
 					});//end insert
-				
-		        } else {
-					alert(rsp.error_msg)
-		        }
-		    });
 		}//end success
 	});//end getCngOftoday
   }

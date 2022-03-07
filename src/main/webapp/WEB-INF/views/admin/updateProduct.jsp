@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,10 +66,12 @@
 						
 				<div class="inputArea">
 					 <label for="PRO_THUMBNAIL">이미지</label>
-						<input type="hidden" name="PRO_THUMBNAIL" value="${p.PRO_THUMBNAIL }">
+						<input type="hidden" id= "PRO_THUMBNAIL" name="PRO_THUMBNAIL" value="${p.PRO_THUMBNAIL }">
 				   <input type="file" name="uploadFile">(${p.PRO_THUMBNAIL })<br>
 				</div>
 				
+			 
+				  
 				<input type="submit" value="수정">
 				<input type="reset" value="취소">	
 					 

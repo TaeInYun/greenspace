@@ -63,7 +63,7 @@
 		 , a.addr_postal as addr_postal, a.addr_road as addr_road, a.addr_detail as addr_detail, a.addr_phone as addr_phone
 	FROM
 	 orders o
-	 <if test="addr_no != null and addr_no != 0">
+	 <if test="address_no != null and address_no != 0">
 		 , (SELECT
 		 no, addr_postal, addr_road, addr_detail,addr_phone
 		FROM
@@ -80,13 +80,13 @@
 	 </if>
 	WHERE
 	ord_id= #{ord_id}
-	<if test="addr_no != 0">
+	<if test="address_no != 0 and address_no != null">
 		and
 		a.no = o.address_no
 		and
-		o.address_no = #{addr_no}
+		o.address_no = #{address_no}
 	</if>
-	 <if test="receiver_no != 0">
+	 <if test="receiver_no != 0 and receiver_no != null">
 		and
 		a.no = o.receiver_no
 		and

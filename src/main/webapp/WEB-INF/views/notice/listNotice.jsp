@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
@@ -28,11 +29,10 @@
             <td>작성일</td>
         </tr>
 	    <c:forEach var="notice" items="${list}">
-	    	<c:set var="i" value="${(i + 1)}"/>
+	    	<c:set var="i" value="${i+1}"/>
 	            <tr>
 	                <td>
-	                	
-	                	 ${totalRecord} 
+	                	${i+start}
 	                </td> 
 	                <td>
 	                	<a href="detail?no=${notice.no}">${notice.notice_title}</a>
@@ -53,3 +53,4 @@
 
 </body>
 </html>
+

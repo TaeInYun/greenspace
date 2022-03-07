@@ -50,7 +50,15 @@ public class ProductController {
  
 	@Autowired
 	private Pro_add_optionDAO prodao;
-	 
+	
+	
+ 
+	@RequestMapping("/header")
+	public void header() {
+	}
+	@RequestMapping("main/nonmember")
+	public void Index() {
+	}
    
 	//-------------------shop main----------------
 	@RequestMapping("/shop/listProduct_home")
