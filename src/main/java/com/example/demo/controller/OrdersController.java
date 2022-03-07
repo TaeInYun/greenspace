@@ -68,6 +68,7 @@ public class OrdersController {
 	public int getCntOfToday() {
 		return ordersDao.getCntOfToday();
 	}
+	
 	@RequestMapping(value = "/shop/resultOrder", method = RequestMethod.GET)
 	public void OrderOK() {
 		
@@ -75,20 +76,14 @@ public class OrdersController {
 	/*
 	@RequestMapping(value = "/shop/resultOrder", method = RequestMethod.POST)
 	@ResponseBody
-<<<<<<< HEAD
 	public String applyOrder(HttpServletRequest request, @RequestBody ApplyOrderVO data) {
 	
 		HttpSession session = request.getSession();
 		int member_no = 1;
-=======
 	public String applyOrder(HttpSession session, @RequestBody ApplyOrderVO data) {
-		 Gson gson = new Gson(); String result =
-		 gson.toJson(data.getOrders().getOrd_id());
-		 
 		
 		 MemberVO m = (MemberVO)session.getAttribute("m");
 		 int member_no = m.getNo();
->>>>>>> branch 'master' of https://github.com/TaeInYun/greenspace.git
 		
 		data.getOrders().setMember_no(member_no);
 		OrdersVO o = data.getOrders();
@@ -154,6 +149,8 @@ public class OrdersController {
 		session.setAttribute("orderInfo", ob);
 		session.setAttribute("proInfo", proInfo);
 		
+		return "OK";
+	}
 		//return result;
 	}*/
 }
