@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.dao.CartDAO;
 import com.example.demo.dao.MyWishDAO;
 import com.example.demo.vo.CartVO;
+import com.example.demo.vo.MemberVO;
 
 import lombok.Setter;
 
@@ -27,8 +30,9 @@ public class CartController {
 	
 	@RequestMapping("/shop/insertCart")
 	@ResponseBody
-	public String insertCart(CartVO c) {
-		c.setMember_no(1);
+	public String insertCart(HttpSession session,CartVO c) {
+		MemberVO m = (MemberVO)session.getAttribute("m");
+		c.setMember_no(m.getNo());
 		
 		String msg = "장바구니에 추가하지 못했습니다.";
 		int re = dao.insert(c);
@@ -41,13 +45,11 @@ public class CartController {
 
 	@RequestMapping("/shop/isCart")
 	@ResponseBody
-	public int isCart(CartVO c) {
-		HashMap map = new HashMap();
-		map.put("pro_no", c.getPro_no());
-		map.put("cart_option", c.getCart_option());
-		map.put("cart_option_detail", c.getCart_option_detail());
-		map.put("member_no", 1);
-		int re = dao.isCart(map);
+	public int isCart(HttpSession session,CartVO c) {
+		MemberVO m = (MemberVO)session.getAttribute("m");
+		c.setMember_no(m.getNo());
+		
+		int re = dao.isCart(c);
 		return re;
 	}
 	
@@ -62,15 +64,14 @@ public class CartController {
 	
 	@RequestMapping("/shop/updateQty")
 	@ResponseBody
-	public String updateQty(CartVO c) {
+	public String updateQty(HttpSession session,CartVO c) {
+		MemberVO m = (MemberVO)session.getAttribute("m");
+		c.setMember_no(m.getNo());
+		
 		String msg = "변경 실패";
 		
-		HashMap map = new HashMap<>();
-		map.put("cart_qty", c.getCart_qty());
-		map.put("no", c.getNo());
-		map.put("member_no", 1);
 		
-		int re = dao.updateQty(map);
+		int re = dao.updateQty(c);
 		
 		if(re == 1) {
 			msg = "변경";

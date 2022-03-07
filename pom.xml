@@ -148,6 +148,13 @@
          <artifactId>axis</artifactId>
          <version>1.4</version>
       </dependency>
+      <!-- https://mvnrepository.com/artifact/org.json/json -->
+	<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+	<dependency>
+	    <groupId>com.google.code.gson</groupId>
+	    <artifactId>gson</artifactId>
+	    <version>2.9.0</version>
+	</dependency>
       
       <dependency>
 		   <groupId>jstl</groupId>
@@ -169,9 +176,6 @@
             <artifactId>spring-boot-maven-plugin</artifactId>
          </plugin>
       </plugins>
-
-
-
    </build>
 
 </project>
