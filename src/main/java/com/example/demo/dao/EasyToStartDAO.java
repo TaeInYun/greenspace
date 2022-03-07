@@ -35,6 +35,10 @@ public class EasyToStartDAO {
         DBManager.updateLikeETS(no);
     }
 
+    public int findLikeETS(int no) {
+        return DBManager.findLikeETS(no);
+    }
+
 
 
 }

@@ -40,7 +40,7 @@
 		</if>
 	</select>
 	
-	<update id="updateQty" parameterType="Hashmap">
+	<update id="updateQty" parameterType="cartVO">
 		update cart set cart_qty=#{cart_qty} where no= #{no} and member_no=#{member_no}
 	</update>
 	<select id="findByCartNo" resultType="cartVO">

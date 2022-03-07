@@ -75,10 +75,20 @@ public class OrdersController {
 	/*
 	@RequestMapping(value = "/shop/resultOrder", method = RequestMethod.POST)
 	@ResponseBody
+<<<<<<< HEAD
 	public String applyOrder(HttpServletRequest request, @RequestBody ApplyOrderVO data) {
 	
 		HttpSession session = request.getSession();
 		int member_no = 1;
+=======
+	public String applyOrder(HttpSession session, @RequestBody ApplyOrderVO data) {
+		 Gson gson = new Gson(); String result =
+		 gson.toJson(data.getOrders().getOrd_id());
+		 
+		
+		 MemberVO m = (MemberVO)session.getAttribute("m");
+		 int member_no = m.getNo();
+>>>>>>> branch 'master' of https://github.com/TaeInYun/greenspace.git
 		
 		data.getOrders().setMember_no(member_no);
 		OrdersVO o = data.getOrders();
@@ -134,7 +144,7 @@ public class OrdersController {
 			productDAO.updateStockcuzBuy(map);
 			
 			//카트테이블 주문상품 삭제
-			//cartDAO.delete(no);
+			cartDAO.delete(no);
 			
 			//상태유지 변수에 추가
 			proInfo.add(c);

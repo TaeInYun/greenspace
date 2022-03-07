@@ -94,6 +94,9 @@
 	ord.ord_status_code = os.ord_status_code
 	AND
 	member_no = #{member_no}
+	<if test="firstDate != null and firstDate !=0">
+	 and ord_date BETWEEN TO_DATE(#{fristDate}, 'yyyy/mm/dd') AND TO_DATE(#{lastDate}, 'yyyy/mm/dd')
+	</if>
 	ORDER BY
     TO_CHAR(ord_date, 'yyyy.mm.dd'), ord_id
   </select>

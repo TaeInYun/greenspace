@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +16,7 @@ import com.example.demo.dao.MemberDAO;
 import com.example.demo.dao.OrderListDAO;
 import com.example.demo.dao.OrdersDAO;
 import com.example.demo.dao.ReceiverDAO;
+import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OrdersVO;
 
 import lombok.Setter;
@@ -38,15 +41,26 @@ public class OrderListController {
 	private OrdersDAO ordersDao;
 	
 	@RequestMapping("/mypage/myOrder")
-	public void myOrderList(Model model) {
-		int member_no = 1;
-		model.addAttribute("list", orderListDao.findAllOrderListByMemberNo(member_no));
+	public void myOrderList(HttpSession session,Model model) {
+		MemberVO m = (MemberVO)session.getAttribute("m");
+		int member_no = m.getNo();
+		
+		String fristDate = null;
+		String lastDate = null;
+		
+		HashMap map = new HashMap();
+		map.put("member_no", member_no);
+		map.put("fristDate", member_no);
+		map.put("lastDate", member_no);
+		
+		
+		model.addAttribute("list", orderListDao.findAllOrderListByMemberNo(map));
 	}
 	
 	@RequestMapping("/shop/detailOrderList")
-	public void detailOrderList(Model model, HttpServletRequest request,String id, String day) {
-		HttpSession session= request.getSession();
-		int member_no = 1;
+	public void detailOrderList(Model model, HttpSession session,String id, String day) {
+		MemberVO m = (MemberVO)session.getAttribute("m");
+		int member_no = m.getNo();
 		String ord_id = id;
 		
 		OrdersVO o = ordersDao.receiverInfoByOrdId(ord_id);

@@ -190,7 +190,10 @@ public class MemberController {
 	public String updatePwdOK(HttpServletResponse response, HttpSession session, @RequestParam String pwd, Model model) {
 		String id = (String)session.getAttribute("id");
 		
-		model.addAttribute("updatePwdOK", ms.updatePwd(id, pwd));
+		String encodePwd = passwordEncoder.encode(pwd);
+		
+		
+		model.addAttribute("updatePwdOK", ms.updatePwd(id, encodePwd));
 		model.addAttribute("id", id);
 
 		//세션에서 유지한 id 값을 반환해주고 세션을 끝내보자 
