@@ -9,9 +9,14 @@
  	.a{
  		display: block;
  		}
+ 		
+ 		
+  
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <script type="text/javascript">
+
+ 
  
  $(function(){
 	 $("#cat_ul").hide();	 
@@ -30,7 +35,11 @@
 </script>
 </head>
 <body>
-	<h3>카테고리</h3>
+
+	
+
+
+	<h3 style="margin-top: 30px;">카테고리</h3>
 	 <div id="cat_ul">
 		<div class="a">
 			 <a href="/shop/listProduct_home?cat_code=PBA">욕실</a> 

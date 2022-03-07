@@ -1265,6 +1265,13 @@ public class DBManager {
 			session.close();
 			return list;
 		}
+
+		public static ReviewVO findReviewByProno(int no) {
+			SqlSession session = factory.openSession();
+			ReviewVO r = session.selectOne("review.findReviewByProno", no);
+			session.close();
+			return r;
+		}
  
 		
 		

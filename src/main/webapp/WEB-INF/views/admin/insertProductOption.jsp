@@ -7,6 +7,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style type="text/css">
+	.inputArea,span,table{
+		margin: 10px;
+	} 
+	.modal-dialog{
+		width: 600px;
+	}
+	 
+</style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script> 
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -52,8 +61,7 @@ $(function(){
 </script>
 </head>
 <body>
-<h2>옵션추가</h2>
-<hr>
+ 
  	<div class="card align-middle"> 
 	<div class="card-title"> 
 		<h2 class="card-title text-center">옵션</h2> 
@@ -90,11 +98,12 @@ $(function(){
 			 <input type="submit" value="확인" id="submit">
 		</div>
 	</form>	
+	<hr>
 	
 	 
-		 <p>옵션설정</p>	
+		 <span>옵션현황</span>
 		 <c:if test="${cnt<1 }">	
-	 		<P>옵션이 없습니다:(</P>
+	 		<span>옵션이 없습니다!</span>
 		 </c:if>
 		  	
 		 <c:if test="${cnt>=1 }">						 	 	
