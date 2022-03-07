@@ -44,6 +44,7 @@
 	AND
 	addr_main = 1
   </select>
+  
   <select id="findAllOrderListByMemberNo" resultType="orderListVO">
 	SELECT 
 	pao.pro_option_name AS option_name,
@@ -94,8 +95,18 @@
 	ord.ord_status_code = os.ord_status_code
 	AND
 	member_no = #{member_no}
+	<if test="fristDate != null">
+	 	and ord_date BETWEEN TO_DATE(#{fristDate}, 'yyyy/mm/dd') AND TO_DATE(#{lastDate}, 'yyyy/mm/dd')
+	</if>
+	<if test="month != null and month != 0">
+		and TO_CHAR(ord_date, 'YYMMDD') >= TO_CHAR(add_months(sysdate,-#{month}))
+	</if>
+	<if test="day != null and day != 0">
+		and TO_CHAR(ord_date, 'YYMMDD') >= TO_CHAR(sysdate-7, 'YYMMDD')
+	</if>
 	ORDER BY
-    TO_CHAR(ord_date, 'yyyy.mm.dd'), ord_id
+    TO_CHAR(ord_date, 'yyyy.mm.dd') DESC, ord_id DESC
+    offset (#{start}-1) * 2 ROWS FETCH FIRST 2 ROWS ONLY
   </select>
   
   <select id="findOrderListByOrdId" resultType="orderListVO">
@@ -145,6 +156,18 @@
 		AND
 		ord_id=#{id}
 	    ORDER BY
-	    TO_CHAR(ord_date, 'yyyy.mm.dd')
+	    TO_CHAR(ord_date, 'yyyy.mm.dd') DESC, ord_id DESC
+  </select>
+  
+  <select id="cntByMember" resultType="Integer">
+  	SELECT count(*) FROM orders_product od, orders o WHERE od.ord_no=o.no and member_no =#{member_no}
+	<if test="fristDate != null">
+		and ord_date BETWEEN TO_DATE(#{fristDate}, 'yyyy/mm/dd') AND TO_DATE(#{lastDate}, 'yyyy/mm/dd')	</if>
+	<if test="month != null and month != 0">
+		and TO_CHAR(ord_date, 'YYMMDD') >= TO_CHAR(add_months(sysdate,-#{month}))
+	</if>
+	<if test="day != null and day != 0">
+		and TO_CHAR(ord_date, 'YYMMDD') >= TO_CHAR(sysdate-7, 'YYMMDD')
+	</if>
   </select>
 </mapper>

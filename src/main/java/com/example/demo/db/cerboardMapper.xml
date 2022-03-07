@@ -12,45 +12,28 @@
 	
 	<!-- 인증게시판 리스트  -->
 	<select id="findAll" resultType="cerboardVO">
-	select num, no ,cer_status,cer_thumbnail,cer_content, cer_date , nickname , levels, cer_hit, cer_like from(
-    select rownum num, no ,cer_status,cer_thumbnail,cer_content, cer_date , nickname ,levels, cer_hit, cer_like from (
-     select cer.no no,cer_status,cer_thumbnail,cer_content, cer_date , nickname , levels,cer_hit, cer_like from
-		(select  cer.no,cer_status,cer_thumbnail,cer_content, cer_date , nickname ,levels, cer_hit, cer_like
+	 select num,no, no,cer_status,cer_thumbnail,cer_content, cer_date , nickname ,levels, cer_hit, cer_like from
+		(select rownum num, cer.no no,cer_status,cer_thumbnail,cer_content, cer_date , nickname ,levels, cer_hit, cer_like
 		from certification_board cer, member m
-		where m.no=cer.member_no 
-		<if test="keyword != null">
-		 and ${searchColumn} like '%'||#{keyword}||'%' 
-		 </if>
-         ) cer
-		left outer join img i
-		on i.cer_no = cer.no
-        order by CER_DATE))
-    <!-- where num between #{start} and #{end} -->
-		
+		where m.no=cer.member_no  order by cer_date )
 	</select>
 	
 	<!-- My 인증게시판 리스트  -->
 	<select id="findCerByMember" resultType="cerboardVO">
-		select cer.no,cer_status,cer_thumbnail,cer_content, cer_date , nickname ,levels, cer_hit, cer_like from
-		(select cer.no,cer_status,cer_thumbnail,cer_content, cer_date , nickname ,levels, cer_hit, cer_like
+		select cer.no,cer_status,cer_thumbnail,cer_content, cer_date , nickname ,levels, cer_hit, cer_like
 		from certification_board cer, member m
 		where m.no=cer.member_no 
 		and member_no=#{member_no}
-		) cer
-		left outer join img i
-		on i.cer_no = cer.no
 		order by CER_DATE
 	</select>
 	
 	
 	<!-- 인증게시판 상세  -->
 	<select id="getCerBoard" resultType="cerboardVO">
-		select cer.no,cer_thumbnail,cer_content, cer_date , nickname ,levels,cer_status,cer_hit, cer_like ,chg_title1,chg_title2,chg_title3, i.no,img_name from
-		(select cer.no,cer_thumbnail,cer_content, cer_date , nickname,levels,cer_status,cer_hit, cer_like,chg_title1,chg_title2,chg_title3
+		select cer.no,cer_thumbnail,cer_content, cer_date , nickname,levels,cer_status,cer_hit, cer_like,chg_title1,chg_title2,chg_title3
 		from certification_board cer, member m
-		where m.no=cer.member_no and cer.no=#{cer_no}) cer
-		left outer join img i
-		on i.cer_no = cer.no
+		where m.no=cer.member_no and cer.no=#{cer_no}
+		 
 	</select>	
 	
 	   <!-- 인증게시판 수정-->
@@ -68,25 +51,13 @@
 	  	update certification_board set cer_hit=cer_hit+1 where no=#{no}
 	  </update>	
 
-	<!-- 
-	<insert id="insert" parameterType="cerboardVO">
-	   	insert into certification_board values(
-	    seq_cer.nextval,
-	   	#{cer_status},
-	    #{cer_content},
-	     sysdate,
-	     0,
-	     0,             
-	    #{member_no},
-	    #{chg_user_no},
-	    #{cer_thumbnail}
-	    )
-	</insert> -->
-	
 		 
 	<insert id="insert" parameterType="cerboardVO">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+   		 select seq_cer.nextval FROM DUAL
+  		</selectKey> 
 	   	insert into certification_board values(
-	    seq_cer.nextval,
+	   	#{no},
 	   	#{cer_status},
 	    #{cer_content},
 	     sysdate,

@@ -1,0 +1,18 @@
+body { margin:0; padding:0; }
+ul, li { margin:0; padding:0; list-style:none; } 
+
+div#root { width:900px; margin:0 auto; }		 
+section#content { float:right; width:700px; }
+aside { float:left; width:200px; }
+
+header#header div#header_box { text-align:center; padding:30px 0; }
+  
+a:link {
+  color : black;
+  text-decoration: none;
+}
+ 
+#admin li{
+ 	display: block;
+ 	 
+ }

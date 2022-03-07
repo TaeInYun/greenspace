@@ -122,15 +122,20 @@
 			})
 
 		});
-	</script>
-
+	
+		 
+		</script>
+	
+	
 
 
 </HEAD>
 <BODY>
 	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+	<a href="mypage/mypagePointList?no=${m.no } ">포인트기록</a>
 	<h3>기본 회원정보</h3>
-
+ 
+	 
 	아이디 : ${m.id}
 
 	<br> 비밀번호 : ${m.pwd}

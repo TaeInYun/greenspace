@@ -1,12 +1,12 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>관리자설정_상품목록</title>
-<link href="/css/shop.css" rel="stylesheet"/>
+<link href="/css/admin.css" rel="stylesheet"/>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/js/qty.js"></script>

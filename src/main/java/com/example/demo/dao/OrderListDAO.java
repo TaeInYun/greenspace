@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.db.DBManager;
 import com.example.demo.vo.OrderListVO;
+import com.example.demo.vo.SearchVO;
 
 @Repository
 public class OrderListDAO {
@@ -18,10 +19,13 @@ public class OrderListDAO {
 	public OrderListVO initOrderInfo(int member_no) {
 		return DBManager.initOrderInfo(member_no);
 	}
-	public List<OrderListVO> findAllOrderListByMemberNo(int member_no) {
-		return DBManager.findAllOrderListByMemberNo(member_no);
+	public List<OrderListVO> findAllOrderListByMemberNo(HashMap map) {
+		return DBManager.findAllOrderListByMemberNo(map);
 	}
 	public List<OrderListVO> findOrderListByOrdId(String id) {
 		return DBManager.findOrderListByOrdId(id);
+	}
+	public int cntByMember(HashMap map) {
+		return DBManager.cntByMember(map);
 	}
 }

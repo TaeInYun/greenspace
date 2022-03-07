@@ -1,6 +1,7 @@
 package com.example.demo.vo;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,8 +17,9 @@ public class CommunityVO {
 	private int commu_hit;
 	private int member_no;
 	private String nickname;
-	private String img_name;
+	private String o_img_name;
 	
-	private MultipartFile uploadFile;
-	
+	//private MultipartFile uploadFile;
+	private List<MultipartFile> files;
+
 }

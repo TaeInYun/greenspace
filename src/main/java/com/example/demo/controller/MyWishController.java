@@ -44,11 +44,13 @@ public class MyWishController {
 	private CartDAO dao_cart;
 	
 	@RequestMapping("/shop/cart")
-	public void myWishList(Model model) {
-		int member_no = 1;
+	public void myWishList(HttpSession session,Model model) {
+		MemberVO m = (MemberVO)session.getAttribute("m");
+		int member_no = m.getNo();
+		
 		List<MyWishVO> list = dao_mywish.findByMember(member_no);
 		OrderListVO info = dao_orderList.initOrderInfo(member_no);
-
+		
 		if(info.getPro_saleprice() < 50000) {
 			info.setDelivery_price(2500);
 		}else {
@@ -61,18 +63,17 @@ public class MyWishController {
 	}
 	
 	@RequestMapping(value = "/shop/order_form", method = RequestMethod.POST)
-	public void getProInfoForOrder(HttpServletRequest request,
+	public void getProInfoForOrder(HttpSession session,
 			@RequestParam(value="proInfo[]") List<String> proInfo,
 			@RequestParam(value="receiverInfo[]") List<String> receiverInfo,
 			@RequestParam(value="orderInfo[]") List<String> orderInfo
 	) {
-		HttpSession session = request.getSession();
+		MemberVO m = (MemberVO)session.getAttribute("m");
 		
 		HashMap map = new HashMap();
 		
 		
-		int member_no = 1;
-		map.put("member_no", member_no);
+		map.put("member_no", m.getNo());
 		
 		int rownum = 0;
 		List<MyWishVO> list = new ArrayList<MyWishVO>();
@@ -86,13 +87,13 @@ public class MyWishController {
 			mw.setRownum(rownum);
 			list.add(mw);
 		}
-		MemberVO m = dao_member.getMemberInfo(member_no);
-		
+		MemberVO mb = dao_member.getMemberInfo(m.getNo());
+		System.out.println(mb);
 		session.setAttribute("rownum", rownum);
 		session.setAttribute("list", list);
 		session.setAttribute("receiverInfo", receiverInfo);
 		session.setAttribute("orderInfo", orderInfo);
-		session.setAttribute("point", m.getPoint_use());
+		session.setAttribute("point", mb.getPoint_use());
 	}
 	
 	@RequestMapping(value = "/shop/order_form", method = RequestMethod.GET)

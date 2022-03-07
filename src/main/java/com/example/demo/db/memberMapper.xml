@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
 	  <insert id="insert" parameterType="memberVO">
-	  	insert into member values(seq_cer.nextval,
+	  	insert into member values(144,
 		#{id},#{pwd} ,#{name},#{nickname},#{email},#{phone},
 		null,null,0,0,1,0)
 	  </insert>	
@@ -55,8 +55,8 @@
 		</select>
 	
 		<update id="buyProduct" parameterType="HashMap">
-			UPDATE member SET point_use = (SELECT point_use FROM member WHERE no = #{member_no}) - #{point_use}+ #{point_save}, 
-			point_save = (SELECT point_save FROM member WHERE no=#{member_no}) + #{point_save} 
+			UPDATE member SET point_use = (SELECT point_use- #{point_use}+ #{point_save} FROM member WHERE no = #{member_no}) , 
+			point_save = (SELECT point_save + #{point_save}  FROM member WHERE no=#{member_no}) 
 			WHERE no = #{member_no}
 		</update>
 		
@@ -70,7 +70,7 @@
 
 	  <!-- 메인 유저정보 -->
 	  <select id="mainMemberInfo" resultType="memberVO">
-	  SELECT nickname, levels, point_use FROM member where no = #{member_no}
+	  SELECT nickname, levels, point_use,point_save, point_save-point_use presentPoint FROM member where no = #{member_no}
 	  </select>
 	  
 	  <select id="orderInfo" resultType="memberVO">

@@ -18,6 +18,7 @@ import com.example.demo.vo.ChallengeUserVO;
 import com.example.demo.vo.ChallengeVO;
 import com.example.demo.vo.CommunityVO;
 import com.example.demo.vo.EasyToStartVO;
+import com.example.demo.vo.ImgVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.MyReviewVO;
 import com.example.demo.vo.MyWishVO;
@@ -268,7 +269,7 @@ public class DBManager {
 	//-----------------------MYWISH ( 장바구니, 위시리스트)------------------------
 	public static List<MyWishVO> findByMember(int member_no){
 		SqlSession session = factory.openSession();
-		List<MyWishVO> list = session.selectList("myWish.findByMember", 1);
+		List<MyWishVO> list = session.selectList("myWish.findByMember", member_no);
 		session.close();
 		return list;
 	}
@@ -568,16 +569,16 @@ public class DBManager {
 		return re;
 	}
 	
-	public static int isCart(HashMap map) {
+	public static int isCart(CartVO c) {
 		SqlSession session = factory.openSession();
-		int re= session.selectOne("cart.isCart", map);
+		int re= session.selectOne("cart.isCart", c);
 		session.close();
 		return re;
 	}
 	
-	public static int updateQty(HashMap map) {
+	public static int updateQty(CartVO c) {
 		SqlSession session = factory.openSession();
-		int re = session.update("cart.updateQty", map);
+		int re = session.update("cart.updateQty", c);
 		session.commit();
 		session.close();
 		return re;
@@ -728,10 +729,10 @@ public class DBManager {
 		return o;
 	}
 	
-	public static List<OrderListVO> findAllOrderListByMemberNo(int member_no) {
+	public static List<OrderListVO> findAllOrderListByMemberNo(HashMap map) {
 		
 		SqlSession session = factory.openSession();
-		List<OrderListVO> o = session.selectList("orderList.findAllOrderListByMemberNo", member_no);
+		List<OrderListVO> o = session.selectList("orderList.findAllOrderListByMemberNo", map);
 		session.close();
 		return o;
 	}
@@ -743,7 +744,12 @@ public class DBManager {
 		return o;
 	}
 	
-	
+	public static int cntByMember(HashMap map) {
+		SqlSession session = factory.openSession();
+		int cnt = session.selectOne("cntByMember", map);
+		session.close();
+		return cnt;
+	}
 	
 	//--------------------OrdersVO관련--------------
 	public static int getCntOfToday() {
@@ -766,9 +772,9 @@ public class DBManager {
 		session.close();
 		return re;
 	}
-	public static OrderBillVO billOfOrder(HashMap map) {
+	public static OrderBillVO billOfOrder(OrdersVO o) {
 		SqlSession session = factory.openSession();
-		OrderBillVO ob = session.selectOne("orders.billOfOrder", map);
+		OrderBillVO ob = session.selectOne("orders.billOfOrder", o);
 		session.close();
 		return ob;
 	}
@@ -1142,13 +1148,51 @@ public class DBManager {
 
 	
 	//---------------EasyToStart---------------
-
-		//게시물 목록 불러오기
-		public static List<EasyToStartVO> getEasyToStartAll(){
+		
+		
+		
+		public static List<EasyToStartVO> findAllETS(HashMap map){
 			SqlSession session = factory.openSession();
-			List<EasyToStartVO> list = session.selectList("easyToStart.getEasyToStartAll");
+			List<EasyToStartVO> list = session.selectList("easyToStart.findAll", map);
 			session.close();
 			return list;
+			
+		}
+
+		public static int getTotalRecordETS(){
+			SqlSession session = factory.openSession();
+			int no = session.selectOne("easyToStart.getTotalRecord");
+			session.close();
+			return no;
+		}
+
+		
+		public static EasyToStartVO findByNoETS(int no) {
+			SqlSession session = factory.openSession();
+			EasyToStartVO b = session.selectOne("easyToStart.findByNoETS", no);
+			session.close();
+			return b;		
+		}
+		
+		public static int findLikeETS(int no) {
+			SqlSession session = factory.openSession();
+			int likeCount = session.selectOne("easyToStart.findLikeETS", no);
+			session.close();
+			return likeCount;		
+		}
+		
+		public static void updateHitETS(int no) {
+			SqlSession session = factory.openSession();
+			session.update("easyToStart.updateHitETS", no);
+			session.commit();
+			session.close();
+		}
+		
+		public static void updateLikeETS(int no) {
+			SqlSession session = factory.openSession();
+			session.update("easyToStart.updateLikeETS", no);
+			session.commit();
+			session.close();
 		}
 
 
@@ -1162,7 +1206,7 @@ public class DBManager {
 			return re;
 		}
 
-		//notice
+		//notice------------------------------------------
 		public static List<NoticeVO> getList(){
 			SqlSession session = factory.openSession();
 			List<NoticeVO> list = session.selectList("notice.getList");
@@ -1195,6 +1239,7 @@ public class DBManager {
 		public static int updateNotice(NoticeVO b) {
 			SqlSession session = factory.openSession(true);
 			int re = session.update("notice.updateNotice", b);
+			session.commit();
 			session.close();
 			return re;
 		}
@@ -1229,5 +1274,67 @@ public class DBManager {
 			session.close();
 			return r;
 		}
+		
+		
+		//-------------IMG (파일)------------
+		//레코드 추가
+		public static int uploadFile(HashMap map){
+			SqlSession session = factory.openSession();
+			int re = session.insert("img.uploadFile", map);
+			session.commit();
+			session.close();
+			return re;
+		}	
+		
+		//-- 레코드 삭제
+		public static int deleteImg(int no) {
+			SqlSession session  = factory.openSession();
+			int re=session.delete("img.delete", no);
+			session.commit();
+			session.close();
+			return re;
+		}
+		
+		//--레코드 정보 (이미지 번호로 찾아오기)
+		public static ImgVO findImgByNo(int no) {
+			SqlSession session = factory.openSession();
+			ImgVO i = session.selectOne("img.findImgByNo", no);
+			session.close();
+			return i;		
+		}
+		
+		//---커뮤니티 이미지리스트
+		public static List<ImgVO> listCommuImg(int no){
+			SqlSession session = factory.openSession();
+			List<ImgVO> list = session.selectList("img.listCommuImg",no);
+			session.close();
+			return list;	
+		}
+		
+		//---커뮤니티 이미지리스트
+		public static List<ImgVO> listCerImg(int no){
+			SqlSession session = factory.openSession();
+			List<ImgVO> list = session.selectList("img.listCerImg",no);
+			session.close();
+			return list;	
+		}
+ 
+
+		public static PointVO findPresentPoint(int no) {			 
+			SqlSession session = factory.openSession();
+			PointVO p = session.selectOne("point.findPresentPoint", no);
+			session.close();
+			return p;
+		}
+ 
+
+		public static List<PointVO> findAllPointByNO(HashMap map) {
+			SqlSession session = factory.openSession();
+			List<PointVO> list = session.selectList("point.findAllPointByNO",map);
+			session.close();
+			return list;
+		}
+ 
+		
 		
 }

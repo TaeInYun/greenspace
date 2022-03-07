@@ -2,9 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+	img{
+		width: 200px;
+		height: 200px;
+	}
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -97,7 +104,7 @@
 	<hr>
 	<div>
 		<h3>Product Info <span>상품정보</span></h3>
-		<table border="1" width="80%">
+		<table border="1" width="800px">
 			<thead>
 				<tr>
 					<td>번호</td>
