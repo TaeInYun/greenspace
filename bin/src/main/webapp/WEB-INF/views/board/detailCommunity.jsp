@@ -46,6 +46,15 @@ section#content ul li { display:inline-block; margin:10px; }
 		<div class="content">
 		<span>${c.commu_content}</span>
 		</div>	
+		
+		<div class="result-images">
+		<!-- 업로드한 파일들을 forEach문을 이용해 <img> 태그에 표시 -->
+		<c:forEach var="list" items="${imglist}" >
+			<img src="../upload/commu/${list.save_img_name}" width="500px" height="100%">
+	        <br><br><br>
+	    </c:forEach>         
+	</div>
+		
 		</li>
  	</ul>					 
 </section>	

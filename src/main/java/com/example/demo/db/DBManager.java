@@ -1011,12 +1011,20 @@ public class DBManager {
 	//---------------Community (커뮤니티) ---------------------
 	
 	/*  커뮤니티게시판 목록   */
-	public static List<CommunityVO> findCommunity(){
+	public static List<CommunityVO> findAllCommunity(HashMap map){
 		SqlSession session = factory.openSession();
-		List<CommunityVO> list= session.selectList("community.findAll");
+		List<CommunityVO> list= session.selectList("community.findAll",map);
 		session.close();
 		return list;
 	}		
+	
+	/*  커뮤니티게시판 레코드개수   */
+	public static int getTotalRecordCommu(){
+		SqlSession session = factory.openSession();
+		int no = session.selectOne("community.getTotalRecord");
+		session.close();
+		return no;
+	}
 
 	
 	/*  커뮤니티게시판 등록   */
@@ -1062,6 +1070,7 @@ public class DBManager {
 		session.commit();
 		session.close();
 	}
+	
 	
 	
 	/*  My 커뮤니티게시판 목록 */

@@ -10,12 +10,16 @@
 	and to_char(cer_date,'yy/mm/dd') = TO_CHAR(SYSDATE, 'yy/mm/dd')
 	</select>
 	
+	<select id="getTotalRecord" resultType="java.lang.Integer">
+        select count(*) from certification_board
+    </select>
+	
 	<!-- 인증게시판 리스트  -->
 	<select id="findAll" resultType="cerboardVO">
-	 select num,no, no,cer_status,cer_thumbnail,cer_content, cer_date , nickname ,levels, cer_hit, cer_like from
-		(select rownum num, cer.no no,cer_status,cer_thumbnail,cer_content, cer_date , nickname ,levels, cer_hit, cer_like
+	 select cer.no no,cer_status,cer_thumbnail,cer_content, cer_date , nickname ,levels, cer_hit, cer_like
 		from certification_board cer, member m
-		where m.no=cer.member_no  order by cer_date )
+		where m.no=cer.member_no  order by cer_date desc
+		offset #{start} rows fetch first 10 rows only
 	</select>
 	
 	<!-- My 인증게시판 리스트  -->
