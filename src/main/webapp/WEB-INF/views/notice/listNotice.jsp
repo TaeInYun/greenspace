@@ -43,7 +43,8 @@
 	      	</c:forEach>
     </table>
 
-    <c:forEach var="i" begin="1" end="${totalPage }">
+    <c:forEach var="i" begin="1" end="${
+Page }">
         <a href="listNotice?pageNUM=${i }">${i }</a>&nbsp;&nbsp;
     </c:forEach>
 	

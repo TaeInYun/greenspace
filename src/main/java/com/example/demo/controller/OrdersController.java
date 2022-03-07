@@ -77,9 +77,6 @@ public class OrdersController {
 	@RequestMapping(value = "/shop/resultOrder", method = RequestMethod.POST)
 	@ResponseBody
 	public String applyOrder(HttpSession session, @RequestBody ApplyOrderVO data) {
-		 Gson gson = new Gson(); String result =
-		 gson.toJson(data.getOrders().getOrd_id());
-		 
 		
 		 MemberVO m = (MemberVO)session.getAttribute("m");
 		 int member_no = m.getNo();
@@ -148,6 +145,6 @@ public class OrdersController {
 		session.setAttribute("orderInfo", ob);
 		session.setAttribute("proInfo", proInfo);
 		
-		return result;
+		return "OK";
 	}
 }

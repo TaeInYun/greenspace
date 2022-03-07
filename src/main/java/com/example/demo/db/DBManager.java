@@ -675,7 +675,12 @@ public class DBManager {
 		return o;
 	}
 	
-	
+	public static int cntByMember(HashMap map) {
+		SqlSession session = factory.openSession();
+		int cnt = session.selectOne("cntByMember", map);
+		session.close();
+		return cnt;
+	}
 	
 	//--------------------OrdersVO관련--------------
 	public static int getCntOfToday() {
