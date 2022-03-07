@@ -1105,6 +1105,13 @@ public class DBManager {
 			return b;		
 		}
 		
+		public static int findLikeETS(int no) {
+			SqlSession session = factory.openSession();
+			int likeCount = session.selectOne("easyToStart.findLikeETS", no);
+			session.close();
+			return likeCount;		
+		}
+		
 		public static void updateHitETS(int no) {
 			SqlSession session = factory.openSession();
 			session.update("easyToStart.updateHitETS", no);
@@ -1201,6 +1208,7 @@ public class DBManager {
 		
 		
 		//-------------IMG (파일)------------
+		//레코드 추가
 		public static int uploadFile(HashMap map){
 			SqlSession session = factory.openSession();
 			int re = session.insert("img.uploadFile", map);
@@ -1208,6 +1216,23 @@ public class DBManager {
 			session.close();
 			return re;
 		}	
+		
+		//-- 레코드 삭제
+		public static int deleteImg(int no) {
+			SqlSession session  = factory.openSession();
+			int re=session.delete("img.delete", no);
+			session.commit();
+			session.close();
+			return re;
+		}
+		
+		//--레코드 정보 (이미지 번호로 찾아오기)
+		public static ImgVO findImgByNo(int no) {
+			SqlSession session = factory.openSession();
+			ImgVO i = session.selectOne("img.findImgByNo", no);
+			session.close();
+			return i;		
+		}
 		
 		//---커뮤니티 이미지리스트
 		public static List<ImgVO> listCommuImg(int no){
@@ -1217,14 +1242,15 @@ public class DBManager {
 			return list;	
 		}
 		
-		//---커뮤니티 이미지 삭제
-		public static int deleteCommuImg(int no) {
-			SqlSession session  = factory.openSession();
-			int re=session.delete("img.deleteCommuImg", no);
-			session.commit();
+		//---커뮤니티 이미지리스트
+		public static List<ImgVO> listCerImg(int no){
+			SqlSession session = factory.openSession();
+			List<ImgVO> list = session.selectList("img.listCerImg",no);
 			session.close();
-			return re;
+			return list;	
 		}
+		
+
 				
 		
 		

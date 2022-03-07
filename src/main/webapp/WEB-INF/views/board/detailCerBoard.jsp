@@ -51,12 +51,6 @@ section#content ul li { display:inline-block; margin:10px; }
 			</tr>
 			</table>
 	 
-	 
-	 <c:if test="${c.cer_thumbnail ne null }">
-		<div class="cer_thumbnail">
-		<img  src="/upload/cer/${c.cer_thumbnail }" width="400" height="400">
-		</div> 
-	</c:if>	
 		<div class="nickname">
 		<span>LV ${c.levels} ${c.nickname}</span>
 		</div>
@@ -73,13 +67,27 @@ section#content ul li { display:inline-block; margin:10px; }
 		<div class="content">
 		<span>${c.cer_content}</span>
 		</div>	
+		
+		 <c:if test="${c.cer_thumbnail ne null }">
+		<div class="cer_thumbnail">
+		<img  src="/upload/cer/${c.cer_thumbnail }" width="400" height="400">
+		</div> 
+		</c:if>	
+		
+		<div class="result-images">
+		<!-- 업로드한 파일들을 forEach문을 이용해 <img> 태그에 표시 -->
+		<c:forEach var="list" items="${imglist}" >
+			<img src="../upload/cer/${list.save_img_name}" width="500px" height="100%">
+	        <br><br><br>
+	    </c:forEach>         
+	</div>
 				 
 </section>	
 
-<c:if test="${m.nickname == c.nickname}">
+<!--<c:if test="${m.nickname == c.nickname}"></c:if>-->
 <a href="/board/updateCerBoard?no=${c.no }">글수정</a>
 <a href="/board/deleteCerBoard?no=${c.no }">글삭제</a>
-</c:if>
+
 
 </body>
 </html>

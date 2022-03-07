@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"	 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,8 +39,7 @@ a:visited {
 		</div>
 		</c:if>
 	
-		
-		<c:if test="${not empty m}"> 
+		<c:if test="${not empty m}">
 		<div id="memu">
 			<strong>${m.levels }LV</strong>
 			<strong>${m.nickname }</strong>

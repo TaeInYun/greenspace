@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -16,9 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -64,7 +67,7 @@ public class CommunityController {
 	
 	@RequestMapping(value="/board/insertCommunity", method = RequestMethod.POST)
 	public ModelAndView insertCerBoard_submit(HttpServletRequest request,CommunityVO c, MultipartHttpServletRequest mhsq)
-	throws IllegalStateException,IOException{
+	throws Exception {
 
 		ModelAndView mav = new ModelAndView("redirect:/board/listCommunity");
 
@@ -85,94 +88,132 @@ public class CommunityController {
 		}
 		
 		// 넘어온 파일을 리스트로 저장
-        List<MultipartFile> mf = mhsq.getFiles("uploadFile");
-        if (mf.size() == 1 && mf.get(0).getOriginalFilename().equals("")) {
-             
+        List<MultipartFile> files = mhsq.getFiles("files");
+        if (files.size() == 1 && files.get(0).getOriginalFilename().equals("")) {
+        	files = mhsq.getFiles("files");
+        	System.out.println("files.size() == 1 "+files);
         } else {
-            for (int i = 0; i < mf.size(); i++) {
+        	for (MultipartFile mf : files) {
                 // 파일 중복명 처리
                 String genId = UUID.randomUUID().toString();
                 // 본래 파일명
-                String originalfileName = mf.get(i).getOriginalFilename();
+                String originalfileName = mf.getOriginalFilename();
              // 저장되는 파일 이름 
                 String saveFileName = genId + "." + FilenameUtils.getExtension(originalfileName);
-
-                long fileSize = mf.get(i).getSize(); // 파일 사이즈
+             
+                long fileSize = mf.getSize(); // 파일 사이즈
                
                 String savePath = path +"/"+saveFileName; // 저장 될 파일 경로
                 //System.out.println("저장경로"+savePath);
-                mf.get(i).transferTo(new File(path +"/"+saveFileName)); // 파일 저장
-
+                mf.transferTo(new File(path +"/"+saveFileName)); // 파일 저장
                 
                 //img테이블 저장
         		HashMap<String, Object> map = new HashMap<>();     	    
         		map.put("originalfileName", originalfileName);
         	    map.put("saveFileName", saveFileName);
         	    map.put("commu_no", commu_no);
-
         	    imgdao.uploadFile(map);
-                
 			}
-        }
+        }//파일저장 if end
 	
 		return mav;
 	}
 	
 	
-/*
-	
+
+
 	//------------------커뮤니티 수정하기--------------------
 	@RequestMapping(value = "/board/updateCommunity", method = RequestMethod.GET)
 	public void updateForm(int no, Model model,HttpSession session) {
 		model.addAttribute("c", dao.getCommunity(no));	
 		model.addAttribute("imglist", imgdao.listCommuImg(no));
+
 	}
-	
+
 	
 	@RequestMapping(value = "/board/updateCommunity", method = RequestMethod.POST)
-	public ModelAndView updateSubmit(CommunityVO c, HttpServletRequest request,Model model) {
-
+	public ModelAndView updateSubmit(CommunityVO c, HttpServletRequest request,Model model,MultipartHttpServletRequest mhsq)
+	throws Exception {
+		
 		ModelAndView mav = new ModelAndView("redirect:/board/listCommunity");
 		String path = request.getRealPath("upload/commu");
+		int commu_no = c.getNo();
 		
-		//이미지테이블에 해당 게시물 이미지 잇나 체크
-		List<ImgVO> list = imgdao.listCommuImg(no);
+		
+		//이미지테이블에 이미지정보 리스트
+		List<ImgVO> list = imgdao.listCommuImg(commu_no);
 	
-		// 넘어온 파일을 리스트로 저장
-        List<MultipartFile> mf = mhsq.getFiles("uploadFile");
-        if (mf.size() == 1 && mf.get(0).getOriginalFilename().equals("")) {
-             
-        } else {
-            for (int i = 0; i < mf.size(); i++) {
-                // 파일 중복명 처리
-                String genId = UUID.randomUUID().toString();
-                // 본래 파일명
-                String originalfileName = mf.get(i).getOriginalFilename();
-             // 저장되는 파일 이름 
-                String saveFileName = genId + "." + FilenameUtils.getExtension(originalfileName);
 
-                long fileSize = mf.get(i).getSize(); // 파일 사이즈
-               
-                String savePath = path +"/"+saveFileName; // 저장 될 파일 경로
-                //System.out.println("저장경로"+savePath);
-                mf.get(i).transferTo(new File(path +"/"+saveFileName)); // 파일 저장
-
-                
-                //img테이블 저장
-        		HashMap<String, Object> map = new HashMap<>();     	    
-        		map.put("originalfileName", originalfileName);
-        	    map.put("saveFileName", saveFileName);
-        	    map.put("commu_no", commu_no);
-
-        	    imgdao.uploadFile(map);
-                
-			}
-        }
-		
-		
-	}
-	
-	*/
+     	//전달되어온 파일 정보
+		 List<MultipartFile> multipartList = c.getFiles();
+		 System.out.println("업로드한파일수"+multipartList.size());
+	    
+		 String multipartOrigName=null;
+		 
+		 // 전달되어온 파일 하나씩 검사
+		 for (MultipartFile multipartFile : multipartList) { 
+             // 파일의 원본명 얻어오기
+            multipartOrigName = multipartFile.getOriginalFilename();
+             System.out.println("저장되어있는이름"+multipartOrigName);
+		 }
+		 
+		 if(multipartOrigName != null && !multipartOrigName.equals("")) {
+			 System.out.println("파일수정했어요");
+			
+			 //기존에 있는 이미지 삭제 
+					for( ImgVO i:list) {
+						String oldimgname = i.getSave_img_name();
+						System.out.println(oldimgname);
+						
+						File file = new File(path + "/" + oldimgname);
+						
+							file.delete();
+							System.out.println("파일삭제성공");
+							
+							//해당 게시물 번호 이미지테이블 레코드 삭제
+							imgdao.delete(i.getNo());
+							System.out.println("이미지레코드삭제성공");
+					}
+					
+			 //새로운 이미지 추가
+					 List<MultipartFile> files = mhsq.getFiles("files");
+				        if (files.size() == 1 && files.get(0).getOriginalFilename().equals("")) {
+				        	files = mhsq.getFiles("files");
+				        	System.out.println("files.size() == 1 "+files);
+				        } else {
+				        	for (MultipartFile mf : files) {
+				                // 파일 중복명 처리
+				                String genId = UUID.randomUUID().toString();
+				                // 본래 파일명
+				                String originalfileName = mf.getOriginalFilename();
+				             // 저장되는 파일 이름 
+				                String saveFileName = genId + "." + FilenameUtils.getExtension(originalfileName);
+				             
+				                long fileSize = mf.getSize(); // 파일 사이즈
+				               
+				                String savePath = path +"/"+saveFileName; // 저장 될 파일 경로
+				                //System.out.println("저장경로"+savePath);
+				                mf.transferTo(new File(path +"/"+saveFileName)); // 파일 저장
+				                
+				                //img테이블 저장
+				        		HashMap<String, Object> map = new HashMap<>();     	    
+				        		map.put("originalfileName", originalfileName);
+				        	    map.put("saveFileName", saveFileName);
+				        	    map.put("commu_no", commu_no);
+				        	    imgdao.uploadFile(map);
+							}
+				  }//레코드 추가 if end
+					
+			
+		 }else {
+			 System.out.println("파일수정하지않아요");
+		 }
+		 //게시판 수정메소드
+		 int re = dao.updateCommunity(c);
+		 System.out.println("게시물 수정 성공");
+		 
+		return mav;       
+}
 	
 	//--------커뮤니티 상세----------------
 	@RequestMapping("/board/detailCommunity")
@@ -197,7 +238,7 @@ public class CommunityController {
 		String path = request.getRealPath("upload/commu");
 			
 			//이미지가 있다면 파일 삭제
-			if(!list.isEmpty()) {
+			if(!CollectionUtils.isEmpty(list)) {
 			
 				for( ImgVO i:list) {
 					
@@ -208,13 +249,12 @@ public class CommunityController {
 					
 						file.delete();
 						System.out.println("파일삭제성공");
-		
+						
+						//해당 게시물 번호 이미지테이블 레코드 삭제
+						imgdao.delete(i.getNo());
+						System.out.println("이미지레코드삭제성공");
 				}
-				//해당 게시물 번호 이미지테이블 레코드 삭제
-				imgdao.deleteCommuImg(no);
-				System.out.println("이미지레코드삭제성공");
 			}
-			
 			//게시판 삭제	
 			int re = dao.deleteCommunity(no);
 			
@@ -224,10 +264,7 @@ public class CommunityController {
 			mav.setViewName("error");
 			mav.addObject("msg", "게시물 삭제에 실패하였습니다.");
 		}
-			
 			return mav;
 	}
-	
-	
-}
+	}
 

@@ -12,7 +12,7 @@
 			seq_img.nextval,
 			#{originalfileName},
 			#{saveFileName},
-			#{cer_nobbs_seq.currval, jdbcType=INTEGER},
+			#{cer_no, jdbcType=INTEGER},
 			#{chg_no, jdbcType=INTEGER},
 			#{eco_no, jdbcType=INTEGER},
 			#{ets_no, jdbcType=INTEGER},
@@ -29,13 +29,19 @@
 	select no,o_img_name,save_img_name from img where commu_no=#{no}
 	</select>
 	
-		<select id="updateCommuImg" resultType="imgvo">
-	update img set o_img_name=#{o_img_name},   where commu_no=#{no}
+	<select id="listCerImg" resultType="imgvo">
+	select no,o_img_name,save_img_name from img where cer_no=#{no}	
+	</select>
+
+
+	<delete id="delete">
+		delete img where no = #{no}
+	</delete>
+	
+	<select id="findImgByNo" resultType="imgvo">
+	select * from img where no = #{no}
 	</select>
 	
-	<delete id="deleteCommuImg">
-		delete img where commu_no = #{no}
-	</delete>
 	
 <!-- 
  <insert id="uploadFile" parameterType="HashMap">

@@ -34,7 +34,6 @@ import com.example.demo.vo.OrdersProductVO;
 import com.example.demo.vo.OrdersVO;
 import com.example.demo.vo.PointVO;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.gson.Gson;
 
 import lombok.Setter;
 
@@ -69,13 +68,18 @@ public class OrdersController {
 	public int getCntOfToday() {
 		return ordersDao.getCntOfToday();
 	}
+	
 	@RequestMapping(value = "/shop/resultOrder", method = RequestMethod.GET)
 	public void OrderOK() {
 		
 	}
-	
+	/*
 	@RequestMapping(value = "/shop/resultOrder", method = RequestMethod.POST)
 	@ResponseBody
+	public String applyOrder(HttpServletRequest request, @RequestBody ApplyOrderVO data) {
+	
+		HttpSession session = request.getSession();
+		int member_no = 1;
 	public String applyOrder(HttpSession session, @RequestBody ApplyOrderVO data) {
 		
 		 MemberVO m = (MemberVO)session.getAttribute("m");
@@ -147,4 +151,6 @@ public class OrdersController {
 		
 		return "OK";
 	}
+		//return result;
+	}*/
 }

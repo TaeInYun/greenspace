@@ -84,12 +84,14 @@
          <optional>true</optional>
       </dependency>
       <!-- LOMBOK -->
+      
       <dependency>
           <groupId>org.projectlombok</groupId>
           <artifactId>lombok</artifactId>
           <version>1.18.22</version>
           <scope>provided</scope>
       </dependency>
+      
       <!-- 서버 재가동 없이 적용 -->
       <dependency>
          <groupId>org.springframework.boot</groupId>
@@ -154,6 +156,18 @@
 	    <version>2.9.0</version>
 	</dependency>
       
+      <dependency>
+		   <groupId>jstl</groupId>
+		   <artifactId>jstl</artifactId>
+		   <version>1.2</version>
+  		</dependency>
+	
+	<dependency>
+          <groupId>com.google.code.gson</groupId>
+          <artifactId>gson</artifactId>
+          <version>2.9.0</version>
+      </dependency>
+      
    </dependencies>
    <build>
       <plugins>
@@ -165,4 +179,3 @@
    </build>
 
 </project>
-

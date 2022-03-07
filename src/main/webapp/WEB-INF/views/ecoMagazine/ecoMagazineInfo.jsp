@@ -1,29 +1,58 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Insert title here</title>
+<meta charset="UTF-8">
+<title>녹지공간 쇼핑몰</title> 
+	<link href="/css/shop.css" rel="stylesheet"/> 	 
 </head>
 <body>
-    <h3> 에코매거진 </h3>
-
-    <hr>
-    <a href="#">유용정보 </a>
-    <a href="ecoMagazineNews">환경관련기사</a>
-    <a href="ecoMagazineCampaign">캠페인/후원안내</a>
-    <br>
-    <br>
-    <a href="insertNotice">  글 등록  </a><br>
-    <form action="listBoard" method="post">
-        <input type="text" name="keyword">
-        <input type="submit" value="검색">
-    </form>
-
-
-       
+	<div id="root">
+		<header id="header">
+			<div id="header_box">
+				<jsp:include page="../shop/shopHeader.jsp"/>
+			</div>
+		</header>		 
+		
+		<section id="container">		
+			<div id="container_box"> 
+				<!-- 본문 -->			
+					<section id="content">
+					<ul>
+						 <c:forEach var="p" items="${list }">
+							 <li>
+								<div class="PRO_THUMBNAIL">
+									<a href="/shop/detailProduct?no=${p.no}">
+										<img  src="/upload/${p.PRO_THUMBNAIL }" width="200" height="200">
+									</a>
+								</div> 
+								  
+								<div class="pro_name">
+									<a href="/shop/detailProduct?no=${p.no}">${p.pro_name}</a>
+								</div>
+								
+								<div class="pro_priceZip">   
+									  <div class="pro_price">
+									    <span> ${p.pro_price } </span>
+									  </div>   		
+								  
+									   <div class="pro_saleprice">
+									    <span> ${p.pro_saleprice } </span>
+									  </div>   		
+								 </div>				 
+							 </li>
+					  	</c:forEach>
+					 </ul>					 
+					</section>					
+					 
+					<aside id="aside">
+						<jsp:include page="../shop/shopAside.jsp"/>
+					</aside>				
+			</div><!-- 전체  section box-->
+		</section>
+</div>
 </body>
 </html>

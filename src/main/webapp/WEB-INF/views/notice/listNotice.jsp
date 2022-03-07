@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
@@ -43,8 +44,7 @@
 	      	</c:forEach>
     </table>
 
-    <c:forEach var="i" begin="1" end="${
-Page }">
+    <c:forEach var="i" begin="1" end="${totalPage }">
         <a href="listNotice?pageNUM=${i }">${i }</a>&nbsp;&nbsp;
     </c:forEach>
 	
