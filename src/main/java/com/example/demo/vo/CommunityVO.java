@@ -19,6 +19,7 @@ public class CommunityVO {
 	private String nickname;
 	private String o_img_name;
 	
-	private MultipartFile uploadFile;
+	//private MultipartFile uploadFile;
+	private List<MultipartFile> files;
 
 }

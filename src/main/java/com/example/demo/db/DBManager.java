@@ -23,6 +23,7 @@ import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.MyReviewVO;
 import com.example.demo.vo.MyWishVO;
 import com.example.demo.vo.NoticeVO;
+import com.example.demo.vo.OneVO;
 import com.example.demo.vo.OrderBillVO;
 import com.example.demo.vo.Pro_add_optionVO;
 import com.example.demo.vo.OrderListVO;
@@ -174,6 +175,74 @@ public class DBManager {
 	public static int getTotalRecordQna(HashMap map) {
 		SqlSession session = factory.openSession();
 		int no = session.selectOne("qna.totalRecord", map);
+		session.close();
+		return no;
+	}
+	
+	
+	//---------------------oneVO------------------------
+	
+	public static List<OneVO> findAllOne(HashMap map){
+		SqlSession session = factory.openSession();
+		List<OneVO> list = session.selectList("one.findAll",map);
+		session.close();
+		return list;
+	}
+	
+	
+	public static List<OneVO> findAllOneMy(HashMap map){
+		SqlSession session = factory.openSession();
+		List<OneVO> list = session.selectList("one.findAllMy",map);
+		session.close();
+		return list;
+	}
+	
+	   
+	public static OneVO findAllOneDetail(int no) {
+		SqlSession session = factory.openSession();
+		OneVO o = session.selectOne("one.findAllDetail", no);
+		session.close();
+		return o;
+	}
+	
+	public static List<OneVO> findAllOneSearch(HashMap map){
+		System.out.println("map에 저장된 내용"+map);
+		SqlSession session = factory.openSession();
+		List<OneVO> list = session.selectList("one.findAllSearch",map);
+		session.close();
+		return list;
+	}
+	
+    public static int insertOne(OneVO o) {
+		
+		SqlSession session  = factory.openSession();
+		int re=session.insert("one.insert",o);
+		session.commit();
+		session.close();
+		return re;
+	}
+    
+    
+    public static int updateOne(OneVO o) {
+		SqlSession session = factory.openSession(true);
+		int re = session.update("one.update", o);
+		session.commit();
+		session.close();
+		return re;				
+	}	
+	
+	public static int deleteOne(int no) {
+		SqlSession session  = factory.openSession();
+		int re=session.delete("one.delete", no);
+		session.commit();
+		session.close();
+		return re;
+	}
+	
+	
+	public static int getTotalRecordOne(HashMap map) {
+		SqlSession session = factory.openSession();
+		int no = session.selectOne("one.totalRecord", map);
 		session.close();
 		return no;
 	}
@@ -675,7 +744,12 @@ public class DBManager {
 		return o;
 	}
 	
-	
+	public static int cntByMember(HashMap map) {
+		SqlSession session = factory.openSession();
+		int cnt = session.selectOne("cntByMember", map);
+		session.close();
+		return cnt;
+	}
 	
 	//--------------------OrdersVO관련--------------
 	public static int getCntOfToday() {
@@ -1203,6 +1277,7 @@ public class DBManager {
 		
 		
 		//-------------IMG (파일)------------
+		//레코드 추가
 		public static int uploadFile(HashMap map){
 			SqlSession session = factory.openSession();
 			int re = session.insert("img.uploadFile", map);
@@ -1210,6 +1285,23 @@ public class DBManager {
 			session.close();
 			return re;
 		}	
+		
+		//-- 레코드 삭제
+		public static int deleteImg(int no) {
+			SqlSession session  = factory.openSession();
+			int re=session.delete("img.delete", no);
+			session.commit();
+			session.close();
+			return re;
+		}
+		
+		//--레코드 정보 (이미지 번호로 찾아오기)
+		public static ImgVO findImgByNo(int no) {
+			SqlSession session = factory.openSession();
+			ImgVO i = session.selectOne("img.findImgByNo", no);
+			session.close();
+			return i;		
+		}
 		
 		//---커뮤니티 이미지리스트
 		public static List<ImgVO> listCommuImg(int no){
@@ -1219,16 +1311,41 @@ public class DBManager {
 			return list;	
 		}
 		
-		//---커뮤니티 이미지 삭제
-		public static int deleteCommuImg(int no) {
-			SqlSession session  = factory.openSession();
-			int re=session.delete("img.deleteCommuImg", no);
-			session.commit();
+		//---커뮤니티 이미지리스트
+		public static List<ImgVO> listCerImg(int no){
+			SqlSession session = factory.openSession();
+			List<ImgVO> list = session.selectList("img.listCerImg",no);
 			session.close();
-			return re;
+			return list;	
 		}
+
 				
 	//memberInfo------------------------------------------
+
+ 
+
+		public static PointVO findPresentPoint(int no) {			 
+			SqlSession session = factory.openSession();
+			PointVO p = session.selectOne("point.findPresentPoint", no);
+			session.close();
+			return p;
+		}
+ 
+
+		public static List<PointVO> findAllPointByNO(HashMap map) {
+			SqlSession session = factory.openSession();
+			List<PointVO> list = session.selectList("point.findAllPointByNO",map);
+			session.close();
+			return list;
+		}
+
+		public static ReviewVO findReviewByProno(int no) {
+			SqlSession session = factory.openSession();
+			ReviewVO r = session.selectOne("review.findReviewByProno", no);
+			session.close();
+			return r;
+		}
+
 		
 		/* 이메일 변경 */
 		public static int updateEmail(HashMap map) {

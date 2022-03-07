@@ -16,9 +16,7 @@
 				<div id="header1_box">
 					<jsp:include page="../header.jsp"/>
 				</div>
-				<div id="header2_box">
-					 <jsp:include page="../shop/shopHeader.jsp"/>
-				</div>
+				
 				
 			</div>
 		</header>		 
@@ -27,6 +25,9 @@
 			<div id="container_box"> 
 				<!-- 본문 -->			
 					<section id="content">
+					<div id="header2_box">
+					 <jsp:include page="../shop/shopHeader.jsp"/>
+					</div>
 					<ul>
 						 <c:forEach var="p" items="${list }">
 							 <li>

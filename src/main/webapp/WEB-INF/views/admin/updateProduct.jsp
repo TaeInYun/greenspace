@@ -1,11 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>관리자설정_${p.pro_name }_상품수정</title>
+<style type="text/css">
+	.inputArea{
+		margin: 10px;
+	}
+	input{
+		margin: 10px;
+	}
+
+</style>
 </head>
 <body>
 	

@@ -21,7 +21,7 @@ public class MemberDAO {
 	}
 	
 	//닉네임 중복체크
-	public int checkNicname(String nickname) {
+	public int checkNickname(String nickname) {
 		return DBManager.checkNickname(nickname);
 	}
 	

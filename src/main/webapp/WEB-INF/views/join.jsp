@@ -141,9 +141,10 @@ $(function(){
 		        
 	    	  /* 최종 유효성 검사 */
 	         if(idCheck && idckCheck && pwCheck && pwckCheck && pwckcorCheck && nameCheck && nickNameCheck && nickckCheck && emailCheck && emailckCheck && phoneCheck && codeCheck && codeckCheck ){
-
+	        	 console.log("가입버튼클릭");
 	             $("#join_form").attr("action", "/join");
 	             $("#join_form").submit();   
+	             
 	         }    
 	         
 	 		return false;
@@ -304,7 +305,7 @@ $(function(){
 	        
 	        /* 닉네임 중복체크 */
 				$.ajax({
-					url:"loginByOrder",
+					url:"checkNickname",
 					data:{nickname:nickname},
 					success:function(data){
 						//0이면 사용가능 , 1이면 중복

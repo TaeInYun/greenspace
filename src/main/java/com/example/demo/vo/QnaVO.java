@@ -20,4 +20,6 @@ public class QnaVO {
 	private String ord_id;  //주문번호
 	private String nickname;  //작성자(닉네임)
 	private MultipartFile uploadFile;
+	private int member_no;   //회원번호
+	private int pro_no;
 }

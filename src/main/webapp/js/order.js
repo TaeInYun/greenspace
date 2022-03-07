@@ -86,9 +86,7 @@ function requestPay(cnt, arr_cartNo) {
 						data: JSON.stringify(data),
 						contentType: "application/json; charset=utf-8",
 						async: false,
-						dataType: 'json',
 						success: function(msg){
-							alert("성공")
 							location.href="resultOrder";
 						}
 					});//end insert

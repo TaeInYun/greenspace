@@ -208,7 +208,8 @@ $(function(){
 				 	 	<img id="memberPhoto" src= "/upload/Lv1.png"    >				 	  
 					 
 				 			 
-				 	<div id="main_member_textBOX" style="width: 40%; margin-top:70px;margin-left:40px;  text-align: left; float: left"  >			 
+				 	<div id="main_member_textBOX" style="width: 50%; margin-top:50px;margin-left:30px;  text-align: left; float: left; font-size: 15px; font-weight: bold;"   >			 
+				 	
 						<div id=memberInfo  >
 							<input type="hidden" name="member_no" value=${m.no }>
 							<strong>${m.nickname}</strong>님<br>
@@ -224,12 +225,12 @@ $(function(){
 	
 		챌린지목록
 		<div id="listTable">
-		<table border="1" width="50%">
-			<c:forEach var="c" items="${chglist}">
+		<table border="1" width="100%">
+			<c:forEach var="c" items="${chglist}" >
 			<tr>
 				<td>${c.chg_title}</td>
 				
-				<c:if test="${c.chg_status_code eq 'STA'}">
+				<c:if test="${c.chg_status_code eq 'STA'}" >
 					<c:choose>
 						<c:when test="${empty endlist}">
 						<td><button type="button" id="startBtn" class="btn btn-primary btn-sm" value="${c.chg_no}"  >도전하기</button></td>			
@@ -241,7 +242,7 @@ $(function(){
 				</c:if>
 				
 				<c:if test="${c.chg_status_code eq 'ING'}">
-				<td><button type="button" id="finishBtn" class="btn btn-primary btn-sm" value="${c.chg_no}" >완료</button>
+				<td><button   type="button" id="finishBtn" class="btn btn-primary btn-sm" value="${c.chg_no}" >완료</button>
 				<button type="button" id="ResetBtn" class="btn btn-secondary btn-sm" value="${c.chg_no}" >포기</button></td>
 				</c:if>	
 				
@@ -261,6 +262,7 @@ $(function(){
 	</div><!-- end 도전 목록 -->
 	
 	<br>
+		 
 	 <c:if test="${empty endlist}">
 	<button type="button" id="modal-open" class="btn btn-primary btn-lg"   >오늘 챌린지 완료</button>
 	 </c:if>
@@ -274,7 +276,7 @@ $(function(){
 	</c:when>
 	</c:choose>
 	</c:if>
-
+ 
 		</div>
 		<jsp:include page="../mainpage/popup.jsp"/>
 		</div> <!--  main_textBOX 	 -->

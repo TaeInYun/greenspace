@@ -46,8 +46,7 @@
 									<td>${q.nickname }</td>
 									<td>${q.day }</td>
 									<td>${q.status }</td>
-								 
-									
+								 	
 								</tr>	
 							</c:forEach>
 						</table>	 

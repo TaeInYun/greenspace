@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.db.DBManager;
 import com.example.demo.vo.OrderListVO;
+import com.example.demo.vo.SearchVO;
 
 @Repository
 public class OrderListDAO {
@@ -23,5 +24,8 @@ public class OrderListDAO {
 	}
 	public List<OrderListVO> findOrderListByOrdId(String id) {
 		return DBManager.findOrderListByOrdId(id);
+	}
+	public int cntByMember(HashMap map) {
+		return DBManager.cntByMember(map);
 	}
 }

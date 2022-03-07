@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +34,6 @@
 		<input type="hidden" name="member_no" value="${m.no }" > <br> <!-- hidden -->
 		
 		<!-- QSZ사이즈 QDE배송관련 QRE재입고 QDT상품상세  -->		
-		<input type="hidden" name="pro_qna_type_code" id="changeInput"/>
 		<select id="changeTest" >
 		  <option value="QSZ">사이즈</option>
 		  <option value="QDE">배송관련</option>

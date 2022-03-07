@@ -5,20 +5,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style type="text/css">
-#att_zone {
-  width: 450px;
-  min-height: 150px;
-  padding: 10px;
-  border: 1px dotted #00f;
-}
-
-#att_zone:empty:before {
-  content: attr(data-placeholder);
-  color: #999;
-  font-size: .9em;
-}
-</style>
 <link rel="stylesheet" href="/css/toggleSwitch.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
@@ -43,7 +29,10 @@ $(function(){
 			                  + 'right:0px;bottom:0px;z-index:999;background-color:rgba(255,255,255,0.1);color:#f00';
 			  
 			    btnAtt.onchange = function(e){
-			      var files = e.target.files;
+			      var files = e.target.files;// FileList 객체
+			      
+			      console.log(files); // { 0: File, 1: File, length: 2 }
+			     
 			      var fileArr = Array.prototype.slice.call(files)
 			      for(f of fileArr){
 			        imageLoader(f);
@@ -53,7 +42,7 @@ $(function(){
 			    /*첨부된 이미리즐을 배열에 넣고 미리보기 */
 			    imageLoader = function(file){
 			      sel_files.push(file);
-			      var reader = new FileReader();
+			      var reader = new FileReader();//파일을 읽기 위해..
 			      reader.onload = function(ee){
 			        let img = document.createElement('img')
 			        img.setAttribute('style', img_style)
@@ -121,7 +110,7 @@ $(function(){
 			내용<br>
 			<textarea rows="10" cols="60" name="commu_content"></textarea><br>		
 		</div>
-	<input type='file' id='btnAtt' name="uploadFile" multiple='multiple'/>
+	<input type='file' id='btnAtt' name="files" multiple='multiple'/>
 	<div id='att_zone' 
 	      data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하세요'></div>
 		<input type="submit" value="등록">

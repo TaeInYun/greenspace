@@ -1,6 +1,7 @@
 package com.example.demo.vo;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,5 +27,6 @@ public class CerBoardVO {
 	
 	private String cer_thumbnail;
 	private MultipartFile uploadFile;
+	private List<MultipartFile> files;
 	
 }

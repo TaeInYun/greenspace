@@ -14,5 +14,16 @@ public class PointVO {
 	private int point_amount;
 	private int member_no;
 	private String point_type_code;
+	///////
+	private String point_type_name;
+	private int presentPoint;
+	private String ord_id;
+	
+ 
+	
+ 
+	
+	
+	
 
 }
