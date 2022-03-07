@@ -19,12 +19,12 @@ public class CartDAO {
 		return DBManager.deleteCart(no);
 	}
 
-	public int isCart(HashMap map) {
-		return DBManager.isCart(map);
+	public int isCart(CartVO c) {
+		return DBManager.isCart(c);
 	}
 	
-	public int updateQty(HashMap map) {
-		return DBManager.updateQty(map);
+	public int updateQty(CartVO c) {
+		return DBManager.updateQty(c);
 	}
 	
 	public CartVO findByCartNo(HashMap map) {

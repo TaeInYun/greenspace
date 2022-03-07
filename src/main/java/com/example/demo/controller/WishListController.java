@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.dao.Pro_add_optionDAO;
 import com.example.demo.dao.WishListDAO;
+import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.WishListVO;
 
 import lombok.Setter;
@@ -27,8 +30,9 @@ public class WishListController {
 	private Pro_add_optionDAO proAddOptionDAO;
 	
 	@RequestMapping("shop/wishList")
-	public void findByMemberWish(Model model) {
-		int member_no = 1;
+	public void findByMemberWish(HttpSession session,Model model) {
+		MemberVO m = (MemberVO)session.getAttribute("m");
+		int member_no = m.getNo();
 		
 		model.addAttribute("list", dao.findByMemberWish(member_no) );
 		model.addAttribute("cnt", dao.cntOfWishList(member_no) );
@@ -48,9 +52,12 @@ public class WishListController {
 
 	@RequestMapping("shop/insertWishList")
 	@ResponseBody
-	public int insertWishList(WishListVO w) {
+	public int insertWishList(HttpSession session,WishListVO w) {
 		String msg = "위시리스트에 추가하지 못했습니다.";
-		w.setMember_no(1);
+		MemberVO m = (MemberVO)session.getAttribute("m");
+		int member_no = m.getNo();
+		w.setMember_no(member_no);
+		
 		if( w.getCart_option() != null) {
 			HashMap map = new HashMap();
 			map.put("pro_option_detail_name", w.getCart_option_detail());
@@ -70,8 +77,9 @@ public class WishListController {
 	
 	@RequestMapping("shop/isWishList")
 	@ResponseBody
-	public int isWishList(WishListVO w) {
-		w.setMember_no(1);
+	public int isWishList(HttpSession session,WishListVO w) {
+		MemberVO m = (MemberVO)session.getAttribute("m");
+		w.setMember_no(m.getNo());
 		
 		int cnt = dao.isWishList(w);
 		

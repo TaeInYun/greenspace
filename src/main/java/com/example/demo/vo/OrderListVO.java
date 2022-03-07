@@ -11,6 +11,7 @@ public class OrderListVO {
 	private String day;
 	private int delivery_price;
 	private String delivery_number;
+	//날짜검색
 	
 	//배송자정보
 	private int addr_no;

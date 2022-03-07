@@ -200,7 +200,7 @@ public class DBManager {
 	//-----------------------MYWISH ( 장바구니, 위시리스트)------------------------
 	public static List<MyWishVO> findByMember(int member_no){
 		SqlSession session = factory.openSession();
-		List<MyWishVO> list = session.selectList("myWish.findByMember", 1);
+		List<MyWishVO> list = session.selectList("myWish.findByMember", member_no);
 		session.close();
 		return list;
 	}
@@ -500,16 +500,16 @@ public class DBManager {
 		return re;
 	}
 	
-	public static int isCart(HashMap map) {
+	public static int isCart(CartVO c) {
 		SqlSession session = factory.openSession();
-		int re= session.selectOne("cart.isCart", map);
+		int re= session.selectOne("cart.isCart", c);
 		session.close();
 		return re;
 	}
 	
-	public static int updateQty(HashMap map) {
+	public static int updateQty(CartVO c) {
 		SqlSession session = factory.openSession();
-		int re = session.update("cart.updateQty", map);
+		int re = session.update("cart.updateQty", c);
 		session.commit();
 		session.close();
 		return re;
@@ -660,10 +660,10 @@ public class DBManager {
 		return o;
 	}
 	
-	public static List<OrderListVO> findAllOrderListByMemberNo(int member_no) {
+	public static List<OrderListVO> findAllOrderListByMemberNo(HashMap map) {
 		
 		SqlSession session = factory.openSession();
-		List<OrderListVO> o = session.selectList("orderList.findAllOrderListByMemberNo", member_no);
+		List<OrderListVO> o = session.selectList("orderList.findAllOrderListByMemberNo", map);
 		session.close();
 		return o;
 	}

@@ -76,13 +76,13 @@ public class OrdersController {
 	
 	@RequestMapping(value = "/shop/resultOrder", method = RequestMethod.POST)
 	@ResponseBody
-	public String applyOrder(HttpServletRequest request, @RequestBody ApplyOrderVO data) {
+	public String applyOrder(HttpSession session, @RequestBody ApplyOrderVO data) {
 		 Gson gson = new Gson(); String result =
 		 gson.toJson(data.getOrders().getOrd_id());
 		 
 		
-		HttpSession session = request.getSession();
-		int member_no = 1;
+		 MemberVO m = (MemberVO)session.getAttribute("m");
+		 int member_no = m.getNo();
 		
 		data.getOrders().setMember_no(member_no);
 		OrdersVO o = data.getOrders();
@@ -138,7 +138,7 @@ public class OrdersController {
 			productDAO.updateStockcuzBuy(map);
 			
 			//카트테이블 주문상품 삭제
-			//cartDAO.delete(no);
+			cartDAO.delete(no);
 			
 			//상태유지 변수에 추가
 			proInfo.add(c);
