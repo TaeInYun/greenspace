@@ -21,4 +21,8 @@ public class ReviewVO {
 	private Double re_rate;			//평점
 	private String re_thumbnail;	//썸네일이미지		
 	private MultipartFile uploadFile;
+	
+	private int count;
+	private int avg;
+	
 }

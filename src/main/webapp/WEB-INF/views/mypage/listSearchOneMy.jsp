@@ -18,12 +18,12 @@ var selectBoxChange = function(value){
 
 </head>
 <body>
-	<form action="/mypage/listQna" method="post">						
+	<form action="/mypage/listSearchOneMy" method="post">						
 						 	<select name="searchColumn">							 							 		
-								<option value="QSZ">사이즈</option>
-								<option value="QDE">배송관련</option>
-								<option value="QRE">재입고</option>
-								<option value="QDT">상품상세</option>
+								<option value="EXC">교환</option>   <!-- EXC교환 REF환불 CAN취소 ETC기타 -->
+								<option value="REF">환불</option>
+								<option value="CAN">취소</option>
+								<option value="ETC">기타</option>
 							</select>
 						 	<input type="submit" value="검색">
 						 	</form>
@@ -32,29 +32,23 @@ var selectBoxChange = function(value){
 					<table border="1" width="80%">
 							<tr>
 								
-								<td>사진</td>
-								<td>상품이름</td>
-								<td>내용</td>
-								<td>문의유형</td>
+								<td>1대1문의 제목</td>
+								<td>주문번호</td>
 								<td>작성일</td>
-								<td>처리상태</td>
-															 
-								
+								<td>문의유형</td>	
+								<td>처리상태</td>																					 								
 							</tr>
 							
-							<c:forEach var="q2" items="${q }">
+							<c:forEach var="o" items="${list }">
 								<tr>													
-									<td><img  src="/upload/qna/${q2.img_name }" width="100" height="100">${q2.img_name }</td>
-																					 
+																												 
 									<td>
-									<a href="/mypage/detailQna?no=${q2.no}">${q2.pro_name }</a>	
+									<a href="/mypage/detailOne?no=${o.no}">${o.one_title }</a>	
 									</td>
-									<td>${q2.title }</td>
-									<td>${q2.qna_type }</td>
-									<td>${q2.day }</td>
-									<td>${q2.status }</td>
-								 
-									
+									<td>${o.ord_no }</td>
+									<td>${o.one_date }</td>
+									<td>${o.one_type_name }</td>																								
+									<td>${o.qna_status_code }</td>																							
 								</tr>	
 							</c:forEach>
 						</table>	 	

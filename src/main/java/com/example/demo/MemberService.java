@@ -127,14 +127,14 @@ public class MemberService implements UserDetailsService{
 		map.put("pwd", pwd);
 		
 		int re = dao.updatePwd(map);
-		System.out.println(re);
+		
 		
 		return re;
 	}
 
 
 	
-
+	
 	
 
 }

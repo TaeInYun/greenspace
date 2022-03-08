@@ -32,6 +32,7 @@
 	<typeAlias type="com.example.demo.vo.EasyToStartVO" alias="EasyToStartVO"/>
     <typeAlias type="com.example.demo.vo.NoticeVO" alias="noticeVO"/>
     <typeAlias type="com.example.demo.vo.LikeVO" alias="likeVO"/>
+ 
 	
   </typeAliases>
   <environments default="development">  

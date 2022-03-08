@@ -14,6 +14,6 @@ public class ProQnaVO {
 	private Date pro_qna_date;
 	private int pro_no;
 	private int member_no;
-	private String pro_qna_type_code;
+	private String pro_qna_type_code;   //PRO_QNA_TYPE_CODE
 	private String qna_status_code;
 }

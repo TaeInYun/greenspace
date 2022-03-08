@@ -22,6 +22,10 @@ public class ReviewDAO {
 		return DBManager.findAllReviewDetail(no);
 	}
 	
+	public ReviewVO findReviewByProno(int no){
+		return DBManager.findReviewByProno(no);
+	}
+	
 	public int insert(ReviewVO r) {
 		return DBManager.insertReview(r);
 	}

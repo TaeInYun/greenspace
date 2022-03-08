@@ -78,10 +78,24 @@ public class MemberDAO {
 		return DBManager.findAllMember();
 	}
 
-	//회원정보
+	//마이페이지 - 회원 정보 변경 
 	public MemberVO getMemberInfo(int member_no){
 		return DBManager.getMemberInfo(member_no);
 	}
 	
+	public int updateEmail(HashMap map){
+		return DBManager.updateEmail(map);
+	}
 	
+	public int updateNickName(HashMap map){
+		return DBManager.updateNickName(map);
+	}
+	
+	public int updatePhone(HashMap map){
+		return DBManager.updatePhone(map);
+	}
+	
+	public int updateAccount(HashMap map){
+		return DBManager.updateAccount(map);
+	}
 }

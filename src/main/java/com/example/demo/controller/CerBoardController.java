@@ -194,7 +194,7 @@ public class CerBoardController {
 				
 				if(cer_status.equals("비공개")) {
 					
-				PointVO PointVO = new PointVO(0, null, "적립", 10, member_no, "CHG");
+				PointVO PointVO = new PointVO(0, null, "적립", 10, member_no, "CHG",null,0,null);
 				pointDAO.insertPoint(PointVO);
 				
 				int point_save = PointVO.getPoint_amount();
@@ -207,7 +207,7 @@ public class CerBoardController {
 				memberDAO.insertBoardPoint(map);
 				
 				}else if(cer_status.equals("공개")){
-					PointVO PointVO = new PointVO(0, null, "적립", 50, member_no, "PUB");
+					PointVO PointVO = new PointVO(0, null, "적립", 50, member_no, "PUB",null,0,null);
 					pointDAO.insertPoint(PointVO);
 					
 					int point_save = PointVO.getPoint_amount();

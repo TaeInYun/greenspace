@@ -16,5 +16,7 @@ public class MemberVO {
 	private int point_use;
 	private int point_save;
 	private int levels;
-	private int mem_type;
+	private int mem_type;	
+	private int presentPoint;
+	
 }

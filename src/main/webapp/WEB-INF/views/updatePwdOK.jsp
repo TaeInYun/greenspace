@@ -16,6 +16,7 @@
 
 				<c:when test="${ updatePwdOK eq'1'}">
 					${id}님 비밀번호 변경이 완료되었습니다.
+					<a href = "http://localhost:8080/login">로그인으로 이동</a>
 				</c:when>
 				<c:otherwise>
 					<script>

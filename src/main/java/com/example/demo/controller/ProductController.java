@@ -34,6 +34,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.dao.CartDAO;
 import com.example.demo.dao.Pro_add_optionDAO;
 import com.example.demo.dao.ProductDAO;
+import com.example.demo.dao.ReviewDAO;
 import com.example.demo.vo.Pro_add_optionVO;
 import com.example.demo.vo.ProductVO;
 
@@ -47,7 +48,9 @@ public class ProductController {
 	private ProductDAO dao;
 	
 	
- 
+	@Autowired
+	private ReviewDAO reviewDAO;
+	
 	@Autowired
 	private Pro_add_optionDAO prodao;
 	
@@ -106,6 +109,7 @@ public class ProductController {
 		 	model.addAttribute("cnt", dao.findOptionView(no));
 		 	model.addAttribute("option", dao.findOptionName(no));
 		 	model.addAttribute("op", dao.findOption(no));
+		 	model.addAttribute("review",reviewDAO.findReviewByProno(no));
 		}
 		
 		
@@ -114,7 +118,7 @@ public class ProductController {
 		public void detailProduct_admin(int no, Model model) {	
 			model.addAttribute("p", dao.findByNo(no));	  	
 		 	model.addAttribute("cnt", dao.findOptionView(no));
-
+		 	model.addAttribute("review",reviewDAO.findReviewByProno(no));
 			model.addAttribute("findOptionByProNo", prodao.findOptionByProNo(no));	
 
 		 	model.addAttribute("option", dao.findOptionName(no));

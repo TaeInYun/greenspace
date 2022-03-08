@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,8 +17,11 @@
 	 글쓴이:${qd.nickname} <br>
 	 작성일:${qd.day} <br>
 	 처리상태:${qd.status} <br>
+	 상품번호:${qd.pro_no }<br>
 	
 	 
-	 <%--  <a href="/mypage/updateAddress?no=${a.no}">수정하기</a>  --%>
+	   <a href="/shop/updateProQna?no=${qd.no}"><button>수정하기</button></a>  
+	   <a href="/shop/deleteProQna?no=${qd.no}"><button>삭제하기</button></a>  
 </body>
+
 </html>

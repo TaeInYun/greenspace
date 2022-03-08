@@ -86,23 +86,16 @@ public class NoticeController {
                 response.setContentType("text/html;charset=utf-8");
                 PrintWriter out = response.getWriter();
                 out.println("<script>");
-                out.println("alert('게시물 등록이 완료되었습니다');");
-                out.println("location.href=\"notice/listNotice\";");
+                out.println("alert('공지사항 등록이 완료되었습니다');");
+                out.println("location.reload();");
                 out.println("</script>");
                 out.close();
             }catch (Exception e){
                 System.out.println("예외발생" + e.getMessage());
             }
-
         }
+        
+        
+        
     }
 }
-
-//    @PostMapping(value = "/notice/insertNotice")
-//    public void insertNotice(@RequestParam String content, @RequestParam String title){
-//        NoticeVO notice = new NoticeVO();
-//        notice.setNotice_title(title);
-//        notice.setNotice_content(content);
-//        System.out.println(notice);
-//
-//    }

@@ -6,9 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자설정_상품등록</title>
-<link href="/css/shop.css" rel="stylesheet"/> 
+<link href="/css/admin.css" rel="stylesheet"/> 
+<style type="text/css">
+	.inputArea{
+		margin: 10px;
+	}
+	 
 
- 
+</style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
@@ -22,7 +27,7 @@ $(function(){
 		  var reader = new FileReader;
 		  reader.onload = function(data) {
 		   $(".select_img img").attr("src", data.target.result).width(500);        
-		  }
+		  	}
 		  reader.readAsDataURL(this.files[0]);
 		 }
 		});
