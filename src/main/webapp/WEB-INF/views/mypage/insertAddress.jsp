@@ -30,16 +30,21 @@
 	})
  });
 </script>
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<meta charset="UTF-8">
 </head>
 <body>
+
+<jsp:include page="../header.jsp"/>
 
 
 	<h2>메인주소입력</h2>
 	<form action="insertAddress" method="post">		
 		<!--  리뷰번호:
 		<input type="hidden" name="no"> <br> -->
-		 <input type="button" value="우편번호찾기" onclick="kakaopost()"> <br>
+		<div id="container"> <input type="button" value="우편번호찾기" onclick="kakaopost()" class="btn btn-primary"> <br> </div>
 		
 		
 		<!-- 메인/서브: -->
@@ -60,7 +65,7 @@
 		<!-- 회원번호:-->	
 		<input type="hidden" name="member_no" value="${m.no }" > <br> <!-- hidden -->
 		
-		<input type="submit" value="등록입니다">
+		<input type="submit" value="등록">
 		<input type="reset" value="취소">
 	</form>
 </body>
