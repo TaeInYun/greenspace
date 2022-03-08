@@ -1,4 +1,4 @@
-package com.example.demo.db;
+package com.example.demo.controller;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -1096,21 +1096,12 @@ public class DBManager {
 	
 	
 	/*  My 커뮤니티게시판 목록 */
-	public static List<CommunityVO> findCommuByMember(HashMap map){
+	public static List<CommunityVO> findCommuByMember(int member_no){
 		SqlSession session = factory.openSession();
-		List<CommunityVO> list= session.selectList("community.findCommuByMember",map);
+		List<CommunityVO> list= session.selectList("community.findCommuByMember",member_no);
 		session.close();
 		return list;
-	}	
-	
-	
-	/* My 챌린지 인증게시판 레코드개수   */
-	public static int getTotalRecordMyCommu(HashMap map){
-		SqlSession session = factory.openSession();
-		int no = session.selectOne("community.getTotalRecordMyCommu",map);
-		session.close();
-		return no;
-	}
+	}		
 
 	
 	//---------------EasyToStart---------------

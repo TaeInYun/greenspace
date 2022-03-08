@@ -13,6 +13,10 @@
 	<select id="getTotalRecord" resultType="java.lang.Integer">
         select count(*) from certification_board
     </select>
+    
+    	<select id="getTotalRecordMyCer" parameterType="hashMap" resultType="java.lang.Integer">
+        select count(*) from certification_board where member_no=#{member_no}
+    </select>
 	
 	<!-- 인증게시판 리스트  -->
 	<select id="findAll" resultType="cerboardVO">
@@ -28,7 +32,8 @@
 		from certification_board cer, member m
 		where m.no=cer.member_no 
 		and member_no=#{member_no}
-		order by CER_DATE
+		order by CER_DATE desc
+		offset #{start} rows fetch first 10 rows only
 	</select>
 	
 	

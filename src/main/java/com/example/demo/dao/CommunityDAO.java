@@ -20,15 +20,17 @@ public class CommunityDAO {
 	// 커뮤니티 게시판 목록
 	    //페이지로 나누기
 	    public List<CommunityVO> findAllCommunity(HashMap map){
-	        totalRecord = DBManager.getTotalRecord();
+	        totalRecord = DBManager.getTotalRecordCommu();
 	        totalPage = (int)Math.ceil(totalRecord/(double)pageSIZE);
 	        return DBManager.findAllCommunity(map);
 	    }
 
 	
 	//My 커뮤니티게시판 목록
-	public List<CommunityVO> findCommuByMember(int member_no){
-		return DBManager.findCommuByMember(member_no);
+	public List<CommunityVO> findCommuByMember(HashMap map){
+		 totalRecord = DBManager.getTotalRecordMyCommu(map);
+	     totalPage = (int)Math.ceil(totalRecord/(double)pageSIZE);
+		return DBManager.findCommuByMember(map);
 	}
 	
 	//커뮤니티게시판 등록
