@@ -55,7 +55,7 @@
 </script>
 </head>
 <body>
-	<i class="fa-solid fa-file-heart"></i>
+	<i class="fa-solid fa-heart"></i>
 	<h2>위시 리스트</h2>
 	<span>${cnt } 개</span>
 	<ul>

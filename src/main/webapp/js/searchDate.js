@@ -8,17 +8,17 @@ function searchByDate(data) {
 			
 			$.each(po.ord, function(){
 				let a =	$("<a></a>").attr("href", "/shop/detailProduct?no=" + this.pro_no).html($("<img></img>").attr("src", "/upload/"+ this.pro_thumbnail));
-				let ul = $("<ul></ul>");							
+				let div = $("<div></div>").attr("class","product_table-productInfo");							
 
-				let product = $("<li></li>").append( $("<a></a>").attr("href", "/shop/detailProduct?no=" + this.pro_no).html(this.pro_name));
-				ul.append(product);
+				let product = $("<div></div>").append( $("<a></a>").attr("href", "/shop/detailProduct?no=" + this.pro_no).html(this.pro_name));
+				div.append(product);
 				
 				if(this.option_name != null){
-					let option = $("<li></li>").html( "(" + this.option_name + ")" + this.option_detail);
-					ul.append(option);
+					let option = $("<div></div>").html( "(" + this.option_name + ")" + this.option_detail);
+					div.append(option);
 				}
 				
-				let proInfo = $("<td></td>").append(  $("<div></div>").append(a, ul) );
+				let proInfo = $("<td></td>").append(  $("<div></div>").append(a, div) );
 				let ordDate = $("<td></td>").html(this.day);
 				let ordId = $("<td></td>").append($("<a></a>").html(this.id).attr("href", "/shop/detailOrderList?id="+this.id+"&&day=" + this.day))
 				let proPrice = $("<td></td>").html(this.pro_price + "원 <br>(" + this.pro_qty + "개)")
