@@ -88,6 +88,8 @@ public class ProductController {
 		
 		int start = (pageNUM-1)* dao.pageSIZE + 1;
 		int end = start + dao.pageSIZE - 1;
+		System.out.println("start"+start);
+		System.out.println("end"+end);
 		
 		HashMap map= new HashMap();
 	 
@@ -256,7 +258,7 @@ public class ProductController {
  
 	@RequestMapping(value = "/admin/deleteProduct", method = RequestMethod.POST)
 	public ModelAndView deleteSubmit(int no, HttpServletRequest request, ProductVO p) {
-		ModelAndView mav = new ModelAndView("redirect:/admin/detailProduct"+"?no="+p.getNo());
+		ModelAndView mav = new ModelAndView("redirect:/admin/listProduct" );
 		String oldFname = dao.findByNo(no).getPRO_THUMBNAIL();		
 		 
 		int re = dao.delete(no);

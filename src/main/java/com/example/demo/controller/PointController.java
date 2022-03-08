@@ -47,16 +47,13 @@ public class PointController {
 	@Autowired
 	private MemberDAO memberdao;
 	 
-	@RequestMapping("mypage/mypagePointList")
+	@RequestMapping("mypage/myPointList")
 	public void findPresentPoint(Model model,int no,String filter ) {		 
 		 model.addAttribute("findPresentPoint", dao.findPresentPoint(no));	
 		 HashMap map = new HashMap();
 		 map.put("filter", filter);
 		 map.put("no", no);
 		 model.addAttribute("findAllPointByNO", dao.findAllPointByNO(map)); 
-		 
-		 
-		 
 	}
 	
 	
