@@ -1167,9 +1167,9 @@ public class DBManager {
 		}
 			
 		
-		public static EasyToStartVO ETS() {
+		public static List<EasyToStartVO> ETS() {
 			SqlSession session = factory.openSession();
-			EasyToStartVO re = session.selectOne("easyToStart.ETS");
+			List<EasyToStartVO> re = session.selectList("easyToStart.ETS");
 			session.close();
 			return re;		
 		}

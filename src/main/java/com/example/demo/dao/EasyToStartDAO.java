@@ -40,7 +40,7 @@ public class EasyToStartDAO {
     }
 
    
-    public EasyToStartVO ETS() {
+    public List<EasyToStartVO> ETS() {
         return DBManager.ETS();
     }
 

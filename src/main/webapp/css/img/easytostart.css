@@ -12,11 +12,7 @@ a:link {
   color : black;
   text-decoration: none;
 }
-section#content div.PRO_THUMBNAIL img { width:200px; height:200px; }
-section#content div.pro_name { padding:10px 0; text-align:center; }
-section#content div.pro_name a { color:black;font-size:15px; }
-section#content div.pro_priceZip { padding:10px 0;text-align:center; position: relative; font-size:15px;}
-section#content div.pro_price { padding:10px 0; text-decoration:line-through;color: gray;position: relative;display:inline;}
-section#content div.pro_saleprice { padding:10px 0; position: relative;display:inline; }
+section#content div.ETS_THUMBNAIL img { width:200px; height:200px; }
+section#content div.ETS_TITLE { padding:10px 0; text-align:center; }
 
  

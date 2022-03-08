@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Insert title here</title>
-    <style type="text/css">
+<meta charset="UTF-8">
+<title>EASY TO START</title> 
+	<link href="/css/easytostart.css" rel="stylesheet"/> 
+	<style type="text/css">
        .yes_select{
           display: none;
           visibility: hidden;
@@ -45,58 +46,65 @@
      });
 
    </script>
-   
-   
-   
+   	 
 </head>
 <body>
-    <h3>EasyToStart</h3>
-    <hr>
-    
-   <br><a href="#">전체</a> &nbsp
-   <a href="">일상생활</a> &nbsp
-   <a href="">욕실</a>&nbsp
-   <a href="">주방</a>&nbsp
-   <a href="">분리수거</a>&nbsp
-   
-   <hr>
-   
-    <br><a href="insertNotice">  글 등록  </a><br>
-
-   <table border="1" width="80%">
-       <tr>
-           <td>썸네일</td>
-           <td>제목</td>
-           <td>좋아요</td>
-       </tr>
-       <c:forEach var="e" items="${easyToStart }">
-           <tr>
-               <td>${e.ets_thumbnail}</td>             
-               <td>
-               	<a href="detail?no=${e.no}">${e.ets_title }</a>
-               </td>
-               <td style="user-select: none"> 
-                  <input type="hidden" class="ets-no" value="${e.no}">   
-                  <div class="addlike">
+	<div id="root">
+		<header id="header">
+			<div id="header_box">
+				<div id="header1_box">
+					<jsp:include page="../header.jsp"/>
+				</div>
+				
+				
+			</div>
+		</header>		 
+		
+		<h3>EasyToStart</h3>
+	   <br><a href="#">전체</a> &nbsp
+	   <a href="">일상생활</a> &nbsp
+	   <a href="">욕실</a>&nbsp
+	   <a href="">주방</a>&nbsp
+	   <a href="">분리수거</a>&nbsp
+	   
+	   	<hr>
+		
+		<section id="container">		
+			<div id="container_box"> 		
+					<section id="content">
+					<ul>
+						 <c:forEach var="e" items="${easyToStart }">
+							 <li>
+								<div class="ETS_THUMBNAIL">
+									<a href="detail?no=${e.no}">
+										<img src="/upload/ets/${e.ets_thumbnail}" width="200" height="200">
+									</a>
+								</div> 
+								  
+								<div class="ETS_TITLE">
+									<a href="detail?no=${e.no}">${e.ets_title }</a>
+								</div>
+								
+								<div style="user-select: none">
+               						<input type="hidden" class="ets-no" value="${e.no}">   
+                 				 <div class="addlike">
                   
-                     <i class="fa-regular fa-heart no_select" >   
-                     </i>   
+                    			<i class="fa-regular fa-heart no_select" >   
+                     				</i>   
                      
-                     <i class="fa-solid fa-heart yes_select">   </i>
-                     <span class = "count">${e.ets_like}</span>
-                </div> 
-               </td>
-           </tr>
-       </c:forEach>
-   </table>
-
-   <c:forEach var="i" begin="1" end="${totalPage }">
-       <a href="easyToStartList?pageNUM=${i }">${i }</a>&nbsp;&nbsp;
-   </c:forEach>
-   
-   
-   
-
-   
+                     			<i class="fa-solid fa-heart yes_select">   </i>
+                     			<span class = "count">${e.ets_like}</span>
+				                </div> 
+				               </div>
+											 
+							 </li>
+					  	</c:forEach>
+					 </ul>					 
+					</section>					
+					 
+								
+			</div><!-- 전체  section box-->
+		</section>
+</div>
 </body>
 </html>
