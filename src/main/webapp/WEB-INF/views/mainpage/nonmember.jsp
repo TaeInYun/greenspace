@@ -22,7 +22,7 @@
 			location.href='../board/listCommunity'
 		})
 		$("#ecoButton").click(function(){
-			location.href=''
+			location.href='../ecoMagazine/ecoMagazineInfo'
 		})
 		
 	})
