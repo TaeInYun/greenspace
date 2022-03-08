@@ -35,6 +35,15 @@
   right: 12px;
   margin: 0;
 }
+table {
+    	width: 100%;
+    	border-top: 1px solid #444444;
+    	border-collapse: collapse;
+  }
+  th, td {
+	    border-bottom: 1px solid #444444;
+	    padding: 10px;
+  }
 </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -74,7 +83,7 @@
 									  <img id="icon" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
 								</div>
 						</form>
-						<table border="1" width="80%">
+						<table>
 							<tr>
 								 
 								<td>상품번호</td>

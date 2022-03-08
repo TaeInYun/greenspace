@@ -9,6 +9,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-${m.nickname }´Ô <a href="logout">·Î±×¾Æ¿ô</a>
+	${m.nickname }´Ô <a href="logout">·Î±×¾Æ¿ô</a>
 </body>
 </html>

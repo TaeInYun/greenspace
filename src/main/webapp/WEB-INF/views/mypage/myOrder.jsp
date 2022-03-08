@@ -5,18 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-	/*datepicer 버튼 롤오버 시 손가락 모양 표시*/
-	.ui-datepicker-trigger{cursor: pointer;}
-	/*datepicer input 롤오버 시 손가락 모양 표시*/
-	.hasDatepicker{cursor: pointer;}
-	.ui-datepicker-trigger{
-		width: 4%;
-		height: 4%;
-	}
-</style>
-
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
 <title>Insert title here</title>
 <script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script>
@@ -26,7 +16,12 @@
 <script type="text/javascript" src="/js/paging.js"></script>
 <script type="text/javascript">
 	$(function() {
-
+		$("#orderList").attr("style","color:white; background: #00913A;")
+		$( $(".nav-btn")[0] ).attr("style", "background: #00913A;");
+		$( $(".nav-btn .nav-btn__text")[0] ).attr("style", "color:white");
+		
+		$(".myShopping").attr("style","background: #00913A; font-weight:800; color: white; padding: 5px 15px; border-radius: 20px;");
+		
 		let option = {
 				 monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
 					dayNamesMin:['월','화','수','목','금','토','일'],
@@ -71,6 +66,8 @@
 			}
 
 			searchByDate(data);
+			$(".search__btns button").attr("style", "");
+			$(this).attr("style","background: #008040;color: white;");
 		});
 		
 		$("#week").click(function(){
@@ -80,6 +77,8 @@
 			}
 			
 			searchByDate(data);
+			$(".search__btns button").attr("style", "");
+			$(this).attr("style","background: #008040;color: white;");
 			
 		});
 		
@@ -91,6 +90,8 @@
 
 			searchByDate(data);
 			$("#paging > a").attr("id", ${period});
+			$(".search__btns button").attr("style", "");
+			$(this).attr("style","background: #008040;color: white;");
 		});
 		$("#threeMonth").click(function(){
 			let data={
@@ -98,12 +99,16 @@
 					period: "threeMonth"
 			}
 			searchByDate(data);
+			$(".search__btns button").attr("style", "");
+			$(this).attr("style","background: #008040;color: white;");
+			
 		});
 		$("#allDay").click(function(){
 			location.href="/mypage/myOrder";
 		});
 		
-		$(document).on("click","#paging > a", function(){
+		
+		$(document).on("click","#paging li> a", function(){
 			let start = $(this).text();
 			let period = $(this).attr("id");
 			
@@ -146,83 +151,92 @@
 				}
 				searchByDate(data);
 			}
-			
 		});
-		
+		$("button[id=${period}]").attr("style","background: #008040;color: white;");
 	});
 </script>
 </head>
-<body>
-	<div>
-		<div>
-			<button type="button" id="week" value="7">1주일</button>
-			<button type="button" id="oneMonth" value="1">1개월</button>
-			<button type="button" id="threeMonth" value="3">3개월</button>
-			<button type="button" id="allDay" value="3">전체 시기</button>
-		</div>
-		<div>
-			<input type="text" id="firstDate" readonly="readonly" placeholder="조회할 날짜를 선택해주세요"> 
-			~ 
-			<input type="text" id="lastDate" readonly="readonly" placeholder="조회할 날짜를 선택해주세요">
-			<input type="button" id="search" value="조회">
-		</div>
-	</div>
-	<table border="1", width="800px">
-		<thead>
-			<tr>
-				<td>상품 정보</td>
-				<td>주문 일자</td>
-				<td>주문 번호</td>
-				<td>주문 금액(수량)</td>
-				<td>주문 상태</td>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="c" items="${list }">
-				<tr>
-					<td>
-						<div>
-							<a href="/shop/detailProduct?no=${c.pro_no }">
-								<img  src="/upload/${c.pro_thumbnail }" width="200" height="200">
-							</a>
-							<ul>
-								<li>
+<body>	
+	<div id="root">
+	<jsp:include page="../header.jsp"></jsp:include>
+	<div class="section">
+		<jsp:include page="../mypage/myAside.jsp"></jsp:include>
+		<main class="mypage-main">
+			<jsp:include page="./myShoppingHeader.jsp"></jsp:include>
+			<div class="search">
+				<div class="search__btns">
+					<button type="button" id="week" value="7">1주일</button>
+					<button type="button" id="oneMonth" value="1">1개월</button>
+					<button type="button" id="threeMonth" value="3">3개월</button>
+					<button type="button" id="allDay" value="3">전체 시기</button>
+				</div>
+				<div class="search__calender">
+					<input type="text" id="firstDate" readonly="readonly" placeholder="시작 날짜"> 
+					<span>&nbsp;&nbsp;</span>
+					<input type="text" id="lastDate" readonly="readonly" placeholder="종료 날짜">
+					<input type="button" id="search" value="조회" >
+				</div>
+			</div>
+			<table class="product_table">
+				<thead>
+					<tr>
+						<th>상품 정보</th>
+						<th>주문 일자</th>
+						<th>주문 번호</th>
+						<th>주문 금액(수량)</th>
+						<th>주문 상태</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="c" items="${list }">
+						<tr>
+							<td>
+								<div class="product_table-productInfo">
 									<a href="/shop/detailProduct?no=${c.pro_no }">
-										${c.pro_name }
+										<img  src="/upload/${c.pro_thumbnail }" width="200" height="200">
 									</a>
-								</li>
-								<c:if test="${c.option_name != null }">
-									<li>
-										(${c.option_name })${c.option_detail}
-									</li>
-								</c:if>
-							</ul>
-						</div>
-					</td>
-					<td>
-						${c.day }
-					</td>
-					<td>
-						<a href="/shop/detailOrderList?id=${c.id }&&day=${c.day}">
-							${c.id }
-						</a>
-					</td>
-					<td>
-						${c.pro_price }원<br>
-						(${c.pro_qty }개)
-					</td>
-					<td>
-						${c.status }
-						<input type="button" value="후기 작성">
-					</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	<div id="paging">
-		<c:forEach begin="1" end="${ totalPage}" var="i">
-			<a href="#" id= "${period }">${i }</a>&nbsp;&nbsp;
-		</c:forEach>
+									<div>
+										<div>
+											<a href="/shop/detailProduct?no=${c.pro_no }">
+												${c.pro_name }
+											</a>
+										</div>
+										<c:if test="${c.option_name != null }">
+											<div class="table-col__option">
+												(${c.option_name })${c.option_detail}
+											</div>
+										</c:if>
+									</div>
+								</div>
+							</td>
+							<td>
+								${c.day }
+							</td>
+							<td>
+								<a href="/shop/detailOrderList?id=${c.id }&&day=${c.day}" >
+									${c.id }
+								</a>
+							</td>
+							<td>
+								${c.pro_price }원 (${c.pro_qty }개)
+							</td>
+							<td>
+								${c.status }
+								<input type="button" value="후기 작성">
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			<div id="paging">
+				<ul class="pagi">
+				<c:forEach begin="1" end="${ totalPage}" var="i">
+					<li><a href="#" id= "${period }">${i }</a></li>
+				</c:forEach>
+				</ul>
+			</div>
+		</main>
+	</div>
 	</div>
 </body>
 </html>

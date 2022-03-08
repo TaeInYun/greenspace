@@ -5,7 +5,7 @@
 <html>
 <head>
 <style type="text/css">
-#header_wrap{padding: 10px; height: 50px; }
+#header_wrap{padding: 20px; height: 50px; font-size: 1.2em;}
 ul, li { margin:10px; padding:0; list-style:none; display: inline-block;} 
 #logo{  display: inline-block; float: left; margin: 10px;  font-size: 35px; font-weight: bold; } 
 #memu{ display: inline-block; float: right; margin-right: 20px 60px 20px}

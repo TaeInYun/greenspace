@@ -48,6 +48,26 @@ section#content { float:right; width:900px; margin-top: 30px;}
 	  	margin-top: 20px;
 	  	margin-bottom: 20px;
 	 }
+	 
+	table {
+    	width: 100%;
+    	border-top: 1px solid #444444;
+    	border-collapse: collapse;
+  }
+  th, td {
+	    border-bottom: 1px solid #444444;
+	    padding: 10px;
+  }
+  input{
+  	width: 100px;
+  }
+  #minus,#plus {  	  
+  	   border:none;  
+  	   background:none;
+  }
+  button{
+  	border-radius: 20px;
+  }
 </style> 
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -144,14 +164,7 @@ section#content { float:right; width:900px; margin-top: 30px;}
 </script>
 </head>
 <body>
-   <h2>상품 상세</h2>
-   <div id="btns">
-      <button id="cart">장바구니 추가</button>
-      <a href="" id="wishList">찜하기</a> 
-      <span id="addMsg"></span>
-   </div>
-   <hr>
-    <div id="root">
+   <div id="root">
       <header id="header">
          <div id="header_box">
             <jsp:include page="../header.jsp"/>
@@ -221,7 +234,7 @@ section#content { float:right; width:900px; margin-top: 30px;}
                                </div>
                     
                             <div id="littleCart" class="context_text">
-                                  <table border="1">
+                                  <table >
                                     <thead>
                                        <tr>
                                           <td>옵션</td>
@@ -234,9 +247,11 @@ section#content { float:right; width:900px; margin-top: 30px;}
                            </div>          
                     </c:if>
                     
-                     <div id="btns" class="context_text">
-					      <button id="cart">장바구니 추가</button>
-					      <a href="" id="wishList">찜하기</a> 
+                     <div id="btns" class="context_text">					     
+						      <button id="cart">장바구니 추가</button>
+						      <a href="" id="wishList">찜하기</a> 
+						      <span id="addMsg"></span>
+						   					   			      
 				     </div>
 				 </div>	<!-- lableZip -->
 				</div> 	<!-- content_1 -->

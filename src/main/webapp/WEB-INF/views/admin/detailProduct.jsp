@@ -28,6 +28,15 @@
 	 	margin: 10px;
 	 	margin-top: 0px;
 	 }
+	 table {
+    	width: 100%;
+    	border-top: 1px solid #444444;
+    	border-collapse: collapse;
+	  }
+	  th, td {
+	    border-bottom: 1px solid #444444;
+	    padding: 10px;
+	  }
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -126,7 +135,7 @@
 						  	
 						 <c:if test="${cnt>=1 }">
 						 	 	
-						 	  <table border="1" width="80%">
+						 	  <table>
 								<tr>
 									<td> 옵션명 </td>
 									<td> 옵션상세명</td>

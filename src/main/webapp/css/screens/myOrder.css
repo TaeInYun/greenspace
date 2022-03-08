@@ -1,0 +1,12 @@
+@charset "UTF-8";
+.section{
+	padding: 0 40px;
+	margin: 0 auto;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.mypage-main{
+	margin: 0 10px;
+	width:84%
+}

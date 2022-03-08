@@ -371,8 +371,8 @@
 			<button  type="submit">등록</button>
 		</ul>
 	</form>
-
-
+			<hr>
+	<a href=/mypage/mainAddress> <button>내 주소 관리</button></a> <br>
 	<a href = "/mainpage/member">메인페이지로</a>
 
 
