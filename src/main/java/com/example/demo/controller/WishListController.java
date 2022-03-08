@@ -32,9 +32,23 @@ public class WishListController {
 	@RequestMapping("shop/wishList")
 	public void findByMemberWish(HttpSession session,Model model) {
 		MemberVO m = (MemberVO)session.getAttribute("m");
-		int member_no = m.getNo();
+		int member_no = 0;
+		if(m != null) {
+			member_no = m.getNo();
+		}
 		
-		model.addAttribute("list", dao.findByMemberWish(member_no) );
+		model.addAttribute("list",  dao.findByMemberWish(member_no));
+		model.addAttribute("cnt", dao.cntOfWishList(member_no) );
+	}
+	@RequestMapping("mypage/myWishList")
+	public void findByMyWishList(HttpSession session,Model model) {
+		MemberVO m = (MemberVO)session.getAttribute("m");
+		int member_no = 0;
+		if(m != null) {
+			member_no = m.getNo();
+		}
+		
+		model.addAttribute("list",  dao.findByMemberWish(member_no));
 		model.addAttribute("cnt", dao.cntOfWishList(member_no) );
 	}
 	

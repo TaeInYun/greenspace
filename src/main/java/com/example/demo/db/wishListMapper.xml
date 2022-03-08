@@ -27,7 +27,9 @@
 		pro_name, 
 		pro_price as price,
 		pro_saleprice as saleprice,
-		pro_brand
+		pro_brand,
+		(SELECT count(*) FROM wishlist WHERE pro_no =p.no) cnt,
+		 w.pro_add_option_no AS pro_add_option_no
 		from pro_add_option pao, product p, wishlist w
 		where
 		p.no = pao.pro_no(+)

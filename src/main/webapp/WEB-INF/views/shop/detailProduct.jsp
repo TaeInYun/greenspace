@@ -110,6 +110,7 @@
    <div id="btns">
       <button id="cart">장바구니 추가</button>
       <a href="" id="wishList">찜하기</a> 
+      <span id="addMsg"></span>
    </div>
    <hr>
     <div id="root">

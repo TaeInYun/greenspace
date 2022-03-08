@@ -73,13 +73,9 @@ public class OrdersController {
 	public void OrderOK() {
 		
 	}
-	/*
+
 	@RequestMapping(value = "/shop/resultOrder", method = RequestMethod.POST)
 	@ResponseBody
-	public String applyOrder(HttpServletRequest request, @RequestBody ApplyOrderVO data) {
-	
-		HttpSession session = request.getSession();
-		int member_no = 1;
 	public String applyOrder(HttpSession session, @RequestBody ApplyOrderVO data) {
 		
 		 MemberVO m = (MemberVO)session.getAttribute("m");
@@ -151,6 +147,4 @@ public class OrdersController {
 		
 		return "OK";
 	}
-		//return result;
-	}*/
 }
