@@ -14,7 +14,26 @@
 	.modal-dialog{
 		width: 600px;
 	}
-	 
+	table {
+    	width: 100%;
+    	border-top: 1px solid #444444;
+    	border-collapse: collapse;
+  	}
+  	th, td {
+	    border-bottom: 1px solid #444444;
+	    padding: 10px;
+  	}
+  	button{
+		border-radius: 20px;		 
+		width: 200px;
+		background-color: #DCEDC8;
+		border: 0.5px solid green;
+		margin: 5px;
+		padding: 5px  
+	}
+	button:hover {
+  		color: #2ecc71;
+	}
 </style>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script> 
@@ -95,7 +114,7 @@ $(function(){
 		</div>
 		
 		<div class="inputArea">
-			 <input type="submit" value="확인" id="submit">
+			<button  value="확인" id="submit">옵션등록하기</button>			 
 		</div>
 	</form>	
 	<hr>
@@ -109,7 +128,7 @@ $(function(){
 		 <c:if test="${cnt>=1 }">						 	 	
 		 	
 			 
-			  <table border="1" width="80%">
+			  <table>
 				<tr>	
 					<td>번호</td>
 					<td> 옵션명 </td>

@@ -14,8 +14,8 @@
 				where pro_name like '%'||#{keyword}||'%' 
 			</if>				 
 		))
-	where num between #{start} and #{end}     
-	order by num
+		where num between #{start} and #{end}     
+		
   </select>  
 	
  
