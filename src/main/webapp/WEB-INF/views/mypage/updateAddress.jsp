@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,18 +54,17 @@ $(function(){
 	
 		
 		<!-- 리뷰번호:<br>-->
-		<input type="hidden" name="no" value="${a.no }"> <br> <!-- hidden -->
+		<%-- <input type="hidden" name="no" value="${a.no }"> --%> <br> <!-- hidden -->
 		 <input type="button" value="우편번호찾기" onclick="kakaopost()">
 		<!--메인/서브: -->
-		<%-- <input type="hidden" name="addr_main" value="${a.addr_main} "> <br> --%> 
-		<input type="hidden" name="addr_main" id="changeInput">
+		<%-- <input type="hidden" name="addr_main" value="${a.addr_main} "> <br> --%> 		
 		<select id="changeTest" >		
 		  <option value=1>메인</option>
 		  <option value=0>서브</option>
 		  
 		</select> <br>
 		
-		<input type="hidden" name="addr_main" id="addr_main" value=""/><br>
+		<input type="hidden" name="addr_main" id="addr_main"><br>
 		우편번호: <input type="text" name="addr_postal" id="addr_postal" value="${a.addr_postal}"> <br>
 		주소: <input type="text" name="addr_road" id="addr_road" value="${a.addr_road}"> <br>			
 		주소상세: <input type="text" name="addr_detail" id="addr_detail" value="${a.addr_detail}"> <br> 
@@ -85,4 +83,5 @@ $(function(){
 
 </form>
 </body>
+
 </html>

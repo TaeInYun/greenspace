@@ -5,12 +5,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	form{
+		margin: 10px;
+	}
+</style>
 </head>
 <body>
 
 <div class="card align-middle"> 
 	<div class="card-title"> 
-		<h2 class="card-title text-center">상품삭제</h2> 
+		<h2 class="card-title text-center"></h2> 
 	</div> 
 	<div class="card-body"> 
 			<form method="post" action="/admin/deleteProduct">			

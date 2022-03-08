@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dao.EasyToStartDAO;
 import com.example.demo.dao.MemberDAO;
 import com.example.demo.vo.EasyToStartVO;
+import com.example.demo.vo.MemberVO;
 
 import lombok.Setter;
 
@@ -32,7 +33,21 @@ public class EasyToStartController {
 
     @GetMapping(value =  "/easyToStart/easyToStartList")
     public void easyToStartForm(HttpSession session, Model model, @RequestParam(value="pageNUM", defaultValue = "1") int pageNUM) {
-        
+        MemberVO m = (MemberVO)session.getAttribute("m");
+    	
+    	
+    	if(m != null) {
+    		//회원의 이미지를 불러오고 
+    		
+    		
+    		
+    	}else {
+    		//회원이 아닐경우 빈하트로 보여주세요!
+    		
+    		
+    	}
+    	
+    	
     	//현재 페이지에 보여줄 시작번호를 계산한다 
     	int start = (pageNUM -1) * dao.pageSIZE; 
     	
@@ -47,6 +62,12 @@ public class EasyToStartController {
         model.addAttribute("totalRecord", dao.totalRecord);
         model.addAttribute("pageSIZE", dao.pageSIZE);
     	model.addAttribute("start", start);
+    	
+    	
+    	
+    	
+    	
+    	
     }
     
     @GetMapping("/easyToStart/like/{no}")

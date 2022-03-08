@@ -15,6 +15,10 @@
   	select * from review r where r.no=#{no}
   </select>
   
+  <select id="findReviewByProno" resultType="reviewVO">
+  	 select count(*)count,avg(re_rate)avg from review where pro_no=#{no}
+  </select>
+  
   <insert id="insert" parameterType="reviewVO">
   	insert into review(
   	no,

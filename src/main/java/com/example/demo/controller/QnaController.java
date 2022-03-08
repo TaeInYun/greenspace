@@ -37,7 +37,7 @@ public class QnaController {
 		
 		
 		
-		String nickname = ((MemberVO)session.getAttribute("m")).getName();	//회원이 로그인 했을때 회원 번호를 m에 넣어서 상태유지 하는것을 가지고옴 
+		int member_no = ((MemberVO)session.getAttribute("m")).getNo();	//회원이 로그인 했을때 회원 번호를 m에 넣어서 상태유지 하는것을 가지고옴 
 		//model.addAttribute("a", dao.findAll(map));
 		
 		
@@ -56,7 +56,7 @@ public class QnaController {
 		map.put("searchColumn", searchColumn);		
 		map.put("start", start);
 		map.put("end", end);
-		map.put("nickname",nickname);
+		map.put("member_no",member_no);
 		
 		model.addAttribute("totalPage", dao.totalPage);
 		

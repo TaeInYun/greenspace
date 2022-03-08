@@ -6,6 +6,7 @@
   <select id="findAll" resultType="QnaVO">  <!-- 내 qna 리스트 -->
   	SELECT
 	<!-- img_name img_name, -->  <!-- 일단 보류 이미지 파일 완성되면 갑니다.  -->
+	pq.no no,
 	pro_name pro_name, 
 	pro_qna_title title, 
 	pro_qna_type_name qna_type, 
@@ -20,11 +21,12 @@
 	member m
 	WHERE
 	pro.no = i.pro_no 
-	and pro.no = pq.pro_no
+	<!-- and pro.no = pq.pro_no -->     <!-- 임시 pro_no -->
 	and pq.pro_qna_type_code = tc.pro_qna_type_code
 	and qs.qna_status_code = pq.qna_Status_code
 	and m.no= pq.member_no
-	and m.name=#{nickname}
+	 <!-- and m.name=#{nickname}  -->  <!-- 이름 중복가능성 -->
+	 and member_no=#{member_no} 
 	<if test="searchColumn != null">
     and pq.pro_qna_type_code='${searchColumn}'
    </if>
@@ -58,7 +60,8 @@
   nickname nickname,
   pro_qna_date day,
   qna_type_name status,
-  pro_qna_content content
+  pro_qna_content content,
+  p.no pro_no
   from pro_qna q, pro_qna_type t,
   qna_status s,product p,member m
   where q.pro_qna_type_code = t.pro_qna_type_code 

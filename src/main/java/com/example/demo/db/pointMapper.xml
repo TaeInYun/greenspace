@@ -28,4 +28,52 @@
 	where member_no = #{member_no} and to_char(point_date,'yy/mm/dd') 
 	= to_char((select cer_date from certification_board where no=#{cer_no}),'yy/mm/dd')
 	</update>
+	
+	
+	
+	<select id="findPresentPoint" resultType="pointVO">
+		select distinct(select sum(point_amount)적립 
+		from point
+		where member_no=#{no} and
+		point_status='적립')
+		-
+		(select nvl(sum(point_amount),0)사용 
+		from point  
+		where member_no=#{no} and
+		point_status='사용')presentPoint , member_no
+		from point where member_no=#{no}
+	</select>	
+	
+	 
+	
+	<select id="findAllPointByNO" resultType="pointVO">	
+		 select p.no, TO_char(p.point_date,'yyyy/mm/dd')point_date,p.point_amount ,p.point_status ,member_no 
+			from point p
+			where member_no=#{no} and 
+            point_amount!=0
+            order by point_date        	 
+		  <if test="filter != null">
+		  		and point_status=#{point_status}
+		  </if>
+ 	
+ 
+ 
+	
+	
+<!-- 
+	select distinct p.no , p.point_status ,  p.point_type_code ,
+ 	p.member_no,p.point_date, o1.ord_id
+    from point p
+	    LEFT OUTER JOIN (select DISTINCT o.ord_id,ord_date,o.MEMBER_NO,p.point_status 
+		from orders o, point p
+		where o.member_no=#{no} and
+		o.member_no=p.member_no 
+		        )o1
+	    ON p.member_no = o1.member_no  	 
+	where p.member_no=#{no}
+	order by p.point_date
+-->
+
+
+	</select>
 </mapper>

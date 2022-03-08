@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="proqna">
-  <select id="insert" resultType="ProQnaVO">  <!-- 내 qna 리스트 -->
+  <insert id="insert" parameterType="ProQnaVO">  <!-- 내 qna 리스트 -->
   	insert into pro_qna(
 	NO,
 	PRO_QNA_TITLE,
@@ -23,11 +23,11 @@
 	sysdate,
 	#{pro_no},			<!-- 상품번호로이동 int pro_no -->
 	#{member_no},     <!-- value에 m.no 넣으면됨  -->
-	#{PRO_QNA_TYPE_CODE},  <!-- QSZ사이즈 QDE배송관련 QRE재입고 QDT상품상세  -->
-	#{QNA_STATUS_CODE})  <!-- 무조건 WA 답변대기 넣으면됨  -->
+	#{pro_qna_type_code},  <!-- QSZ사이즈 QDE배송관련 QRE재입고 QDT상품상세  -->
+	#{qna_status_code})  <!-- 무조건 WA 답변대기 넣으면됨  -->
   
 	  
-  </select>
+  </insert>
   
   
   <update id="update" parameterType="ProQnaVO">
@@ -35,12 +35,13 @@
       no=#{no},
       PRO_QNA_TITLE=#{pro_qna_title},
       PRO_QNA_CONTENT=#{pro_qna_content},
-	  PRO_QNA_PWD=#{PRO_QNA_PWD},
-	  PRO_QNA_DATE=#{PRO_QNA_DATE},
-	  PRO_NO=#{PRO_NO},
-	  MEMBER_NO=#{MEMBER_NO},
-	  PRO_QNA_TYPE_CODE=#{PRO_QNA_TYPE_CODE},
-	  QNA_STATUS_CODE=#{QNA_STATUS_CODE}
+	  PRO_QNA_PWD=#{pro_qna_pwd},
+	  PRO_QNA_DATE=sysdate,
+	  PRO_NO=#{pro_no}, 
+	  MEMBER_NO=#{member_no},
+	  PRO_QNA_TYPE_CODE=#{pro_qna_type_code},
+	  QNA_STATUS_CODE=#{qna_status_code}
+	  where no=#{no}
   
   </update>
   

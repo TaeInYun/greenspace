@@ -55,7 +55,7 @@ public class AddressController {
 	public ModelAndView insertAddress(AddressVO a) {
 		ModelAndView mav = new ModelAndView("redirect:/admin/listAddress");
 		System.out.println("insert작동함");
-		System.out.println(a);
+		System.out.println("vo에 담긴 객체입니다."+a);
 		
 		dao.insert(a);
 		

@@ -7,25 +7,23 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <script type="text/javascript">
-var bDisplay = true;
-function doDisplay(){
-	var con = document.getElementById("myDIV");
-	if(con.style.display=='none'){
-		con.style.display = 'block';
-	}else{
-		con.style.display = 'none';
-	}
-}
+$(function(){
+	 $("#store_sub").hide();		  
+	 $("#store").click(function() {
+	        $('#store_sub').slideToggle('slow', function() {
+	         });
+	 });
+});
 </script>
 </head>
 <body>
 	<h3>관리자설정</h3>
-	<ul>
+	<ul id="admin">
 			 
 			<li><a href="">주문관리</a></li>
-			<li><a href="javascript:doDisplay();"> 상품관리</a></li>
-			<div id="myDIV">
-					<ul>
+			<li id="store">상품관리</li>
+			<div>
+					<ul id="store_sub">
 						<li style="font-size: 10px"><a href="/admin/insertProduct">상품등록</a><br></li>
 						<li style="font-size: 10px"><a href="/admin/listProduct">상품수정</a><br></li>
 					</ul>
