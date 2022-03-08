@@ -47,7 +47,6 @@ public class WishListController {
 		if(m != null) {
 			member_no = m.getNo();
 		}
-		
 		model.addAttribute("list",  dao.findByMemberWish(member_no));
 		model.addAttribute("cnt", dao.cntOfWishList(member_no) );
 	}

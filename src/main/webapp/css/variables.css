@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+
+:root {
+  --green-main: #00913A;
+  --green-sub: #00a653;
+  --border-round: 20px;
+  --btn-padding: 5px 15px;
+}

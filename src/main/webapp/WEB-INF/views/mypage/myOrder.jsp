@@ -8,15 +8,14 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
-<title>Insert title here</title>
+<title>녹지공간 - 나의 주문내역</title>
 <script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/js/jquery-ui/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/js/searchDate.js"></script>
-<script type="text/javascript" src="/js/paging.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$("#orderList").attr("style","color:white; background: #00913A;")
+		$("#link_orderList").attr("style","color:white; background: #00913A;")
 		$( $(".nav-btn")[0] ).attr("style", "background: #00913A;");
 		$( $(".nav-btn .nav-btn__text")[0] ).attr("style", "color:white");
 		
@@ -108,10 +107,11 @@
 		});
 		
 		
+		//페이지 클릭시 
 		$(document).on("click","#paging li> a", function(){
 			let start = $(this).text();
 			let period = $(this).attr("id");
-			
+
 			if(period == "allDay"){
 				let data = {
 						start: start,
@@ -151,92 +151,94 @@
 				}
 				searchByDate(data);
 			}
+			
+			$(this).attr("style","background: #008040;color: white;");
 		});
-		$("button[id=${period}]").attr("style","background: #008040;color: white;");
+		
 	});
 </script>
 </head>
 <body>	
 	<div id="root">
-	<jsp:include page="../header.jsp"></jsp:include>
-	<div class="section">
-		<jsp:include page="../mypage/myAside.jsp"></jsp:include>
-		<main class="mypage-main">
-			<jsp:include page="./myShoppingHeader.jsp"></jsp:include>
-			<div class="search">
-				<div class="search__btns">
-					<button type="button" id="week" value="7">1주일</button>
-					<button type="button" id="oneMonth" value="1">1개월</button>
-					<button type="button" id="threeMonth" value="3">3개월</button>
-					<button type="button" id="allDay" value="3">전체 시기</button>
+		<jsp:include page="../header.jsp"></jsp:include>
+		<div class="section">
+			<jsp:include page="../mypage/myAside.jsp"></jsp:include>
+			<main class="mypage-main">
+				<jsp:include page="./myShoppingHeader.jsp"></jsp:include>
+				<div class="search">
+					<div class="search__btns">
+						<button type="button" id="week" value="7">1주일</button>
+						<button type="button" id="oneMonth" value="1">1개월</button>
+						<button type="button" id="threeMonth" value="3">3개월</button>
+						<button type="button" id="allDay" value="3">전체 시기</button>
+					</div>
+					<div class="search__calender">
+						<input type="text" id="firstDate" readonly="readonly" placeholder="시작 날짜"> 
+						<span>&nbsp;&nbsp;</span>
+						<input type="text" id="lastDate" readonly="readonly" placeholder="종료 날짜">
+						<input type="button" id="search" value="조회" >
+					</div>
 				</div>
-				<div class="search__calender">
-					<input type="text" id="firstDate" readonly="readonly" placeholder="시작 날짜"> 
-					<span>&nbsp;&nbsp;</span>
-					<input type="text" id="lastDate" readonly="readonly" placeholder="종료 날짜">
-					<input type="button" id="search" value="조회" >
-				</div>
-			</div>
-			<table class="product_table">
-				<thead>
-					<tr>
-						<th>상품 정보</th>
-						<th>주문 일자</th>
-						<th>주문 번호</th>
-						<th>주문 금액(수량)</th>
-						<th>주문 상태</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="c" items="${list }">
+				<table class="product_table">
+					<thead>
 						<tr>
-							<td>
-								<div class="product_table-productInfo">
-									<a href="/shop/detailProduct?no=${c.pro_no }">
-										<img  src="/upload/${c.pro_thumbnail }" width="200" height="200">
-									</a>
-									<div>
-										<div>
-											<a href="/shop/detailProduct?no=${c.pro_no }">
-												${c.pro_name }
-											</a>
-										</div>
-										<c:if test="${c.option_name != null }">
-											<div class="table-col__option">
-												(${c.option_name })${c.option_detail}
-											</div>
-										</c:if>
-									</div>
-								</div>
-							</td>
-							<td>
-								${c.day }
-							</td>
-							<td>
-								<a href="/shop/detailOrderList?id=${c.id }&&day=${c.day}" >
-									${c.id }
-								</a>
-							</td>
-							<td>
-								${c.pro_price }원 (${c.pro_qty }개)
-							</td>
-							<td>
-								${c.status }
-								<input type="button" value="후기 작성">
-							</td>
+							<th>상품 정보</th>
+							<th>주문 일자</th>
+							<th>주문 번호</th>
+							<th>주문 금액(수량)</th>
+							<th>주문 상태</th>
 						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="c" items="${list }">
+							<tr>
+								<td>
+									<div class="product_table-productInfo">
+										<a href="/shop/detailProduct?no=${c.pro_no }">
+											<img  src="/upload/${c.pro_thumbnail }" width="200" height="200">
+										</a>
+										<div>
+											<div>
+												<a href="/shop/detailProduct?no=${c.pro_no }">
+													${c.pro_name }
+												</a>
+											</div>
+											<c:if test="${c.option_name != null }">
+												<div class="table-col__option">
+													(${c.option_name })${c.option_detail}
+												</div>
+											</c:if>
+										</div>
+									</div>
+								</td>
+								<td>
+									${c.day }
+								</td>
+								<td>
+									<a href="/shop/detailOrderList?id=${c.id }&&day=${c.day}" >
+										${c.id }
+									</a>
+								</td>
+								<td>
+									${c.pro_price }원 (${c.pro_qty }개)
+								</td>
+								<td>
+									${c.status }
+									<input type="button" value="후기 작성">
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+				<div id="paging">
+					<ul>
+					<c:forEach begin="1" end="${ totalPage}" var="i">
+						<li><a href="#" id= "${period }">${i }</a></li>
 					</c:forEach>
-				</tbody>
-			</table>
-			<div id="paging">
-				<ul class="pagi">
-				<c:forEach begin="1" end="${ totalPage}" var="i">
-					<li><a href="#" id= "${period }">${i }</a></li>
-				</c:forEach>
-				</ul>
-			</div>
-		</main>
-	</div>
+					</ul>
+				</div>
+			</main>
+		</div>
 	</div>
 </body>
 </html>
