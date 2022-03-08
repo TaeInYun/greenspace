@@ -10,7 +10,7 @@
 	<ul>
 		<li>
 			<a href="/mypage/myOrder" class="nav-btn">
-				<i class="fa-solid fa-hashtag" id="orderList" style="color:#d9d9d9"></i>
+				<i class="fa-solid fa-hashtag" id="link_orderList" style="color:#d9d9d9"></i>
 				<span class="nav-btn__text">주문내역</span>
 			</a>
 		</li>
@@ -21,7 +21,7 @@
 			</a>
 		</li>
 		<li>
-			<a href="/mypage/myWishList" class="nav-btn">
+			<a href="/mypage/myWishList" id="link_likeProduct" class="nav-btn">
 				<i class="fa-solid fa-hashtag" style="color:#d9d9d9"></i>
 				<span class="nav-btn__text" id="likeProduct">찜 상품</span>
 			</a>

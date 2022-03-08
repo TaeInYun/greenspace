@@ -4,7 +4,7 @@
 	font-size: 1.1em;
 	font-weight:700;
 	color: white;
-	padding: 5px 15px;
+	padding: var(--btn-padding);
 	width: 33%
 	
 }
