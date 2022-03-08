@@ -33,7 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.MemberDAO;
 import com.example.demo.dao.PointDAO;
- 
+import com.example.demo.vo.MemberVO;
 
 import lombok.Setter;
 
@@ -42,18 +42,21 @@ import lombok.Setter;
 public class PointController {
 	
 	@Autowired
-	private PointDAO dao;
+	private PointDAO dao; 
+	
 	
 	@Autowired
 	private MemberDAO memberdao;
 	 
-	@RequestMapping("mypage/myPointList")
-	public void findPresentPoint(Model model,int no,String filter ) {		 
-		 model.addAttribute("findPresentPoint", dao.findPresentPoint(no));	
+	@RequestMapping("/mypage/myPointList")
+	public void findPresentPoint(Model model,int no,String filter  ) {		 
+		 model.addAttribute("findPresentPoint", dao.findPresentPoint(no));	  
+		 
 		 HashMap map = new HashMap();
 		 map.put("filter", filter);
 		 map.put("no", no);
 		 model.addAttribute("findAllPointByNO", dao.findAllPointByNO(map)); 
+		 
 	}
 	
 	

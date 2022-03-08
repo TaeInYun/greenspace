@@ -18,6 +18,8 @@ public class PointVO {
 	private String point_type_name;
 	private int presentPoint;
 	private String ord_id;
+	private int num;
+	
 	
  
 	

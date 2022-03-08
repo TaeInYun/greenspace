@@ -339,15 +339,11 @@ public class ProductController {
 		}
 
 		
-		
-		
-		
 		@RequestMapping(value = "/admin/deleteProductOption", method = RequestMethod.POST)
 		public ModelAndView deleteProductOption( int no, Model model,int pro_no) {
 			//admin/insertProductOption?no=31
 			
-			ModelAndView mav = new ModelAndView("redirect:/admin/insertProductOption"+"?no="+pro_no);
-			
+			ModelAndView mav = new ModelAndView("redirect:/admin/insertProductOption"+"?no="+pro_no);			
 			
 			HashMap map= new HashMap();
 			map.put("pro_no", pro_no);

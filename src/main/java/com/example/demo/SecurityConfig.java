@@ -49,8 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			//.successHandler(successHandler()) //로그인 성공시 이전 페이지로
 			.permitAll();
 			 
-			/*http.authorizeHttpRequests()
-			.mvcMatchers("/admin/").hasRole("1");*/
+			http.authorizeHttpRequests()
+			.mvcMatchers("/admin/**").hasRole("1");
 	       
 		
 		http.logout()
