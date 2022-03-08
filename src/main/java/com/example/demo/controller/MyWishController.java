@@ -88,7 +88,7 @@ public class MyWishController {
 			list.add(mw);
 		}
 		MemberVO mb = dao_member.getMemberInfo(m.getNo());
-		System.out.println(mb);
+
 		session.setAttribute("rownum", rownum);
 		session.setAttribute("list", list);
 		session.setAttribute("receiverInfo", receiverInfo);

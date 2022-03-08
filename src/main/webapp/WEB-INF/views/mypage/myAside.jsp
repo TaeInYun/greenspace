@@ -21,18 +21,13 @@
 
 </head>
 <body>
-	<div id="head">
-		<p>카테고리</p>		
-	</div>
-	<div id="menu">
-	
-		<ul>			 
-			<li><a href="#">회원정보</a></li><br>
-			<li><a href="#">내쇼핑</a></li><br>
-			<li><a href="/mypage/myChallenge">녹지활동</a></li><br>
-			<li><a href="#">문의내역</a></li>
-		</ul>
-	</div>
-	
+ 
+	<ul  class="mypage_aside">			 
+		<li class="mypage_aside-li"><a href="#">회원정보</a></li><br>
+		<li class="mypage_aside-li"><a href="/mypage/myOrder" class="myShopping">내 쇼핑</a></li><br>
+		<li class="mypage_aside-li"><a href="/mypage/myChallenge">녹지활동</a></li><br>
+		<li class="mypage_aside-li"><a href="#">문의내역</a></li>
+	</ul>
+ 
 </body>
 </html>

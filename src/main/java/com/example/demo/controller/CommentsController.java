@@ -24,12 +24,13 @@ public class CommentsController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/insertComments")
-	public void  insertComments(String com_content, Integer member_no, Integer commu_no, Integer cer_no){		
+	public void  insertComments(String com_content, Integer member_no, Integer commu_no, Integer cer_no, Integer ets_no){		
 		HashMap map = new HashMap();
 		map.put("com_content", com_content);
 		map.put("member_no", member_no);
 		map.put("commu_no", commu_no);			
 		map.put("cer_no", cer_no);			
+		map.put("ets_no", ets_no);			
 	    int re = commentsdao.insertComments(map);
 	}
 	

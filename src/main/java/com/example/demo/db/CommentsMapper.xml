@@ -31,6 +31,12 @@
         where m.no=c.member_no and
 		cer_no=#{cer_no}
 	</select>
+	<select id="findAllCommentByEts_no" resultType="commentsVO">
+		select c.no, nickname, com_content
+		from  member m, comments c
+        where m.no=c.member_no and
+		ets_no=#{ets_no}
+	</select>
 <!--  
 	<delete id="deleteComments">
 		delete comments where no=#{no} and commu_no=#{commu_no}

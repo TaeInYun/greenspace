@@ -88,8 +88,7 @@ public class ProductController {
 		
 		int start = (pageNUM-1)* dao.pageSIZE + 1;
 		int end = start + dao.pageSIZE - 1;
-		System.out.println("start"+start);
-		System.out.println("end"+end);
+		 
 		
 		HashMap map= new HashMap();
 	 
@@ -350,7 +349,7 @@ public class ProductController {
 			map.put("no", no);
 			
 			int re= prodao.delete(map);
-			System.out.println("상품번호 : "+pro_no);
+			 
 			if(re!=1) {
 				mav.setViewName("error");
 			} 

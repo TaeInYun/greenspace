@@ -1,0 +1,49 @@
+/*datepicer 버튼 롤오버 시 손가락 모양 표시*/
+
+.ui-datepicker-trigger{cursor: pointer;}
+/*datepicer input 롤오버 시 손가락 모양 표시*/
+
+.hasDatepicker{
+	margin: auto 0;
+	cursor: pointer;
+	width: 33%;
+	height: 1.5em;
+}
+
+.ui-datepicker-trigger{
+	width: 2.0em;
+	height: 2.2em;
+	margin: 2px;
+}
+.search{
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	font-size: 1.2em;
+}
+
+.search__btns .search__calender > span{
+	margin: auto 0px;
+}
+.search__btns{
+	display: flex;
+	justify-content: space-between;
+	padding: 10px;
+	width: 40%;
+}
+
+.search__btns button{
+	width: 33%;
+}
+
+.search__calender{
+	display: flex;
+	align-content: center;
+	width: 55%;
+}
+
+#search{
+	width: 10%;
+	margin: auto 5px;
+}

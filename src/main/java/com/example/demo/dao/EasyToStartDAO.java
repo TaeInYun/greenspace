@@ -27,8 +27,8 @@ public class EasyToStartDAO {
         return DBManager.findByNoETS(no);
     }
 
-    public void updateHit(int no) {
-        DBManager.updateHitNotice(no);
+    public void updateHitETS(int no) {
+        DBManager.updateHitETS(no);
     }
     
     public void updateLikeETS(int no) {
@@ -39,6 +39,9 @@ public class EasyToStartDAO {
         return DBManager.findLikeETS(no);
     }
 
-
+   
+    public List<EasyToStartVO> ETS() {
+        return DBManager.ETS();
+    }
 
 }

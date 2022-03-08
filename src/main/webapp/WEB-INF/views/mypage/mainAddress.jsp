@@ -7,8 +7,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<link href="/css/mypage.css" rel="stylesheet"/> 	
 </head>
 <body>
+<div id="root">
+	<header id="header">
+			<div id="header_box">
+				<div id="header1_box">
+					<jsp:include page="../header.jsp"/>
+				</div>
+				
+				
+			</div>
+		</header>
+		
+	<section id="content">
 	<h1>메인배송지</h1>
 	<a href="/mypage/insertAddress"><button >배송지추가하기</button></a>
 	<hr>
@@ -59,6 +72,15 @@
 				
 				
 		</c:forEach>
+					
 	</table> 
+	</section>
+	
+	<aside id="aside">
+			<jsp:include page="../mypage/myAside.jsp"/>
+	</aside>
+	
+	
+</div>
 </body>
 </html>

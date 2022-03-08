@@ -2,13 +2,15 @@
 function deleteWishList(noArr) {
 	
 	let re = confirm("해당 상품을 삭제하시겠습니까?");
+
 	if(re == true){
+		
 		$.ajax({
-			url: "deleteWishList",
+			url: "/shop/deleteWishList",
 			data: {data:noArr},
 			success: function() {
 				alert("해당 상품을 위시리스트에서 삭제하였습니다.");
-				location.href="wishList";
+				location.href="/shop/wishList";
 			}
 		});
 		

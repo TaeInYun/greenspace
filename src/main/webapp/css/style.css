@@ -1,0 +1,64 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Batang:wght@400;700&display=swap');
+
+@import "reset.css";
+@import "variables.css";
+
+/* Components */
+@import "components/datepicker.css";
+@import "components/nav-bar.css";
+@import "components/side-bar.css";
+@import "components/product-table.css";
+
+/* Screens */
+@import "screens/myOrder.css";
+@import "screens/myWishList.css";
+
+#root{
+	width: 1200px;
+	margin: 0 auto;
+}
+body{
+	font-family: 'Gowun Batang', serif;
+}
+
+input, label{
+	font-family: 'Gowun Batang', serif;
+	text-align: center;
+	cursor: pointer;
+}
+
+*{
+	font-family: 'Gowun Batang', serif;
+}
+
+button, input[type=button], .btns_select li{
+	font-weight: 800;
+	background: #fff;
+	border: 1px solid var(--green-main);
+	border-radius: 20px;
+	color:var(--green-main);
+	margin-right: 10px;
+	cursor: pointer;
+}
+
+button:hover, input[type=button]:hover, .btns_select li:hover{
+	background:var(--green-sub);
+	color:#fff;
+}
+
+table {
+  width: 100%;
+  border-top: 1px solid #444444;
+  border-collapse: collapse;
+}
+
+th, td {
+  border-bottom: 1px solid #444444;
+  border-left: 1px solid #444444;
+  padding: 10px;
+}
+
+th:first-child, td:first-child {
+  border-left: none;
+}

@@ -19,6 +19,7 @@ import com.example.demo.vo.ChallengeVO;
 import com.example.demo.vo.CommentsVO;
 import com.example.demo.vo.CommunityVO;
 import com.example.demo.vo.EasyToStartVO;
+import com.example.demo.vo.EcoMagazineVO;
 import com.example.demo.vo.ImgVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.MyReviewVO;
@@ -1166,6 +1167,14 @@ public class DBManager {
 			session.close();
 			return no;
 		}
+			
+		
+		public static List<EasyToStartVO> ETS() {
+			SqlSession session = factory.openSession();
+			List<EasyToStartVO> re = session.selectList("easyToStart.ETS");
+			session.close();
+			return re;		
+		}
 
 		
 		public static EasyToStartVO findByNoETS(int no) {
@@ -1174,6 +1183,7 @@ public class DBManager {
 			session.close();
 			return b;		
 		}
+		
 		
 		public static int findLikeETS(int no) {
 			SqlSession session = factory.openSession();
@@ -1384,7 +1394,52 @@ public class DBManager {
 			session.close();
 			return re;
 		}
+ 	
+	//EcoMagazine------------------------------------------
+		/* 전체 게시물 조회 */
+		public static List<EcoMagazineVO> findEcoMagazineAll(){
+			SqlSession session = factory.openSession();
+			List<EcoMagazineVO> list = session.selectList("ecoMagazine.findEcoMagazineAll");
+			session.close();
+			return list;
+		}
 		
+		/* 게시물 상세보기 */
+		public static EcoMagazineVO findEcoMagazineByNo(int no) {
+			SqlSession session = factory.openSession();
+			EcoMagazineVO b = session.selectOne("ecoMagazine.findEcoMagazineByNo", no);
+			session.close();
+			return b;		
+		}
+		
+		/* 좋아요 수 조회 */
+		public static int findEcoMagazineLike(int no) {
+			SqlSession session = factory.openSession();
+			int re = session.selectOne("ecoMagazine.findEcoMagazineLike", no);
+			session.close();
+			return re;		
+		}
+		
+		
+		/* 좋아요 수 업데이트 */
+		public static void updateEcoMagazineLike(int no) {
+			SqlSession session = factory.openSession();
+			session.update("ecoMagazine.updateEcoMagazineLike", no);
+			session.commit();
+			session.close();
+		}
+		
+		
+		/* 조회수 업데이트 */
+		public static void updateEcoMagazineHit(int no) {
+			SqlSession session = factory.openSession();
+			session.update("ecoMagazine.updateEcoMagazineHit", no);
+			session.commit();
+			session.close();
+		}
+		
+
+ 
 //------------------------댓글-----------------------------------
 		public static int insertComments(HashMap map) {
 			SqlSession session = factory.openSession();
@@ -1424,5 +1479,12 @@ public class DBManager {
 			 List<CommentsVO> list = session.selectList("comments.findAllCommentByCer_no", no);
 			 session.close();
 			 return list;
-		}	 
+		}
+
+		public static List<CommentsVO> findAllCommentByEts_no(int no) {
+			 SqlSession session = factory.openSession();
+			 List<CommentsVO> list = session.selectList("comments.findAllCommentByEts_no", no);
+			 session.close();
+			 return list;
+		}
 }

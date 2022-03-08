@@ -63,12 +63,7 @@ table {
 	             }
 	         });
 		})
-		
-		$("#update").click(function(){
-			alert(a)
-		})
-	
-
+	 
  })
  </script>
 </head>
@@ -110,6 +105,8 @@ table {
 <a href="/board/deleteCommunity?no=${c.no }">글삭제</a>
 
 <a href="/board/listCommunity">글목록</a>
+
+<!-- ----댓글------ -->
 <hr>
 	<div>		 
 	  	<input id="commu_no" type="hidden" value="${c.no}">

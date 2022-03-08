@@ -1,0 +1,68 @@
+.btns_select{
+	width:80%
+}
+.btns_select li{
+	width:16%;
+	text-align: center;
+}
+
+.btns_select li, #soldOut, #delSelected{
+	padding: var(--btn-padding);
+	color:var(--green-main);
+}
+
+.btns_select li:hover, #soldOut:hover, #delSelected:hover{
+	color:#fff;
+}
+.wishProducts{
+	width: 100%;
+	text-align: center;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.wishProduct{
+	border: 1px solid #ccc;
+	padding: 10px 20px;
+	margin-right: 20px;
+	margin-bottom: 10px;
+}
+
+input[name="checkList"]{
+	float:left;
+}
+
+.wishProduct img{
+	clear:left;
+	width: 150px;
+	height: 150px;
+}
+
+.wishProduct-detail{
+	width: 250px;
+}
+
+.wishProduct-check__like{
+	background: #fff;
+	border-radius: var(--border-round);
+	margin-bottom: 5px;
+}
+
+.wishProduct-priceInfo{
+	margin: 7px;
+	font-weight: bolder;
+}
+
+.priceInfo-price{
+	color: #aeaeae;
+	text-decoration: line-through;
+}
+
+.priceInfo-saleprice{
+	color: tomato;
+}
+
+.wishProduct-detail__proName{
+	font-weight: 600;
+	margin: 5px 0;
+}

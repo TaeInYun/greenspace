@@ -1,0 +1,22 @@
+.mypage_aside{
+	width:10%;
+	border-right:1px solid #eee;
+	padding-right: 20px;
+}
+.mypage_aside-li a:hover{
+	background:var(--green-sub);
+	color:#fff;
+	font-weight:800;
+	border-radius: 20px;
+}
+.mypage_aside-li a{
+	width: 100%;
+	padding: 5px 15px; 
+}
+
+.mypage_aside-li{
+	font-size: 1.3em;
+	font-weight: bolder;
+	width: 100%;
+	margin-bottom: 30px;
+}

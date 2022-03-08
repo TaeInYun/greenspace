@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/css/style.css">
 <style type="text/css">
 body{
 	font-size: 15px;

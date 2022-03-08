@@ -31,10 +31,10 @@
 	<typeAlias type="com.example.demo.vo.CommunityVO" alias="communityVO"/>
 	<typeAlias type="com.example.demo.vo.EasyToStartVO" alias="EasyToStartVO"/>
     <typeAlias type="com.example.demo.vo.NoticeVO" alias="noticeVO"/>
-    <typeAlias type="com.example.demo.vo.LikeVO" alias="likeVO"/>
-    <typeAlias type="com.example.demo.vo.CommentsVO" alias="commentsVO"/>
+    <typeAlias type="com.example.demo.vo.LikeVO" alias="likeVO"/> 
+    <typeAlias type="com.example.demo.vo.CommentsVO" alias="commentsVO"/> 
+ 	<typeAlias type="com.example.demo.vo.EcoMagazineVO" alias="EcoMagazineVO"/>
  
-	
   </typeAliases>
   <environments default="development">  
     <environment id="development">
@@ -73,8 +73,9 @@
 	<mapper resource="com/example/demo/db/easyToStartMapper.xml"/>
     <mapper resource="com/example/demo/db/noticeMapper.xml"/>
     <mapper resource="com/example/demo/db/imgMapper.xml"/>
- 	<mapper resource="com/example/demo/db/likeMapper.xml"/>
- 	<mapper resource="com/example/demo/db/CommentsMapper.xml"/>
-
+ 	<mapper resource="com/example/demo/db/likeMapper.xml"/> 
+ 	<mapper resource="com/example/demo/db/CommentsMapper.xml"/> 
+	<mapper resource="com/example/demo/db/ecoMagazineMapper.xml"/>
+ 
   </mappers>
 </configuration>

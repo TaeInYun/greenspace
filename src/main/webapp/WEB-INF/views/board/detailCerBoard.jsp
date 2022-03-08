@@ -116,11 +116,10 @@ section#content ul li { display:inline-block; margin:10px; }
 <a href="/board/updateCerBoard?no=${c.no }">글수정</a>
 <a href="/board/deleteCerBoard?no=${c.no }">글삭제</a>
 
- 
-<hr>
+<!-- ----댓글------ -->
 	<div>		 
-	  	<input id="cer_no" type="text" value="${c.no}">
-		<input id="member_no" type="text" value="${m.no}">		
+	  	<input id="cer_no" type="hidden" value="${c.no}">
+		<input id="member_no" type="hidden" value="${m.no}">		
 		<input id="com_content" type="text" placeholder="댓글을 입력해 주세요">		   
 	 	<button id="insertComments">댓글작성</button>	
 	</div>
