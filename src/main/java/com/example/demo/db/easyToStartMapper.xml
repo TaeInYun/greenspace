@@ -15,6 +15,10 @@
         offset #{start} rows fetch first 10 rows only
     </select>
     
+    <select id="ETS" resultType="EasyToStartVO">
+  		select * from easytostart 
+  	</select>
+    
     <select id="findByNoETS" resultType="EasyToStartVO">
   		select * from easytostart where no=#{no}
   	</select>
@@ -26,6 +30,8 @@
  	 <update id="updateHitETS">
   		update easytostart set ets_hit=ets_hit+1 where no=#{no}
   	</update>
+  
+  	
   	
   	<update id="updateLikeETS">
   		update easytostart set ets_like=ets_like+1 where no=#{no}

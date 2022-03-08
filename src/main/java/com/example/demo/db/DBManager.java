@@ -1165,6 +1165,14 @@ public class DBManager {
 			session.close();
 			return no;
 		}
+			
+		
+		public static EasyToStartVO ETS() {
+			SqlSession session = factory.openSession();
+			EasyToStartVO re = session.selectOne("easyToStart.ETS");
+			session.close();
+			return re;		
+		}
 
 		
 		public static EasyToStartVO findByNoETS(int no) {
@@ -1173,6 +1181,7 @@ public class DBManager {
 			session.close();
 			return b;		
 		}
+		
 		
 		public static int findLikeETS(int no) {
 			SqlSession session = factory.openSession();

@@ -17,35 +17,33 @@
       <script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script>
     <script type="text/javascript">
     
-       $(document).ready(function(){
-          $('.addlike').click(function(){
-             var likeDiv = $(this)
-             var no = likeDiv.siblings(".ets-no").val()
-             var 
-             
-             
-             $.ajax({
-                 method: "GET",
-                 url: "/easyToStart/like/" + no,
-               }).done(function( likeCount ) {
-            	   
-                  likeDiv.children(".count").text(likeCount)
-                  $(likeDiv).find(".no_select").css({
-                     display: "none",
-                    visibility: "hidden"
-                  });
-                  
-                  $(likeDiv).find(".yes_select").css({
-                     display: "inline",
-                    visibility: "visible"
-                  });   
-                 });
-          });
-          
-          
-          
-       });
-    
+    $(document).ready(function(){
+        //만약 하트를 클릭? + 해당 게시판의 하트 좋아요 +1을 해주세요
+        //클라이언트가 클릭 - 서버로 controller에 있는 좋아요 +1 해주기 
+        $('.addlike').click(function(){
+           var likeDiv = $(this)
+           var no = likeDiv.siblings(".ets-no").val()
+           $.ajax({
+               method: "GET",
+               url: "/easyToStart/like/" + no,
+             }).done(function( likeCount ) {
+                likeDiv.children(".count").text(likeCount)
+                $(likeDiv).find(".no_select").css({
+                   display: "none",
+                  visibility: "hidden"
+                });
+                
+                $(likeDiv).find(".yes_select").css({
+                   display: "inline",
+                  visibility: "visible"
+                });
+                
+                
+                
+               });
+        });
+     });
+
    </script>
    
    
@@ -73,8 +71,10 @@
        </tr>
        <c:forEach var="e" items="${easyToStart }">
            <tr>
-               <td>${e.ets_thumbnail}</td>
-               <td>${e.ets_title }</td>
+               <td>${e.ets_thumbnail}</td>             
+               <td>
+               	<a href="detail?no=${e.no}">${e.ets_title }</a>
+               </td>
                <td style="user-select: none"> 
                   <input type="hidden" class="ets-no" value="${e.no}">   
                   <div class="addlike">
@@ -84,8 +84,7 @@
                      
                      <i class="fa-solid fa-heart yes_select">   </i>
                      <span class = "count">${e.ets_like}</span>
-                </div>
-                  
+                </div> 
                </td>
            </tr>
        </c:forEach>

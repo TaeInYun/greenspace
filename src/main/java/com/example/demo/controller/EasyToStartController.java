@@ -70,10 +70,27 @@ public class EasyToStartController {
     	
     }
     
+    @RequestMapping("/easyToStart/testETS")
+	public String findAllETS(HttpSession session, Model model) {
+		model.addAttribute("easyToStart", dao.ETS());		
+		return "/easyToStart/testETS";
+	}
+    
+    
+    
     @GetMapping("/easyToStart/like/{no}")
     @ResponseBody
     public int getLikeCount(@PathVariable int no) {
     	dao.updateLikeETS(no);
     	return dao.findLikeETS(no);
     }
+    
+    
+    @RequestMapping("/easyToStart/detail")
+    public void detail(int no, Model model) {
+    	dao.updateHitETS(no);
+        model.addAttribute("n", dao.findByNoETS(no));
+    }
+    
+    
 }
