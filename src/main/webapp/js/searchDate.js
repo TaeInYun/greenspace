@@ -31,10 +31,13 @@ function searchByDate(data) {
 				//$("#paging > a").attr("id", po.period);
 			});//end ${list}
 			$("#paging").html("")
+			let ul = $("<ul></ul>")
+			
 			for(let i = 1; i <= po.totalPage; i++){
 				let a = $("<a></a>").attr("href","#").attr("id",po.period).html(i);
-				$("#paging").append(a, "&nbsp;&nbsp;");
+				$(ul).append($("<li></li>").append(a));
 			}
+			$("#paging").html(ul);
 		}
 	});
 }

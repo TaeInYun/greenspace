@@ -107,7 +107,8 @@
 			location.href="/mypage/myOrder";
 		});
 		
-		$(document).on("click","#paging > a", function(){
+		
+		$(document).on("click","#paging li> a", function(){
 			let start = $(this).text();
 			let period = $(this).attr("id");
 			
@@ -228,7 +229,7 @@
 				</tbody>
 			</table>
 			<div id="paging">
-				<ul>
+				<ul class="pagi">
 				<c:forEach begin="1" end="${ totalPage}" var="i">
 					<li><a href="#" id= "${period }">${i }</a></li>
 				</c:forEach>
