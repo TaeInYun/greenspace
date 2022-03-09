@@ -5,7 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/css/style.css">
 <style type="text/css">
+
 	.btn btn-lg btn-primary btn-block{
 		border-radius: 20px;		 
 		width: 200px;

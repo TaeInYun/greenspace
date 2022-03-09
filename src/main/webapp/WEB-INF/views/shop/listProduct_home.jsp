@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>녹지공간 쇼핑몰</title> 
 <link href="/css/shop.css" rel="stylesheet"/> 
+<link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 	<div id="root">

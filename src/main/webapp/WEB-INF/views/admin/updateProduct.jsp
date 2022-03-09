@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자설정_${p.pro_name }_상품수정</title>
+<link rel="stylesheet" href="/css/style.css">
 <style type="text/css">
 	.inputArea{
 		margin: 5px;

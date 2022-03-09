@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>관리자설정_상품등록</title>
 <link href="/css/admin.css" rel="stylesheet"/> 
+<link rel="stylesheet" href="/css/style.css">
 <style type="text/css">
 	.inputArea{
 		margin: 10px;

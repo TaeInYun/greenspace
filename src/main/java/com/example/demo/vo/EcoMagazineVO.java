@@ -8,7 +8,7 @@ import java.util.Date;
 public class EcoMagazineVO {
     private int no;
     private String eco_title;
-    private String eco_like;
+    private int eco_like;
     private String eco_content;
     private Date eco_date;
     private int ets_hit;
