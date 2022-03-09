@@ -6,11 +6,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
 <title>EASY TO START</title> 
-	<link href="/css/easytostart.css" rel="stylesheet"/> 
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
+	 
 	<style type="text/css">
        .yes_select{
           display: none;
@@ -49,27 +48,28 @@
 
 <body>
 	<div id="root">
-	
 		<header id="header">
 			<div id="header_box">
 				<div id="header1_box">
 					<jsp:include page="../header.jsp"/>
+					<link href="/css/easytostart.css" rel="stylesheet"/>
 				</div>
 			</div>
 		</header>		 
-
-		<div class ="title">
-			<h3>지구를 위한 첫걸음, Easy To Start</h3>
+		
+		<div class = "boradHeader">
+			<div class ="etsTitle">
+					<h3>Easy To Start</h3>
+			</div>
+			<div class = "etsCategory">
+				<a href="" class = "ets">전체</a>
+		   		<a href="" class = "ets">일상생활</a>
+		   		<a href="" class = "ets">욕실</a>
+		   		<a href="" class = "ets">주방</a>
+		   		<a href="" class = "ets">분리수거</a>
+			</div>
 		</div>
-
-		<div class = "목록">
-			<br><a href="#" class="목록">전체</a> &nbsp
-	   		<a href=""class="목록">일상생활</a> &nbsp
-	   		<a href=""class="목록">욕실</a>&nbsp
-	   		<a href=""class="목록">주방</a>&nbsp
-	   		<a href=""class="목록">분리수거</a>&nbsp
-		</div>
-
+			
 
 		
 		<section id="container">		

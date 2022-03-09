@@ -13,10 +13,13 @@
 /* Screens */
 @import "screens/myOrder.css";
 @import "screens/myWishList.css";
+@import "screens/cart.css";
+@import "screens/order_form.css";
 
 #root{
 	width: 1200px;
 	margin: 0 auto;
+	height: 100%;
 }
 body{
 	font-family: 'Gowun Batang', serif;
@@ -57,8 +60,8 @@ th, td {
   border-bottom: 1px solid #444444;
   border-left: 1px solid #444444;
   padding: 10px;
+  vertical-align: middle;
 }
-
 th:first-child, td:first-child {
   border-left: none;
 }
