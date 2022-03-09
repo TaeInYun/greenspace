@@ -116,21 +116,16 @@ section#content { float:right; width:900px; margin-top: 30px;}
 				alert("상품의 옵션을 선택해주세요");
 				return;
 			}
-			
-			
-			
 			insertWish(isOption,cart_option,pro_no );
-
 		})
 		
 	 	$("#pro_option_detail_name").change(function(){	
-			  
+	 		
 	 		let tr = $("<tr></tr>");
 	 		let select = $("#pro_option_detail_name > option:selected").text();
 	 		let end = select.indexOf('(');
 	 		let option = $.trim(select.substr(0,end));
-	 		let addPrice = $("#pro_option_detail_name > option:selected").val();
-	 		
+	 		let addPrice = $("#pro_option_detail_name > option:selected").val();	 		
 	 		
 			let addSub = $("<td></td>").attr("id", "addSub");
 			let minus = $("<button></button>").html("-").attr("id", "minus");

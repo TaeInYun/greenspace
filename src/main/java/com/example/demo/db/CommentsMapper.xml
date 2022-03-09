@@ -20,35 +20,51 @@
 	</insert>
 	
 	<select id="findAllCommentByCommu_no" resultType="commentsVO">
-		select c.no,  nickname, com_content
+		select c.no,TO_CHAR(com_regdate,'yyyy/mm/dd')com_regdate,  nickname, com_content,member_no
 		from comments c, member m
 		where c.member_no=m.no and
 		commu_no=#{no}
 	</select>
 	<select id="findAllCommentByCer_no" resultType="commentsVO">
-		select c.no, nickname, com_content
+		select c.no, TO_CHAR(com_regdate,'yyyy/mm/dd')com_regdate,nickname, com_content,member_no
 		from  member m, comments c
         where m.no=c.member_no and
 		cer_no=#{cer_no}
 	</select>
 	<select id="findAllCommentByEts_no" resultType="commentsVO">
-		select c.no, nickname, com_content
+		select c.no,TO_CHAR(com_regdate,'yyyy/mm/dd')com_regdate, nickname, com_content,member_no
 		from  member m, comments c
         where m.no=c.member_no and
 		ets_no=#{ets_no}
 	</select>
-<!--  
-	<delete id="deleteComments">
-		delete comments where no=#{no} and commu_no=#{commu_no}
-	</delete>
-	 
-	  	 
-	 
-	<update id="updateComments" parameterType="commentsVO">
+	<select id="findAllCommentByPro_qna_no" resultType="commentsVO">
+		select c.no,TO_CHAR(com_regdate,'yyyy/mm/dd')com_regdate, nickname, com_content,member_no
+		from  member m, comments c
+        where m.no=c.member_no and
+		pro_qna_no=#{pro_qna_no}
+	</select>
+	<select id="findAllCommentByOne_no" resultType="commentsVO">
+		select c.no, TO_CHAR(com_regdate,'yyyy/mm/dd')com_regdate,nickname, com_content,member_no
+		from  member m, comments c
+        where m.no=c.member_no and
+		one_no=#{one_no}
+	</select>
+	<select id="findAllCommentByRe_no" resultType="commentsVO">
+		select c.no, TO_CHAR(com_regdate,'yyyy/mm/dd')com_regdate,nickname, com_content,member_no
+		from  member m, comments c
+        where m.no=c.member_no and
+		re_no=#{re_no}
+	</select>
+  
+	<delete id="deleteComments">		 
+		delete comments where no=#{no} and member_no=#{member_no}
+ 	</delete>
+ 	
+ 	<update id="updateComments" parameterType="HashMap">
 		update comments set com_content=#{com_content}
 		where member_no=#{member_no} and no=#{no}
     </update>
 	
- -->		
+	
 	 
 </mapper>

@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/css/style.css">
 <link href="/css/mypage.css" rel="stylesheet"/> 	 
 <style type="text/css">
 	table {

@@ -7,18 +7,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="/css/style.css">
 <style type="text/css">
-
-	.btn btn-lg btn-primary btn-block{
-		border-radius: 20px;		 
-		width: 200px;
-		background-color: #DCEDC8;
-		border: 0.5px solid green;
-		margin: 5px;
-		padding: 5px  
-	}
-	button:hover {
-  		color: #2ecc71;
-	}
+ 
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">

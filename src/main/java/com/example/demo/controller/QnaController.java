@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.dao.CommentsDAO;
 import com.example.demo.dao.QnaDAO;
 import com.example.demo.vo.MemberVO;
 
@@ -21,6 +22,9 @@ public class QnaController {
 
 	@Autowired
 	private QnaDAO dao;
+	
+	@Autowired
+	private CommentsDAO commentsdao;
 	
 	
 	public void setDao(QnaDAO dao) {
@@ -76,6 +80,8 @@ public class QnaController {
 	public void detail(int no,Model model) {
 		
 		model.addAttribute("qd",dao.findAllDetail(no));
+		model.addAttribute("comments",commentsdao.findAllCommentByPro_qna_no(no));
+		
 	}
 	
 	

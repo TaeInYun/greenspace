@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.dao.CommentsDAO;
 import com.example.demo.dao.ReviewDAO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.ProductVO;
@@ -28,6 +29,9 @@ public class ReviewController {
 
 	@Autowired
 	private ReviewDAO dao;
+	
+	@Autowired
+	private CommentsDAO CommentsDAO;
 	
 	
 	public void setDao(ReviewDAO dao) {
@@ -47,6 +51,7 @@ public class ReviewController {
 		public void detail(int no, Model model) {	
 			dao.updateHit(no);
 			model.addAttribute("r", dao.findAllDetail(no));
+			model.addAttribute("comments", CommentsDAO.findAllCommentByRe_no(no));
 		}
 		
 		

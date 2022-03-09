@@ -17,4 +17,5 @@ public class CommentsVO {
 	private String  nickname;
 	
 	
+	
 }

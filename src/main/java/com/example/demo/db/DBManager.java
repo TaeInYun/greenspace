@@ -1456,13 +1456,7 @@ public class DBManager {
 			 return list;
 		}
 /*
-		public static int deleteComments(HashMap map) {
-			SqlSession session = factory.openSession();
-			int re = session.delete("comments.deleteComments", map);
-			session.commit();
-			session.close();
-			return re;
-		}
+		
 
 	 	public static int updateComments(HashMap map) {
 			SqlSession session = factory.openSession();
@@ -1487,4 +1481,42 @@ public class DBManager {
 			 session.close();
 			 return list;
 		}
+
+		public static List<CommentsVO> findAllCommentByPro_qna_no(int no) {
+			 SqlSession session = factory.openSession();
+			 List<CommentsVO> list = session.selectList("comments.findAllCommentByPro_qna_no", no);
+			 session.close();
+			 return list;
+		}
+
+		public static List<CommentsVO> findAllCommentByOne_no(int no) {
+			 SqlSession session = factory.openSession();
+			 List<CommentsVO> list = session.selectList("comments.findAllCommentByOne_no", no);
+			 session.close();
+			 return list;
+		}
+
+		public static List<CommentsVO> findAllCommentByRe_no(int no) {
+			SqlSession session = factory.openSession();
+			List<CommentsVO> list = session.selectList("comments.findAllCommentByRe_no", no);
+			session.close();
+			return list;
+		}
+
+		public static int deleteComments(HashMap map) {
+			SqlSession session = factory.openSession();
+			int re = session.delete("comments.deleteComments", map);
+			session.commit();
+			session.close();
+			return re;
+		}
+
+		public static int updateComments(HashMap map) {
+			SqlSession session = factory.openSession();
+			int re = session.update("comments.updateComments", map);
+			session.commit();
+			session.close();
+			return re;
+		}
+
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.dao.CommentsDAO;
 import com.example.demo.dao.OneDAO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OneVO;
@@ -24,6 +25,10 @@ public class OneController {
 	
 	@Autowired
 	private OneDAO dao;
+	
+	@Autowired
+	private CommentsDAO CommentsDAO;
+	
 	
 	public void setDao(OneDAO dao) {
 		this.dao= dao;
@@ -85,6 +90,7 @@ public class OneController {
 	public void detail(int no,Model model) {
 		
 		model.addAttribute("od",dao.findAllDetail(no));
+		model.addAttribute("comments",CommentsDAO.findAllCommentByOne_no(no));
 	}
 	
 	

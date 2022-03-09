@@ -1,17 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>	
-	<form action="/board/deleteComments" method="post">
-		 а╓╦╩ ╩Ха╕гоЁ╙©Д?
-		<input type="hidden" name="no" value="${no}">
-		<input type="hidden" name="commu_no" value="${commu_no}">
-		<input type="submit" value="х╝юн">
-	</form>
+<div class="card align-middle"> 
+	<div class="card-title"> 
+		<h2 class="card-title text-center"></h2> 
+	</div> 
+	<div class="card-body">  
+			<form action="/board/deleteComments" method="post">
+					 <p>Л═∙К╖░К║° Л┌╜Л═°М∙≤Л▀°Й╡═Л┼╣К▀┬Й╧▄?<p>	 
+					<input type="hidden" name="no" value="${no}">		 
+					<input type="hidden" name="member_no" value="${member_no}">	 				
+					<button class="btn btn-lg btn-primary btn-block" type="submit">Л┌╜Л═°</button> 
+			</form> 
+	</div> 
+</div>
+
+
+
+
+	 
 </body>
 </html>
