@@ -1,0 +1,22 @@
+.cashInfo{
+	color: var(--green-main);
+	font-weight: bold;
+}
+
+.cashInfo{
+	background: #F3F3F3;
+	border-radius: 15px;
+	height: 400px;
+}
+
+.cashInfo p{
+	font-weight: bold;
+	font-size: 1.0em;
+	margin: 10px;
+}
+
+.cashInfo >div > span{
+	margin: 5px 0;
+	display: block;	
+	text-align:  right;
+}

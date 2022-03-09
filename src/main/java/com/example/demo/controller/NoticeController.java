@@ -47,7 +47,7 @@ public class NoticeController {
         map.put("start", start);
         map.put("totalRecord", dao.totalRecord);
         map.put("totalPage", dao.totalPage);
-
+       
         //dao를 통해 검색한 결과를 model에 저장
         //이대 findAll메소드에서 전체레코드수를 구하고
         //그 값을 갖고 전체페이지수도 계산

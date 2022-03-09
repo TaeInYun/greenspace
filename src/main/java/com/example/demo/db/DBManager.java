@@ -965,10 +965,19 @@ public class DBManager {
 		return cnt;
 	}	
 	
-	/*  챌린지 인증게시판 목록   */
-	public static List<CerBoardVO> findCerBoard(){
+	/* 챌린지 인증게시판 레코드개수   */
+	public static int getTotalRecordCer(){
 		SqlSession session = factory.openSession();
-		List<CerBoardVO> list= session.selectList("cerboard.findAll");
+		int no = session.selectOne("cerboard.getTotalRecord");
+		session.close();
+		return no;
+	}
+
+	
+	/*  챌린지 인증게시판 목록   */
+	public static List<CerBoardVO> findCerBoard(HashMap map){
+		SqlSession session = factory.openSession();
+		List<CerBoardVO> list= session.selectList("cerboard.findAll",map);
 		session.close();
 		return list;
 	}		
@@ -1020,12 +1029,20 @@ public class DBManager {
 	
 	
 	/*  My 챌린지 인증 게시판 목록 */
-	public static List<CerBoardVO> findCerByMember(int member_no){
+	public static List<CerBoardVO> findCerByMember(HashMap map){
 		SqlSession session = factory.openSession();
-		List<CerBoardVO> list= session.selectList("cerboard.findCerByMember",member_no);
+		List<CerBoardVO> list= session.selectList("cerboard.findCerByMember",map);
 		session.close();
 		return list;
 	}		
+	
+	/* My 챌린지 인증게시판 레코드개수   */
+	public static int getTotalRecordMyCer(HashMap map){
+		SqlSession session = factory.openSession();
+		int no = session.selectOne("cerboard.getTotalRecordMyCer",map);
+		session.close();
+		return no;
+	}
 	
 	
 	
@@ -1087,12 +1104,20 @@ public class DBManager {
 	//---------------Community (커뮤니티) ---------------------
 	
 	/*  커뮤니티게시판 목록   */
-	public static List<CommunityVO> findCommunity(){
+	public static List<CommunityVO> findAllCommunity(HashMap map){
 		SqlSession session = factory.openSession();
-		List<CommunityVO> list= session.selectList("community.findAll");
+		List<CommunityVO> list= session.selectList("community.findAll",map);
 		session.close();
 		return list;
 	}		
+	
+	/*  커뮤니티게시판 레코드개수   */
+	public static int getTotalRecordCommu(){
+		SqlSession session = factory.openSession();
+		int no = session.selectOne("community.getTotalRecord");
+		session.close();
+		return no;
+	}
 
 	
 	/*  커뮤니티게시판 등록   */
@@ -1140,13 +1165,23 @@ public class DBManager {
 	}
 	
 	
+	
 	/*  My 커뮤니티게시판 목록 */
-	public static List<CommunityVO> findCommuByMember(int member_no){
+	public static List<CommunityVO> findCommuByMember(HashMap map){
 		SqlSession session = factory.openSession();
-		List<CommunityVO> list= session.selectList("community.findCommuByMember",member_no);
+		List<CommunityVO> list= session.selectList("community.findCommuByMember",map);
 		session.close();
 		return list;
-	}		
+	}	
+	
+	
+	/* My 챌린지 인증게시판 레코드개수   */
+	public static int getTotalRecordMyCommu(HashMap map){
+		SqlSession session = factory.openSession();
+		int no = session.selectOne("community.getTotalRecordMyCommu",map);
+		session.close();
+		return no;
+	}
 
 	
 	//---------------EasyToStart---------------

@@ -85,7 +85,10 @@ section#content ul li { display:inline-block; margin:10px; }
  					</ul>	
 			 
 					</section>	
-				</div> 	 
+				</div> 
+				<c:forEach var="i" begin="1" end="${totalPage }">
+			        <a href="listCerBoard?pageNUM=${i }">${i }</a>&nbsp;&nbsp;
+			 	   </c:forEach>
 		</section>	
 				
 </div>		 

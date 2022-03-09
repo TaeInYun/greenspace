@@ -8,7 +8,6 @@
 <meta charset="UTF-8">
 
 <title>Eco Magazine</title> 
-	<link href="/css/easytostart.css" rel="stylesheet"/> 
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
 	<style type="text/css">
@@ -54,33 +53,38 @@
 			<div id="header_box">
 				<div id="header1_box">
 					<jsp:include page="../header.jsp"/>
+					<link href="/css/ecoMagazine.css" rel="stylesheet"/> 
 				</div>
 			</div>
 		</header>		 
-
-		<div class ="title">
-			<h3>EcoMagazine</h3>
+		<div>
+			<div class ="etsTitle">
+				<h3>EcoMagazine</h3>
+			</div>
+			<div class ="etsCategory">
+				<a href="#" class="목록">유용정보</a> &nbsp
+		   		<a href=""class="목록">환경관련기사</a> &nbsp
+		   		<a href=""class="목록">캠페인/후원안내</a>&nbsp
+			</div>	
 		</div>
+		
+		
 
-		<div class = "목록">
-			<br><a href="#" class="목록">유용정보</a> &nbsp
-	   		<a href=""class="목록">환경관련기사</a> &nbsp
-	   		<a href=""class="목록">캠페인/후원안내</a>&nbsp
-		</div>
+		
 
 		<section id="container">		
 			<div id="container_box"> 		
 				<section id="content">
-					<ul>
+					<ul class ="ECO_UL">
 						<c:forEach var="e" items="${ecoMagazine }">
 							<li>
-								<div class="ETS_THUMBNAIL">
+								<div class="ECO_THUMBNAIL">
 									<a href="detail?no=${e.no}">
 										<img src="/upload/board/${e.eco_thumbnail}" width="200" height="200">
 									</a>
 								</div> 
 								  
-								<div class="ETS_TITLE">
+								<div class="ECO_TITLE">
 									<a href="detail?no=${e.no}">${e.eco_title }</a>
 								</div>
 								

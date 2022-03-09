@@ -6,44 +6,31 @@
 	
 		<!-- 커뮤니티 게시판 리스트  -->
 	<select id="findAll" resultType="communityVO">
-	 select num,no,commu_title,commu_content, commu_date , nickname , commu_hit from
-		(select rownum num, co.no no,commu_title, commu_content, commu_date , nickname , commu_hit
-		from community co, member m
-		where m.no=co.member_no  order by commu_date )
-	</select>
-	
-	
-	
-	
-	<!-- 커뮤니티 게시판 리스트  
-	<select id="findAll" resultType="communityVO">
-	select num, no,commu_title,commu_content, commu_date , nickname , commu_hit from
-    ( select rownum num, no,commu_title,commu_content, commu_date , nickname , commu_hit from
-       ( select co.no no,commu_title,commu_content, commu_date , nickname , commu_hit from
-		(select co.no,commu_title, commu_content, commu_date , nickname , commu_hit
+		select co.no no,commu_title, commu_content, commu_date , nickname , commu_hit
 		from community co, member m
 		where m.no=co.member_no 
-		<if test="keyword != null">
-		 and ${searchColumn} like '%'||#{keyword}||'%'
-		</if>
-		 )co left outer join img i
-		on i.commu_no = co.no
-        order by commu_date ) )
-         where num between #{start} and #{end} 
+		 order by commu_date desc
+		offset #{start} rows fetch first 10 rows only
 	</select>
--->
-
+	
+	<select id="getTotalRecord" resultType="java.lang.Integer">
+        select count(*) from community
+    </select>
+   
+    
+    <select id="getTotalRecordMyCommu" parameterType="hashMap" resultType="java.lang.Integer">
+        select count(*) from community where member_no=#{member_no}
+    </select>    
+	
 	
 	<!-- My 커뮤니티 게시판 리스트  -->
 	<select id="findCommuByMember" resultType="communityVO">
-		select co.no,commu_title,commu_content, commu_date , nickname , commu_hit from
-		(select co.no,commu_title,commu_content, commu_date , nickname , commu_hit
+	select co.no no,commu_title, commu_content, commu_date , nickname , commu_hit
 		from community co, member m
-		where m.no=co.member_no
-        and member_no=#{member_no}) co
-		left outer join img i
-		on i.commu_no = co.no
-		order by commu_date
+		where m.no=co.member_no  
+		and member_no=#{member_no}
+		order by commu_date desc
+		offset #{start} rows fetch first 10 rows only
 	</select>
 	
 	
@@ -64,7 +51,7 @@
 	  	delete community where no=#{no}
 	  </delete>
 	  
-	   <!-- 인증게시판 조회수-->
+	   <!-- 커뮤니티 게시판 조회수-->
 	  <update id="updateHit">
 	  	update community set commu_hit=commu_hit+1 where no=#{no}
 	  </update>	

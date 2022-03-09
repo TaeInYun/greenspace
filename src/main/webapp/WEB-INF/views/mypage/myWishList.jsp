@@ -62,7 +62,7 @@
 <body>
 	<div id="root">
 		<jsp:include page="../header.jsp"></jsp:include>
-		<div class="section">
+		<div class="section mypage">
 			<jsp:include page="../mypage/myAside.jsp"></jsp:include>
 			<main class="mypage-main">
 				<jsp:include page="./myShoppingHeader.jsp"></jsp:include>

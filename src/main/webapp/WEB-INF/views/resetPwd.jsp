@@ -5,28 +5,50 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<link rel="stylesheet" href="/css/joinLogin.css">
+<style type="text/css">
+.findPwdbtn,#backBtn{
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+#backBtn{
+	margin: 0 0 20px 0;
+}
+#input_group{
+	margin-top: 8px;
+}
+</style>
+<title>비밀번호 초기화</title>
 </head>
 <body>
+<div id="warp">
 
-	<h3>비밀번호 초기화</h3>
-	${id}님! 새로운 비밀번호를 입력하세요
-
+	<div id="header-logo">
+	<a href="/mainpage/nonmember"><img id="logo" src="/upload/logo.png"></a>
+	</div>
+	
+<div id="container">
+	<div id="content">	
+	<h2 style="text-align: center">비밀번호 초기화</h2>
+	<div id="show_text" style="">
+	<strong>${id}</strong>&nbsp;님!&nbsp;<br>
+	새로운 비밀번호를 입력하세요.
+	</div>
 	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 
 	<c:choose>
 		<c:when test="${ checkPwd eq '1'}">
 			<form  action="updatePwdOK" method="POST">
-				<p>
-					<label>새비밀번호</label>
-					<input type="password" id="pwd" name="pwd" required>
-				</p>
-				<p>
-					<label>새 비밀번호 확인</label>
-					<input type="password" id="pwdChek" name="pwdChek" required>
-				</p>
-				<input type="submit" value="비밀번호 변경">
-				<button type="button" onclick="history.go(-1);" >Cancel</button>
+				
+					<div id="input_group">
+					<input type="password" class="input" id="pwd" name="pwd" placeholder="새 비밀번호" required>
+				</div>
+				<div id="input_group">
+					
+					<input type="password" class="input" id="pwdChek" name="pwdChek" placeholder="새 비밀번호 확인" required>
+				</div>
+				<input class="findPwdbtn" type="submit" value="비밀번호 변경">
+				<button type="button" id="backBtn" onclick="history.go(-1);" >이전으로</button>
 			</form>
 		</c:when>
 		<c:otherwise>
@@ -35,8 +57,10 @@
 				history.go(-1);
 			</script>
 		</c:otherwise>
-	</c:choose>
-
+		</c:choose>
+		</div>
+	</div>
+</div>
 	
 
 

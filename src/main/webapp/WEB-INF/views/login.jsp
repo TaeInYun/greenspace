@@ -5,80 +5,116 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인</title>
+<link rel="stylesheet" href="/css/joinLogin.css">
 <style type="text/css">
-.error_id, .error_pwd{
-	font-size: 0.7em;
-	color: red;
-}
-.error_login{
-	font-size: 0.7em;
-	color: red;
+#input_group{
+	margin-top: 8px;
 }
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="/js/login.js"></script>
 <script type="text/javascript">
-	$(function(){
+$(function(){
+   
+	$('.tab-link').click(function () {
+        var tab_id = $(this).attr('data-tab');
+ 
+        $('.tab-link').removeClass('current');
+        $('.tab-content').removeClass('current');
+ 
+        $(this).addClass('current');
+        $("#" + tab_id).addClass('current');
+	})
 	
-		 $("#loginBtn").click(function(){
-		
-			var id = $("#id").val();
-    		var pwd = $("#pwd").val();
-	    	/* 아이디 공백일시 */
-			 if(id==""){
-				 $(".error_id").css("display","block");
-				 $(".error_pwd").css("display","none");
-				 return false;
-			}
-	    	
-		    /* 비밀번호 공백일시 */
-			 if(pwd==""){
-				 $(".error_id").css("display","none");
-				 $(".error_pwd").css("display","block");
-				 return false;
-			}
-	    	
-			 /* 로그인 메서드 서버 요청 */
-		        $("#login_form").attr("action", "/login");
-		        $("#login_form").submit();   
-	});
-		
-	});
+});
 </script>
 </head>
 <body>
-	<h2>로그인</h2>
-		<a href="/login">기존 회원</a> 
-	     <a href="/loginByOrderId" style="color:#b3b3b3">비회원 주문조회</a> 
-	     	
-	<form id="login_form" action="login" method="post">
+<div id="warp">
 
-		<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+	<div id="header-logo">
+	<a href="/mainpage/nonmember"><img id="logo" src="/upload/logo.png"></a>
+	</div>
+
+
+<div id="container">
+	<div id="content">
+		<h2 style="text-align: center">로그인</h2>
 		
-			<div class="id_wrap">
-				<input type="text" name="username" id="id" placeholder="아이디를 입력해주세요"><br>
-			</div>
-			
-			<div class="pwd_wrap">
-				<input type="password" name="password" id="pwd" placeholder="비밀번호를 입력해주세요"><br>
+		<!-- 탭메뉴 -->
+		<div id="tab-menu">
+			<a class="tab-link current" data-tab="login_member">기존 회원</a> 
+		    <a class="tab-link" data-tab="login_nonmember">비회원 주문조회</a> 
+		</div>
+		
+		<!-- 회원 로그인 -->
+		<div id="login_member" class="tab-content current">
+		<form id="login_form" action="login" method="post">
+			<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+				
+			<div class="input_group">
+				<input type="text" class="input" name="username" id="id" placeholder="아이디를 입력해주세요"><br>
+			</div>	
+			<div id="input_group">
+				<input type="password" class="input" name="password" id="pwd" placeholder="비밀번호를 입력해주세요"><br>
 			</div> 
-			
+				
 			<div class="error_id" style="display: none" >아이디를 입력해 주세요. </div>
 			<div class="error_pwd" style="display: none">비밀번호를 입력해 주세요. </div>
-			
-			 <!--로그인에러-->
-		    <c:if test="${param.error }">
+				
+			<!--로그인에러-->
+			<c:if test="${param.error }">
 				<div class="error_login" style="display: block" style="font:red">${loginFailMsg}</div>
-		    </c:if>
-		    
+			</c:if>
 			<input id="loginBtn" type="button" value="로그인">
-			   <div>
-			    	<a href="/findIdByEmail">아이디 찾기</a> 
-			     	<a href="/findPwdByEmail">비밀번호 찾기</a> 
-			     		<p>계정이 없으신가요?</p>
-			      	<a href="/join">회원가입</a>
-		      </div>
+			</form>
+		
+		<!-- 아이디/비번찾기 -->
+		<div class="find_link_wrap">
+		 	<ul class="find_Link">
+				 <li><a href="/findId">아이디 찾기</a></li> 
+				 <li><a href="/findPwd">비밀번호 찾기</a></li>
+			 </ul>
+		</div>	 	
+	</div>
+		
+		<!-- 비회원 로그인 -->
+		<div id="login_nonmember" class="tab-content">
+				<form id="login_order_form" action="loginByOrderId" method="post">
+				<!-- <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"> -->
+				
+				<div id="input_group">
+				<input type="text" class="input" name="orderName" id="orderName" placeholder="주문자명"><br>
+				</div>
+				
+				<div id="input_group">
+				<input type="text" class="input" name="orderNum" id="orderNum" placeholder="주문번호"><br>
+				</div> 
+				<div class="error_orderName" style="display: none" >주문자명을 입력해주세요. </div>
+				<div class="error_orderNum" style="display: none">주문번호를 입력해주세요. </div>
+				<span class="error_msg" style="display:none"></span>
+				<input id="loginOrderBtn" type="button" value="비회원 주문조회">
+					<div class="nonmember_text">
+					<span>주문번호는 상품 주문 시 입력하신 문자로 발송되었습니다.<br>
+						확인이 어려울 시 고객센터로 문의하세요.</span>
+					</div>	
+				</form>
+			</div>
+			
+		 <!-- 회원가입 -->
+		<div class="join_link">
+			<span>계정이 없으신가요?</span>
+			<a href="/join"><button id="join">회원가입</button></a>
+		</div>
+	
+		</div>
+	</div>		
+</div>
 
-</form>
+			
+
+
+
 </body>
 </html>

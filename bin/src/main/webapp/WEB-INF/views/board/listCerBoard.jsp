@@ -26,7 +26,7 @@ section#content ul li { display:inline-block; margin:10px; }
 <body>
 
 	<div id="header">
-		<jsp:include page="../header.jsp"/>
+		<jsp:include page="../header.jsp" flush="false"/>
 	</div>
 
 <h3>인증 게시판</h3>
@@ -37,6 +37,7 @@ section#content ul li { display:inline-block; margin:10px; }
 				<!-- 본문 -->			
 					<section id="content">
 					<ul>
+					 <c:set var="num" value="${searchVo.totalCount - ((searchVo.curPage-1) * 10) }"/>
 						 <c:forEach var="c" items="${list }">
 						 <li>
 								<div class="cer_thumbnail">
@@ -60,7 +61,11 @@ section#content ul li { display:inline-block; margin:10px; }
  					</ul>					 
 					</section>	
 				</div> 	 
-		</section>								
+		</section>       
+    <c:forEach var="i" begin="1" end="${totalPage }">
+        <a href="listNotice?pageNUM=${i }">${i }</a>&nbsp;&nbsp;
+    </c:forEach>
+										
 </div>		 
 </body>
 </html>

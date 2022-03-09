@@ -29,7 +29,7 @@ $(function(){
 <body>
    <div id="submenubar">
             <a class="menu1">챌린지활동</a>
-            <a class="menu2">게시물활동 </a>
+            <a class="menu2" href="/mypage/myCommunity">게시물활동 </a>
             <a class="menu3">댓글활동 </a> 
                 <ul class="sub" style="display: block;">
                     <li><a href="/mypage/myChallenge">나의 챌린지</a></li>

@@ -1,23 +1,36 @@
 package com.example.demo.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.db.DBManager;
 import com.example.demo.vo.CommunityVO;
+import com.example.demo.vo.NoticeVO;
 
 @Repository
 public class CommunityDAO {
 	
+	   public static int pageSIZE = 10;    //한 화면에 보여줄 레코드의 수
+	    public static int totalRecord;      //전체 레코드 수
+	    public static int totalPage;        //전체 페이지
+
+	
 	// 커뮤니티 게시판 목록
-	public List<CommunityVO> findCommunity(){
-		return DBManager.findCommunity();
-	}
+	    //페이지로 나누기
+	    public List<CommunityVO> findAllCommunity(HashMap map){
+	        totalRecord = DBManager.getTotalRecordCommu();
+	        totalPage = (int)Math.ceil(totalRecord/(double)pageSIZE);
+	        return DBManager.findAllCommunity(map);
+	    }
+
 	
 	//My 커뮤니티게시판 목록
-	public List<CommunityVO> findCommuByMember(int member_no){
-		return DBManager.findCommuByMember(member_no);
+	public List<CommunityVO> findCommuByMember(HashMap map){
+		 totalRecord = DBManager.getTotalRecordMyCommu(map);
+	     totalPage = (int)Math.ceil(totalRecord/(double)pageSIZE);
+		return DBManager.findCommuByMember(map);
 	}
 	
 	//커뮤니티게시판 등록
