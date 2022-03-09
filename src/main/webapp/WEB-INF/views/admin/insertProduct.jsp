@@ -7,12 +7,23 @@
 <meta charset="UTF-8">
 <title>관리자설정_상품등록</title>
 <link href="/css/admin.css" rel="stylesheet"/> 
+<link rel="stylesheet" href="/css/style.css">
 <style type="text/css">
 	.inputArea{
 		margin: 10px;
 	}
+	button{
+		border-radius: 20px;		 
+		width: 300px;
+		background-color: #DCEDC8;
+		border: 0.5px solid green;
+		margin: 10px;
+		padding: 5px  
+	}
+	button:hover {
+  		color: #2ecc71;
+	}
 	 
-
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
@@ -103,10 +114,9 @@ $(function(){
 							 <label for="PRO_THUMBNAIL">이미지</label>
 							 <input type="file" id="PRO_THUMBNAIL" name="uploadFile" />
 							  
-						</div>
-											 
-						<input type="submit" value="등록" id="optionButton">
-						<input type="reset" value="취소">
+						</div>	 
+						<button  value="등록" id="optionButton">상품등록하기</button>
+						 
 					</form>
 				</section>					
 				 

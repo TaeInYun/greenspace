@@ -40,18 +40,17 @@
 		(select nvl(sum(point_amount),0)사용 
 		from point  
 		where member_no=#{no} and
-		point_status='사용')presentPoint , member_no
+		point_status='사용')presentPoint, member_no
 		from point where member_no=#{no}
 	</select>	
 	
 	 
 	
 	<select id="findAllPointByNO" resultType="pointVO">	
-		 select p.no, TO_char(p.point_date,'yyyy/mm/dd')point_date,p.point_amount ,p.point_status ,member_no 
+		 select rownum num, p.no, TO_char(p.point_date,'yyyy/mm/dd')point_date,p.point_amount ,p.point_status ,member_no 
 			from point p
 			where member_no=#{no} and 
-            point_amount!=0
-            order by point_date        	 
+            point_amount!=0          	 
 		  <if test="filter != null">
 		  		and point_status=#{point_status}
 		  </if>

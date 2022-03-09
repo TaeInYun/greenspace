@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.CerBoardDAO;
 import com.example.demo.dao.ChallengeUserDAO;
+import com.example.demo.dao.CommentsDAO;
 import com.example.demo.dao.ImgDAO;
 import com.example.demo.dao.MemberDAO;
 import com.example.demo.dao.PointDAO;
@@ -53,6 +54,9 @@ public class CerBoardController {
 	@Autowired
 	private ImgDAO imgdao;
 	
+
+	@Autowired
+	private CommentsDAO commentsdao; 
 	
 	// 인증 게시판 목록
 	@RequestMapping("/board/listCerBoard")
@@ -194,7 +198,7 @@ public class CerBoardController {
 				
 				if(cer_status.equals("비공개")) {
 					
-				PointVO PointVO = new PointVO(0, null, "적립", 10, member_no, "CHG",null,0,null);
+				PointVO PointVO = new PointVO(0, null, "적립", 10, member_no, "CHG",null,0,null,0);
 				pointDAO.insertPoint(PointVO);
 				
 				int point_save = PointVO.getPoint_amount();
@@ -207,7 +211,7 @@ public class CerBoardController {
 				memberDAO.insertBoardPoint(map);
 				
 				}else if(cer_status.equals("공개")){
-					PointVO PointVO = new PointVO(0, null, "적립", 50, member_no, "PUB",null,0,null);
+					PointVO PointVO = new PointVO(0, null, "적립", 50, member_no, "PUB",null,0,null,0);
 					pointDAO.insertPoint(PointVO);
 					
 					int point_save = PointVO.getPoint_amount();
@@ -423,6 +427,7 @@ public class CerBoardController {
 		model.addAttribute("c", dao.getCerBoard(no));
 		//해당 게시물 이미지 보이기
 		model.addAttribute("imglist", imgdao.listCerImg(no));
+		model.addAttribute("comments",commentsdao.findAllCommentByCer_no(no));
 
 	}
 

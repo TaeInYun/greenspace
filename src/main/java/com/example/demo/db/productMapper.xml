@@ -14,8 +14,8 @@
 				where pro_name like '%'||#{keyword}||'%' 
 			</if>				 
 		))
-	where num between #{start} and #{end}     
-	order by num
+		where num between #{start} and #{end}     
+		
   </select>  
 	
  
@@ -121,8 +121,6 @@
 	po.pro_option_code=pao.pro_option_code and
 	pao.pro_option_detail_code=pod.pro_option_detail_code
  </select>		 
- 
-
  
 	
  

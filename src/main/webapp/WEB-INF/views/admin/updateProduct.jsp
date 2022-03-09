@@ -5,18 +5,28 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자설정_${p.pro_name }_상품수정</title>
+<link rel="stylesheet" href="/css/style.css">
 <style type="text/css">
 	.inputArea{
-		margin: 10px;
+		margin: 5px;
 	}
 	input{
-		margin: 10px;
+		margin: 5px;
 	}
-
+	button{
+		border-radius: 20px;		 
+		width: 300px;
+		background-color: #DCEDC8;
+		border: 0.5px solid green;
+		margin: 10px;
+		padding: 5px  
+	}
+	button:hover {
+  		color: #2ecc71;
+	}
 </style>
 </head>
-<body>
-	
+<body>	
 	<div class="card align-middle"> 
 	<div class="card-title"> 
 		<h2 class="card-title text-center">상품수정</h2> 
@@ -75,14 +85,11 @@
 				<div class="inputArea">
 					 <label for="PRO_THUMBNAIL">이미지</label>
 						<input type="hidden" id= "PRO_THUMBNAIL" name="PRO_THUMBNAIL" value="${p.PRO_THUMBNAIL }">
-				   <input type="file" name="uploadFile">(${p.PRO_THUMBNAIL })<br>
+				   		<input type="file" name="uploadFile">${p.PRO_THUMBNAIL }<br>
 				</div>
 				
 			 
-				  
-				<input type="submit" value="수정">
-				<input type="reset" value="취소">	
-					 
+				 <button   value="수정"   >상품수정하기</button> 
 			</form> 
 	</div> 
 </div>

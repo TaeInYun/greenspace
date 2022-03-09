@@ -2,9 +2,9 @@ body { margin:0; padding:0; }
 ul, li { margin:0; padding:0; list-style:none; display: inline-blockblock;} 
 a{cursor:pointer;}
 div#root { width:900px; margin:0 auto; }		 
-section#content { float:right; display:inline-block; width:900px; }
+section#content { float:right; display:inline-block; width:700px; }
 #calendar{position:relative; display:inline-block;  width: 450px;}
-aside { float:left; width:200px; }
-
+aside { float:left; width:150px;   margin: 0px;   padding: 0px; text-align: left;}
+ 
 header#header div#header_box { text-align:center; padding:30px 0; }
  

@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>관리자설정_상품목록</title>
 <link href="/css/admin.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/css/style.css">
 <style type="text/css">
 	table {
 	text-align: center;
@@ -35,6 +36,15 @@
   right: 12px;
   margin: 0;
 }
+table {
+    	width: 100%;
+    	border-top: 1px solid #444444;
+    	border-collapse: collapse;
+  }
+  th, td {
+	    border-bottom: 1px solid #444444;
+	    padding: 10px;
+  }
 </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -55,6 +65,8 @@
 </head>
 <body>
 
+
+
 <div id="root">
 		<header id="header">
 			<div id="header_box">
@@ -74,7 +86,7 @@
 									  <img id="icon" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
 								</div>
 						</form>
-						<table border="1" width="80%">
+						<table>
 							<tr>
 								 
 								<td>상품번호</td>
@@ -105,7 +117,7 @@
  
 									<td> <a id="updateProduct" data-toggle="modal" data-target="#updateModal" role="button" href="/admin/updateProduct?no=${p.no }">수정</a></td>
 									<td> <a id="deleteProduct" data-toggle="modal" data-target="#deleteModal" role="button" href="/admin/deleteProduct?no=${p.no }">삭제</a></td>
-									<td> <a id="option" data-toggle="modal" data-target="#optionModal" role="button" href="/admin/insertProductOption?no=${p.no }">옵션</a></td>
+									<td> <a   href="/admin/insertProductOption?no=${p.no }">옵션</a></td>
 									 
 								 
 								</tr>	
@@ -134,13 +146,7 @@
 					  			 				</div> 
 					  			 		    </div>
 					  			 		    
-					  			 		     <div id="optionModal" class="modal fade" tabindex="-1" role="dialog"> 
-					  			 				<div class="modal-dialog"> 
-					  			 					<div class="modal-content"> 
-					  			 					</div> 
-					  			 				</div> 
-					  			 		    </div>
-
+					  			 		     
  
 					  			 			
 					  			 			

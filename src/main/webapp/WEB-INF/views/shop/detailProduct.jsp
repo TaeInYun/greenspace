@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/css/style.css">
 <style type="text/css">
 body{
 	font-size: 15px;
@@ -48,6 +49,27 @@ section#content { float:right; width:900px; margin-top: 30px;}
 	  	margin-top: 20px;
 	  	margin-bottom: 20px;
 	 }
+	 
+	table {
+    	width: 100%;
+    	border-top: 1px solid #444444;
+    	border-collapse: collapse;
+  }
+  th, td {
+	    border-bottom: 1px solid #444444;
+	    padding: 10px;
+  }
+  input{
+  	width: 100px;
+  }
+  #minus,#plus {  	  
+  	   border:none;  
+  	   background:none;
+  }
+  button{
+  	border-radius: 20px;
+  }
+ 
 </style> 
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -144,8 +166,7 @@ section#content { float:right; width:900px; margin-top: 30px;}
 </script>
 </head>
 <body>
-    
-    <div id="root">
+   <div id="root">
       <header id="header">
          <div id="header_box">
             <jsp:include page="../header.jsp"/>
@@ -160,6 +181,9 @@ section#content { float:right; width:900px; margin-top: 30px;}
                      
                        <div class="context_header" >							 
 							<strong><span> ${p.pro_name }</span></strong>
+						 	<i class="fa-solid fa-cart-shopping fa-2x"></i>
+					      	<i class="fa-solid fa-heart fa-2x"></i>
+					      	<script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script>
 						</div>          
                    	  	
                    	   <div class="context_header" id="priceZip">
@@ -215,7 +239,7 @@ section#content { float:right; width:900px; margin-top: 30px;}
                                </div>
                     
                             <div id="littleCart" class="context_text">
-                                  <table border="1">
+                                  <table >
                                     <thead>
                                        <tr>
                                           <td>옵션</td>
@@ -228,9 +252,11 @@ section#content { float:right; width:900px; margin-top: 30px;}
                            </div>          
                     </c:if>
                     
-                     <div id="btns" class="context_text">
-					      <button id="cart">장바구니 추가</button>
-					      <a href="" id="wishList">찜하기</a> 
+                     <div id="btns" class="context_text">					     
+						       
+						     
+						     
+						   					   			      
 				     </div>
 				 </div>	<!-- lableZip -->
 				</div> 	<!-- content_1 -->

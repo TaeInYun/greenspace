@@ -5,9 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/css/style.css">
 <style type="text/css">
 	form{
 		margin: 10px;
+	}
+	
+	.btn btn-lg btn-primary btn-block{
+		border-radius: 20px;		 
+		width: 200px;
+		background-color: #DCEDC8;
+		border: 0.5px solid green;
+		margin: 5px;
+		padding: 5px 
 	}
 </style>
 </head>

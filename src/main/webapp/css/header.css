@@ -1,0 +1,85 @@
+@charset "EUC-KR";
+html,body{
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	width:100%;
+}
+ul, li { 
+	margin: 0;
+	padding: 0;
+	list-style:none;
+	display: inline-block;} 
+
+/* 헤더 */
+
+#header_wrap li{
+	cursor:pointer;
+	text-decoration: none;
+	display: inline-block;
+	text-align: center;
+	padding: 23px 10px 20px 10px;
+	font-size: 14px;
+	}
+	
+a:hover{
+	font-weight: 700;
+}
+
+#header_wrap{
+	width:100%;
+	height:60px;
+}
+
+	
+#logo{ 
+	float:left;
+	margin-top: 17px;
+	padding-left: 15px;
+	 } 
+	 
+#header_wrap #logo .brand_logo{
+	width: 125px;
+}	 
+	
+#header_menu_box,#member_memu_box{
+	position: relative;
+	height:auto;
+	float: right;
+	margin-right: 10px;
+}
+
+#member_info{
+	font-weight: 800;
+	font-size: 14px;
+}
+
+/* 메뉴*/
+#menu_bar{
+	 display: flex;
+	 align-items: center;
+	background-color:transparent;
+	border-top:1px solid #dddddd;
+	border-bottom:1px solid #dddddd;
+	width: 100%;
+	height: 55px;
+	align-items:  center;
+}
+
+
+#menu_box{
+	margin: 0 auto;
+}
+
+#menu_box a{
+	cursor:pointer;
+	font-weight:500;
+	padding: 14px 15px 15px 15px;
+}
+
+#menu_box a:hover{
+	color: green;
+	font-weight:700;
+}

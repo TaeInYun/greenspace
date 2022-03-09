@@ -73,13 +73,9 @@ public class OrdersController {
 	public void OrderOK() {
 		
 	}
-	/*
+
 	@RequestMapping(value = "/shop/resultOrder", method = RequestMethod.POST)
 	@ResponseBody
-	public String applyOrder(HttpServletRequest request, @RequestBody ApplyOrderVO data) {
-	
-		HttpSession session = request.getSession();
-		int member_no = 1;
 	public String applyOrder(HttpSession session, @RequestBody ApplyOrderVO data) {
 		
 		 MemberVO m = (MemberVO)session.getAttribute("m");
@@ -91,8 +87,8 @@ public class OrdersController {
 		int point_save = data.getOrders().getPoint_save();
 		int ord_use_point = data.getOrders().getOrd_use_point();
 		
-		PointVO savePoint = new PointVO(0, null, "적립", point_save, member_no, "BUY");
-		PointVO usePoint = new PointVO(0, null, "사용", ord_use_point, member_no, null);
+		PointVO savePoint = new PointVO(0, null, "적립", point_save, member_no, "BUY",null,0,null);
+		PointVO usePoint = new PointVO(0, null, "사용", ord_use_point, member_no, null,null,0,null);
 		
 		pointDAO.insertPoint(savePoint);
 		int re = pointDAO.insertPoint(usePoint);
@@ -151,6 +147,4 @@ public class OrdersController {
 		
 		return "OK";
 	}
-		//return result;
-	}*/
 }

@@ -1,21 +1,16 @@
 // 위시리스트 상품삭제
-function deleteWishList() {
-	let select = $("input[name=checkList]:checked");
-	let noArr = new Array();
-	
-	$.each(select, function() {
-		let no = $($(this).siblings()[0]).val();
-		noArr.push(no);
-	});
+function deleteWishList(noArr) {
 	
 	let re = confirm("해당 상품을 삭제하시겠습니까?");
+
 	if(re == true){
+		
 		$.ajax({
-			url: "deleteWishList",
+			url: "/shop/deleteWishList",
 			data: {data:noArr},
 			success: function() {
 				alert("해당 상품을 위시리스트에서 삭제하였습니다.");
-				location.href="wishList";
+				location.href="/shop/wishList";
 			}
 		});
 		
@@ -41,17 +36,13 @@ function deleteCart(noArr) {
 
 //장바구니 추가 메세지
 function insertCartMSG(msg){
-	let span = $("<span></span>").attr("class","animate");
-	span.html(msg);
-	span.append( $("<a></a>").attr("href","./cart").html("장바구니로 가기") )
-	$("#btns").append(span);
+	let addMsg = $("#addMsg").html(msg);
+	addMsg.append( $("<a></a>").attr("href","./cart").html("장바구니로 가기") )
 }
 //위시리스트 추가 메세지
 function insertWishMSG(msg){
-	let span = $("<span></span>").attr("class","animate");
-	span.html(msg);
-	span.append( $("<a></a>").attr("href","./wishList").html("위시리스트로 가기") )
-	$("#btns").append(span);
+	let addMsg = $("#addMsg").html(msg);
+	addMsg.append( $("<a></a>").attr("href","./wishList").html("위시리스트로 가기") )
 }
 
 //카트 추가하기
@@ -156,7 +147,7 @@ function insertWish(isOption,cart_option,pro_no ) {
 							}
 						});//end insertWishList ajax
 					}else{
-						alert("위시리스트에 존재하는 상품입니다.");
+						insertWishMSG("위시리스트에 존재하는 상품입니다.");
 					}
 				}
 			});//end isWishList

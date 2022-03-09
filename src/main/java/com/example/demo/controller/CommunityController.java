@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,11 +28,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.dao.CommentsDAO;
 import com.example.demo.dao.CommunityDAO;
 import com.example.demo.dao.ImgDAO;
+import com.example.demo.vo.CommentsVO;
 import com.example.demo.vo.CommunityVO;
 import com.example.demo.vo.ImgVO;
 import com.example.demo.vo.MemberVO;
+import com.example.demo.vo.ProductVO;
 
 @Controller
 public class CommunityController {
@@ -41,6 +45,9 @@ public class CommunityController {
 	
 	@Autowired
 	private ImgDAO imgdao;
+	
+	@Autowired
+	private CommentsDAO commentsdao; 
 	
 
 	// 자유게시판 목록
@@ -56,6 +63,7 @@ public class CommunityController {
 		//Dao가 게시물 목록을 검색할 때 필요한
 		//정보(현재페이지에 보여줄 시작레코드,마지막레코드)
 		//들을 map에 저장한다.
+
 		
 		HashMap map = new HashMap();
 		map.put("start", start);
@@ -243,14 +251,20 @@ public class CommunityController {
 	
 	//--------커뮤니티 상세----------------
 	@RequestMapping("/board/detailCommunity")
-	public void detail(Model model,int no,HttpSession session) {
+	public void detail(Model model,int no,HttpSession session  ) {
 		//조회수 업
 		dao.updateHitCommu(no);
 		//해당 게시물 정보
 		model.addAttribute("c", dao.getCommunity(no));
 		//해당 게시물 이미지 보이기
-		model.addAttribute("imglist", imgdao.listCommuImg(no));
-	}
+		model.addAttribute("imglist", imgdao.listCommuImg(no));		
+		model.addAttribute("comments", commentsdao.findAllCommentByCommu_no(no));	
+		 
+	 }
+	
+	
+	
+	 
 
 
 	//------------------커뮤니티 게시판 삭제하기-------------------- 

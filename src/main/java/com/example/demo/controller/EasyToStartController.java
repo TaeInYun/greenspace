@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dao.CommentsDAO;
 import com.example.demo.dao.EasyToStartDAO;
 import com.example.demo.dao.MemberDAO;
 import com.example.demo.vo.EasyToStartVO;
@@ -30,45 +31,17 @@ public class EasyToStartController {
 
     @Autowired
     private EasyToStartDAO dao;
-
-    @GetMapping(value =  "/easyToStart/easyToStartList")
-    public void easyToStartForm(HttpSession session, Model model, @RequestParam(value="pageNUM", defaultValue = "1") int pageNUM) {
-        MemberVO m = (MemberVO)session.getAttribute("m");
-    	
-    	
-    	if(m != null) {
-    		//회원의 이미지를 불러오고 
-    		
-    		
-    		
-    	}else {
-    		//회원이 아닐경우 빈하트로 보여주세요!
-    		
-    		
-    	}
-    	
-    	
-    	//현재 페이지에 보여줄 시작번호를 계산한다 
-    	int start = (pageNUM -1) * dao.pageSIZE; 
-    	
-    	//DAO에서 게시물 검색에 필요한 정보를 MAP에 저장
-    	HashMap map = new HashMap();
-    	map.put("start", start);
-    	map.put("totalRecord", dao.totalRecord);
-    	map.put("totalPage", dao.totalPage);
-    	
-    	model.addAttribute("easyToStart", dao.findAll(map));
-    	model.addAttribute("totalPage", dao.totalPage);
-        model.addAttribute("totalRecord", dao.totalRecord);
-        model.addAttribute("pageSIZE", dao.pageSIZE);
-    	model.addAttribute("start", start);
-    	
-    	
-    	
-    	
-    	
-    	
-    }
+    @Autowired
+    private CommentsDAO commmentsdao;
+    
+    
+    @GetMapping("/easyToStart/easyToStartList")
+	public String findAllETS(HttpSession session, Model model) {
+		model.addAttribute("easyToStart", dao.ETS());		
+		return "/easyToStart/easyToStartList";
+	}
+    
+    
     
     @GetMapping("/easyToStart/like/{no}")
     @ResponseBody
@@ -76,4 +49,14 @@ public class EasyToStartController {
     	dao.updateLikeETS(no);
     	return dao.findLikeETS(no);
     }
+    
+    
+    @RequestMapping("/easyToStart/detail")
+    public void detail(int no, Model model) {
+    	dao.updateHitETS(no);
+        model.addAttribute("n", dao.findByNoETS(no));
+        model.addAttribute("comments", commmentsdao.findAllCommentByEts_no(no));
+    }
+    
+    
 }

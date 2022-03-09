@@ -88,6 +88,7 @@ public class ProductController {
 		
 		int start = (pageNUM-1)* dao.pageSIZE + 1;
 		int end = start + dao.pageSIZE - 1;
+		 
 		
 		HashMap map= new HashMap();
 	 
@@ -256,7 +257,7 @@ public class ProductController {
  
 	@RequestMapping(value = "/admin/deleteProduct", method = RequestMethod.POST)
 	public ModelAndView deleteSubmit(int no, HttpServletRequest request, ProductVO p) {
-		ModelAndView mav = new ModelAndView("redirect:/admin/detailProduct"+"?no="+p.getNo());
+		ModelAndView mav = new ModelAndView("redirect:/admin/listProduct" );
 		String oldFname = dao.findByNo(no).getPRO_THUMBNAIL();		
 		 
 		int re = dao.delete(no);
@@ -337,22 +338,18 @@ public class ProductController {
 		}
 
 		
-		
-		
-		
 		@RequestMapping(value = "/admin/deleteProductOption", method = RequestMethod.POST)
 		public ModelAndView deleteProductOption( int no, Model model,int pro_no) {
 			//admin/insertProductOption?no=31
 			
-			ModelAndView mav = new ModelAndView("redirect:/admin/insertProductOption"+"?no="+pro_no);
-			
+			ModelAndView mav = new ModelAndView("redirect:/admin/insertProductOption"+"?no="+pro_no);			
 			
 			HashMap map= new HashMap();
 			map.put("pro_no", pro_no);
 			map.put("no", no);
 			
 			int re= prodao.delete(map);
-			System.out.println("상품번호 : "+pro_no);
+			 
 			if(re!=1) {
 				mav.setViewName("error");
 			} 

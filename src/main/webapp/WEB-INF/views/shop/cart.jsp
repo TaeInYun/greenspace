@@ -6,13 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<style type="text/css">
-	img{
-		width: 200px;
-		height: 200px;
-	}
-</style>
-<title>Insert title here</title>
+<link rel="stylesheet" href="/css/style.css">
+<title>녹지몰 - 장바구니</title>
+<script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/js/qty.js"></script>
 <script type="text/javascript" src="/js/product.js"></script>
@@ -112,17 +108,20 @@
 		
 			let receiverInfo = new Array();
 			let arr_receiver = document.getElementsByClassName("receiverInfo");
+			
 			for( let i = 0; i < arr_receiver.length; i++){
-				receiverInfo.push( $(arr_receiver[i]).val() );
+				receiverInfo.push( $(arr_receiver[i]).val());
 			} 
+			
+			console.log(receiverInfo);
 			let orderInfo = new Array();
 			let arr = document.getElementsByClassName("orderInfo");
 			
 			for( let i = 0; i < arr.length; i++){
 				orderInfo.push( $(arr[i]).text() );
 			} 
-			
- 			$.ajax({
+			/*
+ 	 		$.ajax({
 				url: "order_form",
 				type: "post",
 				data: {
@@ -133,7 +132,7 @@
 				success: function(){
 					location.href="/shop/order_form"
 				} 
-			});
+			}); */
 		});
 		
 		
@@ -143,16 +142,20 @@
 </script>
 </head>
 <body>
+<div id="root">
+	<jsp:include page="../header.jsp"></jsp:include>
+	<hr>
+	<div class="section">
+	<i class="fa-solid fa-cart-shopping fa-3x"></i>
 	<h2>장바구니</h2>
 	<span>${cnt }</span>
-	<hr>
 	<div>
 		<button id="soldOut">품절모두삭제</button>
 		<button id="delSelected">선택삭제</button>
 	</div>
 	<div>
 		<form action="insertOrder" >
-			<table border="1" width="80px">
+			<table>
 				<thead>
 					<tr>
 						<td>전체 ${cnt } 개</td>
@@ -242,5 +245,7 @@
 			<button id="order">주문하기</button>
 		</div>
 	</div>
+	</div>
+</div>
 </body>
 </html>

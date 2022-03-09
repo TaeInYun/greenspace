@@ -277,7 +277,8 @@
 	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 
 	<h3>기본 회원정보</h3>
-
+	<a href="/mypage/myPiontList?no=${m.no}">포인트 정보</a>
+	번호 : ${m.no}
 	아이디 : ${m.id}
 
 	<br> 비밀번호 : 
@@ -371,8 +372,8 @@
 			<button  type="submit">등록</button>
 		</ul>
 	</form>
-
-
+			<hr>
+	<a href=/mypage/mainAddress> <button>내 주소 관리</button></a> <br>
 	<a href = "/mainpage/member">메인페이지로</a>
 
 

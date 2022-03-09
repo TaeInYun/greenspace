@@ -1,11 +1,7 @@
  
 body { margin:0; padding:0; }
-div#root { width:900px; margin:0 auto; }
-#header{
-	
-	margin-top: 50px;
-	margin-bottom: 15px;
-}		 
+div#root { width:950px; margin:0 auto; }
+ 
 section#content {   width:950px;text-align:center; } 
 section#content .sigleBox {    width:100%;    margin-bottom: 10px;   } 
 section#content .photo {    float:right;    width: 47%; height: 300px; margin-top:100px; margin-right: 10px;  } 

@@ -39,6 +39,11 @@ public class MemberController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	//test----------------------------
+	@RequestMapping("/test")
+	@ResponseBody
+	public void test() {	
+	}
 
 	//회원가입----------------------------
 	@RequestMapping(value = "/join",method = RequestMethod.GET)
@@ -47,6 +52,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/join", method = RequestMethod.POST)
 	public ModelAndView insert_submit(MemberVO m) {
+		System.out.println("컨트롤러동작");
 		ModelAndView mav = new ModelAndView("joinOK");
 		
 		m.setPwd(   passwordEncoder.encode(  m.getPwd()   ) );
@@ -146,15 +152,10 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView("redirect:/mainpage/member");
 		return mav;
 	}
-	
-	//이메일 아이디 찾기 
-	@RequestMapping(value = "/findIdByEmail", method = RequestMethod.GET)
-	public void findIdByEmailForm() {
-	}
-	
-	//핸드폰 아이디 찾기
-	@RequestMapping(value = "/findIdByPhone", method = RequestMethod.GET)
-	public void findIdByPhoneForm() {
+
+	//아이디 찾기
+	@RequestMapping(value="/findId", method = RequestMethod.GET )
+	public void findId() {
 	}
 	
 	//아이디 찾기
@@ -164,16 +165,13 @@ public class MemberController {
 		return "findIdOK";
 	} 
 	
-	//이메일 비밀번호 찾기
-	@RequestMapping(value="/findPwdByEmail", method = RequestMethod.GET )
-	public void findPwdByEmail() {
+	//비밀번호 찾기
+	@RequestMapping(value="/findPwd", method = RequestMethod.GET )
+	public void findPwd() {
 	}
+
 	
-	//핸드폰 비밀번호 찾기
-	@RequestMapping(value="/findPwdByPhone", method = RequestMethod.GET )
-	public void findPwdByPhone() {
-	}
-	
+
 	
 	@RequestMapping(value="/resetPwd", method = RequestMethod.GET)
 	public void resetPwdForm() throws Exception{
@@ -191,7 +189,7 @@ public class MemberController {
 		String id = (String)session.getAttribute("id");
 		
 		String encodePwd = passwordEncoder.encode(pwd);
-		
+
 		
 		model.addAttribute("updatePwdOK", ms.updatePwd(id, encodePwd));
 		model.addAttribute("id", id);
