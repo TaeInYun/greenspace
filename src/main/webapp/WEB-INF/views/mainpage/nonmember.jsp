@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>녹지공간</title>
  <link href="/css/main.css" rel="stylesheet"/> 	 
+ <link rel="stylesheet" href="/css/style.css">
  <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	$(function(){

@@ -17,10 +17,10 @@
 .product_table tbody tr{
 	text-align: center;
 }
-td{
-	vertical-align: middle;
+.mypage{
+	display: flex;
+	flex-wrap: wrap;
 }
-
 #paging{
 	text-align: center;
 }

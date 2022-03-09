@@ -21,6 +21,34 @@ section#content ul li { display:inline-block; margin:10px; }
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+ <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script type="text/javascript">
+ $(function(){
+		 $("#insertComments").click(function () {		 
+			 let cer_no = $("#cer_no").val();			 
+			 let member_no = $("#member_no").val();
+			 let com_content = $("#com_content").val();
+				 
+			 let data={
+				 com_content:com_content,
+				 cer_no:cer_no,
+				 member_no:member_no				 
+			 }		 
+			 
+			 $.ajax({
+	         	url : "/insertComments",
+	             type : "POST",
+	             data :data,
+	             success : function(result){
+	            	 $("#com_content").val("")
+	             },
+	             error : function(){
+	             	console.log("ajax 통신 실패");
+	             }
+	         }); 
+		})
+ })
+ </script>
  
 </head>
 <body>
@@ -88,6 +116,27 @@ section#content ul li { display:inline-block; margin:10px; }
 <a href="/board/updateCerBoard?no=${c.no }">글수정</a>
 <a href="/board/deleteCerBoard?no=${c.no }">글삭제</a>
 
+<!-- ----댓글------ -->
+	<div>		 
+	  	<input id="cer_no" type="hidden" value="${c.no}">
+		<input id="member_no" type="hidden" value="${m.no}">		
+		<input id="com_content" type="text" placeholder="댓글을 입력해 주세요">		   
+	 	<button id="insertComments">댓글작성</button>	
+	</div>
+<hr>	
+	<div>		 
+		<c:forEach var="comments" items="${comments}"> 
+		 <table>
+				 <tbody>
+					<tr> 
+						<td>${comments.nickname}</td>
+						<td id="com_content">${comments.com_content}</td>
+					<tr>	 
+				</tbody>
+			</table>
+	  	</c:forEach>
+	</div>
+	
 
 </body>
 </html>

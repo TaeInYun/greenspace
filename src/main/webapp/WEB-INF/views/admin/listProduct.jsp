@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>관리자설정_상품목록</title>
 <link href="/css/admin.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/css/style.css">
 <style type="text/css">
 	table {
 	text-align: center;
@@ -64,6 +65,8 @@ table {
 </head>
 <body>
 
+
+
 <div id="root">
 		<header id="header">
 			<div id="header_box">
@@ -114,7 +117,7 @@ table {
  
 									<td> <a id="updateProduct" data-toggle="modal" data-target="#updateModal" role="button" href="/admin/updateProduct?no=${p.no }">수정</a></td>
 									<td> <a id="deleteProduct" data-toggle="modal" data-target="#deleteModal" role="button" href="/admin/deleteProduct?no=${p.no }">삭제</a></td>
-									<td> <a id="option" data-toggle="modal" data-target="#optionModal" role="button" href="/admin/insertProductOption?no=${p.no }">옵션</a></td>
+									<td> <a   href="/admin/insertProductOption?no=${p.no }">옵션</a></td>
 									 
 								 
 								</tr>	
@@ -143,13 +146,7 @@ table {
 					  			 				</div> 
 					  			 		    </div>
 					  			 		    
-					  			 		     <div id="optionModal" class="modal fade" tabindex="-1" role="dialog"> 
-					  			 				<div class="modal-dialog"> 
-					  			 					<div class="modal-content"> 
-					  			 					</div> 
-					  			 				</div> 
-					  			 		    </div>
-
+					  			 		     
  
 					  			 			
 					  			 			

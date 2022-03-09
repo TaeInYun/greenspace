@@ -37,6 +37,7 @@ function searchByDate(data) {
 				let a = $("<a></a>").attr("href","#").attr("id",po.period).html(i);
 				$(ul).append($("<li></li>").append(a));
 			}
+			
 			$("#paging").html(ul);
 		}
 	});

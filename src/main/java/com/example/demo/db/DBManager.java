@@ -16,6 +16,7 @@ import com.example.demo.vo.CerBoardVO;
 import com.example.demo.vo.ChallengeListVO;
 import com.example.demo.vo.ChallengeUserVO;
 import com.example.demo.vo.ChallengeVO;
+import com.example.demo.vo.CommentsVO;
 import com.example.demo.vo.CommunityVO;
 import com.example.demo.vo.EasyToStartVO;
 import com.example.demo.vo.EcoMagazineVO;
@@ -1393,7 +1394,7 @@ public class DBManager {
 			session.close();
 			return re;
 		}
-		
+ 	
 	//EcoMagazine------------------------------------------
 		/* 전체 게시물 조회 */
 		public static List<EcoMagazineVO> findEcoMagazineAll(){
@@ -1438,6 +1439,52 @@ public class DBManager {
 		}
 		
 
-		
-		
+ 
+//------------------------댓글-----------------------------------
+		public static int insertComments(HashMap map) {
+			SqlSession session = factory.openSession();
+			int re = session.insert("comments.insertComments", map);
+			session.commit();
+			session.close();
+			return re;
+		}
+
+		public static List<CommentsVO> findAllCommentByCommu_no(int no) {
+			 SqlSession session = factory.openSession();
+			 List<CommentsVO> list = session.selectList("comments.findAllCommentByCommu_no", no);
+			 session.close();
+			 return list;
+		}
+/*
+		public static int deleteComments(HashMap map) {
+			SqlSession session = factory.openSession();
+			int re = session.delete("comments.deleteComments", map);
+			session.commit();
+			session.close();
+			return re;
+		}
+
+	 	public static int updateComments(HashMap map) {
+			SqlSession session = factory.openSession();
+			int re = session.update("comments.updateComments", map);
+			session.commit();
+			session.close();
+			return re;
+		}
+
+*/
+
+		public static List<CommentsVO> findAllCommentByCer_no(int no) {
+			 SqlSession session = factory.openSession();
+			 List<CommentsVO> list = session.selectList("comments.findAllCommentByCer_no", no);
+			 session.close();
+			 return list;
+		}
+
+		public static List<CommentsVO> findAllCommentByEts_no(int no) {
+			 SqlSession session = factory.openSession();
+			 List<CommentsVO> list = session.selectList("comments.findAllCommentByEts_no", no);
+			 session.close();
+			 return list;
+		}
 }

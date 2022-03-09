@@ -347,6 +347,8 @@
 										<input type="number" id="userCode">
 										<input id="btnCheck" type="button" value="인증번호 확인"><br>
 									</div>
+
+
 			
 									<span class="error_msg" id="phoneMsg" style="display:none"></span>
 									<span class="success_msg" id="phoneMsg" style="display:none"></span>

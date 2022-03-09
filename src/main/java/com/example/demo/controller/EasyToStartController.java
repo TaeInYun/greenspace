@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dao.CommentsDAO;
 import com.example.demo.dao.EasyToStartDAO;
 import com.example.demo.dao.MemberDAO;
 import com.example.demo.vo.EasyToStartVO;
@@ -30,6 +31,9 @@ public class EasyToStartController {
 
     @Autowired
     private EasyToStartDAO dao;
+    @Autowired
+    private CommentsDAO commmentsdao;
+    
     
     @GetMapping("/easyToStart/easyToStartList")
 	public String findAllETS(HttpSession session, Model model) {
@@ -51,6 +55,7 @@ public class EasyToStartController {
     public void detail(int no, Model model) {
     	dao.updateHitETS(no);
         model.addAttribute("n", dao.findByNoETS(no));
+        model.addAttribute("comments", commmentsdao.findAllCommentByEts_no(no));
     }
     
     

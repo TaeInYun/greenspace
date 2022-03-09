@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="/css/mypage.css" rel="stylesheet"/> 	 
 <style type="text/css">
@@ -39,35 +39,37 @@
 		
 		<section id="container">		
 			<div id="container_box"> 
-				<!-- º»¹® -->			
+				<!-- ë³¸ë¬¸ -->			
 				<section id="content">					
  				<div id="presentPoint">
- 					ÇöÀçÆ÷ÀÎÆ®:${findPresentPoint.presentPoint} 	
- 				</div>	 
-			 	  <table>
+ 					í˜„ì¬í¬ì¸íŠ¸: ${findPresentPoint.presentPoint} 	
+ 				</div>
+ 				
+ 				<table>
 						<tr>	
-							<td> ¹øÈ£</td>
-							<td> »óÅÂ </td>
-							<td> Æ÷ÀÎÆ®</td>				 
-							<td> »ç¿ëÀÏÀÚ</td>			 
+							<td> ë²ˆí˜¸</td>
+							<td> ìƒíƒœ </td>
+							<td> í¬ì¸íŠ¸</td>				 
+							<td> ì‚¬ìš©ì¼ì</td>			 
 						</tr>
 						 
 						<c:forEach var="findAllPointByNO" items="${findAllPointByNO}">			 
 						  <tr>
-								<td >${findAllPointByNO.no }</td>				 
+								<td >${findAllPointByNO.num}</td>				 
 								<td >${findAllPointByNO.point_status }</td>				 
 								<td  >${findAllPointByNO.point_amount }</td> 						 
 								<td  >${findAllPointByNO.point_date }</td>			 		 			
 							</tr>		 
 						</c:forEach>
 					</table>
-								
+ 				 
+ 			
 					</section>					
-					 
+					  
 					<aside id="aside">
 						<jsp:include page="../mypage/myAside.jsp"/>
 					</aside>				
-			</div><!-- ÀüÃ¼  section box-->
+			</div><!-- ì „ì²´  section box-->
 		</section>
 </div>
 

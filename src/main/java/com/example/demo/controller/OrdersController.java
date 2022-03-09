@@ -87,8 +87,8 @@ public class OrdersController {
 		int point_save = data.getOrders().getPoint_save();
 		int ord_use_point = data.getOrders().getOrd_use_point();
 		
-		PointVO savePoint = new PointVO(0, null, "적립", point_save, member_no, "BUY",null,0,null);
-		PointVO usePoint = new PointVO(0, null, "사용", ord_use_point, member_no, null,null,0,null);
+		PointVO savePoint = new PointVO(0, null, "적립", point_save, member_no, "BUY",null,0,null,0);
+		PointVO usePoint = new PointVO(0, null, "사용", ord_use_point, member_no, null,null,0,null,0);
 		
 		pointDAO.insertPoint(savePoint);
 		int re = pointDAO.insertPoint(usePoint);

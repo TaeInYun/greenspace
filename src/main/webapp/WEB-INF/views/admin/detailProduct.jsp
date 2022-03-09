@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8"><title>관리자설정_${p.pro_name }_상세페이지</title>
 <link href="/css/admin.css" rel="stylesheet"/> 	 
+<link rel="stylesheet" href="/css/style.css">
  <style type="text/css">
  	 
 	 #content_1{

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comments">
+	<insert id="insertComments" parameterType="HashMap">
+		insert into comments values(
+			SEQ_COMMENT.nextval,
+			#{com_content},
+			sysdate,
+			#{one_no, jdbcType=INTEGER},
+			#{pro_qna_no, jdbcType=INTEGER},
+			#{re_no, jdbcType=INTEGER},
+			#{commu_no, jdbcType=INTEGER},
+			#{eco_no, jdbcType=INTEGER},
+			#{ets_no, jdbcType=INTEGER},
+			#{member_no},
+			#{cer_no, jdbcType=INTEGER}		 
+		)
+	</insert>
+	
+	<select id="findAllCommentByCommu_no" resultType="commentsVO">
+		select c.no,  nickname, com_content
+		from comments c, member m
+		where c.member_no=m.no and
+		commu_no=#{no}
+	</select>
+	<select id="findAllCommentByCer_no" resultType="commentsVO">
+		select c.no, nickname, com_content
+		from  member m, comments c
+        where m.no=c.member_no and
+		cer_no=#{cer_no}
+	</select>
+	<select id="findAllCommentByEts_no" resultType="commentsVO">
+		select c.no, nickname, com_content
+		from  member m, comments c
+        where m.no=c.member_no and
+		ets_no=#{ets_no}
+	</select>
+<!--  
+	<delete id="deleteComments">
+		delete comments where no=#{no} and commu_no=#{commu_no}
+	</delete>
+	 
+	  	 
+	 
+	<update id="updateComments" parameterType="commentsVO">
+		update comments set com_content=#{com_content}
+		where member_no=#{member_no} and no=#{no}
+    </update>
+	
+ -->		
+	 
+</mapper>
