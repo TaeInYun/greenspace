@@ -1,0 +1,127 @@
+@charset "UTF-8";
+
+.cart-header{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 40px;
+	width: 60%
+}
+
+.cart-title h2{
+	display: inline-block;
+	height: 100%;
+	margin-left: 10px;
+	font-size: 1.8em;
+	font-weight:bolder;
+	position: relative;
+	
+}
+
+.cart-cnt{
+	position: absolute;
+	top: +0px;
+	background: var(--green-sub);
+	font-size: 15px;
+	padding: 5px;
+	border-radius: 45%;
+	color: #fff;
+}
+
+#cart_products{
+	width:64%;
+	height: 100%
+}
+
+#cart_products input[type="number"]{
+	width:30px;
+	padding-left: 17px;
+}
+
+#minus{
+	margin-right:0;
+}
+
+.cart-main{
+	display: flex;
+	flex-wrap: wrap;
+}
+#price, .order__price{
+	color: gray;
+	text-decoration: line-through;	
+}
+
+#saleprice{
+	font-weight: bold;
+}
+
+#orderList{
+	width:33%;
+	padding-left: 30px;
+	font-weight: bolder;
+}
+#orderList > div{
+	margin: 20px 0;
+}
+
+#orderList h5{
+	width:100%;
+	font-size: 1.3em;
+	font-weight: bold;
+	text-align: center;
+	padding-top: 25px;
+}
+
+#receiver{
+	background: #F3F3F3;
+	height: 350px;
+	border-radius: 15px;
+}
+
+#receiverInfo input{
+	display: block;
+	margin: 20px auto;
+	width: 60%;
+}
+
+.receiver-radio{
+	margin: 20px auto;
+	text-align: center;
+}
+
+#orderInfo{
+	background: #F3F3F3;
+	border-radius: 15px;
+	height: 280px;
+}
+
+#orderInfo p{
+	font-weight: bold;
+	font-size: 1.0em;
+	margin: 10px;
+	padding-left: 20px;
+}
+
+#orderInfo span{
+	margin: 5px 0;
+	padding-right: 20px;
+	display: block;	
+	text-align:  right;
+}
+.orderInfo-price{
+	margin-top: 20px;
+}
+#tot_saleprice{
+	color: red;
+}
+
+#order, #pay{
+	font-weight: bold;
+	width: 100%;
+	height: 30px;
+	background: var(--green-sub);
+	color: #fff;
+}
+#order:hover, #pay:hover{
+	background: var(--green-main);
+}
