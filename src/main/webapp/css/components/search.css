@@ -1,12 +1,19 @@
 @charset "EUC-KR";
  
  #search_form{
- 	 display: inline-block;
+	display: inline-block;
  }
- .search {
-  position: relative;
-  width: 300px;
+ 
+.searchColumn_wrap{
+		float: left;
 }
+ 
+ .search_keyword_form {
+		float: right;	
+		position: relative;
+		width: 300px;
+}
+
 
 #searchColumn{
  width: 100px;
@@ -22,6 +29,7 @@
   width: 100%;
   border: 1px solid #bbb;
   border-radius: 20px;
+  box-sizing:border-box;
   padding: 10px 12px;
   display: inline-block;
   text-align:left;
