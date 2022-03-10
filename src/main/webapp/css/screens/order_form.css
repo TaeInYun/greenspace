@@ -46,6 +46,12 @@
 	padding-right: 28px;
 }
 
+#useMaxPoint{
+	color: #fff;
+	background: var(--green-sub)
+}
+
+
 #totalPrice{
 	margin-bottom: 10px;
 	color:var(--green-main);

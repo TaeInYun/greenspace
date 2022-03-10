@@ -17,7 +17,7 @@
 	$(function() {
 		$("#link_orderList").attr("style","color:white; background: #00913A;")
 		$( $(".nav-btn")[0] ).attr("style", "background: #00913A;");
-		$( $(".nav-btn .nav-btn__text")[0] ).attr("style", "color:white");
+			$( $(".nav-btn .nav-btn__text")[0] ).attr("style", "color:white");
 		
 		$(".myShopping").attr("style","background: #00913A; font-weight:800; color: white; padding: 5px 15px; border-radius: 20px;");
 		
