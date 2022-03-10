@@ -1,5 +1,7 @@
 .btns_select{
-	width:80%
+	width:80%;
+	margin-top: 25px;
+	margin-bottom: 10px;
 }
 .btns_select li{
 	width:16%;

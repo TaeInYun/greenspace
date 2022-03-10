@@ -6,12 +6,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style type="text/css">
-	img{
-		width: 200px;
-		height: 200px;
-	}
-</style>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/css/style.css">
 <title>Insert title here</title>
@@ -103,16 +97,14 @@
 <body>
 	<div id="root">
 		<jsp:include page="../header.jsp"></jsp:include>
-		<hr>
 		<div class="cart-header">
 			<div class="cart-title">
 				<h2> Order / Payment</h2>
-				<h3>Product Info <span>상품정보</span></h3>
 			</div>
 		</div>
-		<hr>
 		<div class="section mypage">
 			<div id="cart_products">
+				<h3>Product Info <span>상품정보</span></h3>
 				<table class="product_table">
 					<thead>
 						<tr>
@@ -150,7 +142,7 @@
 									 원
 								</td>
 								<td>
-									<span id="price" style="text-decoration: none; color:var(--green-sub); font-weight:bold;">
+									<span id="price" style="text-decoration: none; color: var(--green-text); font-weight:bold;">
 										- ${c.price - c.saleprice} 원
 									</span>
 								</td>
@@ -162,11 +154,8 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<p> 
-					녹지공간은 5만원 이상 구매 시, 대한민국 내 제주도 및 도서 산간 지역 포함, <Strong>전 지역, 전 상품 무료배송 입니다.</Strong>
-				</p>
-				<p>
-					2개 이상의 브랜드(업체) 상품을 주문하신 경우, 각 개별 배송됩니다.
+				<p class="order_notice"> 
+					녹지공간은 5만원 이상 구매 시, 대한민국 내 제주도 및 도서 산간 지역 포함, <span class="order_notice-under">전 지역, 전 상품 무료배송</span> 입니다.
 				</p>
 			</div>
 			<div id="orderList">
@@ -190,7 +179,7 @@
 					</div>
 				</div>
 				<div class="cashInfo">
-					<div>
+					<div class="orderInfo-price">
 						<h5>최종 결제정보</h5>
 						<p>상품 금액</p>
 						<span>+ ${orderInfo[0] }</span>
@@ -201,35 +190,38 @@
 						<p>적립금 사용</p>
 						<div>
 							<input type="text" id="usePoint">
-							<br>
-							<input type="checkbox" name="useMaxPoint" checked="checked" id="useMaxPoint">
-							<label for="useMaxPoint">최대사용</label>
-							<small>(사용가능 적립금: ${point} 원)</small>
+							<div class="order_subtext">
+								<input type="checkbox" name="useMaxPoint" checked="checked" id="useMaxPoint">
+								<label for="useMaxPoint">최대사용</label>
+								<small class="order_subtext-available">(사용가능 적립금: ${point} 원)</small>
+							</div>
 						</div>
 					</div>
 					<div>
 							<p>최종 결제금액</p>
 							<span id="totalPrice">${orderInfo[3] - point }</span>
-							<div>
-								<span id="savePoint">
+							<div class="order_subtext">
+								<span id="savePoint" class="order_subtext-available">
 									<fmt:parseNumber integerOnly="true" value="${orderInfo[3] * 0.1}"></fmt:parseNumber>
 								</span>							
 								원 포인트 적립예정
 							</div>
 					</div>
 				</div>
-				<div>
+				<div class="cashInfo cashInfo-payment">
 					<h5>결제 수단</h5>
-					<input type="radio" name="payment" id="card" checked="checked">
-					<label for="card">신용카드</label>
-					<input type="radio" name="payment" id="bankBook">
-					<label for="bankBook">무통장 입금</label>
-					<div>
+					<div class="receiver-radio">
+						<input type="radio" name="payment" id="card" checked="checked">
+						<label for="card">신용카드</label>
+						<input type="radio" name="payment" id="bankBook">
+						<label for="bankBook">무통장 입금</label>
+					</div>
+					<div class="cashInfo-accept">
 						<input type="checkbox" id="accept">
 						<label for="accept">결제 진행 필수 동의(개인정보 수집 동의)</label>
 					</div>
 				</div>
-				<div>
+				<div class="cashInfo-cashBtn">
 					<button id="pay"><span id="payPrice">${orderInfo[3] - point }</span>원 결제하기</button>
 				</div>
 			</div>

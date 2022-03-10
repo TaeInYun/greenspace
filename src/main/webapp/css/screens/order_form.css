@@ -1,22 +1,70 @@
 .cashInfo{
-	color: var(--green-main);
-	font-weight: bold;
-}
-
-.cashInfo{
 	background: #F3F3F3;
 	border-radius: 15px;
 	height: 400px;
 }
-
+.cashInfo h5{
+	margin-bottom: 20px;
+}
 .cashInfo p{
 	font-weight: bold;
 	font-size: 1.0em;
 	margin: 10px;
+	padding-left: 20px;
 }
 
 .cashInfo >div > span{
 	margin: 5px 0;
+	padding-right: 20px;
 	display: block;	
 	text-align:  right;
+}
+
+.order_saleprice{
+	color: var(--green-main);
+	font-weight: bolder;
+}
+
+.order_notice{
+	font-size: 0.9em;
+	font-weight: bolder;
+}
+
+.order_notice-under{
+	text-decoration: underline;
+	color: var(--green-text);
+}
+
+#usePoint{
+	display: block;
+	margin: 10px auto;
+	width: 80%;
+}
+
+.order_subtext{
+	text-align: right;
+	padding-right: 28px;
+}
+
+#totalPrice{
+	margin-bottom: 10px;
+	color:var(--green-main);
+	font-weight: bolder;
+	font-size: 1.2em;
+}
+
+.order_subtext-available{
+	color: var(--green-text);
+}
+
+.cashInfo-payment{
+	height: 150px;
+}
+
+.cashInfo-accept{
+	text-align: center;
+}
+
+#pay{
+	font-size: 1.0em;
 }

@@ -4,7 +4,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 0 40px;
+	padding: 15px 40px;
 	width: 60%
 }
 
@@ -18,6 +18,11 @@
 	
 }
 
+#cart_products h3{
+	margin: 5px 0px 21px 27px;
+	font-size: 1.15em;
+}
+
 .cart-cnt{
 	position: absolute;
 	top: +0px;
@@ -26,6 +31,18 @@
 	padding: 5px;
 	border-radius: 45%;
 	color: #fff;
+}
+
+.cart_btns{
+	margin: 10px 0;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.cart_btns button{
+	width: 150px;
+	font-size: 0.9em;
+	margin-right: 15px;
 }
 
 #cart_products{
@@ -53,6 +70,7 @@
 
 #saleprice{
 	font-weight: bold;
+	color: var(--green-text);
 }
 
 #orderList{
@@ -81,7 +99,7 @@
 #receiverInfo input{
 	display: block;
 	margin: 20px auto;
-	width: 60%;
+	width: 80%;
 }
 
 .receiver-radio{
@@ -112,7 +130,9 @@
 	margin-top: 20px;
 }
 #tot_saleprice{
-	color: red;
+	color:var(--green-main);
+	font-weight: bolder;
+	font-size: 1.2em;
 }
 
 #order, #pay{
