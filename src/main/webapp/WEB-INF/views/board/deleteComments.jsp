@@ -5,6 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/css/style.css">
+<style type="text/css">
+ 	p{
+ 		text-align: center;
+ 		margin: 10px;
+ 	}
+ 	 
+</style>
 </head>
 <body>	
 <div class="card align-middle"> 
@@ -16,7 +24,7 @@
 					 <p>정말로 삭제하시겠습니까?<p>	 
 					<input type="hidden" name="no" value="${no}">		 
 					<input type="hidden" name="member_no" value="${member_no}">	 				
-					<button class="btn btn-lg btn-primary btn-block" type="submit">삭제</button> 
+					<button style="width: 90%; padding: 10px"  type="submit">삭제</button> 
 			</form> 
 	</div> 
 </div>
