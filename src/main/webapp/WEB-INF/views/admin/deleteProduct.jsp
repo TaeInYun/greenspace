@@ -19,6 +19,9 @@
 		margin: 5px;
 		padding: 5px 
 	}
+	p{
+		text-align: center;
+	}
 </style>
 </head>
 <body>
@@ -31,7 +34,7 @@
 			<form method="post" action="/admin/deleteProduct">			
 					<p>정말로 삭제하시겠습니까?<p>	 
 					<input type="hidden"  name="no" value="${no }"><BR> 
-					<button class="btn btn-lg btn-primary btn-block" type="submit">삭제</button> 
+					<button style="width: 100%; padding: 10px" type="submit">삭제</button> 
 			</form> 
 	</div> 
 </div>

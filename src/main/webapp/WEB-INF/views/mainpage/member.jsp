@@ -5,11 +5,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<!-- 부트스트랩 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="/css/popup.css">
 <link href="/css/style.css" rel="stylesheet"/> 
 <link href="/css/main.css" rel="stylesheet"/> 	 
-<!-- 부트스트랩 -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script><title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/js/popup.js"></script>
@@ -213,18 +214,18 @@ $(function(){
 				 	
 						<div id=memberInfo  >
 							<input type="hidden" name="member_no" value=${m.no }>
-							<strong>${m.nickname}</strong>님<br>
-							에코레벨 : ${m.levels}Lv&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사용가능 포인트 : ${m.point_save}
+							 ${m.nickname}님&nbsp;&nbsp;
+							(에코레벨 : ${m.levels}Lv&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;사용가능 포인트 : ${m.point_save})
 						</div>
 
  
 
 	<div id=chglist>
 		<div id="tree_num">
-		<p>지금까지 ${tree.tree_num }그루의 나무를 살렸어요!</p>
+		<p>지금까지 ${tree.tree_num }그루의 나무를 살렸어요!</p><br>
 		</div>
 	
-		챌린지목록
+		<div style="margin-bottom: 10px">챌린지목록</div>
 		<div id="listTable">
 		<table border="1" width="100%">
 			<c:forEach var="c" items="${chglist}" >

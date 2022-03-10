@@ -7,13 +7,13 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="/css/style.css">
 <style type="text/css">
- 
+ 	p{
+ 		text-align: center;
+ 	}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-
-let pro_no=${p.no}
-alert(pro_no)
+ 
 
 </script>
 </head>
@@ -28,7 +28,7 @@ alert(pro_no)
 					<p>정말로 삭제하시겠습니까?<p>	 
 					<input type="hidden" name="no" value="${no}">		 				
 					<input type="hidden" name="pro_no" value="${pro_no}">		 				
-					<button class="btn btn-lg btn-primary btn-block" type="submit">삭제</button> 
+					<button style="width: 90%; padding: 10px" type="submit">삭제</button> 
 			</form> 
 	</div> 
 </div>

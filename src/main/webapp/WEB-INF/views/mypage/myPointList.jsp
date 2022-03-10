@@ -6,10 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/css/style.css">
-<link href="/css/mypage.css" rel="stylesheet"/> 	 
+<link rel="stylesheet" href="/css/style.css"> 
 <style type="text/css">
-	table {
+body { margin:0; padding:0; }
+ul, li { margin:0; padding:0; list-style:none; display: inline-blockblock;} 
+a{cursor:pointer;}
+div#root { width:1200px; margin:0 auto; }		 
+section#content { float:right; display:inline-block; width:84%; }
+#calendar{position:relative; display:inline-block;  width: 450px;}
+aside { float:left; width:10%   margin: 0px;   padding: 0px; text-align: left; }
+ 
+header#header div#header_box { text-align:center; padding:30px 0; }
+ table {
     	width: 100%;
     	border-top: 1px solid #444444;
     	border-collapse: collapse;

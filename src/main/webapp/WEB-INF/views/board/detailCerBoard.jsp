@@ -134,7 +134,7 @@ section#content ul li { display:inline-block; margin:10px; }
 	<div>		 
 		<c:forEach var="comments" items="${comments}"> 
 		 <table>
-				 <tbody>
+		  <tbody>
 					<tr> 
 						<td id="${comments.member_no}">${comments.nickname}</td>
 						<td>${comments.com_regdate}</td>

@@ -1,9 +1,9 @@
 body { margin:0; padding:0; }
 ul, li { margin:0; padding:0; list-style:none; } 
 
-div#root { width:900px; margin:0 auto; }		 
-section#content { float:right; width:700px; margin-top: 30px;}
-aside { float:left; width:100px; }
+div#root { width:1200px; margin:0 auto; }		 
+section#content { float:right; width:84%; margin-top: 30px;}
+aside { float:left; width:10%; }
 
 header#header div#header_box { text-align:center; padding:30px 0; }
  

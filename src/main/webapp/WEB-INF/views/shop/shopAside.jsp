@@ -8,10 +8,8 @@
 <style type="text/css">
  	.a{
  		display: block;
- 		}
- 		
- 		
-  
+ 		margin: 10px;
+ 		} 
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <script type="text/javascript">

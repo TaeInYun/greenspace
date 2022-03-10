@@ -11,23 +11,23 @@
 body{
 	font-size: 15px;
 }
-div#root { width:900px; margin:0 auto; }		 
-section#content { float:right; width:900px; margin-top: 30px;}
+div#root { width:1200px; margin:0 auto; }		 
+section#content { float:right; width:100%; margin-top: 30px;}
 	 
 	 #content_1{
 	 	display: inline-block;	 	 
-	 	width: 100%;	 	
+	 	width: 100%;
+	 	border-style: solid;	 	
 	 }
 	 img{
-	 	display: inline-block;	 	 
-	 	 
+	 	display: inline-block;	 	 	 
 	 	margin: 20px;
 	 	margin-left:10px;
 	 	float: left;
 	 }
 	 .lableZip{ 	 
 	 	margin:0px;
-	 	width:450px; 	
+	 	width:45%; 	
 	 	margin-right: 10px;
 	 	 
 	 }	 
@@ -46,8 +46,8 @@ section#content { float:right; width:900px; margin-top: 30px;}
 	 }
 	 .context_text{
 	  	margin: 10px;
-	  	margin-top: 20px;
-	  	margin-bottom: 20px;
+	  	margin-top: 40px;
+	  	margin-bottom: 40px;
 	 }
 	 
 	table {
@@ -171,15 +171,12 @@ section#content { float:right; width:900px; margin-top: 30px;}
             <!-- 본문 -->         
                <section id="content">                  
                 <div id="content_1"> 
-                	<img src="/upload/${p.PRO_THUMBNAIL }" width="370" height="400"><br>   
+                	<img src="/upload/${p.PRO_THUMBNAIL }" width="600" height="500"><br>   
                     <div class="lableZip" style="float: right;"> 
                      
                        <div class="context_header" >							 
 							<strong><span> ${p.pro_name }</span></strong>
-						 	<i class="fa-solid fa-cart-shopping fa-2x"></i>
-					      	<i class="fa-solid fa-heart fa-2x"></i>
-					      	<script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script>
-						</div>          
+					   </div>          
                    	  	
                    	   <div class="context_header" id="priceZip">
 							 	<strong><label for="pro_price">가격</label></strong>			
@@ -248,11 +245,11 @@ section#content { float:right; width:900px; margin-top: 30px;}
                     </c:if>
                     
                      <div id="btns" class="context_text">					     
-						       
-						     
-						     
-						   					   			      
-				     </div>
+						    <i class="fa-solid fa-cart-shopping fa-2x"></i>&nbsp;
+					      	<i class="fa-solid fa-heart fa-2x"></i>&nbsp;
+					      	<script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script>
+							<button>바로결제</button>
+					 </div>
 				 </div>	<!-- lableZip -->
 				</div> 	<!-- content_1 -->
 					
