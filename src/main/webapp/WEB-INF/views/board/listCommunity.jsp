@@ -6,10 +6,8 @@
 <html>
 <head>
 <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/board.css">
 <link rel="stylesheet" href="/css/components/search.css">
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<meta charset="UTF-8">
 <style type="text/css">
 
 #communityHeader{
@@ -24,60 +22,12 @@
 }
 
 #content{
-	width: 900px;
+	width: 1000px;
 }
-
-#board{
-	padding-top: 18px;
-}
-
-#commu_box{
-	height:45px;
-}
-
-#search_form{
-	float: right;
-}
-
-#board td{
-	    text-align: center;
-}
-.title{
-	font-size: 24px;
-    color: rgb(0, 145, 58);
-    font-weight: 500;
-    text-align: center;
-    padding: 40px 0 0px 0;
-}
-.writeBtn{
-	display:inline-block;
-	margin-top: 10px;
-}
-.writeBtn button{
-	width:70px;
-}
-
-#paging{
-	margin: auto 0;
-	padding: 20px 0;
-}
-.td_num,.td_hit {
-    width: 45px;
-
-  }
-  
-#board .td_title {
-    width: 480px;
-    text-align: left;
-    padding-left:20px;
-  }
-  
-.td_nickname,.td_date{
-	 width: 110px;
-}  
-
 
 </style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<meta charset="UTF-8">
 <script type="text/javascript">
 $(function(){
 	$( $(".nav-btn")[0] ).attr("style", "background: #00913A;");
@@ -106,10 +56,6 @@ $(function(){
 				</div>
 				
 				<div id="commu_box">
-					<div class="writeBtn">
-					<a href="/board/insertCommunity"><button>글쓰기</button></a>
-					</div>
-				
 				
 					<div id="search_form">
 						<form action="/board/listCommunity" method="post">
@@ -150,7 +96,12 @@ $(function(){
 								<td class="td_hit">${c.commu_hit }</td>				
 							</tr>
 						</c:forEach>
+						
 					</table> 	
+								
+					<div class="writeBtn">
+					<a href="/board/insertCommunity"><button>글쓰기</button></a>
+					</div>
 					
 					<div id="paging">
 				    <c:forEach var="i" begin="1" end="${totalPage }">
