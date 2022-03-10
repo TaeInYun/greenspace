@@ -64,7 +64,7 @@
   	member_no)
   	
   	values(
-  	seq_comment.nextval,
+  	seq_address.nextval,
   	#{addr_main},   
   	#{addr_postal},
   	#{addr_road},

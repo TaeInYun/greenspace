@@ -34,9 +34,9 @@ public class AddressController {
 	@RequestMapping("/mypage/mainAddress")
 	public void listAddress_mypage( Model model,HttpSession session) {	
 		
-		//int member_no = ((MemberVO)session.getAttribute("m")).getNo();	//회원이 로그인 했을때 회원 번호를 m에 넣어서 상태유지 하는것을 가지고옴 
-		model.addAttribute("a", dao.allMainAddress(1));
-		model.addAttribute("list", dao.allSubAddress(1));
+		int member_no = ((MemberVO)session.getAttribute("m")).getNo();	//회원이 로그인 했을때 회원 번호를 m에 넣어서 상태유지 하는것을 가지고옴 
+		model.addAttribute("a", dao.allMainAddress(member_no));
+		model.addAttribute("list", dao.allSubAddress(member_no));
 	} 
 	
 	@RequestMapping("/mypage/detailAddress")
@@ -53,7 +53,7 @@ public class AddressController {
 	
 	@RequestMapping(value = "/mypage/insertAddress" , method = RequestMethod.POST)
 	public ModelAndView insertAddress(AddressVO a) {
-		ModelAndView mav = new ModelAndView("redirect:/admin/listAddress");
+		ModelAndView mav = new ModelAndView("redirect:/mypage/mainAddress");
 		System.out.println("insert작동함");
 		System.out.println("vo에 담긴 객체입니다."+a);
 		

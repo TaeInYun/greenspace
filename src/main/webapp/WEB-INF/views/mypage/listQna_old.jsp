@@ -5,17 +5,15 @@
 <html>
 <head>
 <meta charset="UTF-8"> 
-  <link href="/css/admin.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="/css/style.css">
 <title>Insert title here</title>
 
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  
 <script type="text/javascript">
 
 var selectBoxChange = function(value){
@@ -26,22 +24,22 @@ var selectBoxChange = function(value){
 
  $function(){
 	  
-	 $("#detailQna").find(".model-content").load("/mypage/detailQna?no=${q2.no}"); 
+	 $("#detailQna").find(".panel-heading").load("/mypage/detailQna?no=${q2.no}"); 
 	 
 } 
 
 </script>
-
+<link href="/css/admin.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-	
 <div id="root">
 		<jsp:include page="../header.jsp"></jsp:include>
 				
 		<div class="section mypage">
 		<jsp:include page="../mypage/myAside.jsp"></jsp:include>
 		
-		<div class="mypage-main">
+		<main class="mypage-main">
 				<jsp:include page="./myQnaHeader.jsp"></jsp:include>
 	
 	<section id="content">
@@ -65,7 +63,7 @@ var selectBoxChange = function(value){
 								<td>문의유형</td>
 								<td>작성일</td>
 								<td>처리상태</td>
-								<td>상세보기</td>							 
+															 
 								
 							</tr>
 							
@@ -74,7 +72,7 @@ var selectBoxChange = function(value){
 									<%-- <td><img  src="/upload/qna/${q2.img_name }" width="100" height="100">${q2.img_name }</td> --%>
 																					 
 									<td>
-									${q2.pro_name }								 
+									<a id="detailQna" data-toggle="collapse" data-target="#detailCollapse" href="/mypage/detailQna?no=${q2.no}">${q2.pro_name }</a>									 
 			  			 					  			 		    	
 									</td>
 									
@@ -84,30 +82,20 @@ var selectBoxChange = function(value){
 									<td>${q2.status }</td>
 								 
 									 
-									<td><a id="detailQna" data-toggle="modal" data-target="#detailModal" role="button" href="/mypage/detailQna?no=${q2.no}"><button>상세보기</button></a></td>
+									
 												  			 		     
 								</tr>	
-								
-								
-								
+								<div id="detailCollapse" class="collapse"> 
+			  			 				<div class="collapse-in"> 			  			 					
+			  			 				</div> 
+			  			 		    </div>
 							</c:forEach>
 							
 						</table>	 
 						</section>
+						</main>
 						</div>
-						
-						
-						</div>
-						
-						<div id="detailModal" class="modal fade" tabindex="-1" role="dialog"> 
-			  			 				<div class="modal-dialog"> 
-			  			 					<div class="modal-content"> 
-			  			 					</div> 
-			  			 				</div> 
-			  			 		    </div>
 						</div>	
-						
-						
 	
 </body>
 </html>

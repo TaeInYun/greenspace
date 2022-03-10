@@ -72,8 +72,12 @@ section#content { float:right; width:100%; margin-top: 30px;}
  
 </style> 
 <title>Insert title here</title>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/qty.js"></script>
 <script type="text/javascript" src="/js/product.js"></script>
 <script type="text/javascript">
@@ -158,6 +162,15 @@ section#content { float:right; width:100%; margin-top: 30px;}
 	 	 });
 	 	
 	});
+		
+	 $function(){
+		  
+		 /* $("#deleteProduct").find(".modal-content").load("/admin/deleteProduct?no=${p.no }");  */
+		 $("#rateReview").find(".modal-content").load("/shop/listReview_rate?pro_no=${p.no}"); //상품 리뷰(평점순)
+		 $("#insertReview").find(".modal-content").load("/shop/insertReview?pro_no=${p.no}");  //리뷰작성하기
+		 $("#insertProQna").find(".modal-content").load("/shop/insertProQna?pro_no=${p.no}");  //1대1문의 작성하기 
+		 
+	 }	
 </script>
 </head>
 <body>
@@ -259,11 +272,40 @@ section#content { float:right; width:100%; margin-top: 30px;}
                       
                       <hr>
  						<div id="other" style="clear: both; margin: 10PX;">
-							<a href="/shop/listReview_rate?pro_no=${p.no}">리뷰 목록 보기</a>						
-		 		            <a href="/shop/insertReview?pro_no=${p.no}"> 리뷰작성하기</a>
-		 		            <a href="/shop/insertProQna?pro_no=${p.no}"> 1대1문의작성하기</a>
+							<%-- <a href="/shop/listReview_rate?pro_no=${p.no}">리뷰 목록 보기</a>	 --%>					
+		 		            <%-- <a href="/shop/insertReview?pro_no=${p.no}"> 리뷰작성하기</a> --%>
+		 		            <%-- <a href="/shop/insertProQna?pro_no=${p.no}"> 1대1문의작성하기</a> --%>
+		 		            
+		 		            <a id="rateReview" data-toggle="modal" data-target="#rateModal" role="button" href="/shop/listReview_rate?pro_no=${p.no}"><button>상품리뷰확인</button></a>
+		 		            <a id="insertReview" data-toggle="modal" data-target="#reviewModal" role="button" href="/shop/insertReview?pro_no=${p.no}"><button>리뷰작성</button></a>
+		 		            <a id="insertProQna" data-toggle="modal" data-target="#proQnaModal" role="button" href="/shop/insertProQna?pro_no=${p.no}"><button>1대1문의작성</button></a>
+		 		            		 		            
+		 		            
 						</div>
  
+                 	<!-- 모달창 -->
+  			 			<div id="rateModal" class="modal fade" tabindex="-1" role="dialog"> 
+  			 				<div class="modal-dialog"> 
+  			 					<div class="modal-content"> 
+  			 					</div> 
+  			 				</div> 
+  			 		    </div>
+  			 		    
+  			 		    <div id="reviewModal" class="modal fade" tabindex="-1" role="dialog"> 
+  			 				<div class="modal-dialog"> 
+  			 					<div class="modal-content"> 
+  			 					</div> 
+  			 				</div> 
+  			 		    </div>
+  			 		    
+  			 		    <div id="proQnaModal" class="modal fade" tabindex="-1" role="dialog"> 
+  			 				<div class="modal-dialog"> 
+  			 					<div class="modal-content"> 
+  			 					</div> 
+  			 				</div> 
+  			 		    </div>
+  			 		    
+                 
                  
                </section><!-- 본문 -->               
                                    

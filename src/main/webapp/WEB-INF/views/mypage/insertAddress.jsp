@@ -1,13 +1,14 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>Insert title here</title>
 <script  type="text/javascript" src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script type="text/javascript">
  function kakaopost(){
     new daum.Postcode({
@@ -33,13 +34,20 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<link href="/css/admin.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/css/style.css">
 <meta charset="UTF-8">
 </head>
 <body>
 
-<jsp:include page="../header.jsp"/>
+<div id="root">
+<jsp:include page="../header.jsp"></jsp:include>
 
+<div class="section">
+	<jsp:include page="../mypage/myAside.jsp"></jsp:include>
+	
 
+	<section id="content">
 	<h2>메인주소입력</h2>
 	<form action="insertAddress" method="post">		
 		<!--  리뷰번호:
@@ -68,6 +76,9 @@
 		<input type="submit" value="등록">
 		<input type="reset" value="취소">
 	</form>
+		</section>
+		</div>
+	</div>
 </body>
 
 </html>
