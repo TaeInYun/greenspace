@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
- 
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,14 +14,14 @@
 	 	width: 100%;	 	
 	 }
 	 img{
-	 	display: inline-block;	 	 
+	 	display: inline-block; 	 
 	 	 
 	 	margin: 20px;
 	 	margin-left:10px;
 	 	float: left;
 	 }
 	 .lableZip{	 	 
-	 	width: 50%;
+	 	width: 60%;
 	 	 
 	 }
 	 .label{	 	 
@@ -37,6 +36,9 @@
 	  th, td {
 	    border-bottom: 1px solid #444444;
 	    padding: 10px;
+	  }
+	  p{
+	  	margin:10px;
 	  }
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -65,7 +67,7 @@
 					<section id="content">
 					 	 
 					  <div id="content_1"> 
-                	<img src="/upload/${p.PRO_THUMBNAIL }" width="300" height="300"><br>   
+                	<img src="/upload/${p.PRO_THUMBNAIL }" width="360" height="300"><br>   
                     <div class="lableZip" style="float: right;"> 
                                          
                        <div class="label" >

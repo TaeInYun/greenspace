@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="/css/style.css">
 <style type="text/css">
 	.inputArea{
-		margin: 5px;
+		margin: 10px;
 	}
 	input{
 		margin: 5px;
@@ -77,8 +77,8 @@
 				 
 				 
 				 <div class="inputArea">
-					<label for="pro_content">상품내용</label>
-					<textarea rows="10" cols="80" name="pro_content" >${p.pro_content }</textarea>
+					<label for="pro_content">상품내용</label><br>
+					<textarea rows="10" cols="50" name="pro_content" >${p.pro_content }</textarea>
 				</div>	
 			  		 
 						

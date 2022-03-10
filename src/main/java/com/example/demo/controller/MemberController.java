@@ -41,7 +41,6 @@ public class MemberController {
 	
 	//test----------------------------
 	@RequestMapping("/test")
-	@ResponseBody
 	public void test() {	
 	}
 

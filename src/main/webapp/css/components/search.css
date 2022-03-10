@@ -1,0 +1,47 @@
+@charset "EUC-KR";
+ 
+ #search_form{
+	display: inline-block;
+ }
+ 
+.searchColumn_wrap{
+		float: left;
+}
+ 
+ .search_keyword_form {
+		float: right;	
+		position: relative;
+		width: 300px;
+}
+
+
+#searchColumn{
+ width: 100px;
+  border: 1px solid #bbb;
+  border-radius: 20px;
+  padding: 10px 12px;
+  display: inline-block;
+  float: left;
+  margin-right: 8px;
+}
+
+.keyword {
+  width: 100%;
+  border: 1px solid #bbb;
+  border-radius: 20px;
+  box-sizing:border-box;
+  padding: 10px 12px;
+  display: inline-block;
+  text-align:left;
+  font-size: 14px;
+}
+
+
+
+#icon {
+  position : absolute;
+  width: 17px;
+  top: 12px;
+  right: 13px;
+  margin: 0;
+}

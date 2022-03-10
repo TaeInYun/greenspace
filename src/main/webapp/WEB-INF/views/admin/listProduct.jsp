@@ -6,8 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자설정_상품목록</title>
-<link href="/css/admin.css" rel="stylesheet"/>
-<link rel="stylesheet" href="/css/style.css">
+
 <style type="text/css">
 	table {
 	text-align: center;
@@ -40,20 +39,22 @@ table {
     	width: 100%;
     	border-top: 1px solid #444444;
     	border-collapse: collapse;
+    	
   }
   th, td {
 	    border-bottom: 1px solid #444444;
-	    padding: 10px;
+	    padding: 10px;	    
   }
 </style>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"><!-- 모달창 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="/css/admin.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/css/style.css">
 <script type="text/javascript" src="/js/qty.js"></script>
 <script type="text/javascript" src="/js/cart.js"></script>
-<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
  $function(){
 	  
@@ -89,14 +90,14 @@ table {
 						<table>
 							<tr>
 								 
-								<td>상품번호</td>
+								<td>번호</td>
 								<td>사진</td>
-								<td>상품이름</td>
-								<td>상품브랜드</td>
-								<td>상품가격</td>
-								<td>상품할인가</td>
+								<td>이름</td>
+								<td>브랜드</td>
+								<td>가격</td>
+								<td>할인가</td>
 								<td>재고수</td>								 
-								<td colspan=3>상품관리</td>
+								<td colspan=3>설정</td>
 							</tr>
 							
 							<c:forEach var="p" items="${list }">

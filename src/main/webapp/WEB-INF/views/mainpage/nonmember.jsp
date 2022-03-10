@@ -44,17 +44,17 @@
 				<!-- 본문 -->			
 					<section id="content">
 					 			 
-									<div id="mainsigleBox" style=" width: 100%; height: 500px" class="sigleBox">
+									<div id="mainsigleBox" style=" width: 100%; height: 600px" class="sigleBox">
 										 <img src="/upload/main.png"  id="main_photo"  >
 										<div id="main_textBOX"  >									 
 										 	   
-										 		<span id="title"  style="text-align: center; font-size: 30px; margin: 15px;  "><strong>지구를 지키는 에코라이프!<br></strong> 
-										 		<strong>녹지공간과 함께!</strong></span>
+										 		<span id="main_title"  style="text-align: center; font-size: 30px; margin: 25px;  ">지구를 지키는 에코라이프!<br> 
+										 		녹지공간과 함께!</span>
 										 		<span id="textBOX_content"  style="text-align: center;">일상 속 생활습관 몇가지를
 													바꾸는 것만으로도 가능한 에코라이프!<br>
 													여러사람들과 챌린지도 하고 달성하며
 													내가 얼마나 환경에 기여했는지 확인해볼까요?</span>
-												 <button id="mainButton"> 로그인/회원가입 </button>     
+												 <button id="mainButton" > 로그인/회원가입 </button>     
 										</div>										
 									</div>
 									  									
@@ -73,7 +73,7 @@
 											 	</span>
 										 		
 										 	
-										 	 <button class="btn" id="ecoButton" style="background-color: #fff">  ECO Magazine 바로가기 </button> 
+										 	 <button class="btn" id="ecoButton" style="background-color: #fff;">  ECO Magazine 바로가기 </button> 
 										 	
 										</div>
 									</div>			 
