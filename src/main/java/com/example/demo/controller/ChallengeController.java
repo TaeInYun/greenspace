@@ -126,11 +126,11 @@ public class ChallengeController {
 	@RequestMapping( value={"/mainpage/updateChgStatus","/mypage/updateChgStatus"})
 	@ResponseBody
 	public int changeChgStatus(ChallengeListVO c) {
-		
+		System.out.println("도전상태변경");
 		int chg_no = c.getChg_no();
 		String chg_status_code = c.getChg_status_code();
 		int member_no = c.getMember_no();
-		
+		System.out.println(chg_no + chg_status_code + member_no);
 		int re = listdao.updateChgStatus(c);
 		if(re==1) {
 			System.out.println("수정성공");

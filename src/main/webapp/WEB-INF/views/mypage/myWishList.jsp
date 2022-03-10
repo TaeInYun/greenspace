@@ -92,22 +92,30 @@
 								<label for="chk_${c.no }"><img src="/upload/${c.pro_thumbnail }"></label>
 							</div>
 							<div class="wishProduct-detail">
-								<a href="/shop/detailProduct?no=${c.pro_no }" class="wishProduct-detail__link">
-									<span class="wishProduct-detail__like">
-										<i class="fa-solid fa-heart-pulse fa-lg" style="color:#ff4f4f"></i>
-										${c.cnt }
-									</span>
-									<h4 class="wishProduct-detail__proName">[ ${c.pro_brand } ]</h4>
-									<h4 class="wishProduct-detail__proName">${c.pro_name }</h4>
-								</a>
-									<c:if test="${c.pro_option != null}">
-										<h5>(${c.pro_option }) ${c.option_detail }</h5>
-									</c:if>
-									<p class="wishProduct-priceInfo">	
-										<span class="priceInfo-price">${c.price + c.pro_add_price }</span>
-										<span class="priceInfo-saleprice">${c.saleprice + c.pro_add_price }</span>
-										<span class="priceInfo-saleRate">(${Math.round((1 - c.saleprice / c.price) * 100 *100) /100 } %)</span>
-									</p>
+								<div class="wishProduct-detail-proInfo ">
+									<div class="wishProduct-detail__link">
+										<span class="wishProduct-detail__like">
+											<i class="fa-solid fa-heart-pulse fa-lg" style="color:#ff4f4f"></i>
+											${c.cnt }
+										</span>
+										<div class="wishProduct__proInfo">
+											<p class="wishProduct-detail__proName">[ ${c.pro_brand } ]</p>
+											<p class="wishProduct-detail__proName">
+												<a href="/shop/detailProduct?no=${c.pro_no }" >
+													${c.pro_name }
+												</a>
+												<c:if test="${c.pro_option != null}">
+													<p>(${c.pro_option }) ${c.option_detail }</p>
+												</c:if>
+											</p>
+										</div>
+									</div>
+								</div>
+								<p class="wishProduct-priceInfo">	
+									<span class="priceInfo-price">${c.price + c.pro_add_price }</span>
+									<span class="priceInfo-saleprice">${c.saleprice + c.pro_add_price }</span>
+									<span class="priceInfo-saleRate">(${Math.round((1 - c.saleprice / c.price) * 100 *100) /100 } %)</span>
+								</p>
 							</div>
 							<div>
 								<input type="button" value="장바구니 담기">

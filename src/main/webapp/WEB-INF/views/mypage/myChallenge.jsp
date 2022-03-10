@@ -4,17 +4,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="/css/popup.css">
-<link href="/css/mypage.css" rel="stylesheet"/> 
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/mychallenge.css">
+<link rel="stylesheet" href="/css/popup.css"> 
 <style type="text/css">
+#confirmBtn{
+	border-right:1px solid #cccccc; 
+	font-weight:bolder;
+	color:#04AA6D;
+}
 </style>	 
 <!-- 부트스트랩 -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script><title>Insert title here</title>
+<link rel="stylesheet" href="/css/popup.css">
+<link href="/css/mychallenge.css" rel="stylesheet"/>  
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/js/popup.js"></script>
 <script type="text/javascript">
 $(function(){
+	
+	$( $(".nav-btn")[0] ).attr("style", "background: #00913A;");
+	$( $(".nav-btn .nav-btn__text")[0] ).attr("style", "color:white");
+	
 	
 	//도전하기 버튼 클릭시 상태 ING로 변경
 	$(document).on("click", "#startBtn", function() {
@@ -149,40 +159,44 @@ $(function(){
 </script>
 </head>
 <body>
-
-	<div id="header">
-		<jsp:include page="../header.jsp"/>
-	</div>
-		
-<input type="hidden" name="member_no" value=${m.no }>
-  		<aside id="aside">
-			<jsp:include page="../mypage/myAside.jsp"/>
-		</aside>	
 <div id="root">
-
-	<section id="content">
 	
-	<div>
-		<jsp:include page="../mypage/myActiveMenu.jsp"/>
-	</div>
+	<jsp:include page="../mainpage/popup.jsp"/>  
 
-	<div id="calendar">
-		<jsp:include page="../mypage/calendar.jsp"/>
-	</div> 
-
-	<div id=chglist>
-			<div id="tree_num">
-			<p>지금까지 ${tree.tree_num }그루의 나무를 살렸어요!</p>
-			</div>
+	
+		<jsp:include page="../header.jsp"></jsp:include>
+		<div class="section mypage">
+			<jsp:include page="../mypage/myAside.jsp"></jsp:include>
+			<main class="mypage-main">
+				<jsp:include page="./myActiveHeader.jsp"></jsp:include>
+				<div class="search">
+					<div class="search__btns">
+						<a href="/mypage/myChallenge"><button type="button">My 챌린지</button></a>
+						<a href="/mypage/myCerBoard"><button type="button">My 인증</button></a>
+					</div>
+				</div>
 		
-		챌린지목록
+		<div id="content_box">
+		
+			<input type="hidden" name="member_no" value=${m.no }>	
+		
+			<div id="calendar">
+				<jsp:include page="../mypage/calendar.jsp"/>
+			</div> 
+
+		<div id=chglist>
+		<div id="tree_num">
+		<p>지금까지 ${tree.tree_num }그루의 나무를 살렸어요!</p><br>
+		</div>
+	
+		<div style="margin-bottom: 10px">챌린지목록</div>
 		<div id="listTable">
-		<table border="1" width="50%">
-			<c:forEach var="c" items="${chglist}">
+		<table border="1" width="100%">
+			<c:forEach var="c" items="${chglist}" >
 			<tr>
 				<td>${c.chg_title}</td>
 				
-				<c:if test="${c.chg_status_code eq 'STA'}">
+				<c:if test="${c.chg_status_code eq 'STA'}" >
 					<c:choose>
 						<c:when test="${empty endlist}">
 						<td><button type="button" id="startBtn" class="btn btn-primary btn-sm" value="${c.chg_no}"  >도전하기</button></td>			
@@ -194,7 +208,7 @@ $(function(){
 				</c:if>
 				
 				<c:if test="${c.chg_status_code eq 'ING'}">
-				<td><button type="button" id="finishBtn" class="btn btn-primary btn-sm" value="${c.chg_no}" >완료</button>
+				<td><button   type="button" id="finishBtn" class="btn btn-primary btn-sm" value="${c.chg_no}" >완료</button>
 				<button type="button" id="ResetBtn" class="btn btn-secondary btn-sm" value="${c.chg_no}" >포기</button></td>
 				</c:if>	
 				
@@ -208,31 +222,32 @@ $(function(){
 					</c:when>
 				</c:choose>
 				</c:if>	
-				</td>
 			</tr>
 			</c:forEach>
 		</table>
 	</div><!-- end 도전 목록 -->
 	
-	<br>
-	 <c:if test="${empty endlist}">
-	<button type="button" id="modal-open" class="btn btn-primary btn-lg"   >오늘 챌린지 완료</button>
-	 </c:if>
-	 <c:if test="${not empty endlist}">
-	 <c:choose>
-	 <c:when test="${cercnt eq 0 }">
-	<button type="button" id="insertCerBtn" class="btn btn-primary btn-lg" >인증글 쓰러가기</button>
-	</c:when>
-	<c:when test="${cercnt eq 1 }">
-	<button type="button" id="goCerBtn" class="btn btn-primary btn-lg" >인증글 확인하기</button>
-	</c:when>
-	</c:choose>
-	</c:if>
-	
+
+				 
+			 <c:if test="${empty endlist}">
+			<button type="button" id="modal-open" class="btn btn-primary btn-lg"   >오늘 챌린지 완료</button>
+			 </c:if>
+			 <c:if test="${not empty endlist}">
+			 <c:choose>
+			 <c:when test="${cercnt eq 0 }">
+			<button type="button" id="insertCerBtn" class="btn btn-primary btn-lg" >인증글 쓰러가기</button>
+			</c:when>
+			<c:when test="${cercnt eq 1 }">
+			<button type="button" id="goCerBtn" class="btn btn-primary btn-lg" >인증글 확인하기</button>
+			</c:when>
+			</c:choose>
+			</c:if>
+		 
+		</div>
+		<jsp:include page="../mainpage/popup.jsp"/>	
+	</div>	
+			</main>
+		</div>
 	</div>
-	</section>
- 
-</div>
-<jsp:include page="../mainpage/popup.jsp"/>  
 </body>
 </html>

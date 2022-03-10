@@ -5,77 +5,104 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/board.css">
+<link rel="stylesheet" href="/css/components/search.css">
+<link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
+<style type="text/css">
+#content_box{
+	
+	display: flex;
+	flex: 1;
+	padding: 10px;
+	
+}
+
+
+
+#board{
+	margin-left: 30px;
+}
+
+</style>
+<script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	
+	$( $(".nav-btn")[1] ).attr("style", "background: #00913A;");
+	$( $(".nav-btn .nav-btn__text")[1] ).attr("style", "color:white");
+	
+	$(".myActive").attr("style","background: #00913A; font-weight:800; color: white; padding: 5px 15px; border-radius: 20px;");
+	
+});
+</script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>녹지공간-게시물 활동</title>
 </head>
 <body>
-
-	<div id="header">
-		<jsp:include page="../header.jsp"/>
-	</div>
-	
-  		<aside id="aside">
-			<jsp:include page="../mypage/myAside.jsp"/>
-		</aside>	
-		
-		
-	<div id="root">
-	<section id="container">
-	
-		<div id="container_box">	
-				<!-- 본문 -->			
-				<section id="content">
-					
-		<div id="submenu">
-			<jsp:include page="../mypage/myActiveMenu.jsp"/>
-		</div>	
+<div id="root">
+		<jsp:include page="../header.jsp"></jsp:include>
+		<div class="section mypage">
+			<jsp:include page="../mypage/myAside.jsp"></jsp:include>
+			<main class="mypage-main">
+				<jsp:include page="./myActiveHeader.jsp"></jsp:include>
 			
-		<h3>My 커뮤니티</h3>
-		<div>
-		<a href="/board/insertCommunity">글등록</a>
-		</div>
-		
-			<table border="1" width="80%">
-				<tr>
-					<td>번호</td>
-					<td>제목</td>
-					<td>닉네임</td>
-					<td>등록일</td>
-					<td>조회수</td>
-				</tr>
-				<c:forEach var="c" items="${list }">
-			    	<c:set var="i" value="${i+1}"/>
-					<tr>
-						<td>${i+start}</td>
-						<td><a href="/board/detailCommunity?no=${c.no }">${c.commu_title}</a></td>				 
-						<td>${c.nickname }</td>
-						<td><fmt:formatDate value="${c.commu_date }" pattern="yy.MM.dd HH:ss"/></td>
-						<td>${c.commu_hit }</td>				
-					</tr>
-				</c:forEach>
-			</table> 	
-			
-		    <c:forEach var="i" begin="1" end="${totalPage }">
-		        <a href="myCommunity?pageNUM=${i }">${i }</a>&nbsp;&nbsp;
-		    </c:forEach>
-		    
-		    <div id="form">
-				<form action="/board/listCommunity" method="post">
-				<div class="w100" style="padding-right:10px">
-						<select name="searchColumn" id="searchColumn">
-							<option value="commu_title">제목</option>
-							<option value="commu_content">본문</option>
-							<option value="nickname">작성자</option>
-						</select>
-					        <input type="text" class="search-input" name="keyword" id="keyword"/>
-					        <button type="submit" name="btnSearch" id="btnSearch">검색</button>
+			<div id="commu_box">
+					<div id="search_form">
+						<form action="/board/listCommunity" method="post">
+						<div class="searchColumn_wrap">
+								<select name="searchColumn" id="searchColumn">
+									<option value="commu_title">제목</option>
+									<option value="commu_content">본문</option>
+									<option value="nickname">작성자</option>
+								</select>
+						</div>		
+								<div class="search_keyword_form">
+									 <input class="keyword" type="text" name="keyword"  placeholder="검색어 입력">
+									  <img id="icon" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+								</div>
+						
+						</form>
+					</div>
 				</div>
-				</form>
+				<div id="board">
+					<table border="1" width="80%">
+						<tr>
+							<td>번호</td>
+							<td>제목</td>
+							<td>닉네임</td>
+							<td>등록일</td>
+							<td>조회수</td>
+						</tr>
+						<c:forEach var="c" items="${list }">
+					    	<c:set var="i" value="${i+1}"/>
+							<tr>
+								<td class="td_num">${i+start}</td>
+								<td class="td_title"><a href="/board/detailCommunity?no=${c.no }">${c.commu_title}</a></td>				 
+								<td class="td_nickname">${c.nickname }</td>
+								<td class="td_date"><fmt:formatDate value="${c.commu_date }" pattern="yy.MM.dd HH:ss"/></td>
+								<td class="td_hit">${c.commu_hit }</td>				
+							</tr>
+						</c:forEach>
+					</table> 	
+							
+					<div class="writeBtn">
+					<a href="/board/insertCommunity"><button>글쓰기</button></a>
+					</div>
+					
+				</div>	
+					<div id="paging">
+					<ul>
+					<c:forEach var="i" begin="1" end="${totalPage }">
+				        <a href="myCommunity?pageNUM=${i }">${i }</a>&nbsp;&nbsp;
+				    </c:forEach>
+					</ul>
+				</div>
 
-			</section>
-			</div>
-			 	   
-</section>
-</div>
+				
+			</main>
+		</div>
+	</div>
 </body>
 </html>

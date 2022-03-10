@@ -6,66 +6,34 @@
 <html>
 <head>
 <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/board.css">
 <link rel="stylesheet" href="/css/components/search.css">
-<meta charset="UTF-8">
 <style type="text/css">
+
+#communityHeader{
+		display: flex; 
+		justify-content:center;	
+		margin: 30px 0 30px 0;
+}
+
 #container_box{
 	display: flex; 
 	justify-content:center;
 }
 
 #content{
-	width: 900px;
+	width: 1000px;
 }
 
-#board{
-	margin-top: 15px;
-}
-
-#search_form{
-	float: right;
-}
-
-#board td{
-	    text-align: center;
-}
-.title{
-	font-size: 24px;
-    color: rgb(0, 145, 58);
-    font-weight: 500;
-    text-align: center;
-    padding: 40px 0 40px 0;
-}
-.writeBtn{
-	display:inline-block;
-	margin-top: 12px;
-}
-.writeBtn button{
-	width:70px;
-}
-
-#paging{
-	margin: auto 0;
-	padding: 20px 0;
-}
-.td_num,.td_hit {
-    width: 45px;
-
-  }
-  
-#board .td_title {
-    width: 480px;
-    text-align: left;
-    padding-left:20px;
-  }
-.td_nickname,.td_date{
-	 width: 110px;
-}   
-#box{
-height:45px;
-
-}
 </style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<meta charset="UTF-8">
+<script type="text/javascript">
+$(function(){
+	$( $(".nav-btn")[0] ).attr("style", "background: #00913A;");
+	$( $(".nav-btn .nav-btn__text")[0] ).attr("style", "color:white");
+})
+</script>
 <title>커뮤니티</title>
 </head>
 <body>
@@ -83,11 +51,12 @@ height:45px;
 				커뮤니티
 				</div>
 				
-				<div id="box">
-					<div class="writeBtn">
-					<a href="/board/insertCommunity"><button>글쓰기</button></a>
-					</div>
-				 
+				<div id="communityHeader">
+				<jsp:include page="./communityHeader.jsp"/>
+				</div>
+				
+				<div id="commu_box">
+				
 					<div id="search_form">
 						<form action="/board/listCommunity" method="post">
 						<div class="searchColumn_wrap">
@@ -96,15 +65,17 @@ height:45px;
 									<option value="commu_content">본문</option>
 									<option value="nickname">작성자</option>
 								</select>
-								<div class="search">
+						</div>		
+								<div class="search_keyword_form">
 									 <input class="keyword" type="text" name="keyword"  placeholder="검색어 입력">
 									  <img id="icon" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
 								</div>
-						</div>
+						
 						</form>
 					</div>
-					</div>
-				 	
+				</div>
+				  	
+				
 					<div id="board">
 						
 					<table border="1" width="80%">
@@ -125,7 +96,12 @@ height:45px;
 								<td class="td_hit">${c.commu_hit }</td>				
 							</tr>
 						</c:forEach>
+						
 					</table> 	
+								
+					<div class="writeBtn">
+					<a href="/board/insertCommunity"><button>글쓰기</button></a>
+					</div>
 					
 					<div id="paging">
 				    <c:forEach var="i" begin="1" end="${totalPage }">

@@ -10,7 +10,7 @@ function deleteWishList(noArr) {
 			data: {data:noArr},
 			success: function() {
 				alert("해당 상품을 위시리스트에서 삭제하였습니다.");
-				location.href="/shop/wishList";
+				location.href="/mypage/myWishList";
 			}
 		});
 		
@@ -37,12 +37,12 @@ function deleteCart(noArr) {
 //장바구니 추가 메세지
 function insertCartMSG(msg){
 	let addMsg = $("#addMsg").html(msg);
-	addMsg.append( $("<a></a>").attr("href","./cart").html("장바구니로 가기") )
+	addMsg.append( $("<a></a>").attr("href","./cart").html("장바구니 이동").attr("style","font-weight:bold; color:#fff; background:green; border-radius:20px") )
 }
 //위시리스트 추가 메세지
 function insertWishMSG(msg){
 	let addMsg = $("#addMsg").html(msg);
-	addMsg.append( $("<a></a>").attr("href","./wishList").html("위시리스트로 가기") )
+	addMsg.append( $("<a></a>").attr("href","/mypage/myWishList").html("위시리스트 이동").attr("style","font-weight:bold; color:#fff; background:green; border-radius:20px") )
 }
 
 //카트 추가하기

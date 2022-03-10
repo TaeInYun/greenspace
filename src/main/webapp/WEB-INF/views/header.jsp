@@ -16,7 +16,14 @@
  <div id="header_wrap">
 
 		<div id="logo">
+		<c:choose>
+		<c:when test="${empty m }"> 
 			<a href="/mainpage/nonmember"><img class="brand_logo" src="/upload/logo.png" ></a>
+		</c:when>
+		<c:when test="${not empty m }"> 
+			<a href="/mainpage/member"><img class="brand_logo" src="/upload/logo.png" ></a>
+		</c:when>
+		</c:choose>
 		</div>	
 		
 		<c:if test="${empty m }"> 

@@ -71,6 +71,7 @@ section#content { float:right; width:100%; margin-top: 30px;}
   }
  
 </style> 
+<script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script>
 <title>Insert title here</title>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -190,7 +191,6 @@ section#content { float:right; width:100%; margin-top: 30px;}
                        <div class="context_header" >							 
 							<strong><span> ${p.pro_name }</span></strong>
 					   </div>          
-                   	  	
                    	   <div class="context_header" id="priceZip">
 							 	<strong><label for="pro_price">가격</label></strong>			
 									  <div class="pro_price">
@@ -257,19 +257,15 @@ section#content { float:right; width:100%; margin-top: 30px;}
                            </div>          
                     </c:if>
                     
-                     <div id="btns" class="context_text">					     
-						    <i class="fa-solid fa-cart-shopping fa-2x"></i>&nbsp;
-					      	<i class="fa-solid fa-heart fa-2x"></i>&nbsp;
+                     <div id="btns" class="context_text">
+                     		<a href="#" id="cart"><i class="fa-solid fa-cart-shopping fa-2x"></i></a> &nbsp;
+					      	<a href="#" id="wishList"><i class="fa-solid fa-heart fa-2x"></i></a> &nbsp;
 					      	<script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script>
 							<button>바로결제</button>
+							<p id="addMsg"></p>					     
 					 </div>
 				 </div>	<!-- lableZip -->
 				</div> 	<!-- content_1 -->
-					
-                        
- 				 
-                   
-                      
                       <hr>
  						<div id="other" style="clear: both; margin: 10PX;">
 							<%-- <a href="/shop/listReview_rate?pro_no=${p.no}">리뷰 목록 보기</a>	 --%>					

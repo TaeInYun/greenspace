@@ -1,0 +1,55 @@
+@charset "EUC-KR";
+
+#board{
+	padding-top: 15px;
+}
+
+#commu_box{
+	height:45px;
+}
+
+#search_form{
+	float: right;
+}
+
+#board td{
+	    text-align: center;
+}
+
+.title{
+	font-size: 24px;
+    color: rgb(0, 145, 58);
+    font-weight: 500;
+    text-align: center;
+    padding: 40px 0 0px 0;
+}
+
+.writeBtn{
+	float: right;
+	padding : 15px 0;
+}
+
+.writeBtn button{
+	height:35px;
+	width: 100px;
+}
+
+#paging{
+	margin: auto 0;
+	padding: 20px 0;
+}
+
+.td_num,.td_hit {
+    width: 45px;
+
+  }
+  
+#board .td_title {
+    width: 480px;
+    text-align: left;
+    padding-left:20px;
+  }
+  
+.td_nickname,.td_date{
+	 width: 110px;
+}  
