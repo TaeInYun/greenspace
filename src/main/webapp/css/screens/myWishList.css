@@ -38,18 +38,26 @@ input[name="checkList"]{
 	clear:left;
 	width: 150px;
 	height: 150px;
+	margin-bottom:5px;
 }
+
 
 .wishProduct-detail{
 	width: 250px;
+	height: 38%
+}
+
+.wishProduct-detail-proInfo{
+	height: 72%;
 }
 
 .wishProduct-check__like{
 	background: #fff;
 	border-radius: var(--border-round);
-	margin-bottom: 5px;
 }
-
+.wishProduct__proInfo{
+	height: 33%;
+}
 .wishProduct-priceInfo{
 	margin: 7px;
 	font-weight: bolder;

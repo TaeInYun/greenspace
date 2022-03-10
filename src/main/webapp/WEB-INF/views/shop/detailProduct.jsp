@@ -176,9 +176,10 @@ section#content { float:right; width:900px; margin-top: 30px;}
                      
                        <div class="context_header" >							 
 							<strong><span> ${p.pro_name }</span></strong>
-						 	<i class="fa-solid fa-cart-shopping fa-2x"></i>
-					      	<i class="fa-solid fa-heart fa-2x"></i>
+						 	<a href="#" id="cart"><i class="fa-solid fa-cart-shopping fa-2x"></i></a>
+					      	<a href="#" id="wishList"><i class="fa-solid fa-heart fa-2x"></i></a>
 					      	<script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script>
+							<p id="addMsg"></p>
 						</div>          
                    	  	
                    	   <div class="context_header" id="priceZip">
