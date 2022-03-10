@@ -5,7 +5,8 @@
 <head>
 <meta charset="EUC-KR">
 <link rel="stylesheet" href="/css/joinLogin.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script> 
 <style type="text/css">
 
 #footer{
@@ -21,7 +22,7 @@ text-align: center;
 
 #content{
 	width:100%;
-	padding: 50px 0 50px 0;
+	padding: 50px 0 30px 0;
 }
 
 #loginBtn,#homeBtn{
@@ -44,7 +45,7 @@ text-align: center;
 </header>
 	<div id="container">
 			<div id="content">
-			<i class="fa-solid fa-circle-check fa">?</i>
+			<i class="fa-solid fa-circle-check fa-3x">?</i>
 			<h1>회원가입이 완료되었습니다!</h1>
 			<p>로그인하시면 더욱 다양한 서비스와 혜택을 제공 받으실 수 있습니다.</p>
 			</div>
