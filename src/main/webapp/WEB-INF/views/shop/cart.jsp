@@ -144,19 +144,18 @@
 <body>
 	<div id="root">
 		<jsp:include page="../header.jsp"></jsp:include>
-		<hr>
-		<div class="cart-header">
+		<div class="cart-header	">
 			<div class="cart-title">
 				<i class="fa-solid fa-cart-shopping fa-2x"></i>
 				<h2>장바구니 <span class="cart-cnt">${cnt }</span></h2>
 			</div>
-			<div>
-				<button id="soldOut">품절모두삭제</button>
-				<button id="delSelected">선택삭제</button>
-			</div>
 		</div>
 		<div class="section mypage">
 			<div id="cart_products">
+				<div class="cart_btns">
+					<button id="soldOut">품절 모두삭제</button>
+					<button id="delSelected">선택 삭제</button>
+				</div>
 				<form action="insertOrder" >
 					<table class="product_table">
 						<thead>

@@ -14,11 +14,7 @@
 	<div id="root">
 		<header id="header">
 			<div id="header_box">
-				<div id="header1_box">
 					<jsp:include page="../header.jsp"/>
-				</div>
-				
-				
 			</div>
 		</header>		 
 		

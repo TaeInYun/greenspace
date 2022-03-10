@@ -29,6 +29,7 @@
 }
 
 input {
+ 	text-align:left;
   width: 100%;
   border: 1px solid #bbb;
   border-radius: 20px;

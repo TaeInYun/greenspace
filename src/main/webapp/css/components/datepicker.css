@@ -16,6 +16,7 @@
 	margin: 2px;
 }
 .search{
+	margin-top: 25px;
 	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
