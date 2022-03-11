@@ -284,6 +284,10 @@
 							<h3>기본 회원정보</h3>
 					</div>
 					<div>
+						 <a href="/mypage/myPointList?no=${m.no }">포인트내역</a>
+						 <a href="/mypage/myCommentsList?no=${m.no }">댓글내역</a>
+					</div>
+					<div>
 						<hr>아이디 : ${m.id}
 					</div>
 					<div>

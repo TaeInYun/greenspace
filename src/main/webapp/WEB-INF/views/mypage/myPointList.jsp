@@ -30,6 +30,10 @@ header#header div#header_box { text-align:center; padding:30px 0; }
   #presentPoint{
   	margin: 10px;
   }
+  p{
+  	display: inline-block;
+  	margin: 10px;
+  }
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <script type="text/javascript">
@@ -53,6 +57,11 @@ header#header div#header_box { text-align:center; padding:30px 0; }
  				<div id="presentPoint">
  					현재포인트: ${findPresentPoint.presentPoint} 	
  				</div>
+ 				<div id="filter">
+ 					<p><a href="/mypage/myPointList?no=${findPresentPoint.member_no}">전체</a></p>
+ 					<p><a href="/mypage/myPointList?no=${findPresentPoint.member_no}&point_status=적립">적립</a></p>
+ 					<p><a href="/mypage/myPointList?no=${findPresentPoint.member_no}&point_status=사용">사용</a></p>
+ 			    </div>
  				
  				<table>
 						<tr>	

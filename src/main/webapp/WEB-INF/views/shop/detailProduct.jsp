@@ -172,7 +172,7 @@ section#content { float:right; width:100%; margin-top: 30px;}
             <!-- 본문 -->         
                <section id="content">                  
                 <div id="content_1"> 
-                	<img src="/upload/${p.PRO_THUMBNAIL }" width="600" height="500"><br>   
+                	<img src="/upload/${p.PRO_THUMBNAIL }" width="500" height="500"><br>   
                     <div class="lableZip" style="float: right;"> 
                      
                        <div class="context_header" >							 
