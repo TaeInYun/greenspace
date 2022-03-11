@@ -16,7 +16,7 @@
 	QNA_STATUS_CODE
 	) 
 	values(
-	seq_comment.nextval,
+	seq_pro_qna.nextval,
 	#{pro_qna_title},
 	#{pro_qna_content},
 	#{pro_qna_pwd},

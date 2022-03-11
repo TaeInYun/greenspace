@@ -10,7 +10,7 @@
 	pro_name pro_name,
 	pro_qna_title title,
 	pro_qna_type_name qna_type,
-	pro_qna_date day,
+	pro_qna_date day,		<!-- TO_CHAR(pro_qna_date, 'yyyy.mm.dd')    pro_qna_date -->
 	qna_type_name status
 	FROM
 	<!-- img i, -->		
