@@ -33,7 +33,7 @@
   	point_type_code,
   	re_thumbnail) 
   	
-  	values(seq_comment.nextval,
+  	values(seq_review.nextval,
   	#{re_title},
   	#{re_rate},
   	#{re_content},

@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<H2>상품리뷰</H2>
+	
 
 	<table border="1" width="80%">
 		<tr>
@@ -16,15 +16,17 @@
 			<td>리뷰제목</td>
 			<td>리뷰내용</td>
 			<td>회원번호</td>			
+			<td>상세보기</td>
 		</tr>
 		<c:forEach var="r" items="${list }">
 			<tr>
 				<td>${r.no }</td>
 				<td>
-					<a href="/shop/detailReview?no=${r.no}">${r.re_title} </a>					
+					${r.re_title} 					
 				</td>				 
 				<td>${r.re_content }</td>
-				<td>${r.member_no }</td>			
+				<td>${r.member_no }</td>	
+				<td><a href="/shop/detailReview?no=${r.no}"><button>상세보기</button></a></td>
 			</tr>
 		</c:forEach>
 	</table> 	
