@@ -67,11 +67,7 @@
 		   		<a href=""class="목록">캠페인/후원안내</a>&nbsp
 			</div>	
 		</div>
-		
-		
-
-		
-
+	
 		<section id="container">		
 			<div id="container_box"> 		
 				<section id="content">

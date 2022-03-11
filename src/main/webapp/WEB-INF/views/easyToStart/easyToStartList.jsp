@@ -58,9 +58,6 @@
 		</header>		 
 		
 		<div class = "boradHeader">
-			<div class ="etsTitle">
-					<h3>Easy To Start</h3>
-			</div>
 			<div class = "etsCategory">
 				<a href="" class = "ets">전체</a>
 		   		<a href="" class = "ets">일상생활</a>

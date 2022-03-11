@@ -1,0 +1,54 @@
+@charset "EUC-KR";
+.inline-block {
+	display: inline-block;
+}
+
+.margin-right-3 {
+	margin-right: .5rem	
+}
+
+.margin-bottom-2 {
+	margin-bottom: .25rem
+}
+
+.margin-bottom-3 {
+	margin-bottom: .5rem	
+}
+
+.info{
+	width: 6rem;
+
+}
+
+.info_title{
+	
+	border-bottom: 1px solid #eee;
+	padding: 10px;
+	font-weight: bold;	
+}
+
+.info_member{
+	vertical-align: middle;
+	margin: 0 .25rem;
+	font-weight: normal;
+}
+
+.info_title > div {
+	display: inline-block;
+}
+		
+.info_title .title {
+	width: 100px
+}
+
+.info_title > form > div {
+	padding: 1rem
+}
+
+#changePwdHiddenBtn label {
+	margin-right: .5rem
+}
+
+#changePwdHiddenBtn > div {
+	margin-bottom: .5rem
+}
