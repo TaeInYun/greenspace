@@ -27,6 +27,12 @@
 			}
 		})
 		
+		if("${receiverInfo[7]}" == "receiver_no"){
+			$("#newAddr").attr("checked", true);
+		}else{
+			$("#basicAddr").attr("checked", true);
+		}
+		
 		$(document).on("focusout", $("#usePoint"), function(){
 			
 			let maxUseCheck = $()
@@ -161,14 +167,14 @@
 				<div id="receiver">
 					<h5>배송지</h5>
 					<div class="receiver-radio">
-						<input type="radio" name="address"  id="basicAddr" checked="checked">
+						<input type="radio" name="address"  id="basicAddr">
 						<label for="basicAddr">기본 배송지</label>
 						<button type="button" id="changeAddr">주소록</button>
 						<input type="radio" name="address"  id="newAddr">
 						<label for="newAddr">신규 배송지</label>
 					</div>
 					<div id="receiverInfo">
-						<input type="hidden" id="receiverNo" class="receiverInfo" name="addr_no" value="${receiverInfo[0]}">
+						<input type="hidden" id="receiverNo" class="receiverInefo" name=${rceiverInfo[7]} value="${receiverInfo[0]}">
 						<input type="text" readonly="readonly" class="receiverInfo" name="name" value="${receiverInfo[1]}" placeholder="수령인">
 						<input type="text" readonly="readonly" class="receiverInfo" name="phone" value="${receiverInfo[2]}" placeholder="연락처">
 						<input type="text" readonly="readonly" class="receiverInfo" name="addr_postal" value="${receiverInfo[3]}" placeholder="우편번호">

@@ -108,12 +108,14 @@
 		
 			let receiverInfo = new Array();
 			let arr_receiver = document.getElementsByClassName("receiverInfo");
+			let addr_type = $("#receiverNo").attr("name");
 			
 			for( let i = 0; i < arr_receiver.length; i++){
 				receiverInfo.push( $(arr_receiver[i]).val());
 			} 
 			
-			console.log(receiverInfo);
+			receiverInfo.push( addr_type);
+			
 			let orderInfo = new Array();
 			let arr = document.getElementsByClassName("orderInfo");
 			
@@ -133,6 +135,7 @@
 					location.href="/shop/order_form"
 				} 
 			});
+			
 		});
 		
 		

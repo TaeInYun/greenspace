@@ -55,13 +55,14 @@ public class OrderListController {
 		MemberVO m = (MemberVO)session.getAttribute("m");
 		//int member_no = m.getNo();
 		int member_no = 42;
-		int start=s.getStart();
+		int start=s.getStart();//페이지번호
 		
 		HttpSession httpSession	  = request.getSession();
 		
 		if(start==0) {
 			start=1;
 		}
+		
 		HashMap map = new HashMap();
 		map.put("start", start);
 		map.put("member_no", member_no);
@@ -69,6 +70,7 @@ public class OrderListController {
 		map.put("fristDate", s.getFristDate());
 		map.put("lastDate", s.getLastDate());
 		map.put("month", s.getMonth());
+		
 		
 		totalRecord = orderListDao.cntByMember(map);
 		totalPage = (int)Math.ceil(totalRecord/(double)PAGESIZE);
@@ -87,9 +89,9 @@ public class OrderListController {
 	@RequestMapping("/mypage/myOrder")
 	public void myOrderList(HttpSession session,Model model) {
 		MemberVO m = (MemberVO)session.getAttribute("m");
-		//int member_no = m.getNo();
-		int member_no = 42;
+		int member_no = m.getNo();
 		int pageNum = 1;
+		
 		HashMap map = new HashMap();
 		map.put("member_no", member_no);
 		map.put("start", pageNum);

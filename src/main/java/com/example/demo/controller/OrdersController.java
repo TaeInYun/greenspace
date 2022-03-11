@@ -26,6 +26,7 @@ import com.example.demo.dao.OrdersProductDAO;
 import com.example.demo.dao.PointDAO;
 import com.example.demo.dao.Pro_add_optionDAO;
 import com.example.demo.dao.ProductDAO;
+import com.example.demo.dao.ReceiverDAO;
 import com.example.demo.vo.ApplyOrderVO;
 import com.example.demo.vo.CartVO;
 import com.example.demo.vo.MemberVO;
@@ -61,6 +62,8 @@ public class OrdersController {
 	
 	@Autowired
 	private PointDAO pointDAO;
+	@Autowired
+	private ReceiverDAO receiverDAO;
 	
 	
 	@RequestMapping("/getCntOfToday")
@@ -83,7 +86,12 @@ public class OrdersController {
 		
 		data.getOrders().setMember_no(member_no);
 		OrdersVO o = data.getOrders();
-
+		
+		if(data.getReceiver() != null) {
+			receiverDAO.insertReceiver(data.getReceiver());
+			o.setReceiver_no(receiverDAO.maxOfNo());
+		}
+		
 		int point_save = data.getOrders().getPoint_save();
 		int ord_use_point = data.getOrders().getOrd_use_point();
 		
@@ -91,8 +99,7 @@ public class OrdersController {
 		PointVO usePoint = new PointVO(0, null, "사용", ord_use_point, member_no, null,null,0,null,0);
 		
 		pointDAO.insertPoint(savePoint);
-		int re = pointDAO.insertPoint(usePoint);
-		System.out.println("point:" + re);
+		pointDAO.insertPoint(usePoint);
 		
 		HashMap map = new HashMap();
 		map.put("member_no", member_no);
