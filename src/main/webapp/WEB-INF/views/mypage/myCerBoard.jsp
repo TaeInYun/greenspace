@@ -8,20 +8,10 @@
 <link rel="stylesheet" href="/css/board.css">
 <link rel="stylesheet" href="/css/components/search.css">
 <link rel="stylesheet" href="/css/mychallenge.css">
+<link rel="stylesheet" href="/css/cerboard.css">
 <style type="text/css">
-#content_box{
-	display: flex;
-	justify-content: space-around;
-}
 
-#content_box li{
-	padding: 5px 10px;
-}
 
-.cer_thumbnail{
-	border: 1px solid #dddddd;
-	box-sizing: border-box;
-}
 
 
 </style>
@@ -104,7 +94,7 @@ $(function() {
 								<span><fmt:formatDate value="${c.cer_date}" pattern="yy.MM.dd"/></span>
 									
 								</div>
-								<div class="content">
+								<div class="cer_content">
 										<a href="/board/detailCerBoard?no=${c.no}">
 										<span style="text-overflow: ">${c.cer_content}</span></a>
 								</div>	

@@ -5,8 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/board.css">
+<link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/components/search.css">
 <style type="text/css">
 
@@ -22,7 +22,7 @@
 }
 
 #content{
-	width: 1000px;
+	width:1000px;
 }
 
 </style>
@@ -38,11 +38,13 @@ $(function(){
 </head>
 <body>
 <div id="root">
+
 		<header id="header">
 			<div id="header_box">
 				<jsp:include page="../header.jsp"  flush="false" />
 			</div>
 		</header>
+		
 		<section id="container">		
 			<div id="container_box"> 
 				<!-- 본문 -->			
