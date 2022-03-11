@@ -5,8 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/css/style.css">
 <title>Insert title here</title>
+<script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 
 var selectBoxChange = function(value){
@@ -14,10 +18,39 @@ var selectBoxChange = function(value){
 	 $("#changeTest").val(value);
 }
 
-</script>
+$(function() {
+	
+	$("#link_qnaList").attr("style","color:white; background:#00913A;")
+	$("#link_qnaList i").attr("style","color:white;")
+	$( $(".nav-btn")[1] ).attr("style", "background: #00913A;");
+	$( $(".nav-btn .nav-btn__text")[1] ).attr("style", "color:white");
+	
+	$(".myQna").attr("style","background: #00913A; font-weight:800; color: white; padding: 5px 15px; border-radius: 20px;");
+	
+	
+	 $function(){
+		  
+		 $("#detailOne").find(".modal-content").load("/mypage/detailOne?no=${o.no}"); 
+		 
+	} 
+});
 
+
+
+</script>
 </head>
 <body>
+	<div id="root">
+		<jsp:include page="../header.jsp"></jsp:include>
+				
+		<div class="section mypage">
+		<jsp:include page="../mypage/myAside.jsp"></jsp:include>
+		
+		<main class="mypage-main">
+				<jsp:include page="./myQnaHeader.jsp"></jsp:include>
+	
+
+	<section id="content">
 	<form action="/mypage/listSearchOneMy" method="post">						
 						 	<select name="searchColumn">							 							 		
 								<option value="EXC">교환</option>   <!-- EXC교환 REF환불 CAN취소 ETC기타 -->
@@ -43,15 +76,28 @@ var selectBoxChange = function(value){
 								<tr>													
 																												 
 									<td>
-									<a href="/mypage/detailOne?no=${o.no}">${o.one_title }</a>	
+									<a id="detailOne" data-toggle="modal" data-target="#detailModal" role="button" href="/mypage/detailOne?no=${o.no}">${o.one_title }</a>	
 									</td>
 									<td>${o.ord_no }</td>
 									<td>${o.one_date }</td>
 									<td>${o.one_type_name }</td>																								
 									<td>${o.qna_status_code }</td>																							
 								</tr>	
+								
+								<div id="detailModal" class="modal fade" tabindex="-1" role="dialog"> 
+			  			 				<div class="modal-dialog"> 
+			  			 					<div class="modal-content"> 
+			  			 					</div> 
+			  			 				</div> 
+			  			 		    </div>
+			  			 		    
 							</c:forEach>
-						</table>	 	
+						</table>	
+						</section>
+						</main>
+						</div>
+						</div>
+						 	
 	
 </body>
 </html>

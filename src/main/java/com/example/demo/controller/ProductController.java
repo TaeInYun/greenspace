@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,10 +32,15 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.dao.AddressDAO;
 import com.example.demo.dao.CartDAO;
+import com.example.demo.dao.MemberDAO;
 import com.example.demo.dao.Pro_add_optionDAO;
 import com.example.demo.dao.ProductDAO;
 import com.example.demo.dao.ReviewDAO;
+import com.example.demo.vo.AddressVO;
+import com.example.demo.vo.MemberVO;
+import com.example.demo.vo.MyWishVO;
 import com.example.demo.vo.Pro_add_optionVO;
 import com.example.demo.vo.ProductVO;
 
@@ -53,6 +59,10 @@ public class ProductController {
 	
 	@Autowired
 	private Pro_add_optionDAO prodao;
+	@Autowired
+	private AddressDAO addrDao;
+	@Autowired
+	private MemberDAO dao_member;
 	
 	
  
@@ -356,6 +366,76 @@ public class ProductController {
 			return mav;
 		}
 		
-		
-		 
+		@RequestMapping(value = "/shop/direct_order_form", method = RequestMethod.POST)
+		@ResponseBody
+		public String directOrderForm(HttpSession session,
+				@RequestBody List<MyWishVO> data
+		) {
+			MemberVO m = (MemberVO)session.getAttribute("m");
+			
+			int member_no = m.getNo();
+			List<String> receiverInfo = new ArrayList<String>();
+			List<String> orderInfo= new ArrayList<String>();
+			
+			int rownum = 0;
+			int totalPrice = 0;
+			int totalDiscount=0;
+			int deliveryPrice=2500;
+			int totalSalePrice = 0;
+			
+			for(MyWishVO mw : data) {
+				rownum += 1;
+				mw.setRownum(rownum);
+				totalPrice += mw.getPrice();
+				totalSalePrice += mw.getSaleprice();
+			}
+			
+			totalDiscount = totalPrice - totalSalePrice;
+			
+			if(totalSalePrice >= 50000) {
+				deliveryPrice = 0;
+			}
+			
+			MemberVO mb = dao_member.getMemberInfo(m.getNo());
+			AddressVO addr = addrDao.getMainAddress(member_no);
+			
+			receiverInfo.add(addr.getNo() + "");
+			receiverInfo.add(addr.getAddr_receiver());
+			receiverInfo.add(addr.getAddr_phone());
+			receiverInfo.add(addr.getAddr_postal());
+			receiverInfo.add(addr.getAddr_road());
+			receiverInfo.add(addr.getAddr_detail());
+			receiverInfo.add(addr.getAddr_msg());
+			
+			orderInfo.add(totalPrice + "");
+			orderInfo.add(totalDiscount + "");
+			orderInfo.add(deliveryPrice + "");
+			orderInfo.add(totalSalePrice + "");
+			
+			session.setAttribute("rownum", rownum);
+			session.setAttribute("list", data);
+			session.setAttribute("point", mb.getPoint_use());
+			session.setAttribute("receiverInfo", receiverInfo);
+			session.setAttribute("orderInfo", orderInfo);
+
+			/*
+			List<MyWishVO> list = new ArrayList<MyWishVO>();
+			
+			for(String pro_no : proInfo) { 
+				int no = (Integer.parseInt(pro_no)); 
+				rownum += 1;
+				map.put("no", no);
+				MyWishVO mw = dao_mywish.getProInfoForOrder(map);
+				mw.setNo(no);
+				mw.setRownum(rownum);
+				list.add(mw);
+			}
+			MemberVO mb = dao_member.getMemberInfo(m.getNo());
+
+
+			
+			*/
+			
+			return "";
+		}		
 }

@@ -17,6 +17,7 @@
 @import "screens/order_form.css";
 @import "screens/resultOrder.css";
 @import "screens/wishList.css";
+@import "screens/detailOrderList.css";
 
 #root{
 	width: 1200px;

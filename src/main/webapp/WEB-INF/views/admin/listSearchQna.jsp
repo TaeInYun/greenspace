@@ -7,8 +7,24 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/css/admin.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/css/style.css"> 
 </head>
-<body>												 	
+<body>							
+
+<div id="root">
+
+<header id="header">
+			<div id="header_box">
+				<jsp:include page="../header.jsp"/>
+			</div>
+		</header>
+
+<section id="container">		
+	<div id="container_box"> 
+	
+	<section id="content">
+					 	
 						 	<form action="/admin/listSearchQna" method="post"> <!--   pro_qna_type_code=searchColumn(QSZ=사이즈 QDE=배송 QRE=재입고 QDT=상품상세 -->
 							<select name="searchColumn">
 								<option value="QSZ">사이즈</option>
@@ -49,11 +65,19 @@
 								 	
 								</tr>	
 							</c:forEach>
-						</table>	 
-						
-					<c:forEach var="i" begin="1" end="${totalPage }">
+						</table>	
+						 
+						<c:forEach var="i" begin="1" end="${totalPage }">
 							<a href="listSearchQna?pageNUM=${i }">${i }</a>&nbsp;&nbsp;
-					</c:forEach>
+						</c:forEach>
+						</section>
+					
+					<aside id="aside">
+						<jsp:include page="../admin/adminAside.jsp"/>				 		 
+					</aside>
+				</div>
+			</section>
+	</div>				
 
 </body>
 </html>

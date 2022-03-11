@@ -88,7 +88,6 @@
 			for( let i = 0; i < arr.length; i++){
 				arr_cartNo.push( $(arr[i]).val() );
 			} 
-			console.log(arr_cartNo)
 			requestPay(cnt, arr_cartNo);
 		});
 	});
