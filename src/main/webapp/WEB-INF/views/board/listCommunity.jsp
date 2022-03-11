@@ -56,7 +56,6 @@ $(function(){
 				</div>
 				
 				<div id="commu_box">
-				
 					<div id="search_form">
 						<form action="/board/listCommunity" method="post">
 						<div class="searchColumn_wrap">
