@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>녹지몰 - 나의 주문내역</title>
+<title>녹지공간 - 위시리스트</title>
 <link rel="stylesheet" href="/css/style.css">
 <script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -53,10 +53,58 @@
 			let noArr = [wishListNo];
 			deleteWishList(noArr);
 		});
-	})
-	
-	
+		
+		$("#cart").click(function(){
+			let proInfo = $(this).siblings();
+			
+			let pro_no = $(proInfo[0]).val();
+			let cart_name = $(proInfo[1]).val();
+			let pro_price = $(proInfo[2]).val();
+			let pro_saleprice = $(proInfo[3]).val();
+			let cart_option = $(proInfo[4]).val();
+			let cart_option_detail = $(proInfo[5]).val();
+			let pro_add_price = $(proInfo[6]).val();
+			let no = $(proInfo[7]).val();
+			
+			let totPrice = Number(pro_price) + Number(pro_add_price);
+			let totSalePrice = Number(pro_saleprice) + Number(pro_add_price);
+			
+			console.log("totPrice" + totPrice);
+			console.log("cart_name" + cart_name);
+			console.log("totSalePrice" + totSalePrice);
+			console.log("cart_option_detail" + cart_option_detail);
+			
+			let data = {
+				pro_no : pro_no,
+				cart_name : cart_name,
+				cart_price: totPrice,
+				cart_saleprice : totSalePrice,
+				cart_option : cart_option,
+				cart_option_detail : cart_option_detail,
+				cart_qty: 1
+			}
 
+			$.ajax({
+				url:"/shop/isCart",
+				data:data,
+				success: function(cnt){
+					if(cnt == 0){ //장바구니에 없는 상품
+						$.ajax({
+							url: "/shop/insertCart",
+							data: data,
+							success: function(msg){
+								alert(msg);
+								let noArr = [no];
+								deleteWishList(noArr);
+							}
+						});//end insertCart ajax
+					}else{
+						alert("이미 장바구니에 있는 상품입니다.");
+					} 					
+				}
+			});//end isCart
+		});
+	});
 </script>
 </head>
 <body>
@@ -118,7 +166,15 @@
 								</p>
 							</div>
 							<div>
-								<input type="button" value="장바구니 담기">
+								<input type="hidden" name="pro_no" value="${c.pro_no }">
+								<input type="hidden" name="pro_name" value="${c.pro_name }">
+								<input type="hidden" name="pro_price" value="${c.price }">
+								<input type="hidden" name="pro_saleprice" value="${c.saleprice }">
+								<input type="hidden" name="cart_option" value="${c.pro_option }">
+								<input type="hidden" name="cart_option_detail" value="${c.option_detail }">
+								<input type="hidden" name="pro_add_price" value="${c.pro_add_price }">
+								<input type="hidden" name="wishlist_no" value="${c.no }">
+								<input type="button" id="cart" value="장바구니 담기">
 								<button type="button" id="isDelete" value="${c.no }">삭제</button>
 							</div>
 						</div>
