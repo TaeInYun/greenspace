@@ -5,10 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Insert title here</title>	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link href="/css/admin.css" rel="stylesheet"/>
-	<link rel="stylesheet" href="/css/style.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+	<link rel="stylesheet" href="/css/style.css"> 
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
@@ -24,9 +24,18 @@
 </script>
 </head>
 <body>
+<div id="root">
 
-<jsp:include page="../header.jsp"/>
+<header id="header">
+			<div id="header_box">
+				<jsp:include page="../header.jsp"/>
+			</div>
+		</header>
 
+<section id="container">		
+	<div id="container_box"> 
+	
+	<section id="content">
 <H2>주소목록</H2>
 
 	<table border="1" width="80%">
@@ -67,7 +76,20 @@
   			 					</div> 
   			 				</div> 
   			 		    </div>
+  			 		    
+  			 		    <c:forEach var="i" begin="1" end="${totalPage }">
+							<a href="listAddress?pageNUM=${i }">${i }</a>&nbsp;&nbsp;
+					    </c:forEach>
+					
+					
+					</section>
+					
+					<aside id="aside">
+						<jsp:include page="../admin/adminAside.jsp"/>				 		 
+					</aside>
+				</div>
+			</section>
 	
-
+</div>
 </body>
 </html>

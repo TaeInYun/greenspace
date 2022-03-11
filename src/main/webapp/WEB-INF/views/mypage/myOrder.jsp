@@ -9,8 +9,11 @@
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
 <title>녹지공간 - 나의 주문내역</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
 <script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/jquery-ui/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/js/searchDate.js"></script>
 <script type="text/javascript">
@@ -156,6 +159,13 @@
 		});
 		
 	});
+	
+	$function(){
+		  
+		 		 
+		 $("#insertReview").find(".modal-content").load("/shop/insertReview?pro_no=${p.no}");  //리뷰작성하기		 
+		 
+	 }	
 </script>
 </head>
 <body>	
@@ -224,12 +234,21 @@
 								</td>
 								<td>
 									${c.status }
-									<input type="button" value="후기 작성">
-								</td>
+									<!-- <input type="button" value="후기 작성"> -->
+									<a id="insertReview" data-toggle="modal" data-target="#reviewModal" role="button" href="/shop/insertReview?pro_no=${c.pro_no}"><button>리뷰작성</button></a>
+									<div id="reviewModal" class="modal fade" tabindex="-1" role="dialog"> 
+			  			 				<div class="modal-dialog"> 
+			  			 					<div class="modal-content"> 
+			  			 					</div> 
+			  			 				</div> 
+			  			 		    </div>																	
+								</td>								
 							</tr>
-						</c:forEach>
+							
+						</c:forEach>						
 					</tbody>
-				</table>
+					
+				</table>				
 				<div id="paging">
 					<ul>
 					<c:forEach begin="1" end="${ totalPage}" var="i">

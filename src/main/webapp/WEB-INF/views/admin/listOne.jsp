@@ -6,8 +6,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/css/admin.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+
+<div id="root">
+
+<header id="header">
+			<div id="header_box">
+				<jsp:include page="../header.jsp"/>
+			</div>
+		</header>
+
+<section id="container">		
+	<div id="container_box"> 
+	
+	<section id="content">
 
 <H2>1대1문의</H2>
 
@@ -34,9 +49,19 @@
 		</c:forEach>
 	</table> 	
 	
-	<c:forEach var="i" begin="1" end="${totalPage }">
+		<c:forEach var="i" begin="1" end="${totalPage }">
 				<a href="listOne?pageNUM=${i }">${i }</a>&nbsp;&nbsp;
 		</c:forEach>
+		
+		</section>
+					<aside id="aside">
+						<jsp:include page="../admin/adminAside.jsp"/>				 		 
+					</aside>
+			</div>
+		</section>
+	</div>
+		
+		
 
 </body>
 </html>
