@@ -17,6 +17,22 @@ $(function(){
 	         });
 	 });
 });
+
+$(function(){
+	 $("#board_sub").hide();		  
+	 $("#board").click(function() {
+	        $('#board_sub').slideToggle('slow', function() {
+	         });
+	 });
+});
+
+$(function(){
+	 $("#member_sub").hide();		  
+	 $("#member").click(function() {
+	        $('#member_sub').slideToggle('slow', function() {
+	         });
+	 });
+});
 </script>
 </head>
 <body>
@@ -31,9 +47,26 @@ $(function(){
 						<li style="font-size: 10px"><a href="/admin/listProduct">상품수정</a><br></li>
 					</ul>
 			</div>
-			<li><a href="">회원관리</a></li>
+			<li id="member">회원관리</li>
+			<div>
+					<ul id="member_sub">
+						<li style="font-size: 10px"><a href="#">회원관리</a><br></li>
+						<li style="font-size: 10px"><a href="/admin/listReview">리뷰관리</a><br></li>
+					</ul>
+			</div>
+			
 			<li><a href="">포인트관리</a></li>
-			<li><a href="">게시판관리</a></li>
+			<li id="board">게시판관리</li>
+			<div>
+				<ul id="board_sub">
+						<li style="font-size: 10px"><a href="/admin/listSearchQna">상품문의</a><br></li>
+						<li style="font-size: 10px"><a href="/admin/listOne">1대1문의</a><br></li>
+						<li style="font-size: 10px"><a href="#">공지사항</a><br></li>
+						<li style="font-size: 10px"><a href="#">커뮤니티</a><br></li>
+						
+					</ul>
+			</div>
+			
 			<li><a href="">챌린지관리</a></li>
 			 
 				

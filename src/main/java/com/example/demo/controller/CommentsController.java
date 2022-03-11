@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.swing.plaf.synth.SynthStyleFactory;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.CommentsDAO;
+import com.example.demo.vo.CommentsVO;
 
 
 @Controller
@@ -62,8 +64,7 @@ public class CommentsController {
 		}
 		return null;
 	}
-	//---------삭제-------------
-	
+	 
 	 
 	//---------수정-------------
 	@RequestMapping(value = "/board/updateComments", method = RequestMethod.GET )
@@ -82,10 +83,23 @@ public class CommentsController {
 		map.put("com_content", com_content);  
 		int re = commentsdao.updateComments(map);	
 		if(re==1) {
-			String referer = request.getHeader("Referer"); // 헤더에서 이전 페이지를 읽는다.
-			return "redirect:"+ referer; // 이전 페이지로 리다이렉트
+			String referer = request.getHeader("Referer");  
+			return "redirect:"+ referer;  
 		}
 		return null;		 
+	}
+	
+	
+	@RequestMapping("/mypage/myCommentsList")
+	public void findAllCommentByMember_no(int no, Model model){ 
+		 model.addAttribute("findAllCommentByMember_no", commentsdao.findAllCommentByMember_no(no));
+		 model.addAttribute("findAllCommentByMemberAndRe", commentsdao.findAllCommentByMemberAndRe(no));
+		 model.addAttribute("findAllCommentByMemberAndOne", commentsdao.findAllCommentByMemberAndOne(no));
+		 model.addAttribute("findAllCommentByMemberAndPro_no", commentsdao.findAllCommentByMemberAndPro_no(no));
+		 model.addAttribute("findAllCommentByMemberAndcommnu", commentsdao.findAllCommentByMemberAndcommnu(no));
+		 model.addAttribute("findAllCommentByMemberAndCer", commentsdao.findAllCommentByMemberAndCer(no));
+		 model.addAttribute("findAllCommentByMemberAndEco", commentsdao.findAllCommentByMemberAndEco(no));
+		 model.addAttribute("findAllCommentByMemberAndETS", commentsdao.findAllCommentByMemberAndETS(no));
 	}
 	  
 }

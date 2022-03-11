@@ -64,7 +64,84 @@
 		update comments set com_content=#{com_content}
 		where member_no=#{member_no} and no=#{no}
     </update>
+    
+    <!--댓글 내가 쓴 거 -->
+	<select id="findAllCommentByMember_no" resultType="commentsVO">
+		select ROWNUM num , c.no, nickname, c.com_content ,to_char(com_regdate,'yyyy/mm/dd')com_regdate,member_no
+		from comments c, member m 
+		where member_no=#{no}  and
+		m.no = c.member_no 
+		order by com_regdate
+	</select>
 	
+	<select id="findAllCommentByMemberAndRe" resultType="commentsVO">
+		select ROWNUM num , nickname, c.com_content ,to_char(com_regdate,'yyyy/mm/dd')com_regdate,
+		c.member_no, re_content
+		from comments c, member m , review r
+		where c.member_no=#{no}  and
+		m.no = c.member_no and
+        r.no= c.re_no
+		order by com_regdate
+	</select>
 	
-	 
+	<select id="findAllCommentByMemberAndOne" resultType="commentsVO">
+		select ROWNUM num , nickname, c.com_content ,to_char(com_regdate,'yyyy/mm/dd')com_regdate,
+		c.member_no, one_title
+		from comments c, member m ,one o
+		where c.member_no=#{no}  and
+		m.no = c.member_no and
+        o.no= c.one_no
+		order by com_regdate
+	</select>
+	
+	 <select id="findAllCommentByMemberAndPro_no" resultType="commentsVO">
+		select ROWNUM num , nickname, c.com_content ,to_char(com_regdate,'yyyy/mm/dd')com_regdate,
+		c.member_no, pro_qna_title
+		from comments c, member m ,pro_qna pq
+		where c.member_no=#{no}  and
+		m.no = c.member_no and
+        pq.no= c.pro_qna_no
+		order by com_regdate
+	</select>
+	
+	 <select id="findAllCommentByMemberAndcommnu" resultType="commentsVO">
+		select ROWNUM num , nickname, c.com_content ,to_char(com_regdate,'yyyy/mm/dd')com_regdate,
+		c.member_no, commu_title
+		from comments c, member m, community cu
+		where c.member_no=#{no}  and
+		m.no = c.member_no and
+        cu.no= c.commu_no
+		order by com_regdate
+	</select>
+	
+	<select id="findAllCommentByMemberAndCer" resultType="commentsVO">
+		select ROWNUM num , nickname, c.com_content ,to_char(com_regdate,'yyyy/mm/dd')com_regdate,
+		c.member_no, cer_content
+		from comments c, member m, certification_board cb
+		where c.member_no=#{no}  and
+		m.no = c.member_no and
+        cb.no= c.cer_no
+		order by com_regdate
+	</select>
+	
+	<select id="findAllCommentByMemberAndEco" resultType="commentsVO">
+		select ROWNUM num , nickname, c.com_content ,to_char(com_regdate,'yyyy/mm/dd')com_regdate,
+		c.member_no, eco_title
+		from comments c, member m, ecomagazine e
+		where c.member_no=#{no} and
+		m.no = c.member_no and
+        e.no= c.eco_no
+		order by com_regdate
+	</select>
+	
+	<select id="findAllCommentByMemberAndETS" resultType="commentsVO">
+		select ROWNUM num , nickname, c.com_content ,to_char(com_regdate,'yyyy/mm/dd')com_regdate,
+		c.member_no, ets_title
+		from comments c, member m, easytostart ets
+		where c.member_no=#{no}  and
+		m.no = c.member_no and
+        ets.no= c.ets_no
+		order by com_regdate
+	</select>
+	
 </mapper>

@@ -30,6 +30,10 @@ header#header div#header_box { text-align:center; padding:30px 0; }
   #presentPoint{
   	margin: 10px;
   }
+  p{
+  	display: inline-block;
+  	margin: 10px;
+  }
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <script type="text/javascript">
@@ -38,21 +42,20 @@ header#header div#header_box { text-align:center; padding:30px 0; }
 </head>
 <body>
 <div id="root">
-		<header id="header">
-			<div id="header_box">
-				<div id="header1_box">
-					<jsp:include page="../header.jsp"/>
-				</div>
-			</div>
-		</header>		 
-		
-		<section id="container">		
-			<div id="container_box"> 
-				<!-- 본문 -->			
-				<section id="content">					
+		<jsp:include page="../header.jsp"></jsp:include>
+		<div class="section mypage">
+			<jsp:include page="../mypage/myAside.jsp"></jsp:include>
+			<main class="mypage-main">
+	
+							
  				<div id="presentPoint">
  					현재포인트: ${findPresentPoint.presentPoint} 	
  				</div>
+ 				<div id="filter">
+ 					<p><a href="/mypage/myPointList?no=${findPresentPoint.member_no}">전체</a></p>
+ 					<p><a href="/mypage/myPointList?no=${findPresentPoint.member_no}&point_status=적립">적립</a></p>
+ 					<p><a href="/mypage/myPointList?no=${findPresentPoint.member_no}&point_status=사용">사용</a></p>
+ 			    </div>
  				
  				<table>
 						<tr>	
@@ -71,16 +74,22 @@ header#header div#header_box { text-align:center; padding:30px 0; }
 							</tr>		 
 						</c:forEach>
 					</table>
- 				 
- 			
-					</section>					
-					  
-					<aside id="aside">
-						<jsp:include page="../mypage/myAside.jsp"/>
-					</aside>				
-			</div><!-- 전체  section box-->
-		</section>
-</div>
+ 								
+							
+			
+					<div id="paging">
+					<ul>
+					<c:forEach var="i" begin="1" end="${totalPage }">
+				        <a href="myCommunity?pageNUM=${i }">${i }</a>&nbsp;&nbsp;
+				    </c:forEach>
+					</ul>
+				</div>
+
+				
+			</main>
+		</div>
+	</div>
+</body>
 
 
 

@@ -5,7 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/css/style.css">
 <title>Insert title here</title>
+<script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -16,15 +18,26 @@ var selectBoxChange = function(value){
 	 $("#changeTest").val(value);
 }
 
- $function(){
-	  
-	 $("#detailOne").find(".modal-content").load("/mypage/detailOne?no=${o.no}"); 
-	 
-} 
+$(function() {
+	
+	$("#link_qnaList").attr("style","color:white; background:#00913A;")
+	$("#link_qnaList i").attr("style","color:white;")
+	$( $(".nav-btn")[1] ).attr("style", "background: #00913A;");
+	$( $(".nav-btn .nav-btn__text")[1] ).attr("style", "color:white");
+	
+	$(".myQna").attr("style","background: #00913A; font-weight:800; color: white; padding: 5px 15px; border-radius: 20px;");
+	
+	
+	 $function(){
+		  
+		 $("#detailOne").find(".modal-content").load("/mypage/detailOne?no=${o.no}"); 
+		 
+	} 
+});
+
+
 
 </script>
-<link href="/css/admin.css" rel="stylesheet"/>
-<link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 	<div id="root">

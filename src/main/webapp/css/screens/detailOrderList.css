@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+.detailOrderList-title{
+	text-align: center;
+	font-weight: bold;
+	color: var(--green-text);
+}
+.detailOrderList{
+	margin-left: 0;
+	text-align: center;
+}
+
+.detailOrderList__list td:first-child {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.detailOrderList__list img{
+	width: 150px;
+	height: 150px;
+}
+
+.orderList__info{
+	background: #F3F3F3;
+	border-radius: 15px;
+	height: 200px;
+}
+
+.orderList__info table{
+	border: none;
+}
+
+.orderList__info td:first-child{
+	border-right: 1px solid lightgray;
+}
+
+.orderList__info td{
+	border: none;
+	border-bottom: 1px solid lightgray;
+}
+.orderList__info tr:last-child td{
+	border-bottom: none;
+}
+
+.orderList__info-delivery{
+	height: 320px;
+}

@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8"> 
-  <link href="/css/admin.css" rel="stylesheet"/>
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
 <title>Insert title here</title>
 
-
+<link rel="stylesheet" href="/css/popup.css">
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
@@ -24,7 +25,19 @@ var selectBoxChange = function(value){
 }
 
 
- $function(){
+$(function() {
+	
+	$("#link_qnaList").attr("style","color:white; background: #00913A;")
+	$( $(".nav-btn")[0] ).attr("style", "background: #00913A;");
+		$( $(".nav-btn .nav-btn__text")[0] ).attr("style", "color:white");
+	
+		$(".myQna").attr("style","background: #00913A; font-weight:800; color: white; padding: 5px 15px; border-radius: 20px;");
+	
+	
+});
+
+
+$function(){
 	  
 	 $("#detailQna").find(".model-content").load("/mypage/detailQna?no=${q2.no}"); 
 	 

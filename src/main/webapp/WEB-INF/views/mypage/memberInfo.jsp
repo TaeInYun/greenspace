@@ -283,9 +283,11 @@
 						<div class="info">아이디</div>
 						<div class="info_member"> ${m.id} </div>	     
 					</div>
+				
 					<div class = "info_title">
 						<div class="info">비밀번호 </div>
 						<div class="info_member">********</div>
+
 						<button id="changePwdBtn" class="btn01">비밀번호 변경</button>
 							<form action="/mypage/updatePwd2" method="post">
 								<div id="changePwdHiddenBtn" class="example01" style="display: none;">
@@ -402,7 +404,12 @@
 							<button>내 주소 관리</button>
 						</a>
 					</div>
-				</main>			
+					<div class = "info_title"> 
+						 <button><a href="/mypage/myPointList?no=${m.no }">포인트내역</a></button>
+						 <button><a href="/mypage/myCommentsList?no=${m.no }">댓글내역</a></button>
+					</div>	
+				</main>		
+					
 		</div>
 	</div>
 		

@@ -11,13 +11,16 @@
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
 
+ 
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script> 
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
  
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
 <script type="text/javascript">
+
 	 $(function(){
 			 $("#insertComments").click(function () {		 
 				 let ets_no = $("#ets_no").val();
