@@ -11,10 +11,15 @@ section#content ul li.ECO_UL { display:inline-block; margin:10px; }
 section#content div.ECO_THUMBNAIL img { width:200px; height:200px; }
 section#content div.ECO_TITLE { padding:10px 0; text-align:center; }
 
-
-
-
-a:link {
+a:link.title {
+  margin: 0 10px;
+  background: #eee;
+  border-radius: 20px;
+  font-size: 1.1em;
+  font-weight: 700;
+  color: white;
+  padding: var(--btn-padding);
+  width: 33%;
   text-decoration: none;
   font-size: 16px;
   text-align: center;
@@ -44,4 +49,11 @@ a:visited{
 .etsCategory{
     text-align: center;
     padding: 10px 50px;
+}
+
+.boardList{
+	    text-align: center;
+}
+.boardpadding{
+	padding: 10px;
 }
