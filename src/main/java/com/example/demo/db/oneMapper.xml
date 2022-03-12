@@ -45,17 +45,17 @@
 		offset #{start} rows fetch first 5 rows only -->
 	<!-- where num between #{start} and #{end} -->
 	
-	select one_title, one_content, one_date from one
+	select no,one_title, one_content, TO_CHAR(one_date, 'yyyy.mm.dd') AS one_date from one
 	<if test="keyword != null">
     		where one_type_code='${searchColumn}'
    			</if>
 			<if test="keyword != null">
-				where one_title like '%'  || #{keyword} || '%'  OR
+				and one_title like '%'  || #{keyword} || '%'  OR
 	            one_content like '%'  || #{keyword} || '%' 
 			</if>				 
 		
 		offset #{start} rows fetch first 5 rows only 
-	
+	<!--  one_type_code 상태유지가 웹에서 잘안되는듯 -->
          
   </select>
   

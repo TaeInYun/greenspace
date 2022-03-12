@@ -36,8 +36,8 @@
 									<td>
 									<a href="/mypage/detailOne?no=${o.no}">${o.one_title }</a>	
 									</td>
-									<td>${o.content }</td>
-									<td>${o.date }</td>									
+									<td>${o.one_content }</td>
+									<td>${o.one_date }</td>									
 								
 								 
 									

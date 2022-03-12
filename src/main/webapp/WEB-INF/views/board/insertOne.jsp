@@ -5,7 +5,33 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/css/style.css">
+ <link rel="stylesheet" href="/css/board.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style type="text/css">
+		#noticeHeader{
+				display: flex; 
+				justify-content:center;	
+				margin: 30px 0 30px 0;
+		}
+		#container_box{
+			display: flex; 
+			justify-content:center;
+		}
+		#content{
+			width: 1000px;
+		}
+		.keyword2 {
+   		/*  width: 100%; */
+   		 border: 1px solid #bbb;
+   		 border-radius: 20px;
+   		 box-sizing: border-box;
+   		 padding: 10px 12px;
+    	display: inline-block;
+    	text-align: left;
+   		 font-size: 14px;
+}
+	</style>
 <script type="text/javascript">
  
  $(function(){
@@ -18,7 +44,14 @@
 
 </head>
 <body>
-
+<div id="root">
+<div>
+			<jsp:include page="../header.jsp"></jsp:include>
+		</div>
+		
+		<div id="noticeHeader">
+				<jsp:include page="/WEB-INF/views/notice/noticeHeader.jsp"/>
+		</div>
 
 	<h2>1대1문의 작성</h2>
 	<form action="insertOne" method="post"
@@ -47,5 +80,6 @@
 		<input type="submit" value="등록">
 		<input type="reset" value="취소">
 	</form>
+	</div>
 </body>
 </html>

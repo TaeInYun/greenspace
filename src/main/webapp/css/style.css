@@ -18,6 +18,7 @@
 @import "screens/resultOrder.css";
 @import "screens/wishList.css";
 @import "screens/detailOrderList.css";
+@import "screens/myQna.css";
 
 #root{
 	width: 1200px;
