@@ -1,32 +1,18 @@
 @charset "EUC-KR";
 
-#content_box li{
-	
-}
-
-#content_box li{
-	margin: 5px 10px;
-}
-.cer_thumbnail{
-	border: 1px solid #dddddd;
-	box-sizing: border-box;
-	margin-bottom: 10px;
-}
-
 .cer_content{
 	width:100%;
 	height:50px;
+	
 }
-.cer_content > *{
-	padding : 5px;
-}
-
 
 .cer_content_text {
+	font-size:15px;
 width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  line-height: 20px;
 }

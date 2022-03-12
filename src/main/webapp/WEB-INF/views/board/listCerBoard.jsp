@@ -4,40 +4,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/board.css">
+<link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/components/search.css">
 <link rel="stylesheet" href="/css/cerboard.css">
 <style type="text/css">
-#communityHeader{
-		display: flex; 
-		justify-content:center;	
-		margin: 30px 0 30px 0;
-}
-
-#content_box{
-padding-top:15px;
-}
-
-#container_box{
-	display: flex; 
-	justify-content:space-around;
-	flex-direction: row;
-}
-
-#content_box{
-	width:1000px;
-}
-
 #content_box ul{
-	margin-left: 50px;
+	margin-left:50px;
 }
-
-
 </style>
 <meta charset="UTF-8">
-<title>Insert title here</title>
- 
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+$(function(){
+
+	$( $(".nav-btn")[1] ).attr("style", "background: #00913A;");
+	$( $(".nav-btn .nav-btn__text")[1] ).attr("style", "color:white");
+})
+</script>
+<title>녹지공간-인증 게시판</title>
 </head>
 <body>
 <div id="root">
@@ -50,10 +35,7 @@ padding-top:15px;
 			<div id="container_box"> 
 				<!-- 본문 -->			
 				<section id="content">
-				<div class="title">	
-				커뮤니티
-				</div>
-				
+
 				<div id="communityHeader">
 				<jsp:include page="./communityHeader.jsp"/>
 				</div>
@@ -84,7 +66,7 @@ padding-top:15px;
 						 <c:forEach var="c" items="${list }">
 						 <c:if test="${c.cer_status eq '공개' }">
 						 <li>
-								<div class="cer_thumbnail">
+								<div class="thumbnail">
 									<a href="/board/detailCerBoard?no=${c.no}">
 									<c:choose>
 								<c:when test="${c.cer_thumbnail ne null }">
@@ -111,7 +93,7 @@ padding-top:15px;
 						</li>	
 						</c:if>	 
 					  	</c:forEach>	
- 					</ul>					 
+ 					</ul>			 
 					</div>
 					
 			

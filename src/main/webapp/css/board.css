@@ -1,5 +1,17 @@
 @charset "EUC-KR";
 
+#communityHeader,#noticeHeader, 
+#easyToStartHeader,
+#ecoMagazineHeader{
+		display: flex; 
+		justify-content:center;	
+		margin: 50px 0 50px 0;
+}
+
+
+
+
+/*커뮤니티 게시판 리스트*/
 #board{
 	padding-top: 15px;
 }
@@ -27,6 +39,7 @@
 .writeBtn{
 	float: right;
 	padding : 15px 0;
+	margin-bottom: 60px;
 }
 
 .writeBtn button{
@@ -53,5 +66,177 @@
 .td_nickname,.td_date{
 	 width: 110px;
 }  
+
+/* eco ,ets */
+.boardList{
+	display: flex; 
+	justify-content:space-around;
+}
+
+.boardList ul li {  margin:0 10px 10px 10px; }
+
+.boardpadding{
+	margin: 0 0 10px 0;
+}
+
+
+/* 이미지형 게시판(인증게시판)  */
+
+
+#container_box{
+	display: flex; 
+	justify-content:space-around;
+	flex-direction: row;
+}
+
+#content_box{
+	width:1000px;
+}
+
+#content_box li{
+	margin: 15px 10px;
+}
+
+.nickname ,.date, .cer_content{
+	padding :10px 0 10px 0;
+}
+
+
+.nickname{
+	float: left;
+}
+
+.date{
+	color:#aaaaaa;
+	line-height:13px;
+	font-size:13px;
+	float: right;
+}
+
+
+
+/* 게시판 상세*/
+#detail_board_table{
+	margin-top: 15px;
+	border-top: solid 1px #444444;
+}
+
+#detail_board_table tr,
+#detail_board_table th,
+#detail_board_table td{
+    border-collapse: collapse;
+    height: 50px;
+    text-align: left;
+    padding: 0;
+}
+
+
+#detail_board_table span{
+	
+	padding-left: 20px;
+	
+}
+
+#board_content{
+	padding-top:20px;
+	padding-left:20px;
+	padding-bottom:70px;
+}
+
+#detail_board_table > thead td{
+	border-left: 1px solid #aaaaaa;
+	 text-align: center;
+}
+
+div.detail_title{
+ 	height:25px;
+ 	font-size:15px;
+ 	 padding : 10px 0;
+ 	  border-bottom: 1px solid #dddddd;
+ }
+ 
+#board_content img{
+ 	width:600px;
+ }
+ 
+#board_btn button{
+	width:100px;
+	height:30px;
+}
+
+
+#board_btn{
+		display: flex; 
+		justify-content:center;	
+		margin: 30px 0 80px 0;
+}
+
+
+#container_box,#insert_comment{
+	display: flex; 
+	justify-content:center;
+}
+
+#content{
+	width:1000px;
+}
+
+.thumbnail{
+	border: 1px solid #dddddd;
+	box-sizing: border-box;
+}
+
+/* 챌린지게시판 챌린지 테이블 */
+#chgTable_box{
+	margin-top:40px;
+	width: 500px;
+	margin-left:20px;
+	border-top: 1px solid #dddddd;
+}
+
+#chgTable_box td{
+	padding-left: 20px;
+}
+
+#chgTable_box thead{
+	background: #f2f2f2;
+	font-weight: 600;
+}
+
+
+/*코멘트 관련*/
+#comment_box{
+	width: 100%;
+	position: relative;
+	margin: 20px 0;
+}
+
+#comment_box textarea{
+	width:800px;
+	height:100px;
+	padding: 10px;
+	box-sizing: border-box;
+	display: inline-block;
+	position: relative;
+
+} 
+
+#comment_box #insertComments{
+	height:100px;
+	width:160px;
+	position: absolute;
+	right:10px;
+	
+}
+
+#comment_list{
+	margin-bottom: 150px;
+}
+
+#comment_list td{
+	padding: 10px;
+}
+ 
+ 
 
 

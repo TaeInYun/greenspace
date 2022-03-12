@@ -6,27 +6,12 @@
 <head>
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/board.css">
-<link rel="stylesheet" href="/css/detailBoard.css">
 <link rel="stylesheet" href="/css/components/search.css">
 <style type="text/css">
-#communityHeader,#board_btn{
-		display: flex; 
-		justify-content:center;	
-		margin: 30px 0 30px 0;
-}
-
-#container_box,#insert_comment{
-	display: flex; 
-	justify-content:center;
-}
-
-#content{
-	width:1000px;
-}
 
 </style>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>녹지공간-자유 게시판</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script> 
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -36,6 +21,11 @@
  <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <script type="text/javascript">
  $(function(){
+	 
+		$( $(".nav-btn")[0] ).attr("style", "background: #00913A;");
+		$( $(".nav-btn .nav-btn__text")[0] ).attr("style", "color:white");
+	 
+	 
 		 $("#insertComments").click(function () {		 
 			 let commu_no = $("#commu_no").val();
 			 let member_no = $("#member_no").val();
@@ -76,9 +66,6 @@
 			<div id="container_box"> 
 				<!-- 본문 -->			
 				<section id="content">
-				<div class="title">	
-				커뮤니티
-				</div>
 				
 				<div id="communityHeader">
 				<jsp:include page="./communityHeader.jsp"/>
@@ -114,16 +101,16 @@
 						<th><span>${c.commu_title}</span></th>
 						<td><span><fmt:formatDate value="${c.commu_date}" pattern="yy.MM.dd"/></span></td>	
 					</tr>
-				</thead>	
+				</thead>
+					
 					<tr>
-					<td colspan="2"><span>LV ${m.levels} ${c.nickname}</span></td>					
+					<td colspan="2"><span>${c.levels}LV  ${c.nickname}</span></td>					
 					</tr>
+					
 					<tr>
 						<td colspan="2">
 						<div id="board_content">
-						<p>
-						${c.commu_content}
-						</p>
+						<p>${c.commu_content}</p>
 					
 						<!-- 업로드한 파일들을 forEach문을 이용해 <img> 태그에 표시 -->
 						<c:forEach var="list" items="${imglist}" >
@@ -132,16 +119,16 @@
 					    </c:forEach> 
 					    </div> 
 					    </td>
-					<tr>
-
 			 </table>
 				 
 
 		<div id="board_btn">		
-			<!--<c:if test="${m.nickname == c.nickname}"></c:if>-->
-			<button><a href="/board/updateCommunity?no=${c.no }">글수정</a></button>
-			<button><a href="/board/deleteCommunity?no=${c.no }">글삭제</a></button>
-			<button><a href="/board/listCommunity">글목록</a></button>
+			<c:if test="${m.nickname == c.nickname}">
+			<a href="/board/updateCommunity?no=${c.no }"><button>글수정</button></a>
+			<a href="/board/deleteCommunity?no=${c.no }"><button>글삭제</button></a>
+			</c:if>
+			<a href="/board/listCommunity"><button>글목록</button></a>
+			
 		</div>
 	
 	

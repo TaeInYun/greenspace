@@ -4,8 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="/css/style.css">
+
 <link rel="stylesheet" href="/css/board.css">
+<link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/components/search.css">
 <link rel="stylesheet" href="/css/mychallenge.css">
 <link rel="stylesheet" href="/css/cerboard.css">
@@ -72,7 +73,7 @@ $(function() {
 						 <c:forEach var="c" items="${list }">
 						 <li>
 						 
-								<div class="cer_thumbnail">
+								<div class="thumbnail">
 								
 									<a href="/board/detailCerBoard?no=${c.no}">
 									<c:choose>
@@ -96,9 +97,9 @@ $(function() {
 								</div>
 								<div class="cer_content">
 										<a href="/board/detailCerBoard?no=${c.no}">
-										<span style="text-overflow: ">${c.cer_content}</span></a>
+										<span>${c.cer_content}</span></a>
 								</div>	
-						</li>		 
+							</li>		 
 					  	</c:forEach>	
  					</ul>
 		

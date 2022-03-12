@@ -1,16 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%> 
-      
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="/css/imginsert.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/writeForm.css">
 <link rel="stylesheet" href="/css/toggleSwitch.css">
+<style type="text/css">
+#writeForm_box_table textarea{
+	height:150px;
+}
+
+</style>
+<script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="/js/imginsert.js"></script>
+<script type="text/javascript" src="/js/attrzone.js"></script>
 <script type="text/javascript">
 $(function(){
 	
@@ -30,58 +37,112 @@ $(function(){
         }
        console.log(cer_status);
 	});
-	
+    
+    
+	//썸넬 이미지 미리보기
+            $("#cer_thumbnail").on('change', function(){
+                readURL(this);
+            });
+
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                    $('#previewImg').attr('src', e.target.result);
+                }
+
+              reader.readAsDataURL(input.files[0]);
+            }
+        }
+ 
 });
 </script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>녹지공간-인증 게시판</title>
 </head>
 <body>
-
-	<h2>챌린지 인증 작성</h2>
-	<i class="material-icons" style="font-size: 1rem">&#xe001; 하루에 한번만 작성 가능합니다.</i>
-
+<div id="container">
 	<div>
-		글 공개
-		<label class="switch">
-			<input type="checkbox" checked>
-			<span class="slider round"></span>
-		</label> 
-	</div>
+	<div id="wirte_title">
+	<h2>자유게시판 작성</h2>
+	<i class="material-icons" style="font-size: 14px; color:green; padding-top: 10px;">&#xe001; 하루에 한번만 작성 가능합니다.</i>
+	</div>	
+	
+	
+	<div id="writeForm_box">
 
-	<div>
 	<form action="insertCerBoard" method="post" enctype="multipart/form-data">	
-	<input type="hidden" name="member_no" value="${m.no }">
-	<input type="hidden" name="chg_user_no" value="${endlist[0].no}">		
-	<input type="hidden" name="cer_status" id="cer_status" value="공개">		
-		<div class="inputArea">
-			<p></p>
-			<table id="chgTable" border="1" width="50%">
-			<tr>
-			<td>완료한 챌린지 목록</td>
+		<input type="hidden" name="member_no" value="${m.no }">
+		<input type="hidden" name="chg_user_no" value="${endlist[0].no}">		
+		<input type="hidden" name="cer_status" id="cer_status" value="공개">		
+		<table id="writeForm_box_table">
+			<tr>	
+				<th scope="row">글공개</th>
+				<td>
+					<div class="inputArea">
+						<label class="switch">
+						<input type="checkbox" checked>
+						<span class="slider round"></span>
+					</label>
+					</div>
+				</td>
 			</tr>
-			<c:forEach var="c" items="${endlist}"  varStatus="status">
+			
 			<tr>
-				<td><input type="hidden" name="chg_title${status.index+1}" value="${c.chg_title}">${c.chg_title}</td>	
+				<th scope="row">챌린지</th>
+				<td>
+					<table id="chgTable" border="1" width="50%">
+					<tr>
+					<td>완료한 챌린지 목록</td>
+					</tr>
+					<c:forEach var="c" items="${endlist}"  varStatus="status">
+					<tr>
+						<td><input type="hidden" name="chg_title${status.index+1}" value="${c.chg_title}">${c.chg_title}</td>	
+					</tr>
+					</c:forEach>
+					</table>
+				</td>
+			<tr>	
+				<th scope="row">내용</th>
+				<td>
+					<div class="inputArea">
+					<textarea rows="10" cols="60" name="cer_content"></textarea><br>		
+					</div>
+				</td>
 			</tr>
-			</c:forEach>
+			
+			<tr>
+			<th scope="row">썸네일</th>		
+				<td>
+				<div>
+				<input type="file" id="cer_thumbnail" name="uploadFile" />
+				</div>
+				<div id="previewImg_box">
+				<img id="previewImg"/>
+				</div>
+				</td>
+			</tr>
+			
+			<tr>
+			<th scope="row">사진</th>		
+				<td>		
+					<input type='file' id='btnAtt' name="files" multiple='multiple'/>
+					<div id='att_zone' 
+					data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하세요'></div>
+				</td>
+			</tr>
 			</table>
+				
+			<div id="write_btn">  	
+			<button type="submit">등록</button>
+			<button type="button" onclick="history.go(-1);" >취소</button>	
+			</div>
+		</form>
+		
 		</div>
-		<div class="inputArea">
-		내용<br>
-		<textarea rows="10" cols="60" name="cer_content"></textarea><br>		
-		</div>
-		<div class="inputArea">
-			 <label for="cer_thumbnail">썸네일</label>
-			<input type="file" id="cer_thumbnail" name="uploadFile" />				  
-		</div>
-	<input type='file' id='btnAtt' name="files" multiple='multiple'/>
-	<div id='att_zone' 
-	data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하세요'></div>
-
-		<input type="submit" value="등록">
-		<button type="button" onclick="history.go(-1);" >취소</button>
-	</form>
-	</div>
+	</div>	
+</div>
 </body>
 </html>

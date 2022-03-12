@@ -10,11 +10,7 @@
 <link rel="stylesheet" href="/css/components/search.css">
 <style type="text/css">
 
-#communityHeader{
-		display: flex; 
-		justify-content:center;	
-		margin: 30px 0 30px 0;
-}
+
 
 #container_box{
 	display: flex; 
@@ -30,11 +26,11 @@
 <meta charset="UTF-8">
 <script type="text/javascript">
 $(function(){
-	$( $(".nav-btn")[0] ).attr("style", "background: #00913A;");
+		$( $(".nav-btn")[0] ).attr("style", "background: #00913A;");
 	$( $(".nav-btn .nav-btn__text")[0] ).attr("style", "color:white");
 })
 </script>
-<title>커뮤니티</title>
+<title>녹지공간-자유 게시판</title>
 </head>
 <body>
 <div id="root">
@@ -49,9 +45,6 @@ $(function(){
 			<div id="container_box"> 
 				<!-- 본문 -->			
 				<section id="content">
-				<div class="title">	
-				커뮤니티
-				</div>
 				
 				<div id="communityHeader">
 				<jsp:include page="./communityHeader.jsp"/>
