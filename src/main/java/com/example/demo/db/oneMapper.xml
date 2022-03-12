@@ -5,20 +5,22 @@
 <mapper namespace="one">
     <!-- admin  -->
   <select id="findAll" resultType="oneVO">
-		select no,one_title,one_content,one_pwd,one_date,ord_no,member_no,one_type_code,qna_status_code from
+		select no,one_title,one_content,one_pwd,TO_CHAR(one_date, 'yyyy.mm.dd') AS one_date,ord_no,member_no,one_type_code,qna_status_code from
 		(select rownum num, no,one_title,one_content,one_pwd,one_date,ord_no,member_no,one_type_code,qna_status_code from one)
-		where num between #{start} and #{end}  
+		offset #{start} rows fetch first 5 rows only
+		<!-- where num between #{start} and #{end} -->  
   </select>
   
-  <!-- 마이페이지1대1리뷰   sql 수정필요 한듯?-->
+  <!-- 마이페이지1대1리뷰   sql 수정필요 한듯?-->  <!--1개만 집어넣어도 4개 one_type 4개로 나옴  -->
   <select id="findAllMy" resultType="oneVO">
-  		select  no,one_title , ORD_NO, ONE_DATE, one_type_name, qna_type_name
+  		select  no,one_title , ORD_NO, TO_CHAR(one_date, 'yyyy.mm.dd') AS one_date, one_type_name, qna_type_name    <!-- FORMAT(GETDATE(), 'yyyy-MM-dd')   AS ONE_DATE  TO_CHAR(ONE_DATE, 'yyyy.mm.dd')    ONE_DATE -->
 		from one o, one_type ot, qna_status qs
 		where 
 		<if test="searchColumn != null">
 		one_type_name = (select one_type_name from one_type where one_type_code='${searchColumn}') and
 		</if>
 		o.qna_status_code=qs.qna_status_code and
+		o.one_type_code=ot.one_type_code and
 		member_no =#{member_no}
   </select>
   
@@ -29,7 +31,7 @@
   
   <!-- 전체게시판 검색   sql 수정필요-->
   <select id="findAllSearch" resultType="oneVO">
-     select no,one_title,one_content,one_date from (
+     <!-- select no,one_title,one_content,one_date from (
 		select rownum num, no,one_title,one_content,one_date from
 		(select no,one_title,one_content,one_date from one 
 			<if test="keyword != null">
@@ -40,7 +42,20 @@
 	            one_content like '%'  || #{keyword} || '%' 
 			</if>				 
 		))
-	where num between #{start} and #{end}
+		offset #{start} rows fetch first 5 rows only -->
+	<!-- where num between #{start} and #{end} -->
+	
+	select one_title, one_content, one_date from one
+	<if test="keyword != null">
+    		where one_type_code='${searchColumn}'
+   			</if>
+			<if test="keyword != null">
+				where one_title like '%'  || #{keyword} || '%'  OR
+	            one_content like '%'  || #{keyword} || '%' 
+			</if>				 
+		
+		offset #{start} rows fetch first 5 rows only 
+	
          
   </select>
   

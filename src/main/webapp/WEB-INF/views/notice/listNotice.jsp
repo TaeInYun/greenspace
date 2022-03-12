@@ -11,7 +11,6 @@
 	<link rel="stylesheet" href="/css/components/search.css">
     <title>녹지공간-공지사항</title>
     <style type="text/css">
-
 	</style>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
