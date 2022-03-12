@@ -1,0 +1,137 @@
+@charset "EUC-KR";
+
+html,body {
+    height: 100%;
+}
+
+
+
+#container{
+	height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+	
+}
+
+#wirte_title{
+	padding:20px 0px;	
+	font-size: 20px;
+	text-align: center;
+}
+
+#writeForm_box{
+	width:700px;
+}
+
+
+#writeForm_box_table th{
+	width:100px;
+}
+
+#writeForm_box_table .inputArea > input,textarea{
+ 	font-family: 'Gowun Batang', serif;
+ 	font-weight:bolder;
+	text-align: left;
+  	display:inline-block;
+ 	box-sizing : border-box;
+    position: relative;
+    padding: 0 10px 0 10px;
+    width: 100%;
+    height: 45px;
+    border: solid 1px #dadada;
+    background: #fff;
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+#writeForm_box_table textarea{
+	height:300px;
+}
+
+#write_btn input[type="file"]{
+	background-color: none;
+	
+}
+
+#write_btn {
+	margin-top:20px;
+	text-align: center;
+}
+#write_btn button{
+	width:100px;
+	height:30px;
+	margin-bottom: 60px;
+}
+
+
+/* 사진첨부 */
+#btnAtt{padding-bottom:10px;}
+
+#att_zone{
+	min-height:114px;
+	padding:10px;
+	background-color:#f3f3f3;
+	border:1px dashed #aaaaaa;}
+
+#att_zone:empty:before{
+	content : attr(data-placeholder);
+	color : #999;
+	font-size:.9em;
+}
+
+/*첨부파일 박스*/
+#fileDiv{
+	float:left;
+	width:100px;
+	height:100px;
+	border:solid 1px #cccccc;	
+	overflow:hidden;
+	margin-right:10px;
+}
+
+#fileDiv_img {
+	
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/*썸네일 미리보기 */
+#previewImg_box{
+	width:60px;
+	height:60px;
+	background-color: #f3f3f3;
+	overflow:hidden;
+	float:left;
+	position: relative;
+	margin-top:10px;
+}
+
+#previewImg {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/*  현재 썸네일 */
+
+
+#current_ThumbImg{
+	margin-top:10px;
+	margin-left:10px;
+	width:60px;
+	height:60px;
+    object-fit:cover;
+    border:solid 1px #aaaaaa;
+    box-sizing: border-box;
+}
+
+#current_thumbnail span{
+margin-left: 10px; 
+font-size: 14px; 
+color:#888888; 
+position: 
+absolute; 
+margin-top: 35px;
+}

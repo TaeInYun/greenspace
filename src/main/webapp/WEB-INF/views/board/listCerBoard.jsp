@@ -4,34 +4,69 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="/css/board.css">
 <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/components/search.css">
+<link rel="stylesheet" href="/css/cerboard.css">
 <style type="text/css">
+#content_box ul{
+	margin-left:50px;
+}
 </style>
 <meta charset="UTF-8">
-<title>Insert title here</title>
- 
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+$(function(){
+
+	$( $(".nav-btn")[1] ).attr("style", "background: #00913A;");
+	$( $(".nav-btn .nav-btn__text")[1] ).attr("style", "color:white");
+})
+</script>
+<title>녹지공간-인증 게시판</title>
 </head>
 <body>
-
-	<div id="header">
-		<jsp:include page="../header.jsp"/>
-	</div>
-
-<h3>인증 게시판</h3>
-<a href="/board/insertCerBoard">글등록</a>
-<c:if test="${not empty m }">
-<a href="/mypage/myCerBoard">내글 모아보기</a>
-</c:if>
-	<div id="root">
-		<section id="container">	
-		<div id="container_box">	
+<div id="root">
+		<header id="header">
+			<div id="header_box">
+				<jsp:include page="../header.jsp"  flush="false" />
+			</div>
+		</header>
+		<section id="container">		
+			<div id="container_box"> 
 				<!-- 본문 -->			
-					<section id="content">
+				<section id="content">
+
+				<div id="communityHeader">
+				<jsp:include page="./communityHeader.jsp"/>
+				</div>
+
+				<div id="commu_box">
+				
+					<div id="search_form">
+						<form action="/board/listCommunity" method="post">
+						<div class="searchColumn_wrap">
+								<select name="searchColumn" id="searchColumn">
+									<option value="commu_title">제목</option>
+									<option value="commu_content">본문</option>
+									<option value="nickname">작성자</option>
+								</select>
+						</div>		
+								<div class="search_keyword_form">
+									 <input class="keyword" type="text" name="keyword"  placeholder="검색어 입력">
+									  <img id="icon" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+								</div>
+						
+						</form>
+					</div>
+				</div>
+				
+						
+					<div id="content_box">
 					<ul>
 						 <c:forEach var="c" items="${list }">
 						 <c:if test="${c.cer_status eq '공개' }">
 						 <li>
-								<div class="cer_thumbnail">
+								<div class="thumbnail">
 									<a href="/board/detailCerBoard?no=${c.no}">
 									<c:choose>
 								<c:when test="${c.cer_thumbnail ne null }">
@@ -51,21 +86,31 @@
 								<span><fmt:formatDate value="${c.cer_date}" pattern="yy.MM.dd"/></span>
 									
 								</div>
-								<div class="content">
+								<div class="cer_content">
 										<a href="/board/detailCerBoard?no=${c.no}">
-										<span style="text-overflow: ">${c.cer_content}</span></a>
+										<span class="cer_content_text">${c.cer_content}</span></a>
 								</div>	
 						</li>	
 						</c:if>	 
 					  	</c:forEach>	
- 					</ul>					 
-					</section>	
-				</div> 
+ 					</ul>			 
+					</div>
+					
+			
+				
+					<div class="writeBtn">
+					<a href="/board/insertCerBoard"><button>글쓰기</button></a>
+					</div>
+					
+					<div id="paging">
 				    <c:forEach var="i" begin="1" end="${totalPage }">
-			        <a href="listCerBoard?pageNUM=${i }">${i }</a>&nbsp;&nbsp;
-			 	   </c:forEach>
-					 
-		</section>								
-</div>		 
+				        <a href="listCerBoard?pageNUM=${i }">${i }</a>&nbsp;&nbsp;
+				    </c:forEach>
+				    </div>
+				    
+					</section>    
+			</div>
+		</section>
+</div>
 </body>
 </html>

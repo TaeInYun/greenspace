@@ -20,13 +20,25 @@
 @import "screens/detailOrderList.css";
 @import "screens/myQna.css";
 
+html,body {
+	padding: 0 ;
+    margin: 0;
+}
+
+html{
+	height:100%;
+}
+
+body{
+	 min-height: 100%;
+	font-family: 'Gowun Batang', serif;
+}
+
 #root{
 	width: 1200px;
 	margin: 0 auto;
 	height: 100%;
-}
-body{
-	font-family: 'Gowun Batang', serif;
+	padding-bottom: 100px;
 }
 
 input, label{
