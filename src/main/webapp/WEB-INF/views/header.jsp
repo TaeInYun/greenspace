@@ -68,6 +68,7 @@
 				<li><a href="../easyToStart/easyToStartList">Easy To Start</a></li>
 				<li><a href="../shop/listProduct_home">Shop</a></li>
 				<li><a href="../board/listCommunity">Community</a></li>
+				<li><a href="../notice/listNotice">Notice</a></li>				
 			</ul>
 	</div>		
 </div>

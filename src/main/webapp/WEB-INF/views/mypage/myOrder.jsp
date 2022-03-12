@@ -6,9 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
+
 <title>녹지공간 - 나의 주문내역</title>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
 <script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -16,6 +16,24 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/jquery-ui/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/js/searchDate.js"></script>
+<link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
+<link rel="stylesheet" href="/css/style.css">
+<style type="text/css">
+
+/* .mypage_aside {
+    width: 5%; 
+    margin: 20px 0;
+    border-right: 1px solid #eee;
+    padding-right: 34px;
+} */
+.mypage_aside {
+    width: 13%; 
+    margin: 5px;
+    border-right: 1px solid #eee;
+    padding-right: 5px;
+}
+
+</style>
 <script type="text/javascript">
 	$(function() {
 		$("#link_orderList").attr("style","color:white; background: #00913A;")
@@ -157,15 +175,9 @@
 			
 			$(this).attr("style","background: #008040;color: white;");
 		});
-		
+		 $("#insertReview").find(".modal-content").load("/shop/insertReview?pro_no=${p.no}");  //리뷰작성하기 
 	});
-	
-	$function(){
-		  
-		 		 
-		 $("#insertReview").find(".modal-content").load("/shop/insertReview?pro_no=${p.no}");  //리뷰작성하기		 
-		 
-	 }	
+		
 </script>
 </head>
 <body>	

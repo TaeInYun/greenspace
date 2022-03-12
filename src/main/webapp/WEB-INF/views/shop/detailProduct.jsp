@@ -169,7 +169,9 @@ section#content { float:right; width:100%; margin-top: 30px;}
 		 /* $("#deleteProduct").find(".modal-content").load("/admin/deleteProduct?no=${p.no }");  */
 		 $("#rateReview").find(".modal-content").load("/shop/listReview_rate?pro_no=${p.no}"); //상품 리뷰(평점순)
 		 $("#insertReview").find(".modal-content").load("/shop/insertReview?pro_no=${p.no}");  //리뷰작성하기
-		 $("#insertProQna").find(".modal-content").load("/shop/insertProQna?pro_no=${p.no}");  //1대1문의 작성하기 
+		 $("#insertProQna").find(".modal-content").load("/shop/insertProQna?pro_no=${p.no}");  //1대1문의 작성하기
+		 
+		
 		 
 	 }	
 </script>
@@ -185,7 +187,7 @@ section#content { float:right; width:100%; margin-top: 30px;}
             <!-- 본문 -->         
                <section id="content">                  
                 <div id="content_1"> 
-                	<img src="/upload/${p.PRO_THUMBNAIL }" width="600" height="500"><br>   
+                	<img src="/upload/${p.PRO_THUMBNAIL }" width="500" height="500"><br>   
                     <div class="lableZip" style="float: right;"> 
                      
                        <div class="context_header" >							 
@@ -278,7 +280,8 @@ section#content { float:right; width:100%; margin-top: 30px;}
 		 		            		 		            
 		 		            
 						</div>
- 
+ 				
+ 				<div id="rrpModal">
                  	<!-- 모달창 -->
   			 			<div id="rateModal" class="modal fade" tabindex="-1" role="dialog"> 
   			 				<div class="modal-dialog"> 
@@ -301,7 +304,7 @@ section#content { float:right; width:100%; margin-top: 30px;}
   			 				</div> 
   			 		    </div>
   			 		    
-                 
+                 </div>
                  
                </section><!-- 본문 -->               
                                    

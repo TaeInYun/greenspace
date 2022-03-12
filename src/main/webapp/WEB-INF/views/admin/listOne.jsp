@@ -44,7 +44,7 @@
 				</td>				 
 				<td>${o.one_content }</td>
 				<td>${o.one_date }</td>
-				<td>${o.member_no }</td>								
+				<td>${o.member_no }</td>			<!-- o.member_no -->					
 			</tr>
 		</c:forEach>
 	</table> 	

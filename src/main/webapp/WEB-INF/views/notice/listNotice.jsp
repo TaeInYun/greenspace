@@ -14,7 +14,7 @@
 
     <hr>
     <a href="#">공지사항 </a>
-    <a href="listOne"> 문의사항(QnA)</a>
+    <a href="/board/listSearchOne"> 문의사항(QnA)</a>
     <br>
     <a href="insertNotice">  글 등록  </a><br>
     <form action="listBoard" method="post">
