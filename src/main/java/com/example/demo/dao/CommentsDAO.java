@@ -13,11 +13,6 @@ public class CommentsDAO {
 	public int insertComments(HashMap map){
 		return DBManager.insertComments(map);
 	}
-	/*
-	public int updateComments(HashMap map){
-		return DBManager.updateComments(map);
-	}
-	*/
 	public List<CommentsVO> findAllCommentByCommu_no(int no) {
 		return DBManager.findAllCommentByCommu_no(no);
 	}
@@ -45,5 +40,41 @@ public class CommentsDAO {
 	public int updateComments(HashMap map){
 		return DBManager.updateComments(map);
 	}
+	
+	
+	
+	public List<CommentsVO> findAllCommentByMemberAndRe(int no){
+		return DBManager.findAllCommentByMemberAndRe(no);
+	}
+	
+	public List<CommentsVO> findAllCommentByMemberAndOne(int no){
+		return DBManager.findAllCommentByMemberAndOne(no);
+	}
+	
+	public List<CommentsVO> findAllCommentByMemberAndPro_no(int no){
+		return DBManager.findAllCommentByMemberAndPro_no(no);
+	}
+	 
+	
+	public List<CommentsVO> findAllCommentByMemberAndcommnu(int no){
+		return DBManager.findAllCommentByMemberAndcommnu(no);
+	}
+	 
+	
+	public List<CommentsVO> findAllCommentByMember_no(int no){
+		return DBManager.findAllCommentByMember_no(no);
+	}
+	
+	public List<CommentsVO> findAllCommentByMemberAndCer(int no){
+		return DBManager.findAllCommentByMemberAndCer(no);
+	}
+	
+	public List<CommentsVO> findAllCommentByMemberAndEco(int no){
+		return DBManager.findAllCommentByMemberAndEco(no);
+	}
+	public List<CommentsVO> findAllCommentByMemberAndETS(int no){
+		return DBManager.findAllCommentByMemberAndETS(no);
+	}
+	 
 	 
 }

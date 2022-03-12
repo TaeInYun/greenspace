@@ -85,11 +85,13 @@ section#content { float:right; width:100%; margin-top: 30px;}
 	$(function(){
 		let pro_price = ${p.pro_price};
 		let pro_saleprice = ${p.pro_saleprice};
-		let pro_name = "${p.pro_name}"
-		let pro_no = ${p.no}	
+		let pro_name = "${p.pro_name}";
+		let pro_no = ${p.no};	
+		let img = "${p.PRO_THUMBNAIL }";
+		let stock = ${p.pro_stock };
 		let cart_option = "${option.pro_option_name}";
 		
-	//카트관련	
+		//카트관련	
 		$("#cart").click(function(){
 			let isOption = $("#optionList tr").length;
 			
@@ -162,9 +164,84 @@ section#content { float:right; width:100%; margin-top: 30px;}
 	 		$("select").find("option:first").attr("selected", "selected");
 	 	 });
 	 	
+		//***** 상품 주문하기
+		$("#order").click(function(){
+			let isOption = $("#optionList tr").length;
+			
+			if(isOption == 0 && ${cnt>=1 }){
+				alert("상품의 옵션을 선택해주세요");
+				return;
+			}
+			
+			// 옵션이 있는 상품
+			if(isOption != 0){
+				let data = new Array();
+				
+				$.each( $("#optionList tr"), function(){
+					let selectOption = $(this).find("td");
+					let cart_option_detail = $(selectOption[0]).text();
+					let option_price = $(selectOption[1]).text();
+					let qty = $("#qty").val();
+					
+					let totPrice = pro_price + Number(option_price)
+					let totSalePrice = pro_saleprice + Number(option_price)
+					
+					let proInfo = {
+						no: pro_no,
+						price:totPrice,
+						saleprice:totSalePrice,
+						pro_option:cart_option,
+						option_detail:cart_option_detail,
+						qty:qty,
+						stock:stock,
+						img:img
+					};
+					
+					data.push(proInfo);
+				});//end each
+				
+				$.ajax({
+					url: "/shop/direct_order_form",
+					data: JSON.stringify(data),
+					contentType: "application/json; charset=utf-8",
+					async: false,
+					type: "post",
+					success: function(){
+						location.href="order_form";
+					}
+				});
+				
+			}else{
+				let data = new Array();
+				let qty = $("#qty").val();
+				
+				let proInfo = {
+						pro_no: pro_no,
+						price:pro_price,
+						saleprice:pro_saleprice,
+						qty:qty,
+						stock:stock,
+						img:img
+				};
+				
+				data.push(proInfo);
+				
+				
+				$.ajax({
+					url: "/shop/direct_order_form",
+					data: JSON.stringify(data),
+					contentType: "application/json; charset=utf-8",
+					async: false,
+					type: "post",
+					success: function(){
+						location.href="order_form";
+					}
+				});
+			}
+		});
 	});
 		
-	 $function(){
+	 $(function(){
 		  
 		 /* $("#deleteProduct").find(".modal-content").load("/admin/deleteProduct?no=${p.no }");  */
 		 $("#rateReview").find(".modal-content").load("/shop/listReview_rate?pro_no=${p.no}"); //상품 리뷰(평점순)
@@ -173,7 +250,7 @@ section#content { float:right; width:100%; margin-top: 30px;}
 		 
 		
 		 
-	 }	
+	 }	)
 </script>
 </head>
 <body>
@@ -263,7 +340,7 @@ section#content { float:right; width:100%; margin-top: 30px;}
                      		<a href="#" id="cart"><i class="fa-solid fa-cart-shopping fa-2x"></i></a> &nbsp;
 					      	<a href="#" id="wishList"><i class="fa-solid fa-heart fa-2x"></i></a> &nbsp;
 					      	<script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script>
-							<button>바로결제</button>
+							<button id="order">바로결제</button>
 							<p id="addMsg"></p>					     
 					 </div>
 				 </div>	<!-- lableZip -->
