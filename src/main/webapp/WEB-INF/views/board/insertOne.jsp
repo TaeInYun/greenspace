@@ -73,8 +73,8 @@
 		  <option value="CAN">취소</option>
 		  <option value="ETC">기타</option>
 		</select> <br>  
-		상품문의유형:	<input type="text" name="one_type_code" id="one_type_code"> <br>		
-		문의상태:	<input type="text" name="qna_status_code" value="WA" > <br>  <!--wa 답변대기 EXC교환  -->
+		상품문의유형:	<input type="hidden" name="one_type_code" id="one_type_code"> <br>		
+		문의상태:	<input type="hidden" name="qna_status_code" value="WA" > <br>  <!--wa 답변대기 EXC교환  -->
 		
 		
 		<input type="submit" value="등록">

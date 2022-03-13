@@ -26,7 +26,13 @@
   
   <!-- 상세보기 -->
   <select id="findAllDetail" resultType="oneVO">
-   select * from one where no=#{no}
+   <!-- select * from one where no=#{no} -->
+   select no, one_title, ord_no, one_content, TO_CHAR(one_date, 'yyyy.mm.dd') AS one_date, one_type_name, qna_type_name
+   from one o, one_type ot, qna_status qs
+   where
+   o.qna_status_code=qs.qna_status_code and
+   o.one_type_code=ot.one_type_code and
+   no=#{no}
   </select>
   
   <!-- 전체게시판 검색   sql 수정필요-->
@@ -45,7 +51,7 @@
 		offset #{start} rows fetch first 5 rows only -->
 	<!-- where num between #{start} and #{end} -->
 	
-	select no,one_title, one_content, TO_CHAR(one_date, 'yyyy.mm.dd') AS one_date from one
+	 select no,one_title, one_content, TO_CHAR(one_date, 'yyyy.mm.dd') AS one_date from one
 	<if test="keyword != null">
     		where one_type_code='${searchColumn}'
    			</if>
@@ -54,8 +60,17 @@
 	            one_content like '%'  || #{keyword} || '%' 
 			</if>				 
 		
-		offset #{start} rows fetch first 5 rows only 
-	<!--  one_type_code 상태유지가 웹에서 잘안되는듯 -->
+		offset #{start} rows fetch first 5 rows only  
+	
+	
+		<!-- select no,one_title, one_content,  one_date from(
+			select rownum num, no,one_title, one_content, one_date from
+			(select no,one_title, one_content, TO_CHAR(one_date, 'yyyy.mm.dd') AS one_date from one
+			<if test="keyword != null">
+      			 where ${searchColumn} like '%'||#{keyword}||'%' 
+   			</if>
+			order by one_date))
+			where num between #{start} and #{end} -->
          
   </select>
   
