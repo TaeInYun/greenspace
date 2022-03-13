@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <HTML>
 <HEAD>
-	<meta charset="EUC-KR">
+	<meta charset="UTF-8">
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
 	<title>녹지공간 - 회원정보</title>
@@ -27,6 +27,10 @@
 
 		#input_code{
 				display: none;
+		}
+		
+		.mypage-main{
+			width: 80%
 		}
 	</style>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -286,6 +290,7 @@
 					<div>
 						 <a href="/mypage/myPointList?no=${m.no }">포인트내역</a>
 						 <a href="/mypage/myCommentsList?no=${m.no }">댓글내역</a>
+						 <a href="/mypage/myReviewList?no=${m.no }">리뷰내역</a>
 					</div>
 					<div>
 						<hr>아이디 : ${m.id}

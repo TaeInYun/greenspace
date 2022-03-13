@@ -1554,55 +1554,22 @@ public class DBManager {
 			return re;
 		}
 
-		public static List<CommentsVO> findAllCommentByMember_no(int no) {
+		public static List<CommentsVO> findAllCommentByMember_no(HashMap map) {
 			 SqlSession session = factory.openSession();
-			 List<CommentsVO> list = session.selectList("comments.findAllCommentByMember_no", no);
+			 List<CommentsVO> list = session.selectList("comments.findAllCommentByMember_no", map);
 			 session.close();
 			 return list;
 		}
 
-		public static List<CommentsVO> findAllCommentByMemberAndRe(int no) {
+		public static List<ReviewVO> findMyReview(int no) {
 			 SqlSession session = factory.openSession();
-			 List<CommentsVO> list = session.selectList("comments.findAllCommentByMemberAndRe", no);
+			 List<ReviewVO> list = session.selectList("review.findMyReview", no);
 			 session.close();
 			 return list;
 		}
-		public static List<CommentsVO> findAllCommentByMemberAndOne(int no) {
-			 SqlSession session = factory.openSession();
-			 List<CommentsVO> list = session.selectList("comments.findAllCommentByMemberAndOne", no);
-			 session.close();
-			 return list;
-		}
-		public static List<CommentsVO> findAllCommentByMemberAndPro_no(int no) {
-			 SqlSession session = factory.openSession();
-			 List<CommentsVO> list = session.selectList("comments.findAllCommentByMemberAndPro_no", no);
-			 session.close();
-			 return list;
-		}
-		public static List<CommentsVO> findAllCommentByMemberAndcommnu(int no) {
-			 SqlSession session = factory.openSession();
-			 List<CommentsVO> list = session.selectList("comments.findAllCommentByMemberAndcommnu", no);
-			 session.close();
-			 return list;
-		}
-		public static List<CommentsVO> findAllCommentByMemberAndCer(int no) {
-			 SqlSession session = factory.openSession();
-			 List<CommentsVO> list = session.selectList("comments.findAllCommentByMemberAndCer", no);
-			 session.close();
-			 return list;
-		}
-		public static List<CommentsVO> findAllCommentByMemberAndEco(int no) {
-			 SqlSession session = factory.openSession();
-			 List<CommentsVO> list = session.selectList("comments.findAllCommentByMemberAndEco", no);
-			 session.close();
-			 return list;
-		}
-		public static List<CommentsVO> findAllCommentByMemberAndETS(int no) {
-			 SqlSession session = factory.openSession();
-			 List<CommentsVO> list = session.selectList("comments.findAllCommentByMemberAndETS", no);
-			 session.close();
-			 return list;
-		}
+
+		 
+	 
 		
 
 }

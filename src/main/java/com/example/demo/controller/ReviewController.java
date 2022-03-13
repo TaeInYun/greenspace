@@ -180,5 +180,10 @@ public class ReviewController {
 		}
 		
 		
-		
+
+		@RequestMapping("/mypage/myReviewList")
+		public void myReviewList(Model model,int no) {	
+			model.addAttribute("no",no);
+			model.addAttribute("findMyReview", dao.findMyReview(no));
+		}	
 }

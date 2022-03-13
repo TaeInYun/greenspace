@@ -42,6 +42,15 @@ header#header div#header_box { text-align:center; padding:30px 0; }
   	display: inline-block;
   	margin: 10px;
   }
+  a{  
+  	margin: 10px;
+  	margin-bottom: 20px;
+  }
+  .filter{
+  	margin-bottom: 10px;
+  	border-style: solid;
+  }
+  
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <script type="text/javascript">
@@ -50,31 +59,35 @@ header#header div#header_box { text-align:center; padding:30px 0; }
 </head>
 <body>
 <div id="root">
-		<header id="header">
-			<div id="header_box">
-				<div id="header1_box">
-					<jsp:include page="../header.jsp"/>
-				</div>
-			</div>
-		</header>		 
-		
-		<section id="container">		
-			<div id="container_box"> 
-				<!-- 본문 -->			
-				<section id="content">
+<jsp:include page="../header.jsp"></jsp:include>
+		<div class="section mypage">
+			<jsp:include page="../mypage/myAside.jsp"></jsp:include>
+			<main class="mypage-main">
+			<div class="filter">
+					<a href="/mypage/myCommentsList?no=${no}&filter=re_no">리뷰</a>
+					<a href="/mypage/myCommentsList?no=${no}&filter=commu_no">커뮤니티</a>
+					<a href="/mypage/myCommentsList?no=${no}&filter=ets_no">easyToStart</a>
+					<a href="/mypage/myCommentsList?no=${no}&filter=one_no">일대일 문의</a>
+					<a href="/mypage/myCommentsList?no=${no}&filter=pro_qna_no">상품문의</a>
+					<a href="/mypage/myCommentsList?no=${no}&filter=cer_no">챌린지</a>
+					<a href="/mypage/myCommentsList?no=${no}&filter=eco_no">에코매거진</a>
 				 
+			</div>					
 				 
- 					<table>						 						 
-						<c:forEach var="findAllCommentByMember_no" items="${findAllCommentByMember_no}">			 
-						  <tr>
-								<td >${findAllCommentByMember_no.com_regdate}</td>				 
-								<td >${findAllCommentByMember_no.com_content}</td>				 
-						 		<td><a id="updateComments"  data-toggle="modal" data-target="#updateModal" role="button"  href="/board/updateComments?no=${findAllCommentByMember_no.no}&member_no=${findAllCommentByMember_no.member_no}&com_content=${findAllCommentByMember_no.com_content}">수정</a></td>
+		 			<c:forEach var="findAllCommentByMember_no" items="${findAllCommentByMember_no}">
+					
+ 					<table>					 						 
+						<tr>
+								<td>${findAllCommentByMember_no.com_regdate}</td>				 
+								<td>${findAllCommentByMember_no.com_content}</td>				 
+							  	<td><a id="updateComments"  data-toggle="modal" data-target="#updateModal" role="button"  href="/board/updateComments?no=${findAllCommentByMember_no.no}&member_no=${findAllCommentByMember_no.member_no}&com_content=${findAllCommentByMember_no.com_content}">수정</a></td>
 								<td><a id="deleteComments"  data-toggle="modal" data-target="#deleteModal" role="button"  href="/board/deleteComments?no=${findAllCommentByMember_no.no}&member_no=${findAllCommentByMember_no.member_no}">삭제</a></td>
 						 </tr>		 
-						</c:forEach>
+						
 					</table>
- 				 
+ 				 	</c:forEach>
+ 				 	
+ 				 	
  							<div id="deleteModal" class="modal fade" tabindex="-1" role="dialog"> 
 								<div class="modal-dialog"> 
 									<div class="modal-content"> 
@@ -89,16 +102,11 @@ header#header div#header_box { text-align:center; padding:30px 0; }
 								</div> 
 						    </div>	
 		
-					</section>					
-					  
-					<aside id="aside">
-						<jsp:include page="../mypage/myAside.jsp"/>
-					</aside>				
-			</div><!-- 전체  section box-->
-		</section>
-</div>
-
-
+		 
+			</main>
+		</div>
+	</div>
+</body>
 
 
 

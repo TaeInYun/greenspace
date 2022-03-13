@@ -6,7 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
 <link rel="stylesheet" href="/css/style.css"> 
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script> 
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style type="text/css">
 body { margin:0; padding:0; }
 ul, li { margin:0; padding:0; list-style:none; display: inline-blockblock;} 
@@ -22,12 +30,10 @@ header#header div#header_box { text-align:center; padding:30px 0; }
     	border-top: 1px solid #444444;
     	border-collapse: collapse;
     	font-size: 13px;
-    	
   }
   th, td {
 	    border-bottom: 1px solid #444444;
 	    padding: 10px;
-  		font-size: 20px;
   }
   #presentPoint{
   	margin: 10px;
@@ -36,10 +42,15 @@ header#header div#header_box { text-align:center; padding:30px 0; }
   	display: inline-block;
   	margin: 10px;
   }
-  .mypage-main{
-  
-  	float: right;
+  a{  
+  	margin: 10px;
+  	margin-bottom: 20px;
   }
+  .filter{
+  	margin-bottom: 10px;
+  	border-style: solid;
+  }
+  
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <script type="text/javascript">
@@ -52,39 +63,51 @@ header#header div#header_box { text-align:center; padding:30px 0; }
 		<div class="section mypage">
 			<jsp:include page="../mypage/myAside.jsp"></jsp:include>
 			<main class="mypage-main">
-
-
- 				<div id="presentPoint">
- 					현재포인트: ${findPresentPoint.presentPoint} 	
- 				</div>
- 				<div id="filter">
- 					<p><a href="/mypage/myPointList?no=${findPresentPoint.member_no}">전체</a></p>
- 					<p><a href="/mypage/myPointList?no=${findPresentPoint.member_no}&point_status=적립">적립</a></p>
- 					<p><a href="/mypage/myPointList?no=${findPresentPoint.member_no}&point_status=사용">사용</a></p>
- 			    </div>
- 				
- 				<table>
-						<tr>	
-							<td> 번호</td>
-							<td> 상태 </td>
-							<td> 포인트</td>				 
-							<td> 사용일자</td>			 
-						</tr>
-						 
-						<c:forEach var="findAllPointByNO" items="${findAllPointByNO}">			 
-						  <tr>
-								<td >${findAllPointByNO.num}</td>				 
-								<td >${findAllPointByNO.point_status }</td>				 
-								<td  >${findAllPointByNO.point_amount }</td> 						 
-								<td  >${findAllPointByNO.point_date }</td>			 		 			
-							</tr>		 
-						</c:forEach>
-					</table>
-
- 
-
-
+			 		
+				 
+		 		<table border="1" width="80%">
+				<tr>
+					 
+					<td>상품번호</td>
+					<td>리뷰제목</td>
+					<td>리뷰내용</td>
+				 	 
+				</tr>
+				<c:forEach var="findMyReview" items="${findMyReview }">
+					<tr> 
+						<td>${findMyReview.pro_no}</td>
+						<td>
+							${findMyReview.re_title} 					
+						</td>				 
+						<td>${findMyReview.re_content }</td>						 
+					</tr>
+				</c:forEach>
+			</table> 	
+ 				 	
+ 				 	
+ 							 
+		
+		 
 			</main>
 		</div>
 	</div>
 </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+ 
+</body>
+</html>
