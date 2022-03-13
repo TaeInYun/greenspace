@@ -22,10 +22,12 @@ header#header div#header_box { text-align:center; padding:30px 0; }
     	border-top: 1px solid #444444;
     	border-collapse: collapse;
     	font-size: 13px;
+    	
   }
   th, td {
 	    border-bottom: 1px solid #444444;
 	    padding: 10px;
+  		font-size: 20px;
   }
   #presentPoint{
   	margin: 10px;
@@ -33,6 +35,10 @@ header#header div#header_box { text-align:center; padding:30px 0; }
   p{
   	display: inline-block;
   	margin: 10px;
+  }
+  .mypage-main{
+  
+  	float: right;
   }
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
@@ -42,12 +48,12 @@ header#header div#header_box { text-align:center; padding:30px 0; }
 </head>
 <body>
 <div id="root">
-		<jsp:include page="../header.jsp"></jsp:include>
+<jsp:include page="../header.jsp"></jsp:include>
 		<div class="section mypage">
 			<jsp:include page="../mypage/myAside.jsp"></jsp:include>
 			<main class="mypage-main">
-	
-							
+
+
  				<div id="presentPoint">
  					현재포인트: ${findPresentPoint.presentPoint} 	
  				</div>
@@ -74,40 +80,11 @@ header#header div#header_box { text-align:center; padding:30px 0; }
 							</tr>		 
 						</c:forEach>
 					</table>
- 								
-							
-			
-					<div id="paging">
-					<ul>
-					<c:forEach var="i" begin="1" end="${totalPage }">
-				        <a href="myCommunity?pageNUM=${i }">${i }</a>&nbsp;&nbsp;
-				    </c:forEach>
-					</ul>
-				</div>
 
-				
+ 
+
+
 			</main>
 		</div>
 	</div>
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
- 
- 
-</body>
-</html>

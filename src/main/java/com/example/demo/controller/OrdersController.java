@@ -34,6 +34,7 @@ import com.example.demo.vo.OrderBillVO;
 import com.example.demo.vo.OrdersProductVO;
 import com.example.demo.vo.OrdersVO;
 import com.example.demo.vo.PointVO;
+import com.example.demo.vo.ReceiverVO;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Setter;
@@ -86,8 +87,7 @@ public class OrdersController {
 		
 		data.getOrders().setMember_no(member_no);
 		OrdersVO o = data.getOrders();
-		
-		if(data.getReceiver() != null) {
+		if((data.getReceiver()).getNo() != 0) {
 			receiverDAO.insertReceiver(data.getReceiver());
 			o.setReceiver_no(receiverDAO.maxOfNo());
 		}

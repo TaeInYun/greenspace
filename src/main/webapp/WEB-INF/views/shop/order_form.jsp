@@ -29,8 +29,10 @@
 		
 		if("${receiverInfo[7]}" == "receiver_no"){
 			$("#newAddr").attr("checked", true);
+			$("#receiverNo").attr("name", "receiver_no");
 		}else{
 			$("#basicAddr").attr("checked", true);
+			$("#receiverNo").attr("name", "addr_no");
 		}
 		
 		$(document).on("focusout", $("#usePoint"), function(){
@@ -75,7 +77,7 @@
 		
 		$("#basicAddr").click(function(){
 			chooseBasicAddr();
-			
+
 			$("input[name=addr_no]").val(${receiverInfo[0]});
 			$("input[name=name]").val("${receiverInfo[1]}");
 			$("input[name=phone]").val("${receiverInfo[2]}");
@@ -84,17 +86,24 @@
 			$("input[name=addr_detail]").val("${receiverInfo[5]}");
 			$("input[name=addr_msg]").val("${receiverInfo[6]}");
 		});
-		
 		// "결제"
 		$("#pay").click(function(){
-			let cnt = ${rownum}
-			let arr = document.getElementsByClassName("cart_no");
-			let arr_cartNo = new Array();
 			
-			for( let i = 0; i < arr.length; i++){
-				arr_cartNo.push( $(arr[i]).val() );
-			} 
-			requestPay(cnt, arr_cartNo);
+			if($("#accept").is(":checked")){
+				let cnt = ${rownum}
+				let arr = document.getElementsByClassName("cart_no");
+				let arr_cartNo = new Array();
+				
+				for( let i = 0; i < arr.length; i++){
+					arr_cartNo.push( $(arr[i]).val() );
+				} 
+				
+				requestPay(cnt, arr_cartNo);
+			}else{
+				alert("개인정보 수집에 동의해주세요.");
+				$(".cashInfo-accept").attr("style", "background:yellow; color:red;");
+			}
+			
 		});
 	});
 </script>
@@ -174,7 +183,7 @@
 						<label for="newAddr">신규 배송지</label>
 					</div>
 					<div id="receiverInfo">
-						<input type="hidden" id="receiverNo" class="receiverInefo" name=${rceiverInfo[7]} value="${receiverInfo[0]}">
+						<input type="hidden" id="receiverNo" class="receiverInfo" name="${rceiverInfo[7]}" value="${receiverInfo[0]}">
 						<input type="text" readonly="readonly" class="receiverInfo" name="name" value="${receiverInfo[1]}" placeholder="수령인">
 						<input type="text" readonly="readonly" class="receiverInfo" name="phone" value="${receiverInfo[2]}" placeholder="연락처">
 						<input type="text" readonly="readonly" class="receiverInfo" name="addr_postal" value="${receiverInfo[3]}" placeholder="우편번호">

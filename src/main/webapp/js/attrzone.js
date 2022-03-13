@@ -1,5 +1,5 @@
-$(function(){	
-	( /* att_zone : 이미지들이 들어갈 위치 id, btn : file tag id */
+$(function(){
+( /* att_zone : 이미지들이 들어갈 위치 id, btn : file tag id */
 			  imageView = function imageView(att_zone, btn){
 
 			    var attZone = document.getElementById(att_zone);
@@ -8,12 +8,12 @@ $(function(){
 			    
 			    // 이미지와 체크 박스를 감싸고 있는 div 속성
 			    var div_style = 'display:inline-block;position:relative;'
-			                  + 'width:150px;height:100%;margin:5px;border:1px solid #00f;z-index:1';
+			                  + 'width:100px;height:100px;overflow:hidden;margin:5px;border:1px solid #ccc;z-index:1';
 			    // 미리보기 이미지 속성
-			    var img_style = 'width:100%;height:100%;z-index:none';
+			    var img_style = 'width:100%;height:100%;object-fit:cover;z-index:none';
 			    // 이미지안에 표시되는 체크박스의 속성
-			    var chk_style = 'width:30px;height:30px;position:absolute;font-size:24px;'
-			                  + 'right:0px;bottom:0px;z-index:999;background-color:rgba(255,255,255,0.1);color:#f00';
+			    var chk_style = 'width:25px;height:25px;position:absolute;line-height:8px;font-size:18px;margin-top:5px;margin-right:5px;'
+			                  + 'right:0px;z-index:999;background-color:rgba(255,255,255,0.8);color:green;';
 			  
 			    btnAtt.onchange = function(e){
 			      var files = e.target.files;// FileList 객체
@@ -74,7 +74,4 @@ $(function(){
 			    }
 			  }
 			)('att_zone', 'btnAtt')
-});
-	/**
- * 
- */
+})	

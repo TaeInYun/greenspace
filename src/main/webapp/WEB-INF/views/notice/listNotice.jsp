@@ -9,23 +9,10 @@
     <link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/board.css">
 	<link rel="stylesheet" href="/css/components/search.css">
-    <title>Insert title here</title>
+    <title>녹지공간-공지사항</title>
     <style type="text/css">
-		#noticeHeader{
-				display: flex; 
-				justify-content:center;	
-				margin: 30px 0 30px 0;
-		}
-		#container_box{
-			display: flex; 
-			justify-content:center;
-		}
-
-		#content{
-			width: 1000px;
-		}
 	</style>
-	
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript">
 		$(function(){
 			$( $(".nav-btn")[0] ).attr("style", "background: #00913A;");
@@ -36,17 +23,21 @@
 </head>
 <body>
 <div id="root">
-<div>
-			<jsp:include page="../header.jsp"></jsp:include>
-		</div>
-		
-		<div id="noticeHeader">
-				<jsp:include page="./noticeHeader.jsp"/>
-		</div>
+	<header id="header">
+			<div id="header_box">
+				<jsp:include page="../header.jsp"  flush="false" />
+			</div>
+		</header>
 		
 		<section id="container">	
 			<div id="container_box"> 
 				<section id="content">
+				
+				<div id="noticeHeader">
+					<jsp:include page="./noticeHeader.jsp"/>
+				</div>
+				
+				
 				<div id="commu_box">
 					<div id="search_form">
 						<form action="listBoard" method="post">
@@ -89,35 +80,25 @@
 	            </tr>            
 	      	</c:forEach>
     		</table>	
-		</div>
+		
+					<div class="writeBtn">
+					<a href="insertNotice"><button>글쓰기</button></a>
+					</div>
+		
+		
 		<div id="paging">
 			<c:forEach var="i" begin="1" end="${totalPage }">
         		<a href="listNotice?pageNUM=${i }">${i }</a>&nbsp;&nbsp;
     		</c:forEach>
 		</div>
-    
-	
-			<div class="writeBtn">
-    		<button>
-    			<a href="insertNotice">글 등록</a>
-    		</button>
-    	</div>
-				
-				
+		</div>
+    			
 				</section>
 			</div>	
 		</section>	
 
 
 </div>
-		
-			
-			
-			
-	
-	
-	
-	
 	
 
 </body>

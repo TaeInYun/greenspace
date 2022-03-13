@@ -6,14 +6,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
+
 <title>녹지공간 - 나의 주문내역</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
 <script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="/js/jquery-ui/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/js/searchDate.js"></script>
+<link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
+<link rel="stylesheet" href="/css/style.css">
+<style type="text/css">
+
+/* .mypage_aside {
+    width: 5%; 
+    margin: 20px 0;
+    border-right: 1px solid #eee;
+    padding-right: 34px;
+} */
+.mypage_aside {
+    width: 12%; 
+    margin: 5px;
+    border-right: 1px solid #eee;
+    padding-right: 5px;
+}
+
+</style>
 <script type="text/javascript">
 	$(function() {
 		$("#link_orderList").attr("style","color:white; background: #00913A;")
@@ -147,7 +166,7 @@
 				let data = {
 						start: start,
 						period: period,
-						firstDate:firstDate,
+						fristDate: firstDate,
 						lastDate :lastDate
 				}
 				searchByDate(data);
@@ -156,9 +175,9 @@
 			$(this).attr("style","background: #008040;color: white;");
 		});
 		
-		 $("#insertReview").find(".modal-content").load("/shop/insertReview?pro_no=${p.no}");  //리뷰작성하기		 
+		 $("#insertReview").find(".modal-content").load("/shop/insertReview?pro_no=${p.no}");  //리뷰작성하기
+		 
 	});
-	
 </script>
 </head>
 <body>	
@@ -173,12 +192,12 @@
 						<button type="button" id="week" value="7">1주일</button>
 						<button type="button" id="oneMonth" value="1">1개월</button>
 						<button type="button" id="threeMonth" value="3">3개월</button>
-						<button type="button" id="allDay" value="3">전체 시기</button>
+						<button type="button" id="allDay" value="3">전체</button>
 					</div>
 					<div class="search__calender">
-						<input type="text" id="firstDate" readonly="readonly" placeholder="시작 날짜"> 
+						<input type="text" id="firstDate" readonly="readonly" placeholder="시작 날짜" value="${fristDate}"> 
 						<span>&nbsp;&nbsp;</span>
-						<input type="text" id="lastDate" readonly="readonly" placeholder="종료 날짜">
+						<input type="text" id="lastDate" readonly="readonly" placeholder="종료 날짜" value="${lastDate}">
 						<input type="button" id="search" value="조회" >
 					</div>
 				</div>

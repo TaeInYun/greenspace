@@ -47,10 +47,16 @@ public class OneController {
 				
 		HashMap map = new HashMap();
 		map.put("start", start);
-		map.put("end", end);
+		//map.put("end", end);
 		
 		model.addAttribute("totalPage", dao.totalPage);
 		model.addAttribute("list",dao.findAll(map));
+		//페이징추거ㅏ
+		model.addAttribute("totalPage", dao.totalPage);
+        model.addAttribute("totalRecord", dao.totalRecord);
+        model.addAttribute("start", start);
+        model.addAttribute("end", end);
+        model.addAttribute("pageSIZE", dao.pageSIZE);
 		
 		
 	}
@@ -97,7 +103,7 @@ public class OneController {
 	//----------------보드(검색기능)
 	
 	
-		@RequestMapping("/board/listSearchOne")       
+		@RequestMapping("/notice/listSearchOne")       
 		public void listOne(Model model,
 				HttpSession session,
 				String keyword,
@@ -123,10 +129,16 @@ public class OneController {
 			map.put("searchColumn", searchColumn);
 			map.put("keyword", keyword);
 			map.put("start", start);
-			map.put("end", end);
+			//map.put("end", end);
 			
 			model.addAttribute("totalPage", dao.totalPage);
 			model.addAttribute("list",dao.findAllSearch(map));
+			//페이징추가
+			model.addAttribute("totalPage", dao.totalPage);
+	        model.addAttribute("totalRecord", dao.totalRecord);
+	        model.addAttribute("start", start);
+	        model.addAttribute("end", end);
+	        model.addAttribute("pageSIZE", dao.pageSIZE);
 			
 			//만약에 검색하였다면 
 					//검색한 칼럼이름과 검색어를 세션에 저장하여 상태유지 합니다
@@ -145,7 +157,7 @@ public class OneController {
 		
 		@RequestMapping(value="/board/insertOne", method= RequestMethod.POST)	
 		public ModelAndView insertProQna(OneVO o) {
-			ModelAndView mav = new ModelAndView();
+			ModelAndView mav = new ModelAndView("redirect:/notice/listSearchOne");
 			
 			dao.insert(o);
 			
@@ -162,7 +174,7 @@ public class OneController {
 		
 		@RequestMapping(value="/board/updateOne", method=RequestMethod.POST)
 		public ModelAndView updateProQna(OneVO o) {
-			ModelAndView mav = new ModelAndView();
+			ModelAndView mav = new ModelAndView("redirect:/notice/listSearchOne");
 			
 			
 			dao.update(o);

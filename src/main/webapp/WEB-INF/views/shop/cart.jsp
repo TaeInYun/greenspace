@@ -115,15 +115,14 @@
 			} 
 			
 			receiverInfo.push( addr_type);
-			
 			let orderInfo = new Array();
 			let arr = document.getElementsByClassName("orderInfo");
 			
 			for( let i = 0; i < arr.length; i++){
 				orderInfo.push( $(arr[i]).text() );
 			} 
-			
- 	 		$.ajax({
+
+			$.ajax({
 				url: "order_form",
 				type: "post",
 				data: {
@@ -135,7 +134,6 @@
 					location.href="/shop/order_form"
 				} 
 			});
-			
 		});
 		
 		

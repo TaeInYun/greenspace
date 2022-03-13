@@ -66,8 +66,8 @@ public class NoticeController {
     	System.out.println(no);
         dao.updateHit(no);
         model.addAttribute("n", dao.findByNo(no));
-
     }
+    
 
     @GetMapping(value = "/notice/insertNotice")
     public void insertNotice(){

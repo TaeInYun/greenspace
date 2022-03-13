@@ -36,7 +36,7 @@
 	
 	<!-- 커뮤니티  상세  -->
 	<select id="getCommunity" resultType="communityVO">
-	select co.no no,commu_title, commu_content, commu_date , nickname ,commu_hit
+	select co.no no,commu_title, commu_content, commu_date , nickname ,commu_hit,levels
 		from community co, member m
 		where m.no=co.member_no and co.no=#{no}
 	</select>	
