@@ -1,121 +1,110 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
-<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script> 
-<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<title>녹지공간-마이페이지 1대1문의</title>
 <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/board.css">
+<link rel="stylesheet" href="/css/components/search.css">
 <style type="text/css">
-.content{
-width: 200px;
-white-space: normal;
-display: -webkit-box;
--webkit-line-clamp:3;
--webkit-box-orient:vertical;
-overflow:hidden;
+#board{
+	margin-left: 30px;
 }
 
-ul, li { margin:0; padding:0; list-style:none; } 
-
-div#root { width:100%; margin:0 auto; }		 
-section#content ul li { display:inline-block; margin:10px; }
-
-table {
-    	width: 100%;
-    	border-top: 1px solid #444444;
-    	border-collapse: collapse;
-  }
-  th, td {
-	    border-bottom: 1px solid #444444;
-	    padding: 10px;
-	    
-  }
-  
-  #here{
-   font-size:50px;
-  }
-  
-  #stay{
-   position: absolute;
-  /*  left:10%; */
-   font-size:35px;
-  }
-  
- #com_content{
- 	text-align: left; 	 
- 	width: 300px;
- }
+#detail_board_table{
+	margin-top: 0px;
+}
 </style>
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	 $("#insertComments").click(function () {		 
-		 let one_no = $("#one_no").val();
-		 let member_no = $("#member_no").val();
-		 let com_content = $("#com_content").val();
-			 
-		 let data={
-			 com_content:com_content,
-			 one_no:one_no,			
-			 member_no:member_no				 
-		 }		 
-		 
-		 $.ajax({
-         	url : "/insertComments",
-             type : "POST",
-             data :data,
-             success : function(result){
-            	 $("#com_content").val("")
-             },
-             error : function(){
-             	console.log("ajax 통신 실패");
-             }
-         });
-	})
-	 
+	 $( $(".nav-btn")[1] ).attr("style", "background: #00913A;");
+	$( $(".nav-btn .nav-btn__text")[1] ).attr("style", "color:white");
+	
 })
 </script>
 </head>
 <body>
-<div id="header">
-		<jsp:include page="../header.jsp"/>
-		</div>
-<div id="stay">		
-<section id="content">			
-	<h1 id="here">1대1문의 상세</h1>
-	 
-	  문의유형:${od.one_type_name} <br>  <!-- 새로운 dao를 컨트롤러에 불러와야할듯? -->
-	  문의유형코드:${od.one_type_code}<br>
-	  1대1문의 제목:${od.one_title}<br>
-	  주문번호:${od.ord_no}<br>
-	  내용:${od.one_content} <br>
-	  작성일:${od.one_date} <br>	
-	  처리상태:${od.qna_type_name} <br>	  <!-- 새로운 dao를 컨트롤러에 불러와야할듯? -->
-	  처리상태코드:${od.qna_status_code} <br> 
+<div id="root">
+		<jsp:include page="../header.jsp"></jsp:include>
+				
+		<div class="section mypage">
+		<jsp:include page="../mypage/myAside.jsp"></jsp:include>
+		
+			<main class="mypage-main">
+				<jsp:include page="./myQnaHeader.jsp"></jsp:include>
 	
+	
+		<div id="commu_box">
+					<div id="search_form">
+						<form action="/mypage/listSearchOneMy" method="post">
+							<div class="searchColumn_wrap">
+								<select name="searchColumn" id="searchColumn">
+									<option value="EXC">교환</option>   <!-- EXC교환 REF환불 CAN취소 ETC기타 -->
+									<option value="REF">환불</option>
+									<option value="CAN">취소</option>
+									<option value="ETC">기타</option>
+								</select>
+						 	</div>	
+								<div class="search_keyword_form">
+									 <input class="keyword" type="text" name="keyword"  placeholder="검색어 입력">
+									  <img id="icon" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+								</div>
+						 
+						</form>
+						</div> 	
+					</div>
+				
+	
+		<div id="board">
+		<table id="detail_board_table">
+					<colgroup> 
+					<col width="80%">
+					<col width="20%">
+					</colgroup>
+			<thead>			
+				<tr>
+					<th><span>${od.one_title}</span></th>
+					<td><span>${od.one_date}</span></td>	
+				</tr>				
+			</thead>	
+		
+			<tr>
+				<td colspan="2">
+				<span>문의유형 : ${od.one_type_name}</span>		
+				</td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">
+			<span>	처리상태 :${od.qna_type_name}</span>
+				</td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">
+						<div id="board_content">
+						<p>${od.one_content}</p>
+						</div>
+					</td>
+			</tr>		
+	 </table>
+ 	</div>
  
-	   <a href="/board/updateOne?no=${od.no}"><button>수정하기</button></a>  
-	   <a href="/board/deleteOne?no=${od.no}"><button>삭제하기</button></a>  
+	<div id="board_btn">
+	   <a href="/notice/updateOne?no=${od.no}"><button>글수정</button></a>  
+	   <a href="/notice/deleteOne?no=${od.no}"><button>글삭제</button></a>  
+	   <a href="/mypage/listSearchOneMy"><button>글목록</button></a>	
+	  </div>	
 		   
 	   
 <!-- ----댓글------ -->
-	<div>		 
-	  	<input id="one_no" type="hidden" value="${od.no}">
-		<input id="member_no" type="hidden" value="${m.no}">		
-		<textarea class="form-control" id="com_content" rows="3" id="commentContent" placeholder="댓글을 입력하세요."></textarea>
-	 	<button id="insertComments">댓글작성</button>	
-	</div>
-	<hr>	
-	<div>		 
+	<div id="comment_list">	 
 		<c:forEach var="comments" items="${comments}"> 
 		 <table>
 				 <tbody>
@@ -130,25 +119,11 @@ $(function(){
 				</tbody>
 			</table>
 	  	</c:forEach>
-	  	
-	  	<div id="deleteModal" class="modal fade" tabindex="-1" role="dialog"> 
-			<div class="modal-dialog"> 
-				<div class="modal-content"> 
-				</div> 
-			</div> 
-	    </div>	
-	    
-	    <div id="updateModal" class="modal fade" tabindex="-1" role="dialog"> 
-			<div class="modal-dialog"> 
-				<div class="modal-content"> 
-				</div> 
-			</div> 
-	    </div>	
-		
-
-	  	
-			</div>
-	</section>
-</div>
+	</div>
+				
+			</main>
+		</div>
+	</div>
 </body>
+
 </html>

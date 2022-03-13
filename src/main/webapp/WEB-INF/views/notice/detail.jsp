@@ -40,7 +40,7 @@
 					<jsp:include page="./noticeHeader.jsp"/>
 			</div>
 			
-							<div id="commu_box">
+					<div id="commu_box">
 					<div id="search_form">
 						<form action="listBoard" method="post">
 						<div class="searchColumn_wrap">

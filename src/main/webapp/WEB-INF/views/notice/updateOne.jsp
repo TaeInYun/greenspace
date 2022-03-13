@@ -19,6 +19,10 @@
 <script type="text/javascript">
  
  $(function(){
+	 
+	 $( $(".nav-btn")[1] ).attr("style", "background: #00913A;");
+		$( $(".nav-btn .nav-btn__text")[1] ).attr("style", "color:white");
+		
 	$("#changeTest") .change(function(){
 		let n = $(this).val();
 		$("#one_type_code").val(n);
@@ -37,9 +41,14 @@
 	
 	<div id="writeForm_box">
 	<form action="updateOne" method="post"
-			enctype="multipart/form-data">		
-	<input type="hidden" name="member_no" value="${m.no }" > <br> <!-- hidden -->
-
+			enctype="multipart/form-data">
+	
+	<input type="hidden" name="no" value="${o.no }">
+	<input type="hidden" name="member_no" value="${m.no }" > <!-- hidden -->
+	
+	<!-- 상품문의유형: -->
+	<input type="hidden" name="one_type_code" id="one_type_code" value="${o.one_type_code}">
+	
 	<table id="writeForm_box_table">
 	<tr>		
 		<th scope="row">제목</th>
@@ -76,7 +85,7 @@
 		<th scope="row">내용</th>
 		<td>
 			<div class="inputArea">
-			<textarea rows="10" cols="60" name="commu_content">${o.one_content }</textarea>		
+			<textarea rows="10" cols="60" name="one_content">${o.one_content }</textarea>		
 			</div>	
 		</td>	
 	</tr>				

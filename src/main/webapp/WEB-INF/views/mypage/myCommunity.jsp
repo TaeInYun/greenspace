@@ -59,6 +59,7 @@ $(function() {
 				</div>
 				<div id="board">
 					<table>
+					<thead>
 						<tr>
 							<td>번호</td>
 							<td>제목</td>
@@ -66,6 +67,16 @@ $(function() {
 							<td>등록일</td>
 							<td>조회수</td>
 						</tr>
+					</thead>
+					<tbody>
+						<tr >
+						<c:if test="${empty list }">
+							<td colspan="5" style="height: 400px">
+								게시물이 없습니다.
+							</td>
+						</c:if>	
+						<tr>
+						
 						<c:forEach var="c" items="${list }">
 					    	<c:set var="i" value="${i+1}"/>
 							<tr>
@@ -76,6 +87,7 @@ $(function() {
 								<td class="td_hit">${c.commu_hit }</td>				
 							</tr>
 						</c:forEach>
+					</tbody>	
 					</table> 	
 							
 					<div class="writeBtn">
