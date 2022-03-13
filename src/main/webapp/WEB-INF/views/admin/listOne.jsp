@@ -81,9 +81,9 @@
   			 		    </div>
 	
 	
-		<c:forEach var="i" begin="1" end="${totalPage }">
-				<a href="listOne?pageNUM=${i }">${i }</a>&nbsp;&nbsp;
-		</c:forEach>
+			<c:forEach var="i" begin="1" end="${totalPage }">
+					<a href="listOne?pageNUM=${i }">${i }</a>&nbsp;&nbsp;
+			</c:forEach>
 		
 		</section>
 					<aside id="aside">

@@ -18,13 +18,11 @@
 			font-size: 0.7em;
 			color: green;
 		}
-
 		.error_msg{
 			display:none;
 			font-size: 0.7em;
 			color: red;
 		}
-
 		#input_code{
 				display: none;
 		}
@@ -35,18 +33,21 @@
 	<script type="text/javascript">
 	
 	$(document).ready(function(){
+		
+		$(".myInfo").attr("style","background: #00913A; font-weight:800; color: white; padding: 5px 15px; border-radius: 20px;");
+		
+		
+		
 		function showErrorMsg(obj, msg) {
 	        obj.attr("class", "error_msg");
 	        obj.html(msg);
 	        obj.show();
 		}
-
 		function showSuccessMsg(obj, msg) {
 	        obj.attr("class", "success_msg");
 	        obj.html(msg);
 	        obj.show();
 		}
-
 		$(function(){
 			//에러메세지 출력함수--------------------------------------
 			
@@ -104,7 +105,6 @@
 			} else{
 				$(oMsg).css('display', 'none');
 				$("#btnSend").attr("disabled", false);
-
 				phoneCheck=true;
 			}
 		    
@@ -141,7 +141,6 @@
 					$("#changePwdHiddenBtn").slideDown();
 				}
 			});
-
 		//-------------- 인증번호 공백확인 ---------------
 		$("#userCode").blur(function(){
 			var userCode = $("#userCode").val();
@@ -176,9 +175,7 @@
 				$('#newPwd').keyup(function(){
 					$('#chkNotice').html('');
 				});
-
 				$('#newPwdChk').keyup(function(){
-
 					if($('#newPwd').val() != $('#newPwdChk').val()){
 						$('#chkNotice').html('비밀번호 일치하지 않음<br><br>');
 						$('#chkNotice').attr('color', '#f82a2aa3');
@@ -186,16 +183,12 @@
 						$('#chkNotice').html('비밀번호 일치함<br><br>');
 						$('#chkNotice').attr('color', '#199894b3');
 					}
-
 				});
 			});
-
-
 			//비밀번호의 취소 버튼
 			$("#cancelPwdBtn").click(function (){
 				$("#changePwdHiddenBtn").slideUp();
 			})
-
 			//닉네임 변경
 			$(document).ready(function(){
 				$("#changeNickNameBtn").click(function(){
@@ -208,12 +201,10 @@
 					}
 				});
 			});
-
 			//닉네임 취소번튼
 			$("#cancelNickNameBtn").click(function (){
 				$("#changeNickNameHiddenBtn").slideUp();
 			})
-
 			//이메일 변경
 			$(document).ready(function(){
 				$("#changeEmailBtn").click(function(){
@@ -226,12 +217,10 @@
 					}
 				});
 			});
-
 			//이메일 취소버튼
 			$("#cancelEmailBtn").click(function (){
 				$("#changeEmailHiddenBtn").slideUp();
 			})
-
 			//휴대전화 변경
 			$(document).ready(function(){
 				$("#changeCellphone").click(function(){
@@ -250,7 +239,6 @@
 			$("#cancelCellphoneBtn").click(function (){
 				$("#hiddenChangeCellphone").slideUp();
 			})
-
 			//환불계좌 변경
 			$(document).ready(function(){
 				$("#changeAccountBtn").click(function(){
@@ -263,7 +251,6 @@
 					}
 				});
 			});
-
 			//환불계좌 취소
 			$("#cancelAccountBtn").click(function (){
 				$("#changeAccountHiddenBtn").slideUp();
@@ -407,6 +394,7 @@
 					<div class = "info_title"> 
 						 <button><a href="/mypage/myPointList?no=${m.no }">포인트내역</a></button>
 						 <button><a href="/mypage/myCommentsList?no=${m.no }">댓글내역</a></button>
+						 <button><a href="/mypage/myReviewList?no=${m.no }">리뷰내역</a></button>
 					</div>	
 				</main>		
 					

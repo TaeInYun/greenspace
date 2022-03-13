@@ -114,7 +114,7 @@ public class ReviewController {
 		@RequestMapping(value ="/shop/updateReview", method =RequestMethod.GET)
 		public void updateForm(int no, Model model){
 			//model.addAttribute("pro_no", pro_no);
-			//model.addAttribute("no", no);
+			model.addAttribute("no", no);
 			model.addAttribute("r", dao.findAllDetail(no));		
 		}
 		
@@ -160,8 +160,14 @@ public class ReviewController {
 		//-------------------리뷰삭제하기--------------------
 		
 		//findAllRate()
+		@RequestMapping(value ="/shop/deleteReview", method =RequestMethod.GET)
+		public void deleteForm(int no, Model model){
+			//model.addAttribute("pro_no", pro_no);
+			model.addAttribute("no", no);
+			model.addAttribute("r", dao.findAllDetail(no));		
+		}
 		
-		@RequestMapping(value = "/shop/deleteReview" , method = RequestMethod.GET)
+		@RequestMapping(value = "/shop/deleteReview" , method = RequestMethod.POST)
 		public ModelAndView delete(HttpServletRequest request, int no) {
 			String oldFname = dao.findAllDetail(no).getRe_thumbnail();
 			
@@ -180,5 +186,10 @@ public class ReviewController {
 		}
 		
 		
-		
+
+		@RequestMapping("/mypage/myReviewList")
+		public void myReviewList(Model model,int no) {	
+			model.addAttribute("no",no);
+			model.addAttribute("findMyReview", dao.findMyReview(no));
+		}	
 }

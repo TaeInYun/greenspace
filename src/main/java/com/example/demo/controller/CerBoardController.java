@@ -420,7 +420,7 @@ public class CerBoardController {
 	
 	
 	//인증게시판 상세
-	@RequestMapping("/board/detailCerBoard")
+	@RequestMapping(value={"/board/detailCerBoard","/mypage/detailCerBoard"})
 	public void detail(Model model,int no,HttpSession session) {
 		//MemberVO m = (MemberVO)session.getAttribute("m");
 		dao.updateHitCer(no);	

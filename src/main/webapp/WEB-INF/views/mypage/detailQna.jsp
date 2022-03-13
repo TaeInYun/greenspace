@@ -50,6 +50,7 @@ table {
    position: absolute;
   /*  left:10%; */
    font-size:35px;
+   background-color:white;
   }
   
  #com_content{

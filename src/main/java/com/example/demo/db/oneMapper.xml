@@ -7,7 +7,7 @@
   <select id="findAll" resultType="oneVO">
 		select no,one_title,one_content,one_pwd,TO_CHAR(one_date, 'yyyy.mm.dd') AS one_date,ord_no,member_no,one_type_code,qna_status_code from
 		(select rownum num, no,one_title,one_content,one_pwd,one_date,ord_no,member_no,one_type_code,qna_status_code from one)
-		offset #{start} rows fetch first 5 rows only
+		offset #{start} rows fetch first 10 rows only
 		<!-- where num between #{start} and #{end} -->  
   </select>
   
@@ -27,7 +27,7 @@
   <!-- 상세보기 -->
   <select id="findAllDetail" resultType="oneVO">
    <!-- select * from one where no=#{no} -->
-   select no, one_title, ord_no, one_content, TO_CHAR(one_date, 'yyyy.mm.dd') AS one_date, one_type_name, qna_type_name
+   select no, o.one_type_code,one_title, ord_no, one_content, TO_CHAR(one_date, 'yyyy.mm.dd') AS one_date, one_type_name, qna_type_name
    from one o, one_type ot, qna_status qs
    where
    o.qna_status_code=qs.qna_status_code and
@@ -59,8 +59,8 @@
 				and one_title like '%'  || #{keyword} || '%'  OR
 	            one_content like '%'  || #{keyword} || '%' 
 			</if>				 
-		
-		offset #{start} rows fetch first 5 rows only  
+		order by one_date desc
+		offset #{start} rows fetch first 10 rows only  
 	
 	
 		<!-- select no,one_title, one_content,  one_date from(

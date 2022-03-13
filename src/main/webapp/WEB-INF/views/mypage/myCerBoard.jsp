@@ -23,7 +23,8 @@ $(function() {
 	
 	$( $(".nav-btn")[0] ).attr("style", "background: #00913A;");
 	$( $(".nav-btn .nav-btn__text")[0] ).attr("style", "color:white");
-	
+	$(".myActive").attr("style","background: #00913A; font-weight:800; color: white; padding: 5px 15px; border-radius: 20px;");
+
 
 });
 </script>
@@ -75,7 +76,7 @@ $(function() {
 						 
 								<div class="thumbnail">
 								
-									<a href="/board/detailCerBoard?no=${c.no}">
+									<a href="/mypage/detailCerBoard?no=${c.no}">
 									<c:choose>
 								<c:when test="${c.cer_thumbnail ne null }">
 										<img  src="/upload/cer/${c.cer_thumbnail }" width="200" height="200">
@@ -96,7 +97,7 @@ $(function() {
 									
 								</div>
 								<div class="cer_content">
-										<a href="/board/detailCerBoard?no=${c.no}">
+										<a href="/mypage/detailCerBoard?no=${c.no}">
 										<span>${c.cer_content}</span></a>
 								</div>	
 							</li>		 

@@ -80,11 +80,11 @@
 	            </tr>            
 	      	</c:forEach>
     		</table>	
-		
+					<c:if test="${m.mem_type eq 1}">			
 					<div class="writeBtn">
 					<a href="insertNotice"><button>글쓰기</button></a>
 					</div>
-		
+					</c:if>
 		
 		<div id="paging">
 			<c:forEach var="i" begin="1" end="${totalPage }">

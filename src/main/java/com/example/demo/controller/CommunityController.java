@@ -250,7 +250,7 @@ public class CommunityController {
 }
 	
 	//--------커뮤니티 상세----------------
-	@RequestMapping("/board/detailCommunity")
+	@RequestMapping(value={"/board/detailCommunity","/mypage/detailCommunity"})
 	public void detail(Model model,int no,HttpSession session  ) {
 		//조회수 업
 		dao.updateHitCommu(no);

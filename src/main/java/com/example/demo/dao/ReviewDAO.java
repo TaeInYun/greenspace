@@ -18,6 +18,10 @@ public class ReviewDAO {
 		return DBManager.findAllReviewRate(pro_no);
 	}
 	
+	public List<ReviewVO> findMyReview(int no){
+		return DBManager.findMyReview(no);
+	}
+	
 	public ReviewVO findAllDetail(int no){
 		return DBManager.findAllReviewDetail(no);
 	}
