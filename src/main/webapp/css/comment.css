@@ -1,0 +1,30 @@
+@charset "EUC-KR";
+
+.comment_form{
+	border: 1px solid #dddddd;
+	padding: 10px;
+	border-radius: 10px;
+	margin : 10px;
+}
+
+.comments_nickname{
+	font-weight: bold;
+	padding: 10px;
+	font-size: 20px;
+}
+
+#comment_list{
+	margin : 50px;
+}
+
+.comments_content{
+	padding: 15px;
+	font-weight: bold;
+}
+
+.comment_regdate{
+	padding: 10px;
+	display: inline;
+	font-weight: normal;
+	font-size: 15px;
+}
