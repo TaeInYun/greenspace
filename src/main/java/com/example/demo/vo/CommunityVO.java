@@ -17,6 +17,7 @@ public class CommunityVO {
 	private int commu_hit;
 	private int member_no;
 	private String nickname;
+	private int levels;
 	private String o_img_name;
 	
 	//private MultipartFile uploadFile;

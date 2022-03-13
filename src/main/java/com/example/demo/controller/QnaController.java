@@ -59,12 +59,19 @@ public class QnaController {
 		HashMap map = new HashMap();	
 		map.put("searchColumn", searchColumn);		
 		map.put("start", start);
-		map.put("end", end);
+		//map.put("end", end);
 		map.put("member_no",member_no);
 		
 		model.addAttribute("totalPage", dao.totalPage);
+		model.addAttribute("q",dao.findAll(map));
+		//session.setAttribute("q",dao.findAll(map));	
 		
-		session.setAttribute("q",dao.findAll(map));	 
+		model.addAttribute("totalPage", dao.totalPage);
+        model.addAttribute("totalRecord", dao.totalRecord);
+        model.addAttribute("start", start);
+        model.addAttribute("end", end);
+        model.addAttribute("pageSIZE", dao.pageSIZE);
+		
 				
 		//만약에 검색하였다면 
 		//검색한 칼럼이름과 검색어를 세션에 저장하여 상태유지 합니다
@@ -118,10 +125,17 @@ public class QnaController {
 		map.put("searchColumn", searchColumn);
 		map.put("keyword", keyword);
 		map.put("start", start);
-		map.put("end", end);
+		//map.put("end", end);
 		
 		model.addAttribute("totalPage", dao.totalPage);
 		model.addAttribute("list",dao.findAllSearch(map));
+		// 페이징 추가
+		model.addAttribute("totalPage", dao.totalPage);
+        model.addAttribute("totalRecord", dao.totalRecord);
+        model.addAttribute("start", start);
+        model.addAttribute("end", end);
+        model.addAttribute("pageSIZE", dao.pageSIZE);
+		
 		
 		//만약에 검색하였다면 
 				//검색한 칼럼이름과 검색어를 세션에 저장하여 상태유지 합니다

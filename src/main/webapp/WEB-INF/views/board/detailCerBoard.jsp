@@ -4,33 +4,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/board.css">
+<link rel="stylesheet" href="/css/components/search.css">
 <style type="text/css">
-.content{
-width: 200px;
-white-space: normal;
-display: -webkit-box;
--webkit-line-clamp:3;
--webkit-box-orient:vertical;
-overflow:hidden;
-}
 
-ul, li { margin:0; padding:0; list-style:none; } 
-
-div#root { width:100%; margin:0 auto; }		 
-section#content ul li { display:inline-block; margin:10px; }
 </style>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
-<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script> 
+<title>녹지공간-인증 게시판</title> 
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
  $(function(){
+		$( $(".nav-btn")[1] ).attr("style", "background: #00913A;");
+		$( $(".nav-btn .nav-btn__text")[1] ).attr("style", "color:white");
+	 
+	 
 		 $("#insertComments").click(function () {		 
 			 let cer_no = $("#cer_no").val();			 
 			 let member_no = $("#member_no").val();
@@ -59,49 +47,99 @@ section#content ul li { display:inline-block; margin:10px; }
  
 </head>
 <body>
-	<div id="header">
-		<jsp:include page="../header.jsp"/>
-	</div>
-	
-<section id="content">
+<div id="root">
 
-		 <table id="chgTable" border="1" width="50%">
-			<tr>
-				<td>완료한 챌린지 목록</td>
-			</tr>
-			<tr>
-				<c:if test="${c.chg_title1 ne null }">
-				<td>${c.chg_title1 }</td>
-				</c:if>
-				<c:if test="${c.chg_title2 ne null }">
+		<header id="header">
+			<div id="header_box">
+				<jsp:include page="../header.jsp"  flush="false" />
+			</div>
+		</header>
+		
+		<section id="container">		
+			<div id="container_box"> 
+				<!-- 본문 -->			
+				<section id="content">
+				
+				<div id="communityHeader">
+				<jsp:include page="./communityHeader.jsp"/>
+				</div>
+				
+				<div id="commu_box">
+				
+					<div id="search_form">
+						<form action="/board/listCommunity" method="post">
+						<div class="searchColumn_wrap">
+								<select name="searchColumn" id="searchColumn">
+									<option value="commu_title">제목</option>
+									<option value="commu_content">본문</option>
+									<option value="nickname">작성자</option>
+								</select>
+						</div>		
+								<div class="search_keyword_form">
+									 <input class="keyword" type="text" name="keyword"  placeholder="검색어 입력">
+									  <img id="icon" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+								</div>
+						
+						</form>
+					</div>
+				</div>
+
+	 	<table id="detail_board_table">
+		 <tr>
+			<td>
+				<span>LV ${c.levels} ${c.nickname}</span>
+			</td>
+		</tr>	
+		
+		<tr>
+			<td>
+				
+				<span>좋아요${c.cer_like}</span>
+				<span> | </span>
+				<span>조회수 ${c.cer_hit}</span>
+				<span> | </span>				
+				<span>${c.cer_status}</span>	
+				<span> | </span>	
+				<span><fmt:formatDate value="${c.cer_date}" pattern="yy.MM.dd"/></span>
+						
+			</td>
+		</tr>
+
+		<tr>
+		<td>
+		<div id="chgTable_box">
+			<table id="chgTable">
+
+				
+				<thead>
 				<tr>
-				<td>${c.chg_title2 }</td>
+					<td >완료한 챌린지 목록</td>
 				</tr>
-				</c:if>
-				<c:if test="${c.chg_title3 ne null }">
+				</thead>	
+				
+				<tbody>
 				<tr>
-				<td>${c.chg_title3 }</td>
-				</tr>
-				</c:if>
-			</tr>
+					<c:if test="${c.chg_title1 ne null }">
+					<td>${c.chg_title1 }</td>
+					</c:if>
+					<c:if test="${c.chg_title2 ne null }">
+					<tr>
+					<td>${c.chg_title2 }</td>
+					</tr>
+					</c:if>
+					<c:if test="${c.chg_title3 ne null }">
+					<tr>
+					<td>${c.chg_title3 }</td>
+					</tr>
+					</c:if>
+				</tr>	
+				</tbody>	
 			</table>
-	 
-		<div class="nickname">
-		<span>LV ${c.levels} ${c.nickname}</span>
 		</div>
-		<div class="date">
-		<span><fmt:formatDate value="${c.cer_date}" pattern="yy.MM.dd"/></span>
-		</div>
-		<div class="hit">
-		<span>조회수  ${c.cer_hit}</span>
-		</div>	
-		<div class="like">
-		<span>좋아요  ${c.cer_like}</span>
-		</div>		
-		<span>${c.cer_status}</span>		
-		<div class="content">
-		<span>${c.cer_content}</span>
-		</div>	
+		
+			<div id="board_content">
+			<p>${c.cer_content}</p>
+			
 		
 		 <c:if test="${c.cer_thumbnail ne null }">
 		<div class="cer_thumbnail">
@@ -116,22 +154,29 @@ section#content ul li { display:inline-block; margin:10px; }
 	        <br><br><br>
 	    </c:forEach>         
 	</div>
-				 
-</section>	
+	</div>
+	</td>	
+	</tr>
+</table>
 
-<!--<c:if test="${m.nickname == c.nickname}"></c:if>-->
-<a href="/board/updateCerBoard?no=${c.no }">글수정</a>
-<a href="/board/deleteCerBoard?no=${c.no }">글삭제</a>
 
+	<div id="board_btn">
+		<!--<c:if test="${m.nickname == c.nickname}"></c:if>-->
+		<a href="/board/updateCerBoard?no=${c.no }"><button>글수정</button></a>
+		<a href="/board/deleteCerBoard?no=${c.no }"><button>글삭제</button></a>
+		<a href="/board/listCerBoard"><button>글목록</button></a>		
+	</div>
+	
 <!-- ----댓글------ -->
-	<div>		 
+<div id="comment_box">
+	 
 	  	<input id="cer_no" type="hidden" value="${c.no}">
 		<input id="member_no" type="hidden" value="${m.no}">		
 		<textarea class="form-control" id="com_content" rows="3" id="commentContent" placeholder="댓글을 입력하세요."></textarea> 
 	 	<button id="insertComments">댓글작성</button>	
-	</div>
-<hr>	
-	<div>		 
+</div>
+
+	<div id="comment_list">			 
 		<c:forEach var="comments" items="${comments}"> 
 		 <table>
 		  <tbody>
@@ -145,8 +190,8 @@ section#content ul li { display:inline-block; margin:10px; }
 				</tbody>
 			</table>
 	  	</c:forEach>
-	</div>
-	<div id="deleteModal" class="modal fade" tabindex="-1" role="dialog"> 
+
+		<div id="deleteModal" class="modal fade" tabindex="-1" role="dialog"> 
 			<div class="modal-dialog"> 
 				<div class="modal-content"> 
 				</div> 
@@ -159,7 +204,13 @@ section#content ul li { display:inline-block; margin:10px; }
 				</div> 
 			</div> 
 	    </div>	
-		
+	</div>
+	
+	
+				</section>
+			</div>
+	</section>
+</div>	
 
 </body>
 </html>

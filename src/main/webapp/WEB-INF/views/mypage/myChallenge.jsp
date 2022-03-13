@@ -13,6 +13,9 @@
 	font-weight:bolder;
 	color:#04AA6D;
 }
+#content_box{
+	margin-left: -20px;
+}
 </style>	 
 <!-- ºÎÆ®½ºÆ®·¦ -->
 <link rel="stylesheet" href="/css/popup.css">

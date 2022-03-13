@@ -5,16 +5,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/board.css">
+<link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/components/search.css">
 <style type="text/css">
 
-#communityHeader{
-		display: flex; 
-		justify-content:center;	
-		margin: 30px 0 30px 0;
-}
+
 
 #container_box{
 	display: flex; 
@@ -22,7 +18,7 @@
 }
 
 #content{
-	width: 1000px;
+	width:1000px;
 }
 
 </style>
@@ -30,33 +26,31 @@
 <meta charset="UTF-8">
 <script type="text/javascript">
 $(function(){
-	$( $(".nav-btn")[0] ).attr("style", "background: #00913A;");
+		$( $(".nav-btn")[0] ).attr("style", "background: #00913A;");
 	$( $(".nav-btn .nav-btn__text")[0] ).attr("style", "color:white");
 })
 </script>
-<title>커뮤니티</title>
+<title>녹지공간-자유 게시판</title>
 </head>
 <body>
 <div id="root">
+
 		<header id="header">
 			<div id="header_box">
 				<jsp:include page="../header.jsp"  flush="false" />
 			</div>
 		</header>
+		
 		<section id="container">		
 			<div id="container_box"> 
 				<!-- 본문 -->			
 				<section id="content">
-				<div class="title">	
-				커뮤니티
-				</div>
 				
 				<div id="communityHeader">
 				<jsp:include page="./communityHeader.jsp"/>
 				</div>
 				
 				<div id="commu_box">
-				
 					<div id="search_form">
 						<form action="/board/listCommunity" method="post">
 						<div class="searchColumn_wrap">

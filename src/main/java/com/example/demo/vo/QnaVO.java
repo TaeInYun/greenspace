@@ -15,7 +15,7 @@ public class QnaVO {
 	private String title;   //제목
 	private String content;  //내용
 	private String qna_type;  //문의유형
-	private Date day;     //작성일
+	private String day;     //작성일
 	private String status;  //처리상태
 	private String ord_id;  //주문번호
 	private String nickname;  //작성자(닉네임)

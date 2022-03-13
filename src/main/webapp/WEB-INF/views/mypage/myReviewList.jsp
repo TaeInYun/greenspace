@@ -71,6 +71,8 @@ header#header div#header_box { text-align:center; padding:30px 0; }
 					<td>상품번호</td>
 					<td>리뷰제목</td>
 					<td>리뷰내용</td>
+					<td colspan=2>설정</td>
+					 
 				 	 
 				</tr>
 				<c:forEach var="findMyReview" items="${findMyReview }">
@@ -79,10 +81,30 @@ header#header div#header_box { text-align:center; padding:30px 0; }
 						<td>
 							${findMyReview.re_title} 					
 						</td>				 
-						<td>${findMyReview.re_content }</td>						 
+						<td>${findMyReview.re_content }</td>			
+						<td><a id="updateReview"  data-toggle="modal" data-target="#updateModal" role="button"  href="/shop/updateReview?no=${findMyReview.no}">수정</a></td>
+						<td><a id="deleteReview"  data-toggle="modal" data-target="#deleteModal" role="button"  href="/shop/deleteReview?no=${findMyReview.no}">삭제</a></td>
+									 
 					</tr>
 				</c:forEach>
 			</table> 	
+			
+			
+ 							<div id="deleteModal" class="modal fade" tabindex="-1" role="dialog"> 
+								<div class="modal-dialog"> 
+									<div class="modal-content"> 
+									</div> 
+								</div> 
+						    </div>	
+						    
+						    <div id="updateModal" class="modal fade" tabindex="-1" role="dialog"> 
+								<div class="modal-dialog"> 
+									<div class="modal-content"> 
+									</div> 
+								</div> 
+						    </div>	
+		
+		 
  				 	
  				 	
  							 

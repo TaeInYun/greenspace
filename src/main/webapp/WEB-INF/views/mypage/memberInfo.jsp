@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <HTML>
 <HEAD>
-	<meta charset="UTF-8">
+	<meta charset="EUC-KR">
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
 	<title>녹지공간 - 회원정보</title>
@@ -18,20 +18,15 @@
 			font-size: 0.7em;
 			color: green;
 		}
-
 		.error_msg{
 			display:none;
 			font-size: 0.7em;
 			color: red;
 		}
-
 		#input_code{
 				display: none;
 		}
 		
-		.mypage-main{
-			width: 80%
-		}
 	</style>
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -43,13 +38,11 @@
 	        obj.html(msg);
 	        obj.show();
 		}
-
 		function showSuccessMsg(obj, msg) {
 	        obj.attr("class", "success_msg");
 	        obj.html(msg);
 	        obj.show();
 		}
-
 		$(function(){
 			//에러메세지 출력함수--------------------------------------
 			
@@ -107,7 +100,6 @@
 			} else{
 				$(oMsg).css('display', 'none');
 				$("#btnSend").attr("disabled", false);
-
 				phoneCheck=true;
 			}
 		    
@@ -144,7 +136,6 @@
 					$("#changePwdHiddenBtn").slideDown();
 				}
 			});
-
 		//-------------- 인증번호 공백확인 ---------------
 		$("#userCode").blur(function(){
 			var userCode = $("#userCode").val();
@@ -179,9 +170,7 @@
 				$('#newPwd').keyup(function(){
 					$('#chkNotice').html('');
 				});
-
 				$('#newPwdChk').keyup(function(){
-
 					if($('#newPwd').val() != $('#newPwdChk').val()){
 						$('#chkNotice').html('비밀번호 일치하지 않음<br><br>');
 						$('#chkNotice').attr('color', '#f82a2aa3');
@@ -189,16 +178,12 @@
 						$('#chkNotice').html('비밀번호 일치함<br><br>');
 						$('#chkNotice').attr('color', '#199894b3');
 					}
-
 				});
 			});
-
-
 			//비밀번호의 취소 버튼
 			$("#cancelPwdBtn").click(function (){
 				$("#changePwdHiddenBtn").slideUp();
 			})
-
 			//닉네임 변경
 			$(document).ready(function(){
 				$("#changeNickNameBtn").click(function(){
@@ -211,12 +196,10 @@
 					}
 				});
 			});
-
 			//닉네임 취소번튼
 			$("#cancelNickNameBtn").click(function (){
 				$("#changeNickNameHiddenBtn").slideUp();
 			})
-
 			//이메일 변경
 			$(document).ready(function(){
 				$("#changeEmailBtn").click(function(){
@@ -229,12 +212,10 @@
 					}
 				});
 			});
-
 			//이메일 취소버튼
 			$("#cancelEmailBtn").click(function (){
 				$("#changeEmailHiddenBtn").slideUp();
 			})
-
 			//휴대전화 변경
 			$(document).ready(function(){
 				$("#changeCellphone").click(function(){
@@ -253,7 +234,6 @@
 			$("#cancelCellphoneBtn").click(function (){
 				$("#hiddenChangeCellphone").slideUp();
 			})
-
 			//환불계좌 변경
 			$(document).ready(function(){
 				$("#changeAccountBtn").click(function(){
@@ -266,133 +246,153 @@
 					}
 				});
 			});
-
 			//환불계좌 취소
 			$("#cancelAccountBtn").click(function (){
 				$("#changeAccountHiddenBtn").slideUp();
 			})
-			
-			
-
 		}); 
-		</script>
+	</script>
 </HEAD>
 <BODY>
 	<div id="root">
 		<jsp:include page="../header.jsp"></jsp:include>
-		<div class="section">
+		<div class="section mypage">
 			<jsp:include page="../mypage/myAside.jsp"></jsp:include>
 				<main class="mypage-main">
 					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
-					<div>
-							<h3>기본 회원정보</h3>
+					<link href="/css/screens/myInfo.css" rel="stylesheet"/> 
+					<div class = "info_title">
+						<div class="info">아이디</div>
+						<div class="info_member"> ${m.id} </div>	     
 					</div>
-					<div>
-						 <a href="/mypage/myPointList?no=${m.no }">포인트내역</a>
-						 <a href="/mypage/myCommentsList?no=${m.no }">댓글내역</a>
-						 <a href="/mypage/myReviewList?no=${m.no }">리뷰내역</a>
-					</div>
-					<div>
-						<hr>아이디 : ${m.id}
-					</div>
-					<div>
-						<hr>비밀번호 : ********
+				
+					<div class = "info_title">
+						<div class="info">비밀번호 </div>
+						<div class="info_member">********</div>
+
 						<button id="changePwdBtn" class="btn01">비밀번호 변경</button>
 							<form action="/mypage/updatePwd2" method="post">
-								<ul id="changePwdHiddenBtn" class="example01" style="display: none;">
-									<br> 현재비밀번호 <input type="password" id="pwd" name="pwd" required>
-									<br> 신규비밀번호 <input type="password" id="newPwd" name="newPwd" required>
-									<br> 신규비밀번호 확인 <input type="password" id="newPwdChk" name="newPwdChk" required>
+								<div id="changePwdHiddenBtn" class="example01" style="display: none;">
+									<div>
+										<label>현재비밀번호</label>
+										<input type="password" id="pwd" name="pwd" required>
+									</div>
+									<div>
+										<label>신규비밀번호</label>
+										<input type="password" id="newPwd" name="newPwd" required>
+									</div>
+									<div>
+										<label>신규비밀번호 확인</label>
+										<input type="password" id="newPwdChk" name="newPwdChk" required>
+									</div>
+									
 									<font id="chkNotice" size="2"></font>
 									<button id="cancelPwdBtn" type="button">취소</button>
-									<input type="submit" value="확인">
-								</ul>
+									<button type="submit">확인</button>
+								</div>
 							</form>
 					</div>
-					<div>
-						<hr>이름 : ${m.name}
+					<div class = "info_title">
+						<div class="info">이름  </div> 
+						<div class="info_member">${m.name}</div>	
 					</div>
-					<div>
-						<hr>닉네임 : ${m.nickname }
+					<div class = "info_title">
+						<div class="info">닉네임 </div>  
+						<div class="info_member">${m.nickname }</div>	
 						<button id="changeNickNameBtn" class="btn01">닉네임 변경</button>
 						<form action="/mypage/updateNickName" method="POST" >
-							<ul id="changeNickNameHiddenBtn" class="example01" style="display: none;">
-								*길이는 최대 15자 이내로 작성해주세요
-								<br>*중복 닉네임 불가
-								<br>*이모티콘 및 일부 특수문자 사용불가
+							<div id="changeNickNameHiddenBtn" class="example01" style="display: none;">
+								<div class="margin-bottom-3">*길이는 최대 15자 이내로 작성해주세요</div>
+								<div class="margin-bottom-3">*중복 닉네임 불가</div>
+								<div class="margin-bottom-3">*이모티콘 및 일부 특수문자 사용불가</div>
 								<div class="nickname_wrap">
-									<input type="text" name="nickName" id="nickName"><br>
+									<input class="margin-bottom-3" type="text" name="nickName" id="nickName"><br>
 									<span class="error_msg" id="nickNameMsg" style="display:none"></span>
 									<span class="success_msg" id="" style="display:none"></span>
 									<button id="cancelNickNameBtn" type="button">취소</button>
 									<button type="submit">변경</button>
 								</div>	
-							</ul>
+							</div>
 						</form>
 					</div>
-					<div>
-						<hr> 이메일 : ${m.email}
+					<div class = "info_title"> 
+						<div class="info">이메일</div> 
+						<div class="info_member">${m.email}</div>	
 						<button id="changeEmailBtn" class="btn01">이메일 변경</button>
 							<form action="/mypage/memberInfo" method="POST" >
-								<ul id="changeEmailHiddenBtn" class="example01" style="display: none;">
-									이메일 <input type="text" name="email">
-									<br>
-									<button id="cancelEmailBtn" type="button">취소</button>
-									<button type="submit">변경</button>
-								</ul>
+								<div id="changeEmailHiddenBtn" class="example01" style="display: none;">
+									<div class="margin-bottom-3">새로운 이메일</div> 
+									<input type="text" name="email" class="margin-bottom-3" placeholder="example@example.com">
+									<div>
+										<button id="cancelEmailBtn" type="button">취소</button>
+										<button type="submit">변경</button>
+									</div>
+								</div>
 							</form>
 					</div>
-					<div>
-						<hr>휴대전화 : ${m.phone}
-						<button id="changeCellphone" class="btn01">핸드폰 번호 변경</button>
-						<ul id="hiddenChangeCellphone" class="example01" style="display: none;">
-	        				<form id="phone_form" action="/mypage/updatePhone" method="post">
+					<div class = "info_title">
+						<div class="info"> 전화번호 </div> 
+						<div class="info_member">${m.phone}</div>	
+						<button id="changeCellphone" class="btn01">전화번호 변경</button>
+        				<form id="phone_form" action="/mypage/updatePhone" method="post">
+	        				<div id="hiddenChangeCellphone" class="example01" style="display: none;">
 								<div class="phone_wrap">
-									<div >휴대전화</div>
-									<input type="number" pattern="[0-9]*" name="phone" id="phone" placeholder="숫자만 입력하세요" max="11">
+									<div class="margin-bottom-3">새로운 전화번호</div> 
+									<input class="margin-right-3 margin-bottom-3" type="number" pattern="[0-9]*" name="phone" id="phone" placeholder="숫자만 입력하세요" max="11">
 									<input id="btnSend" type="button"  disabled="disabled" value="인증코드 받기"><br>
-										
 									<div id="input_code">
-										<input type="number" id="userCode">
+										<input class="margin-right-3 margin-bottom-2" type="number" id="userCode">
 										<input id="btnCheck" type="button" value="인증번호 확인"><br>
 									</div>
-
-
-			
 									<span class="error_msg" id="phoneMsg" style="display:none"></span>
 									<span class="success_msg" id="phoneMsg" style="display:none"></span>
 									<span class="error_msg" id="codeMsg" style="display:none"></span>
 									<span class="success_msg" id="codeMsg" style="display:none"></span>		
-								</div>		
-							</form>
-      					</ul>
+								</div>
+							</div>		
+						</form>
 					</div>
-					<div>
-						<hr> 환불계좌 : ${m.account_bank} ${m.account_number}
+					<div class = "info_title">
+						<div class="info">환불계좌 </div>
+						<div class="info_member">${m.account_bank} ${m.account_number}</div>	
 						<button id="changeAccountBtn" class="btn01">환불계좌 등록</button>
 							<form action="/mypage/updateAccount" method="POST" >
-								<ul id="changeAccountHiddenBtn" class="example01" style="display: none;">
-									<select name="bank" >
-										<option value="bankName">은행선택</option>
-										<option value="국민은행">국민은행</option>
-										<option value="신한은행">신한은행</option>
-										<option value="우리은행">우리은행</option>
-										<option value="카카오뱅크">카카오뱅크</option>
-										<option value="기타">기타</option>
-									</select>
-									<br> 계좌번호 : <input type="text" name="accountNumber">
-									<button id="cancelAccountBtn" type="button">취소</button>
-									<button  type="submit">등록</button>
-								</ul>
+								<div id="changeAccountHiddenBtn" class="example01" style="display: none;">
+									<div class ="margin-bottom-3">
+										<label>은행  </label>
+										<select name="bank" >
+											<option value="bankName">선택</option>
+											<option value="국민은행">국민은행</option>
+											<option value="신한은행">신한은행</option>
+											<option value="우리은행">우리은행</option>
+											<option value="카카오뱅크">카카오뱅크</option>
+											<option value="기타">기타</option>
+										</select>
+									</div>
+									<div class ="margin-bottom-3">
+										계좌번호  <input type="text" name="accountNumber">
+									</div> 	 
+									<div>
+									
+										<button id="cancelAccountBtn" type="button">취소</button>
+										<button  type="submit">등록</button>
+									</div>
+								</div>
 							</form>
 					</div>
-					<div>
-						<hr>
+					<div class = "info_title"> 
 						<a href=/mypage/mainAddress>
+							<div class="info inline-block">내주소 </div> 
 							<button>내 주소 관리</button>
 						</a>
 					</div>
-				</main>			
+					<div class = "info_title"> 
+						 <button><a href="/mypage/myPointList?no=${m.no }">포인트내역</a></button>
+						 <button><a href="/mypage/myCommentsList?no=${m.no }">댓글내역</a></button>
+						 <button><a href="/mypage/myReviewList?no=${m.no }">리뷰내역</a></button>
+					</div>	
+				</main>		
+					
 		</div>
 	</div>
 		

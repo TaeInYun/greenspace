@@ -16,6 +16,15 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="/css/admin.css" rel="stylesheet"/>
 	<link rel="stylesheet" href="/css/style.css">
+	<style type="text/css">
+.mypage_aside {
+    width: 12%; 
+    margin: 5px;
+    border-right: 1px solid #eee;
+    padding-right: 5px;
+}
+
+</style>
 	<script type="text/javascript">
  $function(){
 	  

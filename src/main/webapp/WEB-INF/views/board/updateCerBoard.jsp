@@ -4,8 +4,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="/css/imginsert.css">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/writeForm.css">
 <link rel="stylesheet" href="/css/toggleSwitch.css">
+<style type="text/css">
+#writeForm_box_table textarea{
+	height:150px;
+}
+</style>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -35,69 +41,149 @@ $(function(){
         	
         }
 	});
+    
+    
+	//썸넬 이미지 미리보기
+    $("#cer_thumbnail").on('change', function(){
+        readURL(this);
+    });
+
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+            $('#previewImg').attr('src', e.target.result);
+        }
+
+      reader.readAsDataURL(input.files[0]);
+    }
+}
+
 	
 });
 </script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>녹지공간- 인증 게시판</title>
 </head>
 <body>
 
-	<h2>챌린지 인증 수정</h2>
-	
+<div id="container">
 	<div>
-		글 공개
-		<label class="switch">
-			<input type="checkbox">
-			<span class="slider round"></span>
-		</label>
-	</div>
-
+	<div id="wirte_title">
+	<h2>인증 게시판 수정</h2>
+	</div>	
+	
+	
+	<div id="writeForm_box">
 
 	<form action="updateCerBoard" method="post" enctype="multipart/form-data">	
 	<input type="hidden" name="no" value="${c.no }">
 	<input type="hidden" name="member_no" value="${c.member_no }">
 	<input type="hidden" name="cer_status" id="cer_status" value="${c.cer_status}">		
-		<div class="inputArea">
-			<p></p>
-			<table border="1" width="50%">
-			<tr>
-			<td>완료한 챌린지 목록</td>
-			</tr>
-			<c:forEach var="c" items="${endlist}">
-			<tr>
-				<td>${c.chg_title}</td>	
-			</tr>
-			</c:forEach>
-			</table>
-		</div>
-		<div class="inputArea">
-		내용<br>
-		<textarea rows="10" cols="60" name="cer_content" >${c.cer_content}</textarea><br>		
-		</div>
+	
+	<table id="writeForm_box_table">
+		<tr>
+		<th scope="row">글공개</th>
+		<td><div class="inputArea">
+				<label class="switch">
+					<input type="checkbox">
+					<span class="slider round"></span>
+				</label>
+			</div>	
+		</td>
+		</tr>
 		
-		<div class="inputArea">
-			 <label for="cer_thumbnail">썸네일</label>
-				<input type="hidden" name="cer_thumbnail" value="${c.cer_thumbnail }">
-		   <input type="file" name="uploadFile">(${c.cer_thumbnail })<br>
-		</div>
-		 <div id="fileDiv">
- 				첨부이미지<br>
-                            <c:forEach items="${imglist }" varStatus="row" var="i" >
-                                <p>
-                                <input type="hidden" name="img_no" value="${i.no}">
-                                  <img src="../upload/cer/${i.save_img_name }" width="100" height="100">
-                                </p>
-                            </c:forEach>
-                        </div>
-        
-        <input type='file' id='btnAtt' name="files" multiple='multiple'/>
-		<div id='att_zone' 
-	      data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하세요'></div> 
+		<tr>
+		<th scope="row">완료 챌린지</th>
+			<td>
+				<ul style="font-weight: 600; list-style:disc; margin-left: 20px;">
+					<c:if test="${c.chg_title1 ne null }">
+					<li>${c.chg_title1 }</li>
+					</c:if>
+					<c:if test="${c.chg_title2 ne null }">
+					<li>${c.chg_title2 }</li>
+					</c:if>
+					<c:if test="${c.chg_title3 ne null }">
+					<li>${c.chg_title3 }</li>
+					</c:if>
+				</ul>	
+			</td>
+		</tr>
 		
-		<input type="submit" value="수정">
-		<button type="button" onclick="history.go(-1);" >취소</button>
-	</form>
+		<tr>
+			<th scope="row">내용</th>
+			<td>
+				<div class="inputArea">
+				<textarea rows="10" cols="60" name="cer_content" >${c.cer_content}</textarea><br>		
+				</div>
+			</td>
+		</tr>
 
+		<tr>
+		<th scope="row">썸네일</th>		
+			<td>
+			<div>
+				<input type="file" id="cer_thumbnail" name="uploadFile" />
+			</div>
+				<div id="previewImg_box">
+					<img id="previewImg"/>
+				</div>
+			
+			<div id="current_thumbnail">	
+			<c:if test="${empty c.cer_thumbnail}"> 
+ 				<span>현재 썸네일 없음</span> 
+ 			</c:if>
+ 			
+ 			 <c:if test="${!empty c.cer_thumbnail}"> 
+			<input type="hidden" name="cer_thumbnail" value="${c.cer_thumbnail }">
+		    <img id="current_ThumbImg" src="../upload/cer/${c.cer_thumbnail }"><span>(현재 썸네일)</span>
+			</c:if>
+			</div>
+			</td>
+		</tr>
+		
+		
+		<tr>
+	    
+ 		<th scope="row">첨부 사진</th>	
+ 				<td>
+ 				 <c:if test="${empty imglist}"> 
+ 				<span>첨부된 사진이 없습니다.</span> 
+ 				</c:if>
+ 				
+       			 
+       				 <c:forEach items="${imglist }" varStatus="row" var="i" >
+       				 <div id="fileDiv">
+       				 	<div id="fileDiv_img">
+       					 <input type="hidden" name="img_no" value="${i.no}">
+                         <img src="../upload/cer/${i.save_img_name }" width="100" height="100">                      
+              		   	</div>
+              		   </div>                   
+                      </c:forEach>
+                 
+                </td>   
+                
+		</tr>
+		
+		<tr>
+		<th scope="row">사진 수정</th>
+			<td>
+			 <input type='file' id='btnAtt' name="files" multiple='multiple'/>
+			<div id='att_zone' 
+		      data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하세요'></div> 
+			
+			</td>
+		</tr>
+		</table>
+		
+			<div id="write_btn">  	
+			<button type="submit">수정</button>
+			<button type="button" onclick="history.go(-1);" >취소</button>
+			</div>
+       </form>
+	</div>
+</div>
 </body>
 </html>

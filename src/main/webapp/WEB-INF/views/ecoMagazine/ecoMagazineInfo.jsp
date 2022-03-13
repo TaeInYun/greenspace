@@ -7,18 +7,26 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Eco Magazine</title> 
+<title>녹지공간-Eco Magazine</title> 
 	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/board.css">
 	<link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
 	<style type="text/css">
        .yes_select{
           display: none;
           visibility: hidden;
        }
+
+       
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script>
-    <script type="text/javascript">    
+    <script type="text/javascript">  
+	    $(function(){
+	    	$( $(".nav-btn")[0] ).attr("style", "background: #00913A;");
+	    	$( $(".nav-btn .nav-btn__text")[0] ).attr("style", "color:white");
+	    })
+	    
 		$(document).ready(function(){
 			//addlike을 눌렀을때
         	$('.addlike').click(function(){
@@ -47,61 +55,57 @@
 </head>
 
 <body>
-	<div id="root">
-	
+<div id="root">
+
 		<header id="header">
 			<div id="header_box">
-				<div id="header1_box">
-					<jsp:include page="../header.jsp"/>
-					<link href="/css/ecoMagazine.css" rel="stylesheet"/> 
-				</div>
+				<jsp:include page="../header.jsp"  flush="false" />
 			</div>
-		</header>		 
-		<div>
-			<div class ="etsTitle">
-				<h3>EcoMagazine</h3>
-			</div>
-			<div class ="etsCategory">
-				<a href="#" class="목록">유용정보</a> &nbsp
-		   		<a href=""class="목록">환경관련기사</a> &nbsp
-		   		<a href=""class="목록">캠페인/후원안내</a>&nbsp
-			</div>	
+		</header>	
+	
+	
+		<section id="container">		
+			<div id="container_box"> 
+				<!-- 본문 -->			
+				<section id="content">		 
+		
+		<div id="ecoMagazineHeader">
+			<jsp:include page="./ecoMagazineHeader.jsp"/>
 		</div>
 		
-		
-
-		
-
-		<section id="container">		
-			<div id="container_box"> 		
-				<section id="content">
-					<ul class ="ECO_UL">
-						<c:forEach var="e" items="${ecoMagazine }">
-							<li>
-								<div class="ECO_THUMBNAIL">
-									<a href="detail?no=${e.no}">
-										<img src="/upload/board/${e.eco_thumbnail}" width="200" height="200">
-									</a>
-								</div> 
-								  
-								<div class="ECO_TITLE">
-									<a href="detail?no=${e.no}">${e.eco_title }</a>
-								</div>
-								
-								<div style="user-select: none">
-               						<input type="hidden" class="ets-no" value="${e.no}">   
-                 				 	<div class="addlike">
-                  						<i class="fa-regular fa-heart no_select"></i>   
-                     					<i class="fa-solid fa-heart yes_select"></i>
-                     					<span class = "count">${e.eco_like}</span>
-				                	</div> 
-				               </div>		 
-							</li>
-					  	</c:forEach>
-					 </ul>					 
-				</section>										
+		<div class="boardList">		
+			<ul class ="ECO_UL">
+				<c:forEach var="e" items="${ecoMagazine }">
+				<li>
+				<div class = boardpadding>
+					<div class="ECO_THUMBNAIL">
+						<a href="detail?no=${e.no}">
+							<img src="/upload/board/${e.eco_thumbnail}" width="200" height="200">
+						</a>
+					</div>  
+				</div>
+				<div class = boardpadding>
+					<div class="ECO_TITLE">
+						<a href="detail?no=${e.no}">${e.eco_title }</a>
+					</div>	
+				</div>
+				<div class = boardpadding>
+					<div style="user-select: none">
+            			<input type="hidden" class="ets-no" value="${e.no}">   
+              				 <div class="addlike">
+               				<i class="fa-regular fa-heart no_select"></i>   
+                  			<i class="fa-solid fa-heart yes_select"></i>
+                  			<span class = "count">${e.eco_like}</span>
+	                	</div> 
+	               </div>		
+				</div> 
+				</li>
+			  	</c:forEach>
+			 </ul>					 
 			</div>
-		</section>
-	</div>
+			</section>
+		</div>
+	</section>	
+</div>	
 </body>
 </html>
