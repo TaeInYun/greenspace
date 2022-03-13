@@ -42,14 +42,14 @@ public class EcoMagazineController{
 	    	dao.updateEcoMagazineLike(no);
 	    	return dao.findEcoMagazineLike(no);
 	    }
-	    
-	  //상세보기  
+
+	
 	    @RequestMapping("/ecoMagazine/detail")
 	    public void detail(int no, Model model) {
 	    	dao.updateEcoMagazineHit(no);
-	        model.addAttribute("n", dao.findEcoMagazineByNo(no));
+	        model.addAttribute("e", dao.findEcoMagazineByNo(no));
+	        
 	    }
-	
 	
 	
 }

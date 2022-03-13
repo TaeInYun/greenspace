@@ -7,12 +7,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link href="/css/easytostart.css" rel="stylesheet"/> 
 <link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
-
- 
-
+<link rel="stylesheet" href="/css/board.css">
+<link rel="stylesheet" href="/css/components/search.css">
+<link rel="stylesheet" href="/css/comment.css">
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script> 
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -50,70 +48,121 @@
 	
 </head>
 <body>
-
-	<header id="header">
-		<div id="header_box">
-			<div id="header1_box">
-				<jsp:include page="../header.jsp"/>
+	<div id="root">
+		<header id="header">
+			<div id="header_box">
+				<jsp:include page="../header.jsp"  flush="false" />
 			</div>
-		</div>
-	</header>
+		</header>
 		
-	<h2>게시물 상세</h2>
-	<hr>
-	글번호 : ${n.no }<br>
-	글제목 : ${n.ets_title}<br>
-	글내용 : <br>
-	
-	<textarea rows="10" cols="80" readonly="readonly">${n.ets_content}</textarea><br>
-		조회수 : ${n.ets_hit }<br>
-	<a href="updateBoard?no=${n.no }">수정</a>
-	<a href="deleteBoard?no=${n.no }">삭제</a>
-	
-	
-	
-<!-- ----댓글------ -->
-	<div>		 
-	  	<input id="ets_no" type="hidden" value="${n.no}">
-		<input id="member_no" type="hidden" value="${m.no}">			 
-		<textarea class="form-control" id="com_content" rows="3" placeholder="댓글을 입력하세요."></textarea>	   
-	 	<button id="insertComments">댓글작성</button>	
+		<section id="container">		
+			<div id="container_box"> 		
+				<section id="content">
+					<div id="easyToStartHeader">
+						<jsp:include page="./easyToStartHeader.jsp"/>
+					</div>
+					<div id="commu_box">
+						<div id="search_form">
+							<form action="listBoard" method="post">
+								<div class="searchColumn_wrap">
+									<select name="searchColumn" id="searchColumn">
+										<option value="commu_title">제목</option>
+										<option value="commu_content">본문</option>
+										<option value="nickname">작성자</option>
+									</select>
+								</div>		
+								<div class="search_keyword_form">
+									 <input class="keyword" type="text" name="keyword"  placeholder="검색어 입력">
+									  <img id="icon" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+								</div>
+							</form>
+						</div>
+					</div>
+					
+					<!--  -->
+					<table id="detail_board_table">
+						<colgroup> 
+							<col width="80%">
+							<col width="20%">
+						</colgroup>
+						<thead>
+							<tr>
+								<th><span>${n.ets_title}</span></th>
+								<th><span>조회수 : ${n.ets_hit }</span></th>
+							</tr>				
+						</thead>
+							<tr>
+								<td colspan="2">
+									<div id="board_content">
+										<p>${n.ets_content }</p>
+									</div>
+								</td>
+							</tr>
+					</table>
+					<div id="board_btn">		
+						<c:if test="${m.nickname == c.nickname}">
+							<a href="updateBoard?no=${n.no }"><button>글수정</button></a>
+							<a href="deleteBoard?no=${n.no }"><button>글삭제</button></a>
+						</c:if>
+						<a href="/notice/listNotice"><button>글목록</button></a>	
+					</div>
+					
+					<!-- ----댓글------ -->
+					
+			
+
+					<div id="comment_list">
+						<c:forEach var="comments" items="${comments}"> 
+						<div class="comment_form">
+							<div id="${comments.member_no}" class="comments_nickname">
+								${comments.nickname}
+								<div class="comment_regdate">
+									${comments.com_regdate}
+								</div>  
+							</div>
+							
+								
+							<div class="comments_content">
+								 ${comments.com_content}
+							</div>
+							<button>
+								<a id="updateComments"  data-toggle="modal" data-target="#updateModal" role="button"  href="/board/updateComments?no=${comments.no}&member_no=${m.no}&com_content=${comments.com_content}">수정</a>
+							</button>
+							<button>
+								<a id="deleteComments"  data-toggle="modal" data-target="#deleteModal" role="button"  href="/board/deleteComments?no=${comments.no}&member_no=${m.no}">삭제</a>
+							</button>
+						</div>
+							
+						</c:forEach>
+						
+						<div id="deleteModal" class="modal fade" tabindex="-1" role="dialog"> 
+							<div class="modal-dialog"> 
+								<div class="modal-content"> 
+								</div> 
+							</div> 
+					    </div>	
+					    
+					    <div id="updateModal" class="modal fade" tabindex="-1" role="dialog"> 
+							<div class="modal-dialog"> 
+								<div class="modal-content"> 
+								</div> 
+							</div> 
+					    </div>	
+					</div>
+							<div id="comment_box">
+	  					<input id="cer_no" type="hidden" value="${c.no}">
+						<input id="member_no" type="hidden" value="${m.no}">		
+						<textarea class="form-control" id="com_content" rows="3" id="commentContent" placeholder="댓글을 입력하세요."></textarea> 
+	 					<button id="insertComments">댓글작성</button>	
+					</div>
+					
+					
+					
+				</section>
+			</div>
+		</section>	
 	</div>
-	<hr>	
-	<div>		 
-		<c:forEach var="comments" items="${comments}"> 		 
-		 <table>
-		  		<tbody>
-					<tr> 
-						<td id="${comments.member_no}">${comments.nickname}</td>
-						<td >${comments.com_regdate}</td>
-						<td id="com_content">${comments.com_content}</td>						 
-						<td><a id="updateComments"  data-toggle="modal" data-target="#updateModal" role="button"  href="/board/updateComments?no=${comments.no}&member_no=${m.no}&com_content=${comments.com_content}">수정</a></td>
-						<td><a id="deleteComments"  data-toggle="modal" data-target="#deleteModal" role="button"  href="/board/deleteComments?no=${comments.no}&member_no=${m.no}">삭제</a></td>
-					 
-					 <tr>	 
-				</tbody>
-			</table>
-		</c:forEach>
-		
-		
-		<div id="deleteModal" class="modal fade" tabindex="-1" role="dialog"> 
-			<div class="modal-dialog"> 
-				<div class="modal-content"> 
-				</div> 
-			</div> 
-	    </div>	
-	    
-	    <div id="updateModal" class="modal fade" tabindex="-1" role="dialog"> 
-			<div class="modal-dialog"> 
-				<div class="modal-content"> 
-				</div> 
-			</div> 
-	    </div>	
-		
-		
-	</div>
-	
+
 	
 	
 </body>
