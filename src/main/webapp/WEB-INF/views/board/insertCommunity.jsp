@@ -19,6 +19,7 @@ $(function(){
 <title>녹지공간-자유 게시판</title>
 </head>
 <body>
+<div id="root">
 <div id="container">
 	<div>
 	<div id="wirte_title">
@@ -63,6 +64,7 @@ $(function(){
 			</form>
 		</div>
 	</div>	
+</div>
 </div>
 </body>
 </html>

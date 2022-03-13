@@ -18,6 +18,7 @@
 <title>녹지공간-자유 게시판</title>
 </head>
 <body>
+<div id="root">
 <div id="container">
 	<div>
 	<div id="wirte_title">
@@ -77,7 +78,6 @@
 			</tr>	
 		</table>
 			
-			
 		  <div id="write_btn">  
 			<button type="submit">수정</button>
 			<button type="button" onclick="history.go(-1);" >취소</button>
@@ -86,5 +86,6 @@
 	</div>
 </div>
 </div>	
+</div>
 </body>
 </html>

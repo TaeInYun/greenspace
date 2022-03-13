@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-		 pageEncoding="UTF-8"%>
+       pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-		 
+       
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,16 +15,15 @@
 <title>녹지공간-공지사항</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-		$(function(){
-			$( $(".nav-btn")[0] ).attr("style", "background: #00913A;");
-			$( $(".nav-btn .nav-btn__text")[0] ).attr("style", "color:white");
-		})
-</script>	
+      $(function(){
+         $( $(".nav-btn")[0] ).attr("style", "background: #00913A;");
+         $( $(".nav-btn .nav-btn__text")[0] ).attr("style", "color:white");
+      })
+</script>   
 </head>
 
 <body>
 <div id="root">
-
 		<header id="header">
 			<div id="header_box">
 				<jsp:include page="../header.jsp"  flush="false" />
@@ -40,7 +39,7 @@
 					<jsp:include page="./noticeHeader.jsp"/>
 			</div>
 			
-							<div id="commu_box">
+					<div id="commu_box">
 					<div id="search_form">
 						<form action="listBoard" method="post">
 						<div class="searchColumn_wrap">
@@ -88,10 +87,11 @@
 			<a href="/notice/listNotice"><button>글목록</button></a>	
 		</div>
 
-				</section>
-			</div>
-	</section>
-</div>		
+
+            </section>
+         </div>
+   </section>
+</div>      
 
 </body>
 </html>

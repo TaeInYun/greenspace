@@ -10,7 +10,8 @@
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/board.css">
 <link rel="stylesheet" href="/css/components/search.css">
-<link rel="stylesheet" href="/css/comment.css">
+
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script> 
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -21,7 +22,7 @@
 
 	 $(function(){
 			 $("#insertComments").click(function () {		 
-				 let ets_no = $("#ets_no").val();
+				 let ets_no = $("#eco_no").val();
 				 let member_no = $("#member_no").val();
 				 let com_content = $("#com_content").val();
 					 
@@ -58,8 +59,8 @@
 		<section id="container">		
 			<div id="container_box"> 		
 				<section id="content">
-					<div id="easyToStartHeader">
-						<jsp:include page="./easyToStartHeader.jsp"/>
+					<div id="ecoMagazineHeader">
+						<jsp:include page="./ecoMagazineHeader.jsp"/>
 					</div>
 					<div id="commu_box">
 						<div id="search_form">
@@ -87,14 +88,14 @@
 						</colgroup>
 						<thead>
 							<tr>
-								<th><span>${n.ets_title}</span></th>
-								<th><span>조회수 : ${n.ets_hit }</span></th>
+								<th><span>${e.eco_title}</span></th>
+								<th><span>${e.eco_hit }</span></th>
 							</tr>				
 						</thead>
 							<tr>
 								<td colspan="2">
 									<div id="board_content">
-										<p>${n.ets_content }</p>
+										<p>${e.eco_content }</p>
 									</div>
 								</td>
 							</tr>
@@ -109,32 +110,28 @@
 					
 					<!-- ----댓글------ -->
 					
-			
+					<div id="comment_box">
+	  					<input id="cer_no" type="hidden" value="${c.no}">
+						<input id="member_no" type="hidden" value="${m.no}">		
+						<textarea class="form-control" id="com_content" rows="3" id="commentContent" placeholder="댓글을 입력하세요."></textarea> 
+	 					<button id="insertComments">댓글작성</button>	
+					</div>
 
-					<div id="comment_list">
+					<div id="comment_list">			 
 						<c:forEach var="comments" items="${comments}"> 
-						<div class="comment_form">
-							<div id="${comments.member_no}" class="comments_nickname">
-								${comments.nickname}
-								<div class="comment_regdate">
-									${comments.com_regdate}
-								</div>  
-							</div>
-							
-								
-							<div class="comments_content">
-								 ${comments.com_content}
-							</div>
-							<button>
-								<a id="updateComments"  data-toggle="modal" data-target="#updateModal" role="button"  href="/board/updateComments?no=${comments.no}&member_no=${m.no}&com_content=${comments.com_content}">수정</a>
-							</button>
-							<button>
-								<a id="deleteComments"  data-toggle="modal" data-target="#deleteModal" role="button"  href="/board/deleteComments?no=${comments.no}&member_no=${m.no}">삭제</a>
-							</button>
-						</div>
-							
-						</c:forEach>
-						
+						 <table>
+						 	<tbody>
+								<tr> 
+									<td id="${comments.member_no}">${comments.nickname}</td>
+									<td>${comments.com_regdate}</td>
+									<td id="com_content">${comments.com_content}</td>
+									<td><a id="updateComments"  data-toggle="modal" data-target="#updateModal" role="button"  href="/board/updateComments?no=${comments.no}&member_no=${m.no}&com_content=${comments.com_content}">수정</a></td>
+									<td><a id="deleteComments"  data-toggle="modal" data-target="#deleteModal" role="button"  href="/board/deleteComments?no=${comments.no}&member_no=${m.no}">삭제</a></td>
+								<tr>	 
+							</tbody>
+							</table>
+					  		</c:forEach>
+				
 						<div id="deleteModal" class="modal fade" tabindex="-1" role="dialog"> 
 							<div class="modal-dialog"> 
 								<div class="modal-content"> 
@@ -149,15 +146,6 @@
 							</div> 
 					    </div>	
 					</div>
-							<div id="comment_box">
-	  					<input id="cer_no" type="hidden" value="${c.no}">
-						<input id="member_no" type="hidden" value="${m.no}">		
-						<textarea class="form-control" id="com_content" rows="3" id="commentContent" placeholder="댓글을 입력하세요."></textarea> 
-	 					<button id="insertComments">댓글작성</button>	
-					</div>
-					
-					
-					
 				</section>
 			</div>
 		</section>	

@@ -8,16 +8,7 @@
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/board.css">
 <link rel="stylesheet" href="/css/components/search.css">
-<link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
 <style type="text/css">
-#content_box{
-	
-	display: flex;
-	flex: 1;
-	padding: 10px;
-	
-}
-
 
 
 #board{
@@ -67,7 +58,8 @@ $(function() {
 					</div>
 				</div>
 				<div id="board">
-					<table border="1" width="80%">
+					<table>
+					<thead>
 						<tr>
 							<td>번호</td>
 							<td>제목</td>
@@ -75,16 +67,27 @@ $(function() {
 							<td>등록일</td>
 							<td>조회수</td>
 						</tr>
+					</thead>
+					<tbody>
+						<tr >
+						<c:if test="${empty list }">
+							<td colspan="5" style="height: 400px">
+								게시물이 없습니다.
+							</td>
+						</c:if>	
+						<tr>
+						
 						<c:forEach var="c" items="${list }">
 					    	<c:set var="i" value="${i+1}"/>
 							<tr>
 								<td class="td_num">${i+start}</td>
-								<td class="td_title"><a href="/board/detailCommunity?no=${c.no }">${c.commu_title}</a></td>				 
+								<td class="td_title"><a href="/mypage/detailCommunity?no=${c.no }">${c.commu_title}</a></td>				 
 								<td class="td_nickname">${c.nickname }</td>
 								<td class="td_date"><fmt:formatDate value="${c.commu_date }" pattern="yy.MM.dd HH:ss"/></td>
 								<td class="td_hit">${c.commu_hit }</td>				
 							</tr>
 						</c:forEach>
+					</tbody>	
 					</table> 	
 							
 					<div class="writeBtn">
