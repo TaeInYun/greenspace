@@ -27,7 +27,8 @@ $(function(){
 	
 	$( $(".nav-btn")[0] ).attr("style", "background: #00913A;");
 	$( $(".nav-btn .nav-btn__text")[0] ).attr("style", "color:white");
-	
+	$(".myActive").attr("style","background: #00913A; font-weight:800; color: white; padding: 5px 15px; border-radius: 20px;");
+
 	
 	//도전하기 버튼 클릭시 상태 ING로 변경
 	$(document).on("click", "#startBtn", function() {

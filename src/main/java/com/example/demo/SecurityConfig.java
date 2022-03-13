@@ -48,10 +48,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.failureHandler(authFailureHandler) //->변수로
 			//.successHandler(successHandler()) //로그인 성공시 이전 페이지로
 			.permitAll();
-	/*		 
+	 		 
 			http.authorizeHttpRequests()
 			.mvcMatchers("/admin/**").hasRole("1");
-	*/       
+	       
 		
 		http.logout()
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))//로그아웃을 위한 서비스명을 설정

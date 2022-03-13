@@ -186,7 +186,7 @@
 						<td id="com_content">${comments.com_content}</td>
 						<td><a id="updateComments"  data-toggle="modal" data-target="#updateModal" role="button"  href="/board/updateComments?no=${comments.no}&member_no=${m.no}&com_content=${comments.com_content}">수정</a></td>
 						<td><a id="deleteComments"  data-toggle="modal" data-target="#deleteModal" role="button"  href="/board/deleteComments?no=${comments.no}&member_no=${m.no}">삭제</a></td>
-					<tr>	 
+					</tr>	 
 				</tbody>
 			</table>
 	  	</c:forEach>

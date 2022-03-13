@@ -33,6 +33,11 @@
 	<script type="text/javascript">
 	
 	$(document).ready(function(){
+		
+		$(".myInfo").attr("style","background: #00913A; font-weight:800; color: white; padding: 5px 15px; border-radius: 20px;");
+		
+		
+		
 		function showErrorMsg(obj, msg) {
 	        obj.attr("class", "error_msg");
 	        obj.html(msg);

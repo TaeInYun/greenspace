@@ -46,8 +46,8 @@ $(function(){
 						<form action="/board/listCommunity" method="post">
 						<div class="searchColumn_wrap">
 								<select name="searchColumn" id="searchColumn">
-									<option value="commu_title">제목</option>
-									<option value="commu_content">본문</option>
+									<option value="cer_title">제목</option>
+									<option value="cer_content">본문</option>
 									<option value="nickname">작성자</option>
 								</select>
 						</div>		

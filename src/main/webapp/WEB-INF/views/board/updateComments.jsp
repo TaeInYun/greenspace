@@ -7,19 +7,33 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="/css/style.css">
 <style type="text/css">
+ 	.card-body{
+	width: 100%;
+	position: relative;
+	margin: 20px 0;
+}
+ 	
  	p{
  		text-align: center;
  	}
+ 	
  	textarea{
- 		margin-left: 20px;
- 		margin-right: 20px;
- 		margin-top: 20px;
+ 	width:800px;
+	height:100px;
+	padding: 10px;
+	box-sizing: border-box;
+	display: inline-block;
+	position: relative;	
  	}
+ 	
+ 	
  	button{
- 		 margin-left: 20px;
- 		 margin-right: 20px;
- 		 margin-bottom: 10px;
+	height:100px;
+	width:160px;
+	position: absolute;
+	right:10px;
  	}
+ 	
 </style>
 </head>
 <body>	
@@ -33,7 +47,7 @@
 				<input type="hidden" name="no" value="${no}">		 
 				<input type="hidden" name="member_no" value="${member_no}">
 				<textarea name="com_content" rows="3" cols="50">${comments.com_content}</textarea>	
-				<button style="width: 90%; padding: 10px" type="submit">수정하기</button> 
+				<button type="submit">수정하기</button> 
 			</form>
 	</div> 
 </div>
