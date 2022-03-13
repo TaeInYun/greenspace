@@ -105,7 +105,7 @@
    offset #{start} rows fetch first 5 rows only 
 	
   <!-- offset #{start} rows fetch first 5 rows only -->
-  
+  <!-- 이걸넣으면 keyword가 작동을 안함 -->
   
   
   </select>

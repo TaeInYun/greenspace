@@ -103,7 +103,7 @@ public class OneController {
 	//----------------보드(검색기능)
 	
 	
-		@RequestMapping("/board/listSearchOne")       
+		@RequestMapping("/notice/listSearchOne")       
 		public void listOne(Model model,
 				HttpSession session,
 				String keyword,
@@ -157,7 +157,7 @@ public class OneController {
 		
 		@RequestMapping(value="/board/insertOne", method= RequestMethod.POST)	
 		public ModelAndView insertProQna(OneVO o) {
-			ModelAndView mav = new ModelAndView();
+			ModelAndView mav = new ModelAndView("/notice/listSearchOne");
 			
 			dao.insert(o);
 			

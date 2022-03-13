@@ -80,7 +80,7 @@ public class ReviewController {
 			
 			System.out.println("insertReview 동작함.");
 			System.out.println(r);
-			ModelAndView mav = new ModelAndView("redirect:/admin/listReview");
+			ModelAndView mav = new ModelAndView("redirect:/shop/listProduct_home");
 			String path = request.getRealPath("upload/review");
 			System.out.println("path:"+path);
 			//String oldFname = r.getRe_thumbnail();
@@ -165,7 +165,7 @@ public class ReviewController {
 		public ModelAndView delete(HttpServletRequest request, int no) {
 			String oldFname = dao.findAllDetail(no).getRe_thumbnail();
 			
-			ModelAndView mav = new ModelAndView("redirect:/listReview");
+			ModelAndView mav = new ModelAndView("redirect:/admin/listReview");
 			int re = dao.delete(no);
 			if(re == 1) {
 				String path = request.getRealPath("upload/review");

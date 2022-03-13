@@ -17,7 +17,7 @@
 			</a>
 		</li>
 		<li>
-			<a href="#" class="nav-btn">
+			<a href="/notice/listSearchOne" class="nav-btn">
 				<i class="fa-solid fa-hashtag" style="color:#d9d9d9"></i>
 				<span class="nav-btn__text" id="orderReview">문의사항</span>
 			</a>

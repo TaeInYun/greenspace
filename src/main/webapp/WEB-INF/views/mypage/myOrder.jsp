@@ -27,7 +27,7 @@
     padding-right: 34px;
 } */
 .mypage_aside {
-    width: 13%; 
+    width: 12%; 
     margin: 5px;
     border-right: 1px solid #eee;
     padding-right: 5px;

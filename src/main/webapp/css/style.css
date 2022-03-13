@@ -18,6 +18,8 @@
 @import "screens/resultOrder.css";
 @import "screens/wishList.css";
 @import "screens/detailOrderList.css";
+@import "screens/myQna.css";
+
 html,body {
 	padding: 0 ;
     margin: 0;
