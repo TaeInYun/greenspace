@@ -8,16 +8,7 @@
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/board.css">
 <link rel="stylesheet" href="/css/components/search.css">
-<link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
 <style type="text/css">
-#content_box{
-	
-	display: flex;
-	flex: 1;
-	padding: 10px;
-	
-}
-
 
 
 #board{
@@ -67,7 +58,7 @@ $(function() {
 					</div>
 				</div>
 				<div id="board">
-					<table border="1" width="80%">
+					<table>
 						<tr>
 							<td>번호</td>
 							<td>제목</td>
@@ -79,7 +70,7 @@ $(function() {
 					    	<c:set var="i" value="${i+1}"/>
 							<tr>
 								<td class="td_num">${i+start}</td>
-								<td class="td_title"><a href="/board/detailCommunity?no=${c.no }">${c.commu_title}</a></td>				 
+								<td class="td_title"><a href="/mypage/detailCommunity?no=${c.no }">${c.commu_title}</a></td>				 
 								<td class="td_nickname">${c.nickname }</td>
 								<td class="td_date"><fmt:formatDate value="${c.commu_date }" pattern="yy.MM.dd HH:ss"/></td>
 								<td class="td_hit">${c.commu_hit }</td>				
