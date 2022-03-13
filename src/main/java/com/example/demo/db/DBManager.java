@@ -734,6 +734,7 @@ public class DBManager {
 	public static List<OrderListVO> findAllOrderListByMemberNo(HashMap map) {
 		
 		SqlSession session = factory.openSession();
+		System.out.println("주문내역조회에 담긴 MAP: "+map);
 		List<OrderListVO> o = session.selectList("orderList.findAllOrderListByMemberNo", map);
 		session.close();
 		return o;
@@ -1319,6 +1320,20 @@ public class DBManager {
 			AddressVO r = session.selectOne("receiver.findByNo", receiver_no);
 			session.close();
 			return r;
+		}
+		public static int maxOfNo() {
+			SqlSession session = factory.openSession();
+			int no = session.selectOne("receiver.maxOfNo");
+			session.close();
+			return no;
+		}
+		
+		public static int insertReceiver(ReceiverVO r) {
+			SqlSession session = factory.openSession();
+			int re = session.insert("receiver.insertReceiver", r);
+			session.commit();
+			session.close();
+			return re;
 		}
 		
 		
