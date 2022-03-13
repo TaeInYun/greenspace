@@ -11,7 +11,7 @@
 <body>
 	<ul>
 		<li>
-			<a href="#" class="nav-btn">
+			<a href="/notice/listNotice" class="nav-btn">
 				<i class="fa-solid fa-hashtag" id="link_orderList" style="color:#d9d9d9"></i>
 				<span class="nav-btn__text"> 공지사항</span>
 			</a>

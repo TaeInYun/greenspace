@@ -139,10 +139,7 @@
 		
 			<div id="board_content">
 			<p>${c.cer_content}</p>
-			</div>
-		
-		
-		
+			
 		
 		 <c:if test="${c.cer_thumbnail ne null }">
 		<div class="cer_thumbnail">
@@ -156,6 +153,7 @@
 			<img src="../upload/cer/${list.save_img_name}" width="500px" height="100%">
 	        <br><br><br>
 	    </c:forEach>         
+	</div>
 	</div>
 	</td>	
 	</tr>

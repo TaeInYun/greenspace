@@ -115,10 +115,11 @@
 						<!-- 업로드한 파일들을 forEach문을 이용해 <img> 태그에 표시 -->
 						<c:forEach var="list" items="${imglist}" >
 							<img src="../upload/commu/${list.save_img_name}">
-					        <br><br><br>
+					    
 					    </c:forEach> 
 					    </div> 
 					    </td>
+					 </tr>   
 			 </table>
 				 
 
