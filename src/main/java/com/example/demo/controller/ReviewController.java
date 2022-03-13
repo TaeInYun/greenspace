@@ -142,6 +142,7 @@ public class ReviewController {
 				// TODO: handle exception
 			}
 			
+			
 			int re=dao.update(r);
 			if(re ==1) {
 				if(thumbnail !=null && !thumbnail.equals("")) {

@@ -90,6 +90,7 @@ header#header div#header_box { text-align:center; padding:30px 0; }
 			</table> 	
 			
 			
+			
  							<div id="deleteModal" class="modal fade" tabindex="-1" role="dialog"> 
 								<div class="modal-dialog"> 
 									<div class="modal-content"> 
