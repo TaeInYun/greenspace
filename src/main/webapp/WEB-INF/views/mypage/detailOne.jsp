@@ -49,6 +49,7 @@ table {
    position: absolute;
   /*  left:10%; */
    font-size:35px;
+   background-color:white;
   }
   
  #com_content{
@@ -94,7 +95,7 @@ $(function(){
 	<h1 id="here">1대1문의 상세</h1>
 	 
 	  문의유형:${od.one_type_name} <br>  <!-- 새로운 dao를 컨트롤러에 불러와야할듯? -->
-	 <%--  문의유형코드:${od.one_type_code}<br> --%><!--안보여줘도 될듯  -->
+	 <%-- 문의유형코드:${od.one_type_code}<br> --%> <!--안보여줘도 될듯  -->
 	  1대1문의 제목:${od.one_title}<br>
 	  주문번호:${od.ord_no}<br>
 	  내용:${od.one_content} <br>
