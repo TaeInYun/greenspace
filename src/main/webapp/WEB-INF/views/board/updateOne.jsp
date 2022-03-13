@@ -68,7 +68,8 @@ table {
 	<h2 id="here">1대1문의수정</h2>
 	<form action="updateOne" method="post"
 			enctype="multipart/form-data">		
-													  
+		
+		<input type="hidden" name="no" value="${o.no }"><br>											  
 		1대1제목: <input type="text" name="one_title" value="${o.one_title }"> <br>		
 		내용: <input type="text" name="one_content" value="${o.one_content }"> <br>					
 		비밀번호: <input type="password" name="one_pwd" > <br> 		

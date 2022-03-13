@@ -27,7 +27,7 @@
   <!-- 상세보기 -->
   <select id="findAllDetail" resultType="oneVO">
    <!-- select * from one where no=#{no} -->
-   select no, one_title, ord_no, one_content, TO_CHAR(one_date, 'yyyy.mm.dd') AS one_date, one_type_name, qna_type_name
+   select no, o.one_type_code,one_title, ord_no, one_content, TO_CHAR(one_date, 'yyyy.mm.dd') AS one_date, one_type_name, qna_type_name
    from one o, one_type ot, qna_status qs
    where
    o.qna_status_code=qs.qna_status_code and
