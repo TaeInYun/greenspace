@@ -1,5 +1,6 @@
 package com.example.demo.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -18,8 +19,8 @@ public class ReviewDAO {
 		return DBManager.findAllReviewRate(pro_no);
 	}
 	
-	public List<ReviewVO> findMyReview(int no){
-		return DBManager.findMyReview(no);
+	public List<ReviewVO> findMyReview(HashMap map){
+		return DBManager.findMyReview(map);
 	}
 	
 	public ReviewVO findAllDetail(int no){

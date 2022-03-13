@@ -15,6 +15,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/board.css">
+<link rel="stylesheet" href="/css/components/search.css">
 <link rel="stylesheet" href="/css/style.css">
 <style type="text/css">
 .content{
@@ -42,9 +44,7 @@ table {
 	    
   }
   
-  #here{
-   font-size:50px;
-  }
+  
   
   #stay{
    position: absolute;
@@ -91,12 +91,57 @@ $(function(){
 	
 
 <body>
-<div id="header">
-		<jsp:include page="../header.jsp"/>
-		</div>
-<div id="stay">		
-<section id="content">		
-<ul>
+<div id="root">
+		<jsp:include page="../header.jsp"></jsp:include>
+				
+		<div class="section mypage">
+		<jsp:include page="../mypage/myAside.jsp"></jsp:include>
+		
+			<main class="mypage-main">
+				<jsp:include page="./myQnaHeader.jsp"></jsp:include>
+
+	<div id="board">
+	<table id="detail_board_table">
+					<colgroup> 
+					<col width="80%">
+					<col width="20%">
+					</colgroup>
+			<thead>			
+				<tr>
+					<th><span>${qd.title}</span></th>
+					<td><span>${qd.day}</span></td>	
+				</tr>				
+			</thead>	
+		
+			<tr>
+				<td colspan="2">
+				<span>상품이름 : ${qd.pro_name}</span>		
+				</td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">
+				<span>문의유형 : ${qd.qna_type}</span>		
+				</td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">
+			<span>	처리상태 :${qd.status}</span>
+				</td>
+			</tr>
+			
+			<tr>
+				<td colspan="2">
+						<div id="board_content">
+						<p>${qd.content}</p>
+						</div>
+					</td>
+			</tr>		
+	 </table>	
+						
+		
+<%-- <ul>
 	 <li>
 	 <h1 id="here">상품문의</h1>
 	 
@@ -109,11 +154,13 @@ $(function(){
 	 처리상태:${qd.status} <br>
 	 상품번호:${qd.pro_no }<br>
 	</li>
- </ul>
-</section>		 
-	   <%-- <a href="/shop/updateProQna?no=${qd.no}"><button>수정하기</button></a>   --%>
-	   <a href="/shop/deleteProQna?no=${qd.no}"><button>삭제하기</button></a>  
+ </ul> --%>
 
+</div>	 
+<div id="board_btn">
+	    <a href="/shop/updateProQna?no=${qd.no}"><button>수정하기</button></a>   
+	   <a href="/shop/deleteProQna?no=${qd.no}"><button>삭제하기</button></a>  
+</div>
 <!-- ----댓글------ -->
 	<div>		 
 	  	<input id="pro_qna_no" type="hidden" value="${qd.no}">
@@ -122,7 +169,8 @@ $(function(){
 	 	<button id="insertComments">댓글작성</button>	
 	</div>
 	<hr>	
-	<div>		 
+	<div>		
+	<div id="comment_list"> 
 		<c:forEach var="comments" items="${comments}"> 
 		 <table>
 				 <tbody>
@@ -136,7 +184,7 @@ $(function(){
 				</tbody>
 			</table>
 	  	</c:forEach>
-	  		
+	  	</div>	
 		 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog"> 
 			<div class="modal-dialog"> 
 				<div class="modal-content"> 
@@ -155,8 +203,11 @@ $(function(){
 	  	
 	  	
 	  	
-	</div>
+		</div>
 	
+					
+			</main>
+		</div>
 	</div>
 </body>
 

@@ -1561,9 +1561,9 @@ public class DBManager {
 			 return list;
 		}
 
-		public static List<ReviewVO> findMyReview(int no) {
+		public static List<ReviewVO> findMyReview(HashMap map) {
 			 SqlSession session = factory.openSession();
-			 List<ReviewVO> list = session.selectList("review.findMyReview", no);
+			 List<ReviewVO> list = session.selectList("review.findMyReview", map);
 			 session.close();
 			 return list;
 		}

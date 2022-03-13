@@ -21,7 +21,7 @@
   
   
   <select id="findMyReview" resultType="reviewVO" >
-  		select * from review where member_no=#{no}
+  		select * from review where member_no=#{member_no}
   </select>
   
   <insert id="insert" parameterType="reviewVO">

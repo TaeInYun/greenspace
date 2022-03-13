@@ -9,12 +9,13 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
-<link rel="stylesheet" href="/css/style.css"> 
+<script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script> 
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/css/style.css"> 
 <style type="text/css">
 body { margin:0; padding:0; }
 ul, li { margin:0; padding:0; list-style:none; display: inline-blockblock;} 
@@ -50,11 +51,22 @@ header#header div#header_box { text-align:center; padding:30px 0; }
   	margin-bottom: 10px;
   	border-style: solid;
   }
-  
+  .mypage_aside {
+    width: 12%; 
+    margin: 5px;
+    border-right: 1px solid #eee;
+    padding-right: 5px;
+}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <script type="text/javascript">
-	 
+$(function() {
+	$("#link_orderList").attr("style","color:white; background: #00913A;")
+	$( $(".nav-btn")[1] ).attr("style", "background: #00913A;");
+		$( $(".nav-btn .nav-btn__text")[1] ).attr("style", "color:white");
+	
+	$(".myShopping").attr("style","background: #00913A; font-weight:800; color: white; padding: 5px 15px; border-radius: 20px;");
+});
 </script>
 </head>
 <body>
@@ -63,7 +75,7 @@ header#header div#header_box { text-align:center; padding:30px 0; }
 		<div class="section mypage">
 			<jsp:include page="../mypage/myAside.jsp"></jsp:include>
 			<main class="mypage-main">
-			 		
+			 		<jsp:include page="./myShoppingHeader.jsp"></jsp:include>
 				 
 		 		<table border="1" width="80%">
 				<tr>
