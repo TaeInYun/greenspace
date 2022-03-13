@@ -14,8 +14,6 @@
 	and i.re_no=r.no and member_no=#{member_no}    
   </select>
   
-  <select id="">
-  	
-  </select>
+
   
 </mapper>

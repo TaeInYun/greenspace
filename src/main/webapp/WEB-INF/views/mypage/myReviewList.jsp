@@ -63,31 +63,33 @@ header#header div#header_box { text-align:center; padding:30px 0; }
 		<div class="section mypage">
 			<jsp:include page="../mypage/myAside.jsp"></jsp:include>
 			<main class="mypage-main">
-			<div class="filter">
-					<a href="/mypage/myCommentsList?no=${no}&filter=re_no">리뷰</a>
-					<a href="/mypage/myCommentsList?no=${no}&filter=commu_no">커뮤니티</a>
-					<a href="/mypage/myCommentsList?no=${no}&filter=ets_no">easyToStart</a>
-					<a href="/mypage/myCommentsList?no=${no}&filter=one_no">일대일 문의</a>
-					<a href="/mypage/myCommentsList?no=${no}&filter=pro_qna_no">상품문의</a>
-					<a href="/mypage/myCommentsList?no=${no}&filter=cer_no">챌린지</a>
-					<a href="/mypage/myCommentsList?no=${no}&filter=eco_no">에코매거진</a>
+			 		
 				 
-			</div>					
-				 
-		 			<c:forEach var="findAllCommentByMember_no" items="${findAllCommentByMember_no}">
-					
- 					<table>					 						 
-						<tr>
-								<td>${findAllCommentByMember_no.com_regdate}</td>				 
-								<td>${findAllCommentByMember_no.com_content}</td>				 
-							  	<td><a id="updateComments"  data-toggle="modal" data-target="#updateModal" role="button"  href="/board/updateComments?no=${findAllCommentByMember_no.no}&member_no=${findAllCommentByMember_no.member_no}&com_content=${findAllCommentByMember_no.com_content}">수정</a></td>
-								<td><a id="deleteComments"  data-toggle="modal" data-target="#deleteModal" role="button"  href="/board/deleteComments?no=${findAllCommentByMember_no.no}&member_no=${findAllCommentByMember_no.member_no}">삭제</a></td>
-						 </tr>		 
-						
-					</table>
- 				 	</c:forEach>
- 				 	
- 				 	
+		 		<table border="1" width="80%">
+				<tr>
+					 
+					<td>상품번호</td>
+					<td>리뷰제목</td>
+					<td>리뷰내용</td>
+					<td colspan=2>설정</td>
+					 
+				 	 
+				</tr>
+				<c:forEach var="findMyReview" items="${findMyReview }">
+					<tr> 
+						<td>${findMyReview.pro_no}</td>
+						<td>
+							${findMyReview.re_title} 					
+						</td>				 
+						<td>${findMyReview.re_content }</td>			
+						<td><a id="updateReview"  data-toggle="modal" data-target="#updateModal" role="button"  href="/shop/updateReview?no=${findMyReview.no}">수정</a></td>
+						<td><a id="deleteReview"  data-toggle="modal" data-target="#deleteModal" role="button"  href="/shop/deleteReview?no=${findMyReview.no}">삭제</a></td>
+									 
+					</tr>
+				</c:forEach>
+			</table> 	
+			
+			
  							<div id="deleteModal" class="modal fade" tabindex="-1" role="dialog"> 
 								<div class="modal-dialog"> 
 									<div class="modal-content"> 
@@ -101,6 +103,11 @@ header#header div#header_box { text-align:center; padding:30px 0; }
 									</div> 
 								</div> 
 						    </div>	
+		
+		 
+ 				 	
+ 				 	
+ 							 
 		
 		 
 			</main>

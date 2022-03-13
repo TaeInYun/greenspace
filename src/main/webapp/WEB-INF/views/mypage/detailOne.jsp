@@ -15,10 +15,6 @@
 #board{
 	margin-left: 30px;
 }
-
-#detail_board_table{
-	margin-top: 0px;
-}
 </style>
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
@@ -38,6 +34,7 @@ $(function(){
 		
 			<main class="mypage-main">
 				<jsp:include page="./myQnaHeader.jsp"></jsp:include>
+
 	
 	
 		<div id="commu_box">

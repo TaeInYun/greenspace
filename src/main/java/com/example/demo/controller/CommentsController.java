@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dao.CommentsDAO;
+import com.example.demo.dao.MemberDAO;
 import com.example.demo.vo.CommentsVO;
 
 
@@ -24,7 +25,11 @@ public class CommentsController {
 	
 	@Autowired
 	private CommentsDAO commentsdao; 
-	
+ 
+
+	@Autowired
+	private MemberDAO memberdao; 
+	 
 	@ResponseBody
 	@RequestMapping(value = "/insertComments")
 	public void  insertComments(String com_content, Integer member_no, Integer commu_no, 
@@ -91,15 +96,12 @@ public class CommentsController {
 	
 	
 	@RequestMapping("/mypage/myCommentsList")
-	public void findAllCommentByMember_no(int no, Model model){ 
-		 model.addAttribute("findAllCommentByMember_no", commentsdao.findAllCommentByMember_no(no));
-		 model.addAttribute("findAllCommentByMemberAndRe", commentsdao.findAllCommentByMemberAndRe(no));
-		 model.addAttribute("findAllCommentByMemberAndOne", commentsdao.findAllCommentByMemberAndOne(no));
-		 model.addAttribute("findAllCommentByMemberAndPro_no", commentsdao.findAllCommentByMemberAndPro_no(no));
-		 model.addAttribute("findAllCommentByMemberAndcommnu", commentsdao.findAllCommentByMemberAndcommnu(no));
-		 model.addAttribute("findAllCommentByMemberAndCer", commentsdao.findAllCommentByMemberAndCer(no));
-		 model.addAttribute("findAllCommentByMemberAndEco", commentsdao.findAllCommentByMemberAndEco(no));
-		 model.addAttribute("findAllCommentByMemberAndETS", commentsdao.findAllCommentByMemberAndETS(no));
-	}
+	public void findAllCommentByMember_no(int no, Model model,String filter){ 
+		model.addAttribute("no",no);
+		HashMap map = new HashMap();
+		map.put("no", no);		 
+		map.put("filter", filter);  
+		model.addAttribute("findAllCommentByMember_no", commentsdao.findAllCommentByMember_no(map));
+	 }
 	  
 }

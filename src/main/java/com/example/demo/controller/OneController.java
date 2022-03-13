@@ -157,8 +157,8 @@ public class OneController {
 		
 		@RequestMapping(value="/notice/insertOne", method= RequestMethod.POST)	
 		public ModelAndView insertProQna(OneVO o) {
-			System.out.println(o);
 			ModelAndView mav = new ModelAndView("redirect:/notice/listSearchOne");
+
 			dao.insert(o);
 			return mav;
 		}
@@ -171,8 +171,9 @@ public class OneController {
 		
 		@RequestMapping(value="/notice/updateOne", method=RequestMethod.POST)
 		public ModelAndView updateProQna(OneVO o) {
-			System.out.println(o);
+
 			ModelAndView mav = new ModelAndView("redirect:/notice/listSearchOne");
+			
 			dao.update(o);
 			return mav;
 		}

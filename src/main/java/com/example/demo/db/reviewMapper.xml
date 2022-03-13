@@ -19,6 +19,11 @@
   	 select count(*)count,avg(re_rate)avg from review where pro_no=#{no}
   </select>
   
+  
+  <select id="findMyReview" resultType="reviewVO" >
+  		select * from review where member_no=#{no}
+  </select>
+  
   <insert id="insert" parameterType="reviewVO">
   	insert into review(
   	no,
