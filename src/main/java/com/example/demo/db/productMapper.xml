@@ -138,8 +138,7 @@
              0,             
     #{pro_content},
     #{cat_code},
-    #{PRO_THUMBNAIL2},
-    #{PRO_THUMBNAIL1}
+    #{PRO_THUMBNAIL}
     )
   </insert>
  
