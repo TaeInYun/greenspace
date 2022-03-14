@@ -31,7 +31,7 @@ function requestPay(cnt, arr_cartNo) {
 	let totalPrice = $("#payPrice").text();
 	let addr_no = $("input[name=addr_no]").val();
 	let receiver_no = $("input[name=receiver_no]").val();
-	
+
 	if(addr_no == null){
 		addr_no = 0;
 	}
@@ -93,6 +93,7 @@ function requestPay(cnt, arr_cartNo) {
 						receiver: receiver
 					}
 					
+					console.log(data)
 				$.ajax({
 						url: "/shop/resultOrder",
 						type: "post",

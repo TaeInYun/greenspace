@@ -31,6 +31,10 @@
 		if("${receiverInfo[7]}" == "receiver_no"){
 			$("#newAddr").attr("checked", true);
 			$("#receiverNo").attr("name", "receiver_no");
+			$("#receiverInfo input").attr("readonly", false);
+			$("input[name=addr_postal]").attr("style", "width:57%; display:inline;margin:0px;");
+			$("input[name=addr_msg]").attr("type", "text").attr("placeholder","배송 요청메세지를 입력해주세요");
+			$("input[name=kakao-search]").attr("type", "button").attr("style","width:20%;display:inline;margin:0px 5px;").val("검색");
 		}else{
 			$("#basicAddr").attr("checked", true);
 			$("#receiverNo").attr("name", "addr_no");
@@ -188,7 +192,7 @@
 						<input type="text" readonly="readonly" class="receiverInfo" name="name" value="${receiverInfo[1]}" placeholder="수령인">
 						<input type="text" readonly="readonly" class="receiverInfo" name="phone" value="${receiverInfo[2]}" placeholder="연락처">
 						<div class="address_search">
-							<input type="text" readonly="readonly" style="margin:0" class="receiverInfo" name="addr_postal" value="${info.addr_postal }" placeholder="우편번호">
+							<input type="text" readonly="readonly" style="margin:0" class="receiverInfo" name="addr_postal" value="${receiverInfo[3]}" placeholder="우편번호">
 							<input type="hidden" name="kakao-search"  value="찾기" onclick="kakaopost()">
 						</div>
 						<input type="text" readonly="readonly" class="receiverInfo" name="addr_road" value="${receiverInfo[4]}"placeholder="주소">

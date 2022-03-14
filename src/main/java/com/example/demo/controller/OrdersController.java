@@ -87,9 +87,11 @@ public class OrdersController {
 		
 		data.getOrders().setMember_no(member_no);
 		OrdersVO o = data.getOrders();
-		if((data.getReceiver()).getNo() != 0) {
+		
+		if(data.getOrders().getReceiver_no() != 0) {
 			receiverDAO.insertReceiver(data.getReceiver());
 			o.setReceiver_no(receiverDAO.maxOfNo());
+			System.out.println("receiverNo: " + o);
 		}
 		
 		int point_save = data.getOrders().getPoint_save();

@@ -13,7 +13,7 @@ function kakaopost(){
 function chooseNewAddr(){
 	$("#receiverInfo input").val("");
 	$("#receiverInfo input").attr("readonly", false);
-	$("#receiverNo").attr("name", "receiver_no").val(0);
+	$("#receiverNo").attr("name", "receiver_no").val(-1);
 	$("input[name=addr_postal]").attr("style", "width:57%; display:inline;margin:0px;");
 	$("input[name=addr_msg]").attr("type", "text").attr("placeholder","배송 요청메세지를 입력해주세요");
 	$("input[name=kakao-search]").attr("type", "button").attr("style","width:20%;display:inline;margin:0px 5px;").val("검색");
