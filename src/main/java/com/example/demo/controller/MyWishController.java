@@ -33,6 +33,9 @@ public class MyWishController {
 	
 	@Autowired
 	private MyWishDAO dao_mywish;
+	
+	@Autowired
+	private AddressDAO dao_address;
 
 	@Autowired
 	private OrderListDAO dao_orderList;
@@ -94,6 +97,7 @@ public class MyWishController {
 		session.setAttribute("receiverInfo", receiverInfo);
 		session.setAttribute("orderInfo", orderInfo);
 		session.setAttribute("point", mb.getPoint_use());
+		session.setAttribute("mainAddr", dao_address.getMainAddress(m.getNo()));
 	}
 	
 	@RequestMapping(value = "/shop/order_form", method = RequestMethod.GET)

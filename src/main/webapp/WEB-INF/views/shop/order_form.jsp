@@ -82,14 +82,24 @@
 		
 		$("#basicAddr").click(function(){
 			chooseBasicAddr();
-
-			$("input[name=addr_no]").val(${receiverInfo[0]});
-			$("input[name=name]").val("${receiverInfo[1]}");
-			$("input[name=phone]").val("${receiverInfo[2]}");
-			$("input[name=addr_postal]").val("${receiverInfo[3]}");
-			$("input[name=addr_road]").val("${receiverInfo[4]}");
-			$("input[name=addr_detail]").val("${receiverInfo[5]}");
-			$("input[name=addr_msg]").val("${receiverInfo[6]}");
+			
+			if("${receiverInfo[7]}" == "addr_no"){
+				$("input[name=addr_no]").val(${receiverInfo[0]});
+				$("input[name=name]").val("${receiverInfo[1]}");
+				$("input[name=phone]").val("${receiverInfo[2]}");
+				$("input[name=addr_postal]").val("${receiverInfo[3]}");
+				$("input[name=addr_road]").val("${receiverInfo[4]}");
+				$("input[name=addr_detail]").val("${receiverInfo[5]}");
+				$("input[name=addr_msg]").val("${receiverInfo[6]}");
+			}else{
+				$("input[name=addr_no]").val(${mainAddr.no});
+				$("input[name=name]").val("${mainAddr.addr_receiver}");
+				$("input[name=phone]").val("${mainAddr.addr_phone}");
+				$("input[name=addr_postal]").val("${mainAddr.addr_postal}");
+				$("input[name=addr_road]").val("${mainAddr.addr_road}");
+				$("input[name=addr_detail]").val("${mainAddr.addr_detail}");
+				$("input[name=addr_msg]").val("${mainAddr.addr_msg}");
+			}
 		});
 		// "결제"
 		$("#pay").click(function(){
