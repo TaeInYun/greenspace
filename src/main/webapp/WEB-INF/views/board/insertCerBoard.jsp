@@ -67,7 +67,7 @@ $(function(){
 <div id="container">
 	<div>
 	<div id="wirte_title">
-	<h2>자유게시판 작성</h2>
+	<h2>인증게시판 작성</h2>
 	<i class="material-icons" style="font-size: 14px; color:green; padding-top: 10px;">&#xe001; 하루에 한번만 작성 가능합니다.</i>
 	</div>	
 	
