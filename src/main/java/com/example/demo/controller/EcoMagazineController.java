@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
+import com.example.demo.dao.CommentsDAO;
 import com.example.demo.dao.EcoMagazineDAO;
 
 import lombok.Setter;
@@ -21,7 +21,9 @@ public class EcoMagazineController{
 	
     @Autowired
     private EcoMagazineDAO dao;
-	
+    
+    @Autowired
+    private CommentsDAO commmentsdao;
 	//@GetMapping("/ecoMagazine/ecoMagazineInfo")
 	//public void listInfo() {
 	//	
@@ -48,8 +50,9 @@ public class EcoMagazineController{
 	    public void detail(int no, Model model) {
 	    	dao.updateEcoMagazineHit(no);
 	        model.addAttribute("e", dao.findEcoMagazineByNo(no));
+	        model.addAttribute("comments", commmentsdao.findAllCommentByEco_no(no));
 	        
-	    }
+	   }
 	
 	
 }

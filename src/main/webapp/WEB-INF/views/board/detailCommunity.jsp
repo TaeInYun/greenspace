@@ -179,7 +179,7 @@
 					    </div>	
 					</div>
 					<div id="comment_box">
-	  					<input id="cer_no" type="hidden" value="${c.no}">
+	  					<input id=commu_no type="hidden" value="${c.no}">
 						<input id="member_no" type="hidden" value="${m.no}">		
 						<textarea class="form-control" id="com_content" rows="3" id="commentContent" placeholder="댓글을 입력하세요."></textarea> 
 	 					<button id="insertComments">댓글작성</button>	

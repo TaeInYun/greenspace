@@ -33,6 +33,10 @@ public class CommentsDAO {
 	public List<CommentsVO> findAllCommentByRe_no(int no) {
 		return DBManager.findAllCommentByRe_no(no);
 	}
+	
+	public List<CommentsVO> findAllCommentByEco_no(int no) {
+		return DBManager.findAllCommentByEco_no(no);
+	}
 	 
 	public int deleteComments(HashMap map){
 		return DBManager.deleteComments(map);

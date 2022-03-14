@@ -1583,6 +1583,13 @@ public class DBManager {
 			 return list;
 		}
 
+		public static List<CommentsVO> findAllCommentByEco_no(int no) {
+			 SqlSession session = factory.openSession();
+			 List<CommentsVO> list = session.selectList("comments.findAllCommentByEco_no", no);
+			 session.close();
+			 return list;
+		}
+
 		 
 	 
 		

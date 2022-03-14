@@ -55,6 +55,13 @@
         where m.no=c.member_no and
 		re_no=#{re_no}
 	</select>
+	
+	<select id="findAllCommentByEco_no" resultType="commentsVO">
+		select c.no, TO_CHAR(com_regdate,'yyyy/mm/dd')com_regdate,nickname, com_content,member_no
+		from member m, comments c
+        where m.no=c.member_no and
+		eco_no=#{eco_no}
+	</select>
   
 	<delete id="deleteComments">		 
 		delete comments where no=#{no} and member_no=#{member_no}

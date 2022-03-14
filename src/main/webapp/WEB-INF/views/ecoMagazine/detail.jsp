@@ -21,14 +21,15 @@
 <script type="text/javascript">
 
 	 $(function(){
+		
 			 $("#insertComments").click(function () {		 
-				 let ets_no = $("#eco_no").val();
+				 let eco_no = $("#eco_no").val();
 				 let member_no = $("#member_no").val();
 				 let com_content = $("#com_content").val();
 					 
 				 let data={
 					 com_content:com_content,
-					 ets_no:ets_no,			
+					 eco_no:eco_no,			
 					 member_no:member_no				 
 				 }		 
 				 
@@ -109,28 +110,36 @@
 					</div>
 					
 					<!-- ----댓글------ -->
-					
 					<div id="comment_box">
-	  					<input id="cer_no" type="hidden" value="${c.no}">
+	  					<input id="eco_no" type="hidden" value="${e.no}">
 						<input id="member_no" type="hidden" value="${m.no}">		
 						<textarea class="form-control" id="com_content" rows="3" id="commentContent" placeholder="댓글을 입력하세요."></textarea> 
 	 					<button id="insertComments">댓글작성</button>	
 					</div>
 
-					<div id="comment_list">			 
+					<div id="comment_list">
 						<c:forEach var="comments" items="${comments}"> 
-						 <table>
-						 	<tbody>
-								<tr> 
-									<td id="${comments.member_no}">${comments.nickname}</td>
-									<td>${comments.com_regdate}</td>
-									<td id="com_content">${comments.com_content}</td>
-									<td><a id="updateComments"  data-toggle="modal" data-target="#updateModal" role="button"  href="/board/updateComments?no=${comments.no}&member_no=${m.no}&com_content=${comments.com_content}">수정</a></td>
-									<td><a id="deleteComments"  data-toggle="modal" data-target="#deleteModal" role="button"  href="/board/deleteComments?no=${comments.no}&member_no=${m.no}">삭제</a></td>
-								<tr>	 
-							</tbody>
-							</table>
-					  		</c:forEach>
+						<div class="comment_form">
+							<div id="${comments.member_no}" class="comments_nickname">
+								${comments.nickname}
+								<div class="comment_regdate">
+									${comments.com_regdate}
+								</div>  
+							</div>
+							
+								
+							<div class="comments_content">
+								 ${comments.com_content}
+							</div>
+							<div class="comment_btn">
+							<c:if test="${m.no == comments.member_no}">
+								<a id="updateComments"  data-toggle="modal" data-target="#updateModal" role="button"  href="/board/updateComments?no=${comments.no}&member_no=${m.no}&com_content=${comments.com_content}"><button>수정</button></a>
+								<a id="deleteComments"  data-toggle="modal" data-target="#deleteModal" role="button"  href="/board/deleteComments?no=${comments.no}&member_no=${m.no}">		<button>삭제</button></a>
+							</c:if>
+							</div>
+						</div>
+							
+						</c:forEach>
 				
 						<div id="deleteModal" class="modal fade" tabindex="-1" role="dialog"> 
 							<div class="modal-dialog"> 

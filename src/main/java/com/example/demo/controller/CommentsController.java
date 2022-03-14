@@ -34,7 +34,7 @@ public class CommentsController {
 	@RequestMapping(value = "/insertComments")
 	public void  insertComments(String com_content, Integer member_no, Integer commu_no, 
 			Integer cer_no, Integer ets_no, 
-			Integer pro_qna_no,Integer one_no, Integer re_no ){		
+			Integer pro_qna_no,Integer one_no, Integer re_no, Integer eco_no ){		
 		HashMap map = new HashMap();
 		map.put("com_content", com_content);
 		map.put("member_no", member_no);
@@ -44,6 +44,7 @@ public class CommentsController {
 		map.put("pro_qna_no", pro_qna_no);			
 		map.put("one_no", one_no);			
 		map.put("re_no", re_no);			
+		map.put("eco_no", eco_no);			
 	    int re = commentsdao.insertComments(map);
 	}
 	
