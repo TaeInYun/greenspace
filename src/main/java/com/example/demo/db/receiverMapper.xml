@@ -16,5 +16,10 @@
 	WHERE
 	no = #{receiver_no}
   </select>
-  
+  <insert id="insertReceiver" parameterType="addressVO">
+  	insert into receiver values(seq_receiver.nextval, #{receiver_name}, #{receiver_phone}, #{receiver_postal}, #{receiver_addr}, #{receiver_detail}, #{receiver_msg})
+  </insert>
+  <select id="maxOfNo" resultType="Integer">
+  	select max(no) AS receiver_no from receiver
+  </select>
 </mapper>

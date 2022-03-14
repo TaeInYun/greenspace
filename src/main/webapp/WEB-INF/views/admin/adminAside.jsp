@@ -67,7 +67,7 @@ $(function(){
 					</ul>
 			</div>
 			
-			<li><a href="">챌린지관리</a></li>
+			<li><a href="/admin/listChg">챌린지관리</a></li>
 			 
 				
 		 

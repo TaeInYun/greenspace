@@ -48,20 +48,20 @@ table {
 </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"><!-- 모달창 -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link href="/css/admin.css" rel="stylesheet"/>
 <link rel="stylesheet" href="/css/style.css">
+<link href="/css/admin.css" rel="stylesheet"/>
 <script type="text/javascript" src="/js/qty.js"></script>
 <script type="text/javascript" src="/js/cart.js"></script>
  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
- $function(){
+$(function(){
 	  
 	 $("#deleteProduct").find(".modal-content").load("/admin/deleteProduct?no=${p.no }"); 
 	 $("#updateProduct").find(".modal-content").load("/admin/updateProduct?no=${p.no }"); 
 	 
- }
+ })
 </script>
 </head>
 <body>
@@ -113,8 +113,6 @@ table {
 									<td>${p.pro_saleprice }</td>
 									<td>${p.pro_stock }</td>
 								 
-									 
-							 
  
 									<td> <a id="updateProduct" data-toggle="modal" data-target="#updateModal" role="button" href="/admin/updateProduct?no=${p.no }">수정</a></td>
 									<td> <a id="deleteProduct" data-toggle="modal" data-target="#deleteModal" role="button" href="/admin/deleteProduct?no=${p.no }">삭제</a></td>

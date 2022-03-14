@@ -23,10 +23,10 @@
 <body>
  
 	<ul  class="mypage_aside">			 
-		<li class="mypage_aside-li"><a href="/mypage/memberInfo">회원정보</a></li><br>
+		<li class="mypage_aside-li"><a href="/mypage/memberInfo" class="myInfo">회원정보</a></li><br>
 		<li class="mypage_aside-li"><a href="/mypage/myOrder" class="myShopping">내 쇼핑</a></li><br>
-		<li class="mypage_aside-li"><a href="/mypage/myChallenge">녹지활동</a></li><br>
-		<li class="mypage_aside-li"><a href="/mypage/listQna">문의내역</a></li>
+		<li class="mypage_aside-li"><a href="/mypage/myChallenge" class="myActive">녹지활동</a></li><br>
+		<li class="mypage_aside-li"><a href="/mypage/listQna" class="myQna">문의내역</a></li>
 	</ul>
  
 </body>

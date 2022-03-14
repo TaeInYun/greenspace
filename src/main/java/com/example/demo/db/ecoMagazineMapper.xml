@@ -13,7 +13,7 @@
   	</select>
   	
   	<select id="findEcoMagazineLike" resultType="integer">
-  		select eco_like from ecomagazine where no=#{no}
+  		select eco_like from ecoMagazine where no=#{no}
   	</select>
   
  	 <update id="updateEcoMagazineHit">
@@ -21,7 +21,7 @@
   	</update>
   	
 	<update id="updateEcoMagazineLike">
-  		update ecomagazine set ets_hit=ets_hit+1 where no=#{no}
+  		update ecomagazine set eco_like=eco_like+1 where no=#{no}
   	</update>
 
 

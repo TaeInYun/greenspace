@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/css/style.css">
 <title>Insert title here</title>
+<script  type="text/javascript" src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 <script type="text/javascript" src="/js/order.js"></script>
@@ -26,6 +27,18 @@
 				$("#usePoint").val( 0  );
 			}
 		})
+		
+		if("${receiverInfo[7]}" == "receiver_no"){
+			$("#newAddr").attr("checked", true);
+			$("#receiverNo").attr("name", "receiver_no");
+			$("#receiverInfo input").attr("readonly", false);
+			$("input[name=addr_postal]").attr("style", "width:57%; display:inline;margin:0px;");
+			$("input[name=addr_msg]").attr("type", "text").attr("placeholder","배송 요청메세지를 입력해주세요");
+			$("input[name=kakao-search]").attr("type", "button").attr("style","width:20%;display:inline;margin:0px 5px;").val("검색");
+		}else{
+			$("#basicAddr").attr("checked", true);
+			$("#receiverNo").attr("name", "addr_no");
+		}
 		
 		$(document).on("focusout", $("#usePoint"), function(){
 			
@@ -69,7 +82,7 @@
 		
 		$("#basicAddr").click(function(){
 			chooseBasicAddr();
-			
+
 			$("input[name=addr_no]").val(${receiverInfo[0]});
 			$("input[name=name]").val("${receiverInfo[1]}");
 			$("input[name=phone]").val("${receiverInfo[2]}");
@@ -78,17 +91,24 @@
 			$("input[name=addr_detail]").val("${receiverInfo[5]}");
 			$("input[name=addr_msg]").val("${receiverInfo[6]}");
 		});
-		
 		// "결제"
 		$("#pay").click(function(){
-			let cnt = ${rownum}
-			let arr = document.getElementsByClassName("cart_no");
-			let arr_cartNo = new Array();
 			
-			for( let i = 0; i < arr.length; i++){
-				arr_cartNo.push( $(arr[i]).val() );
-			} 
-			requestPay(cnt, arr_cartNo);
+			if($("#accept").is(":checked")){
+				let cnt = ${rownum}
+				let arr = document.getElementsByClassName("cart_no");
+				let arr_cartNo = new Array();
+				
+				for( let i = 0; i < arr.length; i++){
+					arr_cartNo.push( $(arr[i]).val() );
+				} 
+				
+				requestPay(cnt, arr_cartNo);
+			}else{
+				alert("개인정보 수집에 동의해주세요.");
+				$(".cashInfo-accept").attr("style", "background:yellow; color:red;");
+			}
+			
 		});
 	});
 </script>
@@ -161,17 +181,20 @@
 				<div id="receiver">
 					<h5>배송지</h5>
 					<div class="receiver-radio">
-						<input type="radio" name="address"  id="basicAddr" checked="checked">
+						<input type="radio" name="address"  id="basicAddr">
 						<label for="basicAddr">기본 배송지</label>
 						<button type="button" id="changeAddr">주소록</button>
 						<input type="radio" name="address"  id="newAddr">
 						<label for="newAddr">신규 배송지</label>
 					</div>
 					<div id="receiverInfo">
-						<input type="hidden" id="receiverNo" class="receiverInfo" name="addr_no" value="${receiverInfo[0]}">
+						<input type="hidden" id="receiverNo" class="receiverInfo" name="${rceiverInfo[7]}" value="${receiverInfo[0]}">
 						<input type="text" readonly="readonly" class="receiverInfo" name="name" value="${receiverInfo[1]}" placeholder="수령인">
 						<input type="text" readonly="readonly" class="receiverInfo" name="phone" value="${receiverInfo[2]}" placeholder="연락처">
-						<input type="text" readonly="readonly" class="receiverInfo" name="addr_postal" value="${receiverInfo[3]}" placeholder="우편번호">
+						<div class="address_search">
+							<input type="text" readonly="readonly" style="margin:0" class="receiverInfo" name="addr_postal" value="${receiverInfo[3]}" placeholder="우편번호">
+							<input type="hidden" name="kakao-search"  value="찾기" onclick="kakaopost()">
+						</div>
 						<input type="text" readonly="readonly" class="receiverInfo" name="addr_road" value="${receiverInfo[4]}"placeholder="주소">
 						<input type="text" readonly="readonly"class="receiverInfo"  name="addr_detail" value="${receiverInfo[5]}" placeholder="상세주소">
 						<input type="hidden" name="addr_msg" class="receiverInfo" value="${receiverInfo[6]}">

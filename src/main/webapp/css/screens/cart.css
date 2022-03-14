@@ -93,7 +93,7 @@
 
 #receiver{
 	background: #F3F3F3;
-	height: 350px;
+	height: 391px;
 	border-radius: 15px;
 }
 
@@ -101,6 +101,12 @@
 	display: block;
 	margin: 20px auto;
 	width: 80%;
+}
+.address_search{
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
 }
 
 .receiver-radio{

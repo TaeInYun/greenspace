@@ -148,7 +148,7 @@ $(function(){
 	//인증글 쓰러가기 클릭
 	$("#insertCerBtn").on("click",function(){
 	//	let member_no = $( $(document).find("input[name=member_no]")).val();
-		window.open("/board/insertCerBoard",'인증글 작성','width=500px,height=600px,menubar=0');
+		location.href = "/board/insertCerBoard"
 
 	});
 	

@@ -24,7 +24,7 @@
 	 
 		$( $(".nav-btn")[0] ).attr("style", "background: #00913A;");
 		$( $(".nav-btn .nav-btn__text")[0] ).attr("style", "color:white");
-	 
+	 	
 	 
 		 $("#insertComments").click(function () {		 
 			 let commu_no = $("#commu_no").val();
@@ -155,7 +155,7 @@
 						<td><a id="updateComments"  data-toggle="modal" data-target="#updateModal" role="button"  href="/board/updateComments?no=${comments.no}&member_no=${m.no}&com_content=${comments.com_content}">수정</a></td>
 						<td><a id="deleteComments"  data-toggle="modal" data-target="#deleteModal" role="button"  href="/board/deleteComments?no=${comments.no}&member_no=${m.no}">삭제</a></td>
 					 
-					<tr>	 
+					</tr>	 
 				</tbody>
 			</table>
 	  	</c:forEach>

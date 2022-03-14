@@ -15,7 +15,6 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="/js/imginsert.js"></script>
 <script type="text/javascript">
 $(function(){
 	
@@ -68,7 +67,7 @@ function readURL(input) {
 <title>녹지공간- 인증 게시판</title>
 </head>
 <body>
-
+<div id="root">
 <div id="container">
 	<div>
 	<div id="wirte_title">
@@ -184,6 +183,8 @@ function readURL(input) {
 			</div>
        </form>
 	</div>
+</div>
+</div>
 </div>
 </body>
 </html>

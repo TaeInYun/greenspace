@@ -4,69 +4,116 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/board.css">
+<link rel="stylesheet" href="/css/components/search.css">
 <style type="text/css">
-.content{
-width: 200px;
-white-space: normal;
-display: -webkit-box;
--webkit-line-clamp:3;
--webkit-box-orient:vertical;
-overflow:hidden;
+
+#board{
+	margin-left: 30px;
 }
 
-ul, li { margin:0; padding:0; list-style:none; } 
+#detail_board_table{
+	margin-top: 0px;
+}
 
-div#root { width:100%; margin:0 auto; }		 
-section#content ul li { display:inline-block; margin:10px; }
 </style>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>녹지공간-인증 게시판</title> 
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+ $(function(){
+		$( $(".nav-btn")[0] ).attr("style", "background: #00913A;");
+		$( $(".nav-btn .nav-btn__text")[0] ).attr("style", "color:white");
+		$(".myActive").attr("style","background: #00913A; font-weight:800; color: white; padding: 5px 15px; border-radius: 20px;");
+
+ })
+ </script>
  
 </head>
 <body>
-	<div id="header">
-		<jsp:include page="../header.jsp"/>
-	</div>
-	
-<section id="content">
+<div id="root">
+		<jsp:include page="../header.jsp"></jsp:include>
+		<div class="section mypage">
+			<jsp:include page="../mypage/myAside.jsp"></jsp:include>
+			<main class="mypage-main">
+				<jsp:include page="./myActiveHeader.jsp"></jsp:include>
+			
+			<div id="commu_box">
+					<div id="search_form">
+						<form action="/board/listCommunity" method="post">
+						<div class="searchColumn_wrap">
+								<select name="searchColumn" id="searchColumn">
+									<option value="commu_title">제목</option>
+									<option value="commu_content">본문</option>
+									<option value="nickname">작성자</option>
+								</select>
+						</div>		
+								<div class="search_keyword_form">
+									 <input class="keyword" type="text" name="keyword"  placeholder="검색어 입력">
+									  <img id="icon" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+								</div>
+						
+						</form>
+					</div>
+				</div>
 
-		 <table id="chgTable" border="1" width="50%">
-			<tr>
-				<td>완료한 챌린지 목록</td>
-			</tr>
-			<tr>
-				<c:if test="${c.chg_title1 ne null }">
-				<td>${c.chg_title1 }</td>
-				</c:if>
-				<c:if test="${c.chg_title2 ne null }">
+		<div id="board">
+	 	<table id="detail_board_table">
+		 <tr>
+			<td>
+				<span>LV ${c.levels} ${c.nickname}</span>
+			</td>
+		</tr>	
+		
+		<tr>
+			<td>
+				
+				<span>좋아요${c.cer_like}</span>
+				<span> | </span>
+				<span>조회수 ${c.cer_hit}</span>
+				<span> | </span>				
+				<span>${c.cer_status}</span>	
+				<span> | </span>	
+				<span><fmt:formatDate value="${c.cer_date}" pattern="yy.MM.dd"/></span>
+						
+			</td>
+		</tr>
+
+		<tr>
+		<td>
+		<div id="chgTable_box">
+			<table id="chgTable">
+
+				<thead>
 				<tr>
-				<td>${c.chg_title2 }</td>
+					<td >완료한 챌린지 목록</td>
 				</tr>
-				</c:if>
-				<c:if test="${c.chg_title3 ne null }">
+				</thead>	
+				
+				<tbody>
 				<tr>
-				<td>${c.chg_title3 }</td>
-				</tr>
-				</c:if>
-			</tr>
+					<c:if test="${c.chg_title1 ne null }">
+					<td>${c.chg_title1 }</td>
+					</c:if>
+					<c:if test="${c.chg_title2 ne null }">
+					<tr>
+					<td>${c.chg_title2 }</td>
+					</tr>
+					</c:if>
+					<c:if test="${c.chg_title3 ne null }">
+					<tr>
+					<td>${c.chg_title3 }</td>
+					</tr>
+					</c:if>
+				</tr>	
+				</tbody>	
 			</table>
-	 
-		<div class="nickname">
-		<span>LV ${c.levels} ${c.nickname}</span>
 		</div>
-		<div class="date">
-		<span><fmt:formatDate value="${c.cer_date}" pattern="yy.MM.dd"/></span>
-		</div>
-		<div class="hit">
-		<span>조회수  ${c.cer_hit}</span>
-		</div>	
-		<div class="like">
-		<span>좋아요  ${c.cer_like}</span>
-		</div>		
-		<span>${c.cer_status}</span>		
-		<div class="content">
-		<span>${c.cer_content}</span>
-		</div>	
+		
+			<div id="board_content">
+			<p>${c.cer_content}</p>
+			
 		
 		 <c:if test="${c.cer_thumbnail ne null }">
 		<div class="cer_thumbnail">
@@ -81,13 +128,35 @@ section#content ul li { display:inline-block; margin:10px; }
 	        <br><br><br>
 	    </c:forEach>         
 	</div>
-				 
-</section>	
-
-<!--<c:if test="${m.nickname == c.nickname}"></c:if>-->
-<a href="/board/updateCerBoard?no=${c.no }">글수정</a>
-<a href="/board/deleteCerBoard?no=${c.no }">글삭제</a>
-
-
+	</div>
+	</td>	
+	</tr>
+</table>
+	<div id="board_btn">
+		<c:if test="${m.nickname == c.nickname}">
+		<a href="/board/updateCerBoard?no=${c.no }"><button>글수정</button></a>
+		<a href="/board/deleteCerBoard?no=${c.no }"><button>글삭제</button></a>
+		</c:if>
+		<a href="/mypage/myCerBoard"><button>글목록</button></a>		
+	</div>
+	
+<!-- ----댓글------ -->
+	<div id="comment_list">			 
+		<c:forEach var="comments" items="${comments}"> 
+		 <table>
+		 	 <tbody>
+					<tr> 
+						<td id="${comments.member_no}">${comments.nickname}</td>
+						<td>${comments.com_regdate}</td>
+						<td id="com_content">${comments.com_content}</td>
+					</tr>	 
+				</tbody>
+			</table>
+	  	</c:forEach>
+		</div>
+			
+			</main>
+		</div>
+	</div>
 </body>
 </html>

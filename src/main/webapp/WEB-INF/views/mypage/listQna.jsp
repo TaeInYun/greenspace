@@ -7,28 +7,21 @@
 <head>
 <meta charset="UTF-8"> 
   
-<title>Insert title here</title>
-
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
- <script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
-  <link rel="stylesheet" href="/css/style.css">
+<title>녹지공간-마이페이지 상품문의</title>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  -->
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/board.css">
+<link rel="stylesheet" href="/css/components/search.css">
 <style type="text/css">
 
-.mypage_aside {
-    width: 12%; 
-    margin: 5px;
-    border-right: 1px solid #eee;
-    padding-right: 5px;
+#board{
+	margin-left: 30px;
 }
 
 </style>
-
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 
 var selectBoxChange = function(value){
@@ -63,19 +56,27 @@ $(function() {
 		<main class="mypage-main">
 				<jsp:include page="./myQnaHeader.jsp"></jsp:include>
 	
-	<section id="content">
-	<form action="/mypage/listQna" method="post">						
-						 	<select name="searchColumn">							 							 		
+ 	<div id="commu_box">
+			<div id="search_form">	
+				<form action="/mypage/listQna" method="post">
+						<div class="searchColumn_wrap">						
+						 	<select name="searchColumn" id="searchColumn">							 							 		
 								<option value="QSZ">사이즈</option>
 								<option value="QDE">배송관련</option>
 								<option value="QRE">재입고</option>
 								<option value="QDT">상품상세</option>
 							</select>
-						 	<input type="submit" value="검색">
-						 	</form>
-						 	
-						 	
-					<table border="1" width="80%">
+						 </div>	
+						 		<div class="search_keyword_form">
+									 <input class="keyword" type="text" name="keyword"  placeholder="검색어 입력">
+									  <img id="icon" src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+								</div>
+					</form>
+			</div> 	
+		
+		</div>							 	
+		<div id="board">				 	
+					<table>
 					<thead>
 							<tr>
 								
@@ -89,6 +90,15 @@ $(function() {
 								
 							</tr>
 					</thead>
+					<tbody>	
+						<tr >
+						<c:if test="${empty q }">
+							<td colspan="5" style="height: 400px">
+								문의내역이 없습니다.
+							</td>
+						</c:if>	
+						<tr>
+						
 							<c:forEach var="q2" items="${q }">
 								<tr>													
 									<%-- <td><img  src="/upload/qna/${q2.img_name }" width="100" height="100">${q2.img_name }</td> --%>
@@ -109,31 +119,23 @@ $(function() {
 			  			 						</div> 
 			  			 					</div> 
 			  			 		   		</div>
-									</td>
-								 
-									 
-									
-												  			 		     
-							</tr>	
-								
-								
-								
+									</td>				  			 		     
+							</tr>			
 					</c:forEach>
-							
-						</table>	
-						<c:forEach var="i" begin="1" end="${totalPage }">
+					</tbody>
+				</table>	
+			</div>
+		
+		<div id="paging">
+		<ul>
+			<c:forEach var="i" begin="1" end="${totalPage }">
 							<a href="listQna?pageNUM=${i }">${i }</a>&nbsp;&nbsp;
-						</c:forEach> 
-						</section>
-						</main>
-						
-						
-						</div>
-						
-						
-						</div>	
-						
-						
-	
-</body>
+			</c:forEach> 
+		</ul>
+		</div>
+			
+			</main>
+		</div>
+	</div>
+</body>						
 </html>

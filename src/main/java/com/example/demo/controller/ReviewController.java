@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -124,7 +125,7 @@ public class ReviewController {
 			System.out.println("updateReview 동작함.");
 			System.out.println(r);
 			
-			ModelAndView mav = new ModelAndView("redirect:/admin/listReview");
+			ModelAndView mav = new ModelAndView("redirect:/mainpage/member");
 			String path = request.getRealPath("upload/review");
 			String oldFname = r.getRe_thumbnail();
 			MultipartFile uploadFile = r.getUploadFile();
@@ -141,6 +142,7 @@ public class ReviewController {
 			}catch (Exception e) {
 				// TODO: handle exception
 			}
+			
 			
 			int re=dao.update(r);
 			if(re ==1) {
@@ -171,7 +173,7 @@ public class ReviewController {
 		public ModelAndView delete(HttpServletRequest request, int no) {
 			String oldFname = dao.findAllDetail(no).getRe_thumbnail();
 			
-			ModelAndView mav = new ModelAndView("redirect:/admin/listReview");
+			ModelAndView mav = new ModelAndView("redirect:/mainpage/member");
 			int re = dao.delete(no);
 			if(re == 1) {
 				String path = request.getRealPath("upload/review");
@@ -188,8 +190,13 @@ public class ReviewController {
 		
 
 		@RequestMapping("/mypage/myReviewList")
-		public void myReviewList(Model model,int no) {	
-			model.addAttribute("no",no);
-			model.addAttribute("findMyReview", dao.findMyReview(no));
+		public void myReviewList(Model model,HttpSession session) {	
+			
+			int member_no = ((MemberVO)session.getAttribute("m")).getNo();	//회원이 로그인 했을때 회원 번호를 m에 넣어서 상태유지 하는것을 가지고옴
+			
+			HashMap map = new HashMap();
+			map.put("member_no",member_no);
+			
+			model.addAttribute("findMyReview", dao.findMyReview(map));
 		}	
 }

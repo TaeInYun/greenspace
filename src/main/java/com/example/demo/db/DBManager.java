@@ -734,6 +734,7 @@ public class DBManager {
 	public static List<OrderListVO> findAllOrderListByMemberNo(HashMap map) {
 		
 		SqlSession session = factory.openSession();
+		System.out.println("주문내역조회에 담긴 MAP: "+map);
 		List<OrderListVO> o = session.selectList("orderList.findAllOrderListByMemberNo", map);
 		session.close();
 		return o;
@@ -1320,6 +1321,20 @@ public class DBManager {
 			session.close();
 			return r;
 		}
+		public static int maxOfNo() {
+			SqlSession session = factory.openSession();
+			int no = session.selectOne("receiver.maxOfNo");
+			session.close();
+			return no;
+		}
+		
+		public static int insertReceiver(ReceiverVO r) {
+			SqlSession session = factory.openSession();
+			int re = session.insert("receiver.insertReceiver", r);
+			session.commit();
+			session.close();
+			return re;
+		}
 		
 		
 		//-------------IMG (파일)------------
@@ -1561,9 +1576,9 @@ public class DBManager {
 			 return list;
 		}
 
-		public static List<ReviewVO> findMyReview(int no) {
+		public static List<ReviewVO> findMyReview(HashMap map) {
 			 SqlSession session = factory.openSession();
-			 List<ReviewVO> list = session.selectList("review.findMyReview", no);
+			 List<ReviewVO> list = session.selectList("review.findMyReview", map);
 			 session.close();
 			 return list;
 		}

@@ -92,7 +92,7 @@ public class OneController {
 		}
 	
 	// 디테일
-	@RequestMapping("/mypage/detailOne")
+	@RequestMapping(value={"/notice/detailOne","/mypage/detailOne"})
 	public void detail(int no,Model model) {
 		
 		model.addAttribute("od",dao.findAllDetail(no));
@@ -150,43 +150,38 @@ public class OneController {
 		
 		
 		//-------- 추가
-		@RequestMapping(value="/board/insertOne", method= RequestMethod.GET)
+		@RequestMapping(value="/notice/insertOne", method= RequestMethod.GET)
 		public void insertForm() {
 			
 		}
 		
-		@RequestMapping(value="/board/insertOne", method= RequestMethod.POST)	
+		@RequestMapping(value="/notice/insertOne", method= RequestMethod.POST)	
 		public ModelAndView insertProQna(OneVO o) {
 			ModelAndView mav = new ModelAndView("redirect:/notice/listSearchOne");
-			
+
 			dao.insert(o);
-			
 			return mav;
 		}
-		
-		
 		//----------- 수정
 		
-		@RequestMapping(value="/board/updateOne", method=RequestMethod.GET)
+		@RequestMapping(value="/notice/updateOne", method=RequestMethod.GET)
 		public void updateFrom(int no, Model model) {
 			model.addAttribute("o", dao.findAllDetail(no));
 		}
 		
-		@RequestMapping(value="/board/updateOne", method=RequestMethod.POST)
+		@RequestMapping(value="/notice/updateOne", method=RequestMethod.POST)
 		public ModelAndView updateProQna(OneVO o) {
+
 			ModelAndView mav = new ModelAndView("redirect:/notice/listSearchOne");
 			
-			
 			dao.update(o);
-			
 			return mav;
 		}
 		
 		//----------- 삭제
-		@RequestMapping("/board/deleteOne")
+		@RequestMapping("/notice/deleteOne")
 		public ModelAndView delete(int no, Model model) {
-			ModelAndView mav= new ModelAndView();
-			
+			ModelAndView mav= new ModelAndView("redirect:/notice/listSearchOne");
 			//int no2;
 			model.addAttribute("o", dao.findAllDetail(no));
 			
