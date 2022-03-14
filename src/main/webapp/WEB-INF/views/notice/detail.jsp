@@ -80,9 +80,11 @@
 		</table>		
 							
 		<div id="board_btn">		
-			<c:if test="${m.nickname == c.nickname}">
-			<a href="updateBoard?no=${n.no }"><button>글수정</button></a>
-			<a href="deleteBoard?no=${n.no }"><button>글삭제</button></a>
+			<c:if test="${m.mem_type eq 1}">
+				<form action="deleteNotice" method="post">
+					<input name="no" value="${n.no }" type="hidden">
+					<button type="submit">글 삭제 </button>
+				</form>
 			</c:if>
 			<a href="/notice/listNotice"><button>글목록</button></a>	
 		</div>

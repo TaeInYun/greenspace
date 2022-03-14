@@ -1312,6 +1312,15 @@ public class DBManager {
 			session.close();
 			return re;
 		}
+		
+		
+		public static int deleteNotice(NoticeVO no) {
+			SqlSession session = factory.openSession();
+			int re = session.delete("notice.delete", no);
+			session.commit();
+			session.close();
+			return re;
+		}
 	 
 		//-------------------RECEIVERVO------------------
 		public static AddressVO findByReceiverNo(int receiver_no) {
