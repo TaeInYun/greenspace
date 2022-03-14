@@ -94,17 +94,12 @@ $(function(){
 			<tr>
 			<th scope="row">완료 챌린지</th>
 			<td>
-				<ul style="font-weight: 600; list-style:disc; margin-left: 20px;">
-					<c:if test="${c.chg_title1 ne null }">
-					<li>${c.chg_title1 }</li>
-					</c:if>
-					<c:if test="${c.chg_title2 ne null }">
-					<li>${c.chg_title2 }</li>
-					</c:if>
-					<c:if test="${c.chg_title3 ne null }">
-					<li>${c.chg_title3 }</li>
-					</c:if>
-				</ul>	
+				<ul>
+				<c:forEach var="c" items="${endlist}"  varStatus="status">
+					<li style="list-style: inside; padding:3px 0;"><input type="hidden" name="chg_title${status.index+1}" value="${c.chg_title}">${c.chg_title}	
+					</li>
+				</c:forEach>
+				</ul>
 			</td>
 			<tr>	
 				<th scope="row">내용</th>

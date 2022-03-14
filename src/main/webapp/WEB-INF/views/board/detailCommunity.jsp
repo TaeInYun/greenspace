@@ -125,7 +125,7 @@
 				 
 
 		<div id="board_btn">		
-			<c:if test="${m.no == c.member_no}">
+			<c:if test="${m.nickname == c.nickname}">
 			<a href="/board/updateCommunity?no=${c.no }"><button>글수정</button></a>
 			<a href="/board/deleteCommunity?no=${c.no }"><button>글삭제</button></a>
 			</c:if>

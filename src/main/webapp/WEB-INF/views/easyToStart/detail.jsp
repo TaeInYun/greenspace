@@ -104,7 +104,7 @@
 							<a href="updateBoard?no=${n.no }"><button>글수정</button></a>
 							<a href="deleteBoard?no=${n.no }"><button>글삭제</button></a>
 						</c:if>
-						<a href="/notice/listNotice"><button>글목록</button></a>	
+						<a href="/easyToStart/easyToStartList"><button>글목록</button></a>	
 					</div>
 					
 					<!-- ----댓글------ -->
