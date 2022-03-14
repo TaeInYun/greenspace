@@ -123,7 +123,8 @@
 			for( let i = 0; i < arr.length; i++){
 				orderInfo.push( $(arr[i]).text() );
 			} 
-
+			console.log(orderInfo)
+			/*
 			$.ajax({
 				url: "order_form",
 				type: "post",
@@ -136,6 +137,7 @@
 					location.href="/shop/order_form"
 				} 
 			});
+			*/
 		});
 		
 		

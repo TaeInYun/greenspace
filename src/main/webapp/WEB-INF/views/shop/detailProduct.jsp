@@ -181,10 +181,10 @@ section#content { float:right; width:100%; margin-top: 30px;}
 					let selectOption = $(this).find("td");
 					let cart_option_detail = $(selectOption[0]).text();
 					let option_price = $(selectOption[1]).text();
-					let qty = $("#qty").val();
+					let qty = ($(this).find("#qty")).val();
 					
-					let totPrice = pro_price + Number(option_price)
-					let totSalePrice = pro_saleprice + Number(option_price)
+					let totPrice = pro_price + Number(option_price);
+					let totSalePrice = pro_saleprice + Number(option_price);
 					
 					let proInfo = {
 						no: pro_no,
