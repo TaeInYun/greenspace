@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>댓글 내역</title>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
@@ -74,18 +74,27 @@ header#header div#header_box { text-align:center; padding:30px 0; }
 				 
 			</div>					
 				 
-		 			<c:forEach var="findAllCommentByMember_no" items="${findAllCommentByMember_no}">
-					
- 					<table>					 						 
+		 			
+ 					<table  border="1" width="80%">			
+	 					<tr>
+						 
+						<td>시간</td>
+						<td>댓글내용</td>
+						<td colspan=2>설정</td>
+						 
+					 	 
+					   </tr>	
+					   <c:forEach var="findAllCommentByMember_no" items="${findAllCommentByMember_no}">
+						 						 
 						<tr>
 								<td>${findAllCommentByMember_no.com_regdate}</td>				 
 								<td>${findAllCommentByMember_no.com_content}</td>				 
 							  	<td><a id="updateComments"  data-toggle="modal" data-target="#updateModal" role="button"  href="/board/updateComments?no=${findAllCommentByMember_no.no}&member_no=${findAllCommentByMember_no.member_no}&com_content=${findAllCommentByMember_no.com_content}">수정</a></td>
 								<td><a id="deleteComments"  data-toggle="modal" data-target="#deleteModal" role="button"  href="/board/deleteComments?no=${findAllCommentByMember_no.no}&member_no=${findAllCommentByMember_no.member_no}">삭제</a></td>
 						 </tr>		 
-						
+						</c:forEach>
+ 				 	
 					</table>
- 				 	</c:forEach>
  				 	
  				 	
  							<div id="deleteModal" class="modal fade" tabindex="-1" role="dialog"> 
