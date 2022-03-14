@@ -16,6 +16,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="/css/board.css">
+<link rel="stylesheet" href="/css/components/search.css">
+<link rel="stylesheet" href="/css/style.css">
 <script type="text/javascript">
 $(function(){
 	 $("#insertComments").click(function () {		 
@@ -46,22 +49,92 @@ $(function(){
 </script>
 </head>
 <body>
-	<h2>리뷰상세</h2>
-	<hr>
-	제목: ${r.re_title }<br>
-	내용: ${r.re_content }<br>
-	작성일: ${r.re_date }<br>
-	상품번호: ${r.pro_no }<br>
-	회원번호: ${r.member_no }<br>
-	조회수: ${r.re_hit }<br>
-	좋아요수: ${r.re_like }<br>
-	주문번호: ${r.order_no }<br>
-	평점: ${r.re_rate }<br>	
-	<img src="/upload/review/${r.re_thumbnail }" width="100" height="100">
-	<hr>
+<div id="root">
+
+	<div>
+	
+	<!-- <h2>리뷰상세</h2> -->
+		
+	<div id="board">
+	<table id="detail_board_table">
+	<colgroup> 
+					<col width="80%">
+					<col width="20%">
+	</colgroup>
+	
+	<thead>			
+				<tr>
+					<th><span>${r.re_title }</span></th>
+					<td><span>${r.re_date }</span></td>	
+				</tr>				
+			</thead>
+			
+	<tr>
+				<td colspan="2">
+				<span>평점: ${r.re_rate }</span>		
+				</td>
+	</tr>
+	
+	<tr>
+				<td colspan="2">
+				<span>상품번호:${r.pro_no }</span>		
+				</td>
+	</tr>
+	
+	<tr>
+				<td colspan="2">
+				<span>조회수:${r.re_hit }</span>		
+				</td>
+	</tr>
+	
+	<tr>
+				<td colspan="2">
+				<span>좋아요수:${r.re_like }</span>		
+				</td>
+	</tr>
+	
+	<tr>
+				<td colspan="2">
+				<span>회원번호:${r.member_no }</span>		
+				</td>
+	</tr>
+	
+	<tr>
+				<td colspan="2">
+				<span>주문번호:${r.order_no }</span>		
+				</td>
+	</tr>
+	
+	<tr>
+				<td colspan="2">
+						<div id="board_content">
+						<p>${r.re_content }</p>
+						</div>
+					</td>
+			</tr>
+	
+	<tr>
+				<td colspan="2">
+						<div id="board_content">
+						<p><img src="/upload/review/${r.re_thumbnail }" width="100" height="100"></p>
+						</div>
+					</td>
+			</tr>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	</table>
+	
 	<a href="/shop/updateReview?no=${r.no}"><button >수정하기</button></a>
 	<!--  <a href="deleteReview?no=${r.no }">삭제</a>-->
 	
+</div>
 <!-- ----댓글------ -->
 	<div>		 
 	  	<input id="re_no" type="hidden" value="${r.no}">
@@ -99,7 +172,8 @@ $(function(){
 	    </div>	
 	  	
 	</div>
-
+	</div>
+</div>
 
 
 </body>

@@ -6,9 +6,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="/css/admin.css" rel="stylesheet"/>
+<link rel="stylesheet" href="/css/style.css"> 
 </head>
 <body>
-	<H2>전체리뷰</H2>
+<div id="root">
+	<header id="header">
+			<div id="header_box">
+				<jsp:include page="../header.jsp"/>
+			</div>
+		</header>
+		<section id="container">
+		<div id="container_box">
+		
+		<section id="content">
+	
 
 	<table border="1" width="80%">
 		<tr>
@@ -27,7 +39,13 @@
 				<td>${r.member_no }</td>			
 			</tr>
 		</c:forEach>
-	</table> 	
-	
+	</table> 
+	</section>
+	<aside id="aside">
+						<jsp:include page="../admin/adminAside.jsp"/>				 		 
+	</aside>
+	</div>
+	</section>	
+	</div>
 </body>
 </html>
