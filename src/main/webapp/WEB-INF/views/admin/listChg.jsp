@@ -75,7 +75,7 @@
 				</tr>	
 				</thead>
 				<tbody>
-				<c:forEach var="ylist" items="${yesterdayChgList }">
+				<c:forEach var="ylist" items="${yesterdaylist }">
 					<tr>
 						<td>${ylist.chg_title}</td>	
 					</tr>
@@ -113,7 +113,7 @@
 				</tr>
 				</thead>
 				<tbody>
-				<c:forEach var="tomorrowList" items="${tomorrowList }">
+				<c:forEach var="tomorrowList" items="${tomorrowlist }">
 					<tr>
 						<td>${tomorrowList.chg_title}</td>	
 					</tr>

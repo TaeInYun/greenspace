@@ -28,33 +28,7 @@
 		$( $(".nav-btn")[1] ).attr("style", "background: #00913A;");
 		$( $(".nav-btn .nav-btn__text")[1] ).attr("style", "color:white");
 		$(".myActive").attr("style","background: #00913A; font-weight:800; color: white; padding: 5px 15px; border-radius: 20px;");
- 
-		 $("#insertComments").click(function () {		 
-			 let commu_no = $("#commu_no").val();
-			 let member_no = $("#member_no").val();
-			 let com_content = $("#com_content").val();
-				 
-			 let data={
-				 com_content:com_content,
-				 commu_no:commu_no,				
-				 member_no:member_no				 
-			 }		 
-			 
-			 $.ajax({
-	         	url : "/insertComments",
-	             type : "POST",
-	             data :data,
-	             success : function(result){
-	            	 $("#com_content").val("")
-	             },
-	             error : function(){
-	             	console.log("ajax 통신 실패");
-	             }
-	         });
-		})
-	 
-		
-		
+ 		
  })
  </script>
 </head>

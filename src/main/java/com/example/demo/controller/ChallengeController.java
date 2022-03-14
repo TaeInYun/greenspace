@@ -45,8 +45,8 @@ public class ChallengeController {
 	public void listChg(Model model) {
 		model.addAttribute("chglist",dao.findAll());	
 		model.addAttribute("todaylist",listdao.todayChgList());
-		model.addAttribute("tomorrowList",listdao.tomorrowChgList());	
-		model.addAttribute("yesterdayList",listdao.yesterdayChgList());	
+		model.addAttribute("tomorrowlist",listdao.tomorrowChgList());	
+		model.addAttribute("yesterdaylist",listdao.yesterdayChgList());	
 	}
 	
 	//------------------관리자 챌린지 추가-------------------- 

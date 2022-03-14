@@ -176,7 +176,6 @@
 	</div>
 	
 <!-- ----댓글------ -->
-
 					<div id="comment_list">
 						<c:forEach var="comments" items="${comments}"> 
 						<div class="comment_form">
