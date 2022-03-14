@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>포인트 내역</title>
 <link rel="stylesheet" href="/css/style.css"> 
 <style type="text/css">
 body { margin:0; padding:0; }
