@@ -46,5 +46,8 @@ public class NoticeDAO {
     public int insertNotice(NoticeVO n){
         return DBManager.insertNotice(n);
     }
-
+    
+    public int deleteNotice(NoticeVO no) {
+    	return DBManager.deleteNotice(no);
+    }
 }

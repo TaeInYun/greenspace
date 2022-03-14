@@ -57,8 +57,6 @@ public class OrderListController {
 		int member_no = m.getNo();
 		int start=s.getStart();//페이지번호
 		
-		System.out.println(s.getFristDate()+"시작날짜");
-		
 		HttpSession httpSession	  = request.getSession();
 		
 		if(start==0) {

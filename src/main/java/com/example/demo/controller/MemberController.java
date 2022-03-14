@@ -159,7 +159,12 @@ public class MemberController {
 	
 	//아이디 찾기
 	@RequestMapping(value = "/findIdOK", method = RequestMethod.POST)
-	public String findIdOk(HttpServletResponse response, @RequestParam String email, @RequestParam String name,@RequestParam String phone, Model md) throws Exception{
+	public String findIdOk(HttpServletResponse response, 
+							@RequestParam String email, 
+							@RequestParam String name,
+							@RequestParam String phone, 
+							Model md) throws Exception{
+		
 		md.addAttribute("id",ms.findId(response, email, name, phone));
 		return "findIdOK";
 	} 
@@ -184,16 +189,14 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/updatePwdOK", method = RequestMethod.POST)
-	public String updatePwdOK(HttpServletResponse response, HttpSession session, @RequestParam String pwd, Model model) {
+	public String updatePwdOK(HttpServletResponse response, 
+								HttpSession session, 
+									@RequestParam String pwd, 
+										Model model) {
 		String id = (String)session.getAttribute("id");
-		
 		String encodePwd = passwordEncoder.encode(pwd);
-
-		
 		model.addAttribute("updatePwdOK", ms.updatePwd(id, encodePwd));
 		model.addAttribute("id", id);
-
-		//세션에서 유지한 id 값을 반환해주고 세션을 끝내보자 
 		return "updatePwdOK";
 	}
 	

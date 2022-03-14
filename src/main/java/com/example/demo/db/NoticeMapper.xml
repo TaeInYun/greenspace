@@ -37,6 +37,9 @@
     <insert id="insert" parameterType="NoticeVO">
         insert into notice (no, notice_title, notice_content, notice_date, notice_hit) values (seq_notice.nextval, #{notice_title}, #{notice_content}, sysdate, 0 )
     </insert>
-
+	
+	<delete id="delete">
+		delete from notice where no=#{no}
+	</delete>
 
 </mapper>

@@ -63,11 +63,31 @@ public class NoticeController {
 
     @RequestMapping("/notice/detail")
     public void detail(int no, Model model) {
-    	System.out.println(no);
         dao.updateHit(no);
         model.addAttribute("n", dao.findByNo(no));
     }
     
+    @PostMapping(value = "/notice/deleteNotice")
+    public void deleteNotice(HttpServletResponse response, @ModelAttribute NoticeVO no,  ModelAndView mav) {
+    	int re = dao.deleteNotice(no);
+    	if(re != 1) {
+            mav.setViewName("error");
+            mav.addObject("msg", "공지사항 삭제에 실패하였습니다.");
+        }else {
+            try{
+            	System.out.println(re);
+                response.setContentType("text/html;charset=utf-8");
+                PrintWriter out = response.getWriter();
+                out.println("<script>");
+                out.println("alert('공지사항 삭제가 완료되었습니다');");
+                out.println("history.go(-2);");
+                out.println("</script>");
+                out.close();
+            }catch (Exception e){
+                System.out.println("예외발생" + e.getMessage());
+            }
+        } 
+    }
 
     @GetMapping(value = "/notice/insertNotice")
     public void insertNotice(){
@@ -87,15 +107,12 @@ public class NoticeController {
                 PrintWriter out = response.getWriter();
                 out.println("<script>");
                 out.println("alert('공지사항 등록이 완료되었습니다');");
-                out.println("location.reload();");
+                out.println("history.go(-2);");
                 out.println("</script>");
                 out.close();
             }catch (Exception e){
                 System.out.println("예외발생" + e.getMessage());
             }
-        }
-        
-        
-        
+        }  
     }
 }
