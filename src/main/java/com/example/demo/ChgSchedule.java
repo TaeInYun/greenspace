@@ -16,7 +16,7 @@ public class ChgSchedule {
 	private ChallengeService challengeService;
 	
 	////@Scheduled(cron=“초 분 시간 일 월 요일 연도")
-	@Scheduled(cron = "00 14 12 * * ?")
+	@Scheduled(cron = "00 10 09 * * ?")
 	public void insertChglist() {
 		challengeService.insertChglist();
 	}

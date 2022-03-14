@@ -108,9 +108,6 @@
 					</div>
 					
 					<!-- ----댓글------ -->
-					
-			
-
 					<div id="comment_list">
 						<c:forEach var="comments" items="${comments}"> 
 						<div class="comment_form">
@@ -125,12 +122,12 @@
 							<div class="comments_content">
 								 ${comments.com_content}
 							</div>
-							<button>
-								<a id="updateComments"  data-toggle="modal" data-target="#updateModal" role="button"  href="/board/updateComments?no=${comments.no}&member_no=${m.no}&com_content=${comments.com_content}">수정</a>
-							</button>
-							<button>
-								<a id="deleteComments"  data-toggle="modal" data-target="#deleteModal" role="button"  href="/board/deleteComments?no=${comments.no}&member_no=${m.no}">삭제</a>
-							</button>
+							<div class="comment_btn">
+							<c:if test="${m.no == comments.member_no}">
+								<a id="updateComments"  data-toggle="modal" data-target="#updateModal" role="button"  href="/board/updateComments?no=${comments.no}&member_no=${m.no}&com_content=${comments.com_content}"><button>수정</button></a>
+								<a id="deleteComments"  data-toggle="modal" data-target="#deleteModal" role="button"  href="/board/deleteComments?no=${comments.no}&member_no=${m.no}">		<button>삭제</button></a>
+							</c:if>
+							</div>
 						</div>
 							
 						</c:forEach>

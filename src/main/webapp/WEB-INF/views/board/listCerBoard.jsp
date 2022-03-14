@@ -39,6 +39,11 @@ $(function(){
 				<div id="communityHeader">
 				<jsp:include page="./communityHeader.jsp"/>
 				</div>
+				
+				
+				<div class="myCerBtn">
+					<a href="/mypage/myCerBoard"><button>내 인증글 보러가기</button></a>
+					</div>
 
 				<div id="commu_box">
 				
@@ -64,35 +69,37 @@ $(function(){
 					<div id="content_box">
 					<ul>
 						 <c:forEach var="c" items="${list }">
-						 <c:if test="${c.cer_status eq '공개' }">
-						 <li>
-								<div class="thumbnail">
-									<a href="/board/detailCerBoard?no=${c.no}">
-									<c:choose>
-								<c:when test="${c.cer_thumbnail ne null }">
-										<img  src="/upload/cer/${c.cer_thumbnail }" width="200" height="200">
-								</c:when>
-								<c:when test="${c.cer_thumbnail eq null }">
-										<img  src="/upload/nothumbnail.png" width="200" height="200">
-								</c:when>
-								</c:choose>	
-									</a>
-								</div> 
-							
-								<div class="nickname">
-									<span>${c.nickname}</span>
-								</div>
-								<div class="date">
-								<span><fmt:formatDate value="${c.cer_date}" pattern="yy.MM.dd"/></span>
-									
-								</div>
-								<div class="cer_content">
+						 
+						 <!-- 공개글만 -->
+							 <c:if test="${c.cer_status eq '공개' }">
+							 <li>
+									<div class="thumbnail">
 										<a href="/board/detailCerBoard?no=${c.no}">
-										<span class="cer_content_text">${c.cer_content}</span></a>
-								</div>	
-						</li>	
-						</c:if>	 
-					  	</c:forEach>	
+										<c:choose>
+									<c:when test="${c.cer_thumbnail ne null }">
+											<img  src="/upload/cer/${c.cer_thumbnail }" width="200" height="200">
+									</c:when>
+									<c:when test="${c.cer_thumbnail eq null }">
+											<img  src="/upload/nothumbnail.png" width="200" height="200">
+									</c:when>
+									</c:choose>	
+										</a>
+									</div> 
+								
+									<div class="nickname">
+										<span>${c.nickname}</span>
+									</div>
+									<div class="date">
+									<span><fmt:formatDate value="${c.cer_date}" pattern="yy.MM.dd"/></span>
+										
+									</div>
+									<div class="cer_content">
+											<a href="/board/detailCerBoard?no=${c.no}">
+											<span class="cer_content_text">${c.cer_content}</span></a>
+									</div>	
+							</li>	
+							</c:if>	
+						</c:forEach>	
  					</ul>			 
 					</div>
 					

@@ -206,38 +206,7 @@ div.detail_title{
 
 
 /*ÄÚ¸àÆ® °ü·Ã*/
-#comment_box{
-	width: 100%;
-	position: relative;
-	margin: 20px 0;
-}
 
-#comment_box textarea{
-	width:800px;
-	height:100px;
-	padding: 10px;
-	box-sizing: border-box;
-	display: inline-block;
-	position: relative;
-
-} 
-
-#comment_box #insertComments{
-	height:100px;
-	width:160px;
-	position: absolute;
-	right:10px;
-	
-}
-
-#comment_list{
-	margin-bottom: 150px;
-}
-
-#comment_list td{
-	padding: 10px;
-}
- 
 
 
 
