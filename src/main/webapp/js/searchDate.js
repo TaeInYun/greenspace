@@ -21,7 +21,7 @@ function searchByDate(data) {
 				let proInfo = $("<td></td>").append(  $("<div></div>").append(a, div) );
 				let ordDate = $("<td></td>").html(this.day);
 				let ordId = $("<td></td>").append($("<a></a>").html(this.id).attr("href", "/shop/detailOrderList?id="+this.id+"&&day=" + this.day))
-				let proPrice = $("<td></td>").html(this.pro_price + "원 <br>(" + this.pro_qty + "개)")
+				let proPrice = $("<td></td>").html(this.pro_price + "원 (" + this.pro_qty + "개)")
 				let status = $("<td></td>").html(this.status).append($("<input></input>").attr("type","button").attr("value","후기 작성"));
 				
 				let tr = $("<tr></tr>").append(proInfo, ordDate, ordId, proPrice, status);

@@ -13,8 +13,8 @@
 	</div> 
 	<div class="card-body">  
 		<form action="/shop/deleteReview" method="post" enctype="multipart/form-data">
-		<p>정말로 삭제하시겠습니까?<p>	 
-					<input type="hidden"  name="no" value="${no }"><BR> 
+					<p>정말로 삭제하시겠습니까?<p>	 
+					<input type="text"  name="no" value="${no}"><BR> 
 					<button style="width: 100%; padding: 10px" type="submit">삭제</button> 
 		</form> 
  

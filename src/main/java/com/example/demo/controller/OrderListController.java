@@ -53,15 +53,18 @@ public class OrderListController {
 	@ResponseBody
 	public PagingOrderListVO myOrderListBydate(HttpServletRequest request,HttpSession session,SearchVO s, Model model ) {
 		MemberVO m = (MemberVO)session.getAttribute("m");
-		//int member_no = m.getNo();
-		int member_no = 42;
-		int start=s.getStart();
+		
+		int member_no = m.getNo();
+		int start=s.getStart();//페이지번호
+		
+		System.out.println(s.getFristDate()+"시작날짜");
 		
 		HttpSession httpSession	  = request.getSession();
 		
 		if(start==0) {
 			start=1;
 		}
+		
 		HashMap map = new HashMap();
 		map.put("start", start);
 		map.put("member_no", member_no);
@@ -70,6 +73,7 @@ public class OrderListController {
 		map.put("lastDate", s.getLastDate());
 		map.put("month", s.getMonth());
 		
+		
 		totalRecord = orderListDao.cntByMember(map);
 		totalPage = (int)Math.ceil(totalRecord/(double)PAGESIZE);
 		
@@ -77,19 +81,23 @@ public class OrderListController {
 		po.setOrd(orderListDao.findAllOrderListByMemberNo(map));
 		po.setPeriod(s.getPeriod());
 		po.setTotalPage(totalPage);
-		/*
-		session.setAttribute("period", s.getPeriod());
-		session.setAttribute("totalPage", totalPage);
-		*/
+		
+		if(s.getPeriod().equals("search")) {
+			session.setAttribute("fristDate", s.getFristDate());
+			session.setAttribute("lastDate", s.getLastDate());
+		}else {
+			session.removeAttribute("fristDate");
+			session.removeAttribute("lastDate");
+		}
 		return po;
 	}
 	
 	@RequestMapping("/mypage/myOrder")
 	public void myOrderList(HttpSession session,Model model) {
 		MemberVO m = (MemberVO)session.getAttribute("m");
-		//int member_no = m.getNo();
-		int member_no = 42;
+		int member_no = m.getNo();
 		int pageNum = 1;
+		
 		HashMap map = new HashMap();
 		map.put("member_no", member_no);
 		map.put("start", pageNum);

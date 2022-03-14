@@ -13,7 +13,6 @@
 <script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/jquery-ui/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/js/searchDate.js"></script>
 <link rel="stylesheet" href="/js/jquery-ui/jquery-ui.css">
@@ -44,7 +43,7 @@
 		
 		let option = {
 				 monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-					dayNamesMin:['월','화','수','목','금','토','일'],
+					dayNamesMin:['일','월','화','수','목','금','토'],
 					closeText: '닫기',
 					minDate: "-2Y", 
 					maxDate: "+0D",
@@ -167,7 +166,7 @@
 				let data = {
 						start: start,
 						period: period,
-						firstDate:firstDate,
+						fristDate: firstDate,
 						lastDate :lastDate
 				}
 				searchByDate(data);
@@ -175,9 +174,10 @@
 			
 			$(this).attr("style","background: #008040;color: white;");
 		});
-		 $("#insertReview").find(".modal-content").load("/shop/insertReview?pro_no=${p.no}");  //리뷰작성하기 
-	});
 		
+		 $("#insertReview").find(".modal-content").load("/shop/insertReview?pro_no=${p.no}");  //리뷰작성하기
+		 
+	});
 </script>
 </head>
 <body>	
@@ -192,12 +192,12 @@
 						<button type="button" id="week" value="7">1주일</button>
 						<button type="button" id="oneMonth" value="1">1개월</button>
 						<button type="button" id="threeMonth" value="3">3개월</button>
-						<button type="button" id="allDay" value="3">전체 시기</button>
+						<button type="button" id="allDay" value="3">전체</button>
 					</div>
 					<div class="search__calender">
-						<input type="text" id="firstDate" readonly="readonly" placeholder="시작 날짜"> 
+						<input type="text" id="firstDate" readonly="readonly" placeholder="시작 날짜" value="${fristDate}"> 
 						<span>&nbsp;&nbsp;</span>
-						<input type="text" id="lastDate" readonly="readonly" placeholder="종료 날짜">
+						<input type="text" id="lastDate" readonly="readonly" placeholder="종료 날짜" value="${lastDate}">
 						<input type="button" id="search" value="조회" >
 					</div>
 				</div>

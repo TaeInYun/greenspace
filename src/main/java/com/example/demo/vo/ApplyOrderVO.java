@@ -8,4 +8,5 @@ import lombok.Data;
 public class ApplyOrderVO {
 	private OrdersVO orders;
 	private List<String> arr_cartNo;
+	private ReceiverVO receiver;
 }

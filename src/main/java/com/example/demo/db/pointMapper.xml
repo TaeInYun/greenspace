@@ -47,13 +47,15 @@
 	 
 	
 	<select id="findAllPointByNO" resultType="pointVO">	
-		 	select rownum num, p.no, TO_char(p.point_date,'yyyy/mm/dd')point_date,p.point_amount ,p.point_status ,member_no 
+		 	select p.no, TO_char(p.point_date,'yyyy/mm/dd')point_date,p.point_amount ,p.point_status ,member_no 
 			from point p
 			where member_no=#{no} and 
-            point_amount!=0          	 
+            point_amount!=0 
+           
 		  <if test="point_status != null">
 		  		and point_status=#{point_status}
 		  </if>
+		   order by   point_date desc
  	</select>
  
  

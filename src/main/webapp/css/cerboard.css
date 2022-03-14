@@ -16,3 +16,14 @@ width: 200px;
   -webkit-box-orient: vertical;
   line-height: 20px;
 }
+
+.myCerBtn{
+	float: left; 	
+
+	margin-top: 5px;
+	margin-left:20px;}
+	
+	.myCerBtn button{
+	height:35px;
+	width: 135px;
+	}

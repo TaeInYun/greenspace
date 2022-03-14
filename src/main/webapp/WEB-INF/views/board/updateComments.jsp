@@ -18,7 +18,7 @@
  	}
  	
  	textarea{
- 	width:800px;
+ 	width:450px;
 	height:100px;
 	padding: 10px;
 	box-sizing: border-box;
@@ -26,13 +26,6 @@
 	position: relative;	
  	}
  	
- 	
- 	button{
-	height:100px;
-	width:160px;
-	position: absolute;
-	right:10px;
- 	}
  	
 </style>
 </head>

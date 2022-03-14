@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/css/style.css">
 <title>녹지공간 - 장바구니</title>
+<script  type="text/javascript" src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="/js/qty.js"></script>
@@ -15,6 +16,7 @@
 <script type="text/javascript" src="/js/checkbox.js"></script>
 <script type="text/javascript" src="/js/address.js"></script>
 <script type="text/javascript">
+
 	$(function(){
 		//***** 체크박스에 대한 변수 선언
 		let checkbox = "input[name=checkList]";
@@ -108,20 +110,22 @@
 		
 			let receiverInfo = new Array();
 			let arr_receiver = document.getElementsByClassName("receiverInfo");
+			let addr_type = $("#receiverNo").attr("name");
 			
 			for( let i = 0; i < arr_receiver.length; i++){
 				receiverInfo.push( $(arr_receiver[i]).val());
 			} 
 			
-			console.log(receiverInfo);
+			receiverInfo.push( addr_type);
 			let orderInfo = new Array();
 			let arr = document.getElementsByClassName("orderInfo");
 			
 			for( let i = 0; i < arr.length; i++){
 				orderInfo.push( $(arr[i]).text() );
 			} 
-			
- 	 		$.ajax({
+			console.log(orderInfo)
+			/*
+			$.ajax({
 				url: "order_form",
 				type: "post",
 				data: {
@@ -133,6 +137,7 @@
 					location.href="/shop/order_form"
 				} 
 			});
+			*/
 		});
 		
 		
@@ -230,8 +235,11 @@
 						<input type="hidden" id="receiverNo" class="receiverInfo" name="addr_no" value="${info.addr_no }">
 						<input type="text" readonly="readonly" class="receiverInfo" name="name" value="${info.name }" placeholder="수령인">
 						<input type="text" readonly="readonly" class="receiverInfo" name="phone" value="${info.phone }" placeholder="연락처">
-						<input type="text" readonly="readonly" class="receiverInfo" name="addr_postal" value="${info.addr_postal }" placeholder="우편번호">
-						<input type="text" readonly="readonly" class="receiverInfo" name="addr_road" value="${info.addr_road }"placeholder="주소">
+						<div class="address_search">
+							<input type="text" readonly="readonly" style="margin:0" class="receiverInfo" name="addr_postal" value="${info.addr_postal }" placeholder="우편번호">
+							<input type="hidden" name="kakao-search"  value="찾기" onclick="kakaopost()">
+						</div>
+						<input type="text" readonly="readonly"   class="receiverInfo" name="addr_road" value="${info.addr_road }"placeholder="주소">
 						<input type="text" readonly="readonly"class="receiverInfo"  name="addr_detail" value="${info.addr_detail }" placeholder="상세주소">
 						<input type="hidden" name="addr_msg" class="receiverInfo" value="${info.addr_msg }">
 					</div>

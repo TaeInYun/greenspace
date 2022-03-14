@@ -6,6 +6,13 @@
 <head>
 <meta charset="UTF-8">
 
+
+<title>녹지공간-마이페이지 1대1문의내역</title>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/board.css">
 <link rel="stylesheet" href="/css/components/search.css">
@@ -17,14 +24,7 @@
 }
 
 </style>
-<title>녹지공간-마이페이지 1대1문의내역</title>
-<script src="https://kit.fontawesome.com/5b334c6c49.js" crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<style type="text/css">
 
-</style>
 <script type="text/javascript">
 
 var selectBoxChange = function(value){

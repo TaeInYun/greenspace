@@ -1,12 +1,24 @@
 function requestPay(cnt, arr_cartNo) {
 	IMP.init("imp27131305");
 	
+	let proName = $("#listCart p:first").text();
+	
 	// 배송정보
 	let name = $("input[name=name]").val();
 	let phone = $("input[name=phone]").val();
 	let addr_road = $("input[name=addr_road]").val();
 	let addr_postal = $("input[name=addr_postal]").val();
-	let proName = $("#listCart p:first").text();
+	let addr_detail = $("input[name=addr_detail]").val();
+	let msg = $("input[name=addr_msg]").val();
+	
+	let receiver = {
+		receiver_name : name,
+		receiver_phone : phone,
+		receiver_postal: addr_postal,
+		receiver_addr: addr_road,
+		receiver_detail: addr_detail,
+		receiver_msg: msg
+	};
 	
 	//사용 포인트
 	let usePoint = $("#usePoint").val();
@@ -19,7 +31,7 @@ function requestPay(cnt, arr_cartNo) {
 	let totalPrice = $("#payPrice").text();
 	let addr_no = $("input[name=addr_no]").val();
 	let receiver_no = $("input[name=receiver_no]").val();
-	
+
 	if(addr_no == null){
 		addr_no = 0;
 	}
@@ -77,9 +89,11 @@ function requestPay(cnt, arr_cartNo) {
 					
 					let data = {
 						arr_cartNo:arr_cartNo,
-						orders:orders
+						orders:orders,
+						receiver: receiver
 					}
 					
+					console.log(data)
 				$.ajax({
 						url: "/shop/resultOrder",
 						type: "post",
@@ -96,5 +110,7 @@ function requestPay(cnt, arr_cartNo) {
 		        }
 		    });
 		}//end success
+		
 	});//end getCngOftoday
+	
   }

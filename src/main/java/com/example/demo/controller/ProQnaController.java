@@ -31,7 +31,7 @@ public class ProQnaController {
 	
 	@RequestMapping(value="/shop/insertProQna", method= RequestMethod.POST)	
 	public ModelAndView insertProQna(ProQnaVO p) {
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView("redirect:/shop/listProduct_home");
 		
 		dao.insert(p);
 		
@@ -48,7 +48,7 @@ public class ProQnaController {
 	
 	@RequestMapping(value="/shop/updateProQna", method=RequestMethod.POST)
 	public ModelAndView updateProQna(ProQnaVO p) {
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView("redirect:/mypage/listQna");
 		
 		
 		dao.update(p);
@@ -60,7 +60,7 @@ public class ProQnaController {
 	
 	@RequestMapping("/shop/deleteProQna")
 	public ModelAndView delete(int no, Model model) {
-		ModelAndView mav= new ModelAndView();
+		ModelAndView mav= new ModelAndView("redirect:/mypage/listQna");
 		
 		//int no2;
 		model.addAttribute("q", daoq.findAllDetail(no));

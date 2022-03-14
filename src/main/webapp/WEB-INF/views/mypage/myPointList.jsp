@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>포인트 내역</title>
 <link rel="stylesheet" href="/css/style.css"> 
 <style type="text/css">
 body { margin:0; padding:0; }
@@ -65,7 +65,7 @@ header#header div#header_box { text-align:center; padding:30px 0; }
  				
  				<table>
 						<tr>	
-							<td> 번호</td>
+				
 							<td> 상태 </td>
 							<td> 포인트</td>				 
 							<td> 사용일자</td>			 
@@ -73,7 +73,7 @@ header#header div#header_box { text-align:center; padding:30px 0; }
 						 
 						<c:forEach var="findAllPointByNO" items="${findAllPointByNO}">			 
 						  <tr>
-								<td >${findAllPointByNO.num}</td>				 
+									 
 								<td >${findAllPointByNO.point_status }</td>				 
 								<td  >${findAllPointByNO.point_amount }</td> 						 
 								<td  >${findAllPointByNO.point_date }</td>			 		 			

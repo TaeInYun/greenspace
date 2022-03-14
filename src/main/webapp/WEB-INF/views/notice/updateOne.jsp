@@ -48,7 +48,7 @@
 	
 	<!-- 상품문의유형: -->
 	<input type="hidden" name="one_type_code" id="one_type_code" value="${o.one_type_code}">
-	
+	<input type="hidden" name="qna_status_code" value="WA" > <br>  <!--wa 답변대기 EXC교환  -->
 	<table id="writeForm_box_table">
 	<tr>		
 		<th scope="row">제목</th>

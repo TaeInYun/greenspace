@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/board.css">
 <link rel="stylesheet" href="/css/components/search.css">
-
+<link rel="stylesheet" href="/css/comment.css">
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script> 
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>

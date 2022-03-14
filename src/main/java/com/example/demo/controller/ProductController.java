@@ -386,8 +386,8 @@ public class ProductController {
 			for(MyWishVO mw : data) {
 				rownum += 1;
 				mw.setRownum(rownum);
-				totalPrice += mw.getPrice();
-				totalSalePrice += mw.getSaleprice();
+				totalPrice += mw.getPrice()*mw.getQty();
+				totalSalePrice += mw.getSaleprice()*mw.getQty();
 			}
 			
 			totalDiscount = totalPrice - totalSalePrice;
@@ -395,6 +395,8 @@ public class ProductController {
 			if(totalSalePrice >= 50000) {
 				deliveryPrice = 0;
 			}
+			
+			totalSalePrice += deliveryPrice;
 			
 			MemberVO mb = dao_member.getMemberInfo(m.getNo());
 			AddressVO addr = addrDao.getMainAddress(member_no);

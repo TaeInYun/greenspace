@@ -4,9 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/style.css">
 <link rel="stylesheet" href="/css/board.css">
 <link rel="stylesheet" href="/css/components/search.css">
+<link rel="stylesheet" href="/css/comment.css">
 <style type="text/css">
 
 </style>
@@ -17,8 +19,7 @@
 <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
  
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
  <script type="text/javascript">
  $(function(){
 	 
@@ -124,7 +125,7 @@
 				 
 
 		<div id="board_btn">		
-			<c:if test="${m.nickname == c.nickname}">
+			<c:if test="${m.no == c.member_no}">
 			<a href="/board/updateCommunity?no=${c.no }"><button>글수정</button></a>
 			<a href="/board/deleteCommunity?no=${c.no }"><button>글삭제</button></a>
 			</c:if>
@@ -135,48 +136,54 @@
 	
 	
 	
-	<!-- ----댓글------ -->
-	<div id="comment_box">
-			 
-			<input id="commu_no" type="hidden" value="${c.no}">
-			<input id="member_no" type="hidden" value="${m.no}">		
-			<textarea class="form-control" id="com_content" cols="60" id="commentContent" placeholder="댓글을 입력하세요."></textarea> 
-			<button id="insertComments">댓글작성</button>	
-	</div>
+					<!-- ----댓글------ -->
+					
+			
 
-	<div id="comment_list">		 
-		<c:forEach var="comments" items="${comments}"> 
-		 <table>
-				 <tbody>
-					<tr> 
-						<td>${comments.nickname}</td>
-						<td>${comments.com_regdate}</td>
-						<td id="com_content">${comments.com_content}</td>
-						<td><a id="updateComments"  data-toggle="modal" data-target="#updateModal" role="button"  href="/board/updateComments?no=${comments.no}&member_no=${m.no}&com_content=${comments.com_content}">수정</a></td>
-						<td><a id="deleteComments"  data-toggle="modal" data-target="#deleteModal" role="button"  href="/board/deleteComments?no=${comments.no}&member_no=${m.no}">삭제</a></td>
-					 
-					</tr>	 
-				</tbody>
-			</table>
-	  	</c:forEach>
-	  	
-
-	  	<div id="deleteModal" class="modal fade" tabindex="-1" role="dialog"> 
-			<div class="modal-dialog"> 
-				<div class="modal-content"> 
-				</div> 
-			</div> 
-	    </div>	
-	    
-	    <div id="updateModal" class="modal fade" tabindex="-1" role="dialog"> 
-			<div class="modal-dialog"> 
-				<div class="modal-content"> 
-				</div> 
-			</div> 
-	    </div>	 	
-	</div><!-- 댓글끝 -->
-	
-
+					<div id="comment_list">
+						<c:forEach var="comments" items="${comments}"> 
+						<div class="comment_form">
+							<div id="${comments.member_no}" class="comments_nickname">
+								${comments.nickname}
+								<div class="comment_regdate">
+									${comments.com_regdate}
+								</div>  
+							</div>
+							
+								
+							<div class="comments_content">
+								 ${comments.com_content}
+							</div>
+							<div class="comment_btn">
+							<c:if test="${m.no == comments.member_no}">
+								<a id="updateComments"  data-toggle="modal" data-target="#updateModal" role="button"  href="/board/updateComments?no=${comments.no}&member_no=${m.no}&com_content=${comments.com_content}"><button>수정</button></a>
+								<a id="deleteComments"  data-toggle="modal" data-target="#deleteModal" role="button"  href="/board/deleteComments?no=${comments.no}&member_no=${m.no}">		<button>삭제</button></a>
+							</c:if>
+							</div>
+						</div>
+							
+						</c:forEach>
+						
+						<div id="deleteModal" class="modal fade" tabindex="-1" role="dialog"> 
+							<div class="modal-dialog"> 
+								<div class="modal-content"> 
+								</div> 
+							</div> 
+					    </div>	
+					    
+					    <div id="updateModal" class="modal fade" tabindex="-1" role="dialog"> 
+							<div class="modal-dialog"> 
+								<div class="modal-content"> 
+								</div> 
+							</div> 
+					    </div>	
+					</div>
+					<div id="comment_box">
+	  					<input id="cer_no" type="hidden" value="${c.no}">
+						<input id="member_no" type="hidden" value="${m.no}">		
+						<textarea class="form-control" id="com_content" rows="3" id="commentContent" placeholder="댓글을 입력하세요."></textarea> 
+	 					<button id="insertComments">댓글작성</button>	
+					</div>
 				</section>
 			</div>
 	</section>

@@ -67,7 +67,7 @@ $(function(){
 <div id="container">
 	<div>
 	<div id="wirte_title">
-	<h2>자유게시판 작성</h2>
+	<h2>인증게시판 작성</h2>
 	<i class="material-icons" style="font-size: 14px; color:green; padding-top: 10px;">&#xe001; 하루에 한번만 작성 가능합니다.</i>
 	</div>	
 	
@@ -92,19 +92,20 @@ $(function(){
 			</tr>
 			
 			<tr>
-				<th scope="row">챌린지</th>
-				<td>
-					<table id="chgTable" border="1" width="50%">
-					<tr>
-					<td>완료한 챌린지 목록</td>
-					</tr>
-					<c:forEach var="c" items="${endlist}"  varStatus="status">
-					<tr>
-						<td><input type="hidden" name="chg_title${status.index+1}" value="${c.chg_title}">${c.chg_title}</td>	
-					</tr>
-					</c:forEach>
-					</table>
-				</td>
+			<th scope="row">완료 챌린지</th>
+			<td>
+				<ul style="font-weight: 600; list-style:disc; margin-left: 20px;">
+					<c:if test="${c.chg_title1 ne null }">
+					<li>${c.chg_title1 }</li>
+					</c:if>
+					<c:if test="${c.chg_title2 ne null }">
+					<li>${c.chg_title2 }</li>
+					</c:if>
+					<c:if test="${c.chg_title3 ne null }">
+					<li>${c.chg_title3 }</li>
+					</c:if>
+				</ul>	
+			</td>
 			<tr>	
 				<th scope="row">내용</th>
 				<td>
